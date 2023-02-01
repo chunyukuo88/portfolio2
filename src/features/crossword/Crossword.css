@@ -1,0 +1,23 @@
+.crossword-row {
+    display: flex;
+    flex-direction: row;
+    color: red;
+}
+
+.crossword-square {
+    outline: solid black 1px;
+    width: 40px;
+    height: 40px;
+}
+
+main {
+    height: 80vh;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
