@@ -7,7 +7,7 @@ import 'react-dom';
 
 describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
   describe('WHEN: the user clicks on a square,', ()=>{
-    it('THEN: the entire row is highlighted.',()=>{
+    it('THEN: the square becomes highlighted.',()=>{
       render(<Crossword />);
 
       const squares = screen.getAllByTestId('crossword-square');
@@ -15,10 +15,10 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
       let neighboringSquareLeft = squares[1];
       expect(neighboringSquareLeft).toHaveStyle(styles.square);
 
-      fireEvent.click(squares[2]);
+      const clicked = squares[2];
+      fireEvent.click(clicked);
 
-      neighboringSquareLeft = squares[1];
-      expect(neighboringSquareLeft).toHaveStyle(styles.neighbor);
+      expect(clicked).toHaveStyle(styles.currentSquare);
     });
   });
 });

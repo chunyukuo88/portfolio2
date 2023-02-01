@@ -10,7 +10,7 @@ export const styles = {
     width: '40px',
     height: '40px',
   },
-  neighbor: {
+  currentSquare: {
     backgroundColor: 'yellow',
     outline: 'solid black 1px',
     width: '40px',
