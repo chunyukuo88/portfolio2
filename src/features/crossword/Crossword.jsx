@@ -1,25 +1,29 @@
 import React from 'react';
-import './Crossword.css';
+import { styles } from './styles.js';
 
 export default function Crossword(){
   const emptyGrid = [
-    ['o','o','o','o','o'],
-    ['o','o','o','o','o'],
-    ['o','o','o','o','o'],
-    ['o','o','o','o','o'],
-    ['o','o','o','o','o'],
+    ['','','','',''],
+    ['','','','',''],
+    ['','','','',''],
+    ['','','','',''],
+    ['','','','',''],
   ];
   const [ grid, setGrid ] = React.useState(emptyGrid);
   return (
-      <main>
-        <section>
-          <h1>Crossword</h1>
+      <main style={styles.main}>
+        <section style={styles.section}>
+          <h1 className={styles.title}>Crossword</h1>
           {
             grid.map((row, outerIndex) => (
-              <div className='crossword-row' key={outerIndex}>
+              <div style={styles.row} key={outerIndex}>
                 {
                   row.map((square, innerIndex) => (
-                    <div key={innerIndex} className='crossword-square'>
+                    <div
+                      key={innerIndex}
+                      data-testid='crossword-square'
+                      style={styles.square}
+                    >
                       {square}
                     </div>
                     )

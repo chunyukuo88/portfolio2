@@ -1,8 +1,8 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Crossword from './Crossword.jsx';
 import '@testing-library/jest-dom';
-
+import { styles } from './styles.js';
 import 'react-dom';
 
 describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
@@ -10,24 +10,11 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
     it('THEN: the entire row is highlighted.', ()=>{
       render(<Crossword />);
 
-      // const squares = document.querySelectorAll('.square');
-      // const neighboringSquareLeft = squares[1];
-      // const neighboringSquareRight = squares[3];
-      // expect(neighboringSquareLeft).toHaveStyle('background-color: white');
-      // const clickedSquare = squares[2];
-      // fireEvent.click(clickedSquare);
+      const squares = screen.getAllByTestId('crossword-square');
 
+      const neighboringSquareLeft = squares[1];
 
+      expect(neighboringSquareLeft).toHaveStyle(styles.square);
     });
-    // tests('THEN: the square is highlighted a different color.', ()=>{
-    //   const props = {
-    //     something: 'yay',
-    //   };
-    //   render(Crossword(props));
-    //
-    //   const main = document.querySelector('main');
-    //
-    //   expect(main.innerHTML).toEqual('yay');
-    // });
   });
 });
