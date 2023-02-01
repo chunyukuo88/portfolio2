@@ -5,10 +5,16 @@ export const styles = {
     color: 'red',
   },
   square: {
-      backgroundColor: 'yellow',
-      outline: 'solid black 1px',
-      width: '40px',
-      height: '40px',
+    backgroundColor: 'white',
+    outline: 'solid black 1px',
+    width: '40px',
+    height: '40px',
+  },
+  neighbor: {
+    backgroundColor: 'yellow',
+    outline: 'solid black 1px',
+    width: '40px',
+    height: '40px',
   },
   main: {
       height: '80vh',

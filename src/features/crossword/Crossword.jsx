@@ -13,7 +13,7 @@ export default function Crossword(){
   return (
       <main style={styles.main}>
         <section style={styles.section}>
-          <h1 className={styles.title}>Crossword</h1>
+          <h1 style={styles.title}>Crossword</h1>
           {
             grid.map((row, outerIndex) => (
               <div style={styles.row} key={outerIndex}>
