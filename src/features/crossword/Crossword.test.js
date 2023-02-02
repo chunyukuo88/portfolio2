@@ -21,4 +21,26 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
       expect(clicked).toHaveStyle(styles.currentSquare);
     });
   });
+  describe('WHEN: the user clicks in the center of the grid, then presses an arrow key,', () => {
+    it('THEN: the square first clicked becomes white again, and the new square becomes highlighted.', () => {
+      render(<Crossword />);
+
+      const squares = screen.getAllByTestId('crossword-square');
+
+      let centerSquare = squares[12];
+      expect(centerSquare).toHaveStyle(styles.square);
+
+      fireEvent.click(centerSquare);
+      centerSquare = squares[12];
+
+      expect(centerSquare).toHaveStyle(styles.currentSquare);
+
+      let squareAboveCenter = squares[7];
+      const main = document.querySelector('main');
+      fireEvent.keyPress(main, { key: 'ArrowUp', which: 38, keyCode: 38 });
+      squareAboveCenter = squares[7];
+
+      expect(squareAboveCenter).toHaveStyle(styles.currentSquare);
+    });
+  });
 });
