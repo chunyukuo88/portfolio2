@@ -11,7 +11,7 @@ export const styles = {
     height: '40px',
   },
   currentSquare: {
-    backgroundColor: 'yellow',
+    backgroundColor: 'blue',
     outline: 'solid black 1px',
     width: '40px',
     height: '40px',

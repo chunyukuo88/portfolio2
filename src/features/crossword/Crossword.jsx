@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { styles } from './styles.js';
 
 export default function Crossword(){
-  console.log('rendered');
-  
   const emptyGrid = [
     [{ value: '', coords: [0,0], isFocus: false },{ value: '', coords: [0,1], isFocus: false },{ value: '', coords: [0,2], isFocus: false },{ value: '', coords: [0,3], isFocus: false },{ value: '', coords: [0,4], isFocus: false}],
     [{ value: '', coords: [1,0], isFocus: false },{ value: '', coords: [1,1], isFocus: false },{ value: '', coords: [1,2], isFocus: false },{ value: '', coords: [1,3], isFocus: false },{ value: '', coords: [1,4], isFocus: false}],
@@ -12,10 +10,11 @@ export default function Crossword(){
     [{ value: '', coords: [4,0], isFocus: false },{ value: '', coords: [4,1], isFocus: false },{ value: '', coords: [4,2], isFocus: false },{ value: '', coords: [4,3], isFocus: false },{ value: '', coords: [4,4], isFocus: false}],
   ];
   const [grid, setGrid] = useState(emptyGrid);
+  const [focused, setFocused] = useState(undefined);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
-  const isFocused = grid[outerIndex][innerIndex].isFocus === true;
-  return (isFocused) ? 'currentSquare' : 'square';
+    const isFocused = grid[outerIndex][innerIndex].isFocus === true;
+    return (isFocused) ? 'currentSquare' : 'square';
   };
 
   const clearFocus = () => {
@@ -30,6 +29,7 @@ export default function Crossword(){
 
   const clickHandler = (outerIndex, innerIndex) => {
     const newGrid = clearFocus();
+    setFocused([outerIndex, innerIndex]);
     newGrid[outerIndex][innerIndex].isFocus = true;
     setGrid(newGrid);
   };
@@ -53,10 +53,13 @@ export default function Crossword(){
   };
 
   const keyDownHandler = (event, outerIndex, innerIndex) => {
-    if (arrowKeys.includes(event.key)) {
-      return processArrowKey(event.key, outerIndex, innerIndex);
+    const { key } = event;
+    if (arrowKeys.includes(key)) {
+      return processArrowKey(key, outerIndex, innerIndex);
     }
-    console.log('pressed ', event.key);
+    const newGrid = JSON.parse(JSON.stringify(grid));
+    newGrid[outerIndex][innerIndex].value = key;
+    setGrid(newGrid);
   };
 
   return (
@@ -70,19 +73,18 @@ export default function Crossword(){
                   row.map((square, innerIndex) => {
                     const style = styles[getStyleRuleName(outerIndex, innerIndex)];
                     return (
-                      <div
+                      <input
                         key={innerIndex}
                         role='button'
                         data-testid='crossword-square'
                         style={style}
-                        tabIndex='1'
+                        tabIndex={0}
+                        max={1}
                         onClick={() => clickHandler(outerIndex, innerIndex)}
                         onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                      >
-                        {square.value}
-                      </div>
-                      );
-                    }
+                        value={square.value}
+                      />
+                    )}
                   )
                 }
               </div>
