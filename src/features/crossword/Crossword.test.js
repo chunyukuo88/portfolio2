@@ -32,12 +32,12 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
 
       fireEvent.click(centerSquare);
       centerSquare = squares[12];
+      let squareAboveCenter = squares[7];
 
       expect(centerSquare).toHaveStyle(styles.currentSquare);
+      expect(squareAboveCenter).toHaveStyle(styles.square);
 
-      let squareAboveCenter = squares[7];
-      const main = document.querySelector('main');
-      fireEvent.keyPress(main, { key: 'ArrowUp', which: 38, keyCode: 38 });
+      fireEvent.keyDown(centerSquare, { key: 'ArrowUp', which: 38, keyCode: 38 });
       squareAboveCenter = squares[7];
 
       expect(squareAboveCenter).toHaveStyle(styles.currentSquare);

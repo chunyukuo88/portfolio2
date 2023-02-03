@@ -1,37 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { styles } from './styles.js';
 
 export default function Crossword(){
   const emptyGrid = [
-    [{ value: '', coords: [0,0], isFocus: false },{ value: '', coords: [0,1], isFocus: false },{ value: '', coords: [0,2], isFocus: false },{ value: '', coords: [0,3], isFocus: false },{ value: '', coords: [0,4], isFocus: false}],
-    [{ value: '', coords: [1,0], isFocus: false },{ value: '', coords: [1,1], isFocus: false },{ value: '', coords: [1,2], isFocus: false },{ value: '', coords: [1,3], isFocus: false },{ value: '', coords: [1,4], isFocus: false}],
-    [{ value: '', coords: [2,0], isFocus: false },{ value: '', coords: [2,1], isFocus: false },{ value: '', coords: [2,2], isFocus: false },{ value: '', coords: [2,3], isFocus: false },{ value: '', coords: [2,4], isFocus: false}],
-    [{ value: '', coords: [3,0], isFocus: false },{ value: '', coords: [3,1], isFocus: false },{ value: '', coords: [3,2], isFocus: false },{ value: '', coords: [3,3], isFocus: false },{ value: '', coords: [3,4], isFocus: false}],
-    [{ value: '', coords: [4,0], isFocus: false },{ value: '', coords: [4,1], isFocus: false },{ value: '', coords: [4,2], isFocus: false },{ value: '', coords: [4,3], isFocus: false },{ value: '', coords: [4,4], isFocus: false}],
+    [{ coords: [0,0] },{ coords: [0,1] },{ coords: [0,2] },{ coords: [0,3] },{ coords: [0,4]}],
+    [{ coords: [1,0] },{ coords: [1,1] },{ coords: [1,2] },{ coords: [1,3] },{ coords: [1,4]}],
+    [{ coords: [2,0] },{ coords: [2,1] },{ coords: [2,2] },{ coords: [2,3] },{ coords: [2,4]}],
+    [{ coords: [3,0] },{ coords: [3,1] },{ coords: [3,2] },{ coords: [3,3] },{ coords: [3,4]}],
+    [{ coords: [4,0] },{ coords: [4,1] },{ coords: [4,2] },{ coords: [4,3] },{ coords: [4,4]}],
   ];
   const [grid, setGrid] = useState(emptyGrid);
   const [focused, setFocused] = useState(undefined);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
-    const isFocused = grid[outerIndex][innerIndex].isFocus === true;
+    if (!focused) return 'square';
+    const isFocused = (focused[0] === outerIndex && focused[1] === innerIndex);
     return (isFocused) ? 'currentSquare' : 'square';
   };
 
-  const clearFocus = () => {
-    const newGrid = JSON.parse(JSON.stringify(grid));
-    newGrid.forEach(row => {
-      row.forEach(square => {
-        square.isFocus = false;
-      });
-    });
-    return newGrid;
-  };
-
   const clickHandler = (outerIndex, innerIndex) => {
-    const newGrid = clearFocus();
     setFocused([outerIndex, innerIndex]);
-    newGrid[outerIndex][innerIndex].isFocus = true;
-    setGrid(newGrid);
   };
 
   const arrowKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
@@ -46,20 +34,20 @@ export default function Crossword(){
   };
 
   const processArrowKey = (direction, outerIndex, innerIndex) => {
-    const newGrid = clearFocus();
+    const previousSquare = document.getElementById(`${outerIndex},${innerIndex}`);
+    previousSquare.blur();
     const [i, j] = getNewCoordinates(direction, outerIndex, innerIndex);
-    newGrid[i][j].isFocus = true;
-    return setGrid(newGrid);
+    const newSquare = document.getElementById(`${i},${j}`);
+    newSquare.focus();
+    return setFocused([i,j]);
   };
 
-  const keyDownHandler = (event, outerIndex, innerIndex) => {
+  const changeHandler = (event, outerIndex, innerIndex) => {
     const { key } = event;
+    //    TODO: Validation for `Alt`, `Space`, and other non-alphanumeric keys.
     if (arrowKeys.includes(key)) {
       return processArrowKey(key, outerIndex, innerIndex);
     }
-    const newGrid = JSON.parse(JSON.stringify(grid));
-    newGrid[outerIndex][innerIndex].value = key;
-    setGrid(newGrid);
   };
 
   return (
@@ -74,15 +62,14 @@ export default function Crossword(){
                     const style = styles[getStyleRuleName(outerIndex, innerIndex)];
                     return (
                       <input
-                        key={innerIndex}
-                        role='button'
                         data-testid='crossword-square'
-                        style={style}
-                        tabIndex={0}
+                        id={`${outerIndex},${innerIndex}`}
+                        key={innerIndex}
                         max={1}
                         onClick={() => clickHandler(outerIndex, innerIndex)}
-                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                        value={square.value}
+                        onKeyDown={(e) => changeHandler(e, outerIndex, innerIndex)}
+                        style={style}
+                        tabIndex={0}
                       />
                     )}
                   )
