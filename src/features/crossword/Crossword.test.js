@@ -43,4 +43,9 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
       expect(squareAboveCenter).toHaveStyle(styles.currentSquare);
     });
   });
+  describe('WHEN: the user is at the right edge of the crossword and presses the right keyboard button,', () => {
+    it('THEN: nothing happens.', () => {
+      // Corresponds to the TODO on line 47 of Crossword.jsx.
+    });
+  });
 });
