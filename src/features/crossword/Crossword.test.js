@@ -6,7 +6,6 @@ import 'react-dom';
 import Crossword, { emptyGrid } from './Crossword.jsx';
 import { styles } from './styles.js';
 
-
 describe('Crossword.jsx', ()=> {
   describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
     describe('WHEN: the user clicks on a square,', ()=>{

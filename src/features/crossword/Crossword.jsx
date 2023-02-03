@@ -1,5 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { styles } from './styles.js';
+
+// Initialize the JS client
+import { createClient } from '@supabase/supabase-js'
+
 
 export const emptyGrid = [
   [{ coords: [0,0] },{ coords: [0,1] },{ coords: [0,2] },{ coords: [0,3] },{ coords: [0,4]} ],
@@ -10,6 +14,23 @@ export const emptyGrid = [
 ];
 
 export default function Crossword(props){
+
+  const supabase = createClient(
+    'https://czzbyiyicvjcorsepbfp.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6emJ5aXlpY3ZqY29yc2VwYmZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQ1MTExNjgsImV4cCI6MTk5MDA4NzE2OH0.y06BXLuGUGK4HbOq6seg2l6ndzbbG46-NjOzGj2xRJo'
+  );
+  const getData = async () => {
+    const { data, err } = await supabase
+      .from('Crossword-Solutions')
+      .select('*')
+    if (err) console.error('you broke it: ', err);
+    console.log('data: ', data[0]);
+  }
+
+  useEffect( () => {
+    getData();
+  }, []);
+
   const [grid, setGrid] = useState(props.grid);
   const [focused, setFocused] = useState(undefined);
 
