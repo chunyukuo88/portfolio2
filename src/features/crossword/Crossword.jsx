@@ -1,15 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { styles } from './styles.js';
 
-export default function Crossword(){
-  const emptyGrid = [
-    [{ coords: [0,0] },{ coords: [0,1] },{ coords: [0,2] },{ coords: [0,3] },{ coords: [0,4]} ],
-    [{ coords: [1,0] },{ coords: [1,1] },{ coords: [1,2] },{ coords: [1,3] },{ coords: [1,4]} ],
-    [{ coords: [2,0] },{ coords: [2,1] },{ coords: [2,2] },{ coords: [2,3] },{ coords: [2,4]} ],
-    [{ coords: [3,0] },{ coords: [3,1] },{ coords: [3,2] },{ coords: [3,3] },{ coords: [3,4]} ],
-    [{ coords: [4,0] },{ coords: [4,1] },{ coords: [4,2] },{ coords: [4,3] },{ coords: [4,4]}],
-  ];
-  const [grid, setGrid] = useState(emptyGrid);
+export const emptyGrid = [
+  [{ coords: [0,0] },{ coords: [0,1] },{ coords: [0,2] },{ coords: [0,3] },{ coords: [0,4]} ],
+  [{ coords: [1,0] },{ coords: [1,1] },{ coords: [1,2] },{ coords: [1,3] },{ coords: [1,4]} ],
+  [{ coords: [2,0] },{ coords: [2,1] },{ coords: [2,2] },{ coords: [2,3] },{ coords: [2,4]} ],
+  [{ coords: [3,0] },{ coords: [3,1] },{ coords: [3,2] },{ coords: [3,3] },{ coords: [3,4]} ],
+  [{ coords: [4,0] },{ coords: [4,1] },{ coords: [4,2] },{ coords: [4,3] },{ coords: [4,4]}],
+];
+
+export default function Crossword(props){
+  const [grid, setGrid] = useState(props.grid);
   const [focused, setFocused] = useState(undefined);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
@@ -69,6 +70,7 @@ export default function Crossword(){
                     const style = styles[getStyleRuleName(outerIndex, innerIndex)];
                     return (
                       <input
+                        autoComplete="off"
                         data-testid='crossword-square'
                         id={`${outerIndex},${innerIndex}`}
                         key={innerIndex}

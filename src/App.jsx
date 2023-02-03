@@ -5,7 +5,7 @@ import { Provider, useSelector } from 'react-redux'
 import { RequireAuth } from './components/RequireAuth.jsx';
 import Language from './features/language/Language';
 import { Login } from './features/auth/Login.jsx';
-import Crossword from "./features/crossword/Crossword";
+import Crossword, { emptyGrid } from "./features/crossword/Crossword";
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
@@ -80,7 +80,7 @@ function HomePage(){
     <div className='page'>
       <p>{auth.user?.email && `Greetings, ${auth.user.email}!`}</p>
       <p>{strings.homeGreeting[language]}</p>
-      <Crossword />
+      <Crossword grid={emptyGrid}/>
     </div>
   );
 }
