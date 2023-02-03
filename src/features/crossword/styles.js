@@ -6,12 +6,14 @@ export const styles = {
   },
   square: {
     backgroundColor: 'white',
+    textTransform: 'capitalize',
     outline: 'solid black 1px',
     width: '40px',
     height: '40px',
   },
   currentSquare: {
     backgroundColor: 'cyan',
+    textTransform: 'capitalize',
     outline: 'solid black 1px',
     width: '40px',
     height: '40px',

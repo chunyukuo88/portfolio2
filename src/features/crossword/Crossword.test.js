@@ -43,9 +43,52 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
       expect(squareAboveCenter).toHaveStyle(styles.currentSquare);
     });
   });
-  describe('WHEN: the user is at the right edge of the crossword and presses the right keyboard button,', () => {
+  describe('WHEN: the user is at the left edge of the crossword and presses the left keyboard button,', () => {
     it('THEN: nothing happens.', () => {
-      // Corresponds to the TODO on line 47 of Crossword.jsx.
+      render(<Crossword />);
+
+      const squares = screen.getAllByTestId('crossword-square');
+
+      let upplerLeftCorner = squares[0];
+      expect(upplerLeftCorner).toHaveStyle(styles.square);
+
+      fireEvent.click(upplerLeftCorner);
+      upplerLeftCorner = squares[0];
+      expect(upplerLeftCorner).toHaveStyle(styles.currentSquare);
+
+      fireEvent.keyDown(upplerLeftCorner, { key: 'ArrowLeft', which: 38, keyCode: 38 });
+      upplerLeftCorner = squares[0];
+      expect(upplerLeftCorner).toHaveStyle(styles.currentSquare);
+    });
+  });
+  describe('WHEN: The user tries to enter a non-alphabet character,', () => {
+    it('THEN: nothing happens.', () => {
+      const { debug } = render(<Crossword />);
+
+      let squares = screen.getAllByTestId('crossword-square');
+      let upperLeftCorner = squares[0];
+      expect(upperLeftCorner.value).toEqual('');
+
+      fireEvent.keyPress(upperLeftCorner, { key: 'Digit1', which: 18, keyCode: 18 }); // The `!` symbol
+      squares = screen.getAllByTestId('crossword-square');
+      upperLeftCorner = squares[0];
+
+      expect(upperLeftCorner.value).toEqual('');
+    });
+  });
+  describe('WHEN: The user tries to enter multiple characters in a square,', () => {
+    it('THEN: it shows the most recent character.', () => {
+      render(<Crossword />);
+
+      let squares = screen.getAllByTestId('crossword-square');
+      let upperLeftCorner = squares[0];
+      expect(upperLeftCorner.value).toEqual('');
+
+      fireEvent.keyPress(upperLeftCorner, { key: 'a', which: 65, keyCode: 'KeyA' });
+      squares = screen.getAllByTestId('crossword-square');
+      upperLeftCorner = squares[0];
+      expect(upperLeftCorner.value).toEqual('A');
+
     });
   });
 });
