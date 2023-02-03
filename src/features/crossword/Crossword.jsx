@@ -50,8 +50,6 @@ export default function Crossword(){
     return setFocused([i,j]);
   };
 
-  const isNotALetter = (key) => (/^[a-zA-Z]+$/).test(key);
-
   const changeHandler = (event, outerIndex, innerIndex) => {
     const { key } = event;
     if (movementKeys.includes(key)) {

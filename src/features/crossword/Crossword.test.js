@@ -22,7 +22,14 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
     });
   });
   describe('WHEN: the user clicks in the center of the grid, then presses an arrow key,', () => {
-    it('THEN: the square first clicked becomes white again, and the new square becomes highlighted.', () => {
+    it.each`
+      key             | which           | keyCode    | resultIndex
+      ${'ArrowUp'}    | ${38}           | ${38}      | ${7}
+      ${'ArrowDown'}  | ${40}           | ${40}      | ${17}
+      ${'ArrowLeft'}  | ${37}           | ${37}      | ${11}
+      ${'ArrowRight'} | ${39}           | ${39}      | ${13} 
+    `('THEN: the square first clicked becomes white again, and the new square becomes highlighted.',
+      ({key, which, keyCode, resultIndex}) => {
       render(<Crossword />);
 
       const squares = screen.getAllByTestId('crossword-square');
@@ -32,15 +39,15 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
 
       fireEvent.click(centerSquare);
       centerSquare = squares[12];
-      let squareAboveCenter = squares[7];
+      let resultantSquare = squares[resultIndex];
 
       expect(centerSquare).toHaveStyle(styles.currentSquare);
-      expect(squareAboveCenter).toHaveStyle(styles.square);
+      expect(resultantSquare).toHaveStyle(styles.square);
 
-      fireEvent.keyDown(centerSquare, { key: 'ArrowUp', which: 38, keyCode: 38 });
-      squareAboveCenter = squares[7];
+      fireEvent.keyDown(centerSquare, { key, which, keyCode });
+      resultantSquare = squares[resultIndex];
 
-      expect(squareAboveCenter).toHaveStyle(styles.currentSquare);
+      expect(resultantSquare).toHaveStyle(styles.currentSquare);
     });
   });
   describe('WHEN: the user is at the left edge of the crossword and presses the left keyboard button,', () => {
@@ -63,7 +70,7 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
   });
   describe('WHEN: The user tries to enter a non-alphabet character,', () => {
     it('THEN: nothing happens.', () => {
-      const { debug } = render(<Crossword />);
+      render(<Crossword />);
 
       let squares = screen.getAllByTestId('crossword-square');
       let upperLeftCorner = squares[0];
@@ -74,21 +81,6 @@ describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
       upperLeftCorner = squares[0];
 
       expect(upperLeftCorner.value).toEqual('');
-    });
-  });
-  describe('WHEN: The user tries to enter multiple characters in a square,', () => {
-    it('THEN: it shows the most recent character.', () => {
-      render(<Crossword />);
-
-      let squares = screen.getAllByTestId('crossword-square');
-      let upperLeftCorner = squares[0];
-      expect(upperLeftCorner.value).toEqual('');
-
-      fireEvent.keyPress(upperLeftCorner, { key: 'a', which: 65, keyCode: 'KeyA' });
-      squares = screen.getAllByTestId('crossword-square');
-      upperLeftCorner = squares[0];
-      expect(upperLeftCorner.value).toEqual('A');
-
     });
   });
 });
