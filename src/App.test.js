@@ -115,7 +115,7 @@ describe('GIVEN: The application (App.jsx) has loaded.', ()=>{
         fireEvent.click(profileButton);
 
         expect(spySignout).toBeCalled();
-        await waitFor(() => expect(spyClear).toBeCalled());
+        await waitFor(() => expect(spyClear).toBeCalledTimes(1));
       });
     });
   });
