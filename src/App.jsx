@@ -26,7 +26,7 @@ function App() {
         </Router>
       </Provider>
     </div>
-  )
+  );
 }
 
 function Header(){
@@ -42,7 +42,11 @@ function Header(){
     <header>
       <Language />
       <button onClick={() => navigate(routes.index)}>🏠</button>
-      <button onClick={() => navigate(routes.counter)}>{strings.goToCounter[language]}</button>
+      <button
+        onClick={() => navigate(routes.counter)}
+      >
+        {strings.goToCounter[language]}
+      </button>
       {auth?.session?.user && <button onClick={() => navigate(routes.profile)}>Profile</button>}
       {
         auth?.session?.user
