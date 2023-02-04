@@ -7,7 +7,6 @@ import strings from '../../common/strings.js';
 
 export const Login = () => {
   const language = useSelector((state) => state.language.value);
-  const auth = useSelector((state) => state.auth?.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
