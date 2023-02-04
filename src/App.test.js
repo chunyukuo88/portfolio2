@@ -1,10 +1,27 @@
 import App from './App';
-import {fireEvent, render} from "@testing-library/react";
-import strings from "./common/strings";
+import { fireEvent, render } from '@testing-library/react';
+import strings from './common/strings';
+import 'react-router-dom';
+import { routes } from './routes';
 
 const { ENGLISH, CHINESE, RUSSIAN } = strings;
 
-describe('GIVEN: ', ()=>{
+const mockNavFn = jest.fn();
+
+jest.mock('react-router-dom', () => {
+  const originalModule = jest.requireActual('react-router-dom');
+  return {
+    __esModule: true,
+    ...originalModule,
+    useNavigate: () => mockNavFn, // shows up as gray in WebStorm but this is actually being used. Proof: Change the spelling and tests break.
+  };
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+describe('GIVEN: The application (App.jsx) has loaded.', ()=>{
   describe('WHEN: ', ()=>{
     test('THEN: ', ()=>{
       const { container } = render(<App />);
@@ -34,9 +51,29 @@ describe('GIVEN: ', ()=>{
       expect(languageButton).toHaveTextContent(strings.language[ENGLISH]);
     });
   });
-  describe('WHEN: The user clicks the language button twice,', () => {
-    test('THEN: The site switches to Russian', () => {
-      //
+  describe('WHEN: The user is NOT logged in and clicks a navigation button,', () => {
+    test.each`
+      buttonId             |   route
+      ${'home-button'}     |   ${routes.index}
+      ${'counter-button'}  |   ${routes.counter}
+      ${'login-button'}    |   ${routes.login}
+  `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
+      render(<App />);
+
+      const homeButton = document.getElementById(buttonId);
+      fireEvent.click(homeButton);
+
+      expect(mockNavFn).toBeCalledWith(route);
+    });
+  });
+  describe('WHEN: The user IS logged in and clicks the profile button,', () => {
+    test.skip('THEN: the navigation method that takes them to Profile page is invoked.', () => {
+      render(<App />);
+
+      const profileButton = document.getElementById('profile-button');
+      fireEvent.click(profileButton);
+
+      expect(mockNavFn).toBeCalledWith(routes.profile);
     });
   });
 });

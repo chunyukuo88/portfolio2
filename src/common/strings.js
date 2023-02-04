@@ -6,7 +6,7 @@ const strings = {
     russian: 'уменьшение',
   },
   email: {
-    chinese: '邮箱地址',
+    chinese: '郵箱地址',
     english: 'Email',
     russian: 'е-мейл',
   },
@@ -37,7 +37,7 @@ const strings = {
     russian: 'Русский',
   },
   login: {
-    chinese: '登录',
+    chinese: '登錄',
     english: 'Log in',
     russian: 'авторизоваться',
   },
@@ -47,9 +47,14 @@ const strings = {
     russian: 'выйти',
   },
   password: {
-    chinese: '密码',
+    chinese: '密碼',
     english: 'Password',
     russian: 'пароль',
+  },
+  profile: {
+    chinese: '個人設置',
+    english: 'Profile',
+    russian: 'страница профиля',
   },
   RUSSIAN: 'russian',
 };

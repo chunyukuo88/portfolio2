@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate  } from 'react-router-dom';
 import { Counter } from './features/counter/Counter.jsx';
 import { store } from './globalState/store.js';
-import { Provider, useSelector } from 'react-redux'
+import { Provider, useSelector } from 'react-redux';
 import { RequireAuth } from './components/RequireAuth.jsx';
 import Language from './features/language/Language';
 import { Login } from './features/auth/Login.jsx';
-import Crossword, { emptyGrid } from "./features/crossword/Crossword";
+import Crossword, { emptyGrid } from './features/crossword/Crossword';
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
@@ -41,17 +41,16 @@ function Header(){
   return (
     <header>
       <Language />
-      <button onClick={() => navigate(routes.index)}>🏠</button>
-      <button
-        onClick={() => navigate(routes.counter)}
-      >
-        {strings.goToCounter[language]}
-      </button>
-      {auth?.session?.user && <button onClick={() => navigate(routes.profile)}>Profile</button>}
+      <button id='home-button' onClick={() => navigate(routes.index)}>🏠</button>
+      <button id='counter-button' onClick={() => navigate(routes.counter)}>{strings.goToCounter[language]}</button>
+      {auth?.session?.user ?
+        <button id='profile-button' onClick={() => navigate(routes.profile)}>{strings.profile[language]}</button>
+        : null
+      }
       {
         auth?.session?.user
-          ? <button onClick={logoutHandler}>{strings.logout[language]}</button>
-          : <button onClick={() => navigate(routes.login)}>{strings.login[language]}</button>
+          ? <button id='logout-button' onClick={logoutHandler}>{strings.logout[language]}</button>
+          : <button id='login-button' onClick={() => navigate(routes.login)}>{strings.login[language]}</button>
       }
     </header>
   );
