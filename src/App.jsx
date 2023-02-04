@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate  } from 'react-router-dom';
 import { Counter } from './features/counter/Counter.jsx';
-import { store } from './globalState/store.js';
-import { Provider, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RequireAuth } from './components/RequireAuth.jsx';
 import Language from './features/language/Language';
 import { Login } from './features/auth/Login.jsx';
@@ -14,17 +13,15 @@ import './App.css';
 function App() {
   return (
     <div className='App'>
-      <Provider store={store}>
-        <Router>
-          <Header />
-          <Routes>
-            <Route exact path={routes.index} element={<HomePage />}/>
-            <Route exact path={routes.counter} element={<CounterPage />}/>
-            <Route exact path={routes.login} element={<LoginPage />}/>
-            <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
-          </Routes>
-        </Router>
-      </Provider>
+      <Router>
+        <Header />
+        <Routes>
+          <Route exact path={routes.index} element={<HomePage />}/>
+          <Route exact path={routes.counter} element={<CounterPage />}/>
+          <Route exact path={routes.login} element={<LoginPage />}/>
+          <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
+        </Routes>
+      </Router>
     </div>
   );
 }
