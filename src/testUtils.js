@@ -1,9 +1,9 @@
-import {configureStore, createSlice} from "@reduxjs/toolkit";
-import counterReducer from "./features/counter/counterSlice";
-import humidityReducer from "./features/humidity/humiditySlice";
-import languageReducer from "./features/language/languageSlice";
-import navigationReducer from "./features/navigation/navigationSlice";
-import tempReducer from "./features/temp/tempSlice";
+import {configureStore, createSlice} from '@reduxjs/toolkit';
+import counterReducer from './features/counter/counterSlice';
+import humidityReducer from './features/humidity/humiditySlice';
+import languageReducer from './features/language/languageSlice';
+import navigationReducer from './features/navigation/navigationSlice';
+import tempReducer from './features/temp/tempSlice';
 
 const mockAuthSlice = createSlice({
   name: 'auth',
@@ -15,8 +15,8 @@ const mockAuthSlice = createSlice({
       },
       user: {
         email: 'test@test.com'
-      }
-    }
+      },
+    },
   },
   reducers: {
     updateAuth: (state, action) => {
@@ -33,5 +33,5 @@ export const mockStore = configureStore({
     language: languageReducer,
     navigation: navigationReducer,
     temp: tempReducer,
-  }
+  },
 });

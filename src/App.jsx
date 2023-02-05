@@ -86,3 +86,31 @@ function HomePage(){
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// TODO: Extract each of the pages for ease of testing, particularly
+// regarding dependency injection and minimization of mocks/spies.
+
+
+
+
+
+
+
+
+
+
+
+
+

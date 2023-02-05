@@ -5,6 +5,9 @@ import 'react-dom';
 
 import Crossword, { emptyGrid } from './Crossword.jsx';
 import { styles } from './styles.js';
+import { createClient } from '@supabase/supabase-js';
+
+jest.mock('@supabase/supabase-js');
 
 describe('Crossword.jsx', ()=> {
   describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
@@ -88,11 +91,38 @@ describe('Crossword.jsx', ()=> {
   });
   describe('GIVEN: The 5x5 crossword grid is correctly filled,', ()=>{
     describe('WHEN: The user clicks the submit button,', () => {
-      test('THEN: It checks the solution with the server.', () => {
-        
-      });
       test('THEN: Confetti is displayed.', () => {
-        //
+        createClient.mockImplementationOnce(() => ({
+          supabase: {
+            from: () => ({
+              select: () => [{
+                solution: 'a,b,c,d',
+              }],
+            }),
+          },
+        }));
+        const grid = [
+          [{},{}],
+          [{},{}],
+        ];
+
+        render(<Crossword grid={grid}/>);
+        let squares = screen.getAllByTestId('crossword-square');
+        const upperLeftCorner = squares[0];
+        const upperRightCorner = squares[1];
+        const lowerLeftCorner = squares[2];
+        const lowerRightCorner = squares[3];
+
+        fireEvent.click(upperLeftCorner);
+        fireEvent.keyPress(upperLeftCorner, { key: 'KeyA', which: 65, keyCode: 65 });
+        fireEvent.click(upperRightCorner);
+        fireEvent.keyPress(upperRightCorner, { key: 'KeyB', which: 66, keyCode: 66 });
+        fireEvent.click(lowerLeftCorner);
+        fireEvent.keyPress(upperLeftCorner, { key: 'KeyC', which: 67, keyCode: 67 });
+        fireEvent.click(lowerRightCorner);
+        fireEvent.keyPress(lowerRightCorner, { key: 'KeyD', which: 68, keyCode: 68 });
+
+
       });
     });
   });
