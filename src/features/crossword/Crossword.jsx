@@ -1,9 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import {styles} from './styles.js';
 import {createClient} from '@supabase/supabase-js'
-import useWindowSize from 'react-use/lib/useWindowSize';
-import Confetti from 'react-confetti';
-import {useTimeout} from "react-use";
 
 export default function Crossword(props){
   const supabase = createClient(
@@ -27,7 +24,6 @@ export default function Crossword(props){
     crosswordData = data;
   });
 
-  const { width, height } = useWindowSize();
   const { grid } = props;
   const [ gridCopy, setGridCopy] = useState([...JSON.parse(JSON.stringify(grid))]);
   const [focused, setFocused] = useState(undefined);
@@ -97,23 +93,11 @@ export default function Crossword(props){
     return setGridCopy(gridCopy);
   };
 
-  const Victory = () => {
-    const ms = 5000;
-    const [isReady, cancel] = useTimeout(ms);
-
-    return (
-      <>
-        <h1>Victory! Gud jerb</h1>
-        { isReady() === false ? <Confetti width={width} height={height} tweenDuration={1000}/> : '' }
-      </>
-    );
-  };
-
   return (
       <main style={styles.main}>
         <section style={styles.section}>
           <h1 style={styles.title}>Crossword</h1>
-          { (userHasWon) ? <Victory /> : null}
+          { (userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
           {
             gridCopy.map((row, outerIndex) => (
               <div style={styles.row} key={outerIndex}>
