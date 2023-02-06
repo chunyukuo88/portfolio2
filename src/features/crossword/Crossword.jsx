@@ -1,21 +1,9 @@
-import React, {useState, useMemo } from 'react';
-import { styles } from './styles.js';
-import { createClient } from '@supabase/supabase-js'
+import React, {useMemo, useState} from 'react';
+import {styles} from './styles.js';
+import {createClient} from '@supabase/supabase-js'
 import useWindowSize from 'react-use/lib/useWindowSize';
 import Confetti from 'react-confetti';
-
-// export const emptyGrid = [
-//   [ { value: '' },{ value: '' },{ value: '' },{ value: '' },{ value: '' } ],
-//   [ { value: '' },{ value: '' },{ value: '' },{ value: '' },{ value: '' } ],
-//   [ { value: '' },{ value: '' },{ value: '' },{ value: '' },{ value: '' } ],
-//   [ { value: '' },{ value: '' },{ value: '' },{ value: '' },{ value: '' } ],
-//   [ { value: '' },{ value: '' },{ value: '' },{ value: '' },{ value: '' } ],
-// ];
-
-export const emptyGrid = [
-  [ { value: '' },{ value: '' } ],
-  [ { value: '' },{ value: '' } ],
-];
+import {useTimeout} from "react-use";
 
 export default function Crossword(props){
   const supabase = createClient(
@@ -109,11 +97,23 @@ export default function Crossword(props){
     return setGridCopy(gridCopy);
   };
 
+  const Victory = () => {
+    const ms = 5000;
+    const [isReady, cancel] = useTimeout(ms);
+
+    return (
+      <>
+        <h1>Victory! Gud jerb</h1>
+        { isReady() === false ? <Confetti width={width} height={height} tweenDuration={1000}/> : '' }
+      </>
+    );
+  };
+
   return (
       <main style={styles.main}>
         <section style={styles.section}>
           <h1 style={styles.title}>Crossword</h1>
-          { (userHasWon) ? <Confetti width={width} height={height} tweenDuration={1000}/> : null}
+          { (userHasWon) ? <Victory /> : null}
           {
             gridCopy.map((row, outerIndex) => (
               <div style={styles.row} key={outerIndex}>
