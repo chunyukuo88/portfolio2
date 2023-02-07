@@ -1,4 +1,15 @@
 export const styles = {
+  squareWrapper: {
+    position: 'relative',
+
+  },
+  clueNumber: {
+    color: 'gray',
+    left: '0.25rem',
+    position: 'absolute',
+    top: '0.25rem',
+    zIndex: '3',
+  },
   row: {
     display: 'flex',
     flexDirection: 'row',
@@ -10,9 +21,11 @@ export const styles = {
     fontSize: '2rem',
     height: '3rem',
     outline: 'solid black 1px',
+    position: 'relative',
     textAlign: 'center',
     textTransform: 'capitalize',
     width: '3rem',
+    zIndex: '2',
   },
   squareVictory: {
     backgroundColor: 'lightGreen',
@@ -20,12 +33,14 @@ export const styles = {
     fontSize: '3rem',
     height: '3rem',
     outline: 'solid black 1px',
+    position: 'relative',
     textAlign: 'center',
     textTransform: 'capitalize',
     transform: 'rotate(360deg)',
     transition: '1s',
     userSelect: 'none',
     width: '3rem',
+    zIndex: '2',
   },
   currentSquare: {
     backgroundColor: 'cyan',
@@ -33,9 +48,11 @@ export const styles = {
     fontSize: '2rem',
     height: '3rem',
     outline: 'solid black 1px',
+    position: 'relative',
     textAlign: 'center',
     textTransform: 'capitalize',
     width: '3rem',
+    zIndex: '2',
   },
   main: {
       height: '80vh',

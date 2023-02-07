@@ -1,21 +1,19 @@
-import React, {useMemo, useState} from 'react';
-import {styles} from './styles.js';
+import React, { useEffect, useState } from 'react';
+import { styles } from './styles.js';
 import { getData } from './utils';
 
 export default function Crossword(props){
-  console.log('RENDER')
-  const crosswordPromise = useMemo(async () => {
-    return await getData();
+  useEffect( () => {
+    getData().then(data => {
+      setCrosswordData(data);
+    });
   }, []);
-  let crosswordData;
-  crosswordPromise.then((data) => {
-    crosswordData = data;
-  });
 
   const { grid } = props;
   const [ gridCopy, setGridCopy] = useState([...JSON.parse(JSON.stringify(grid))]);
   const [focused, setFocused] = useState(undefined);
   const [userHasWon, setUserHasWon] = useState(false);
+  const [crosswordData, setCrosswordData] = useState(undefined);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
     if (userHasWon) return 'squareVictory';
@@ -82,16 +80,22 @@ export default function Crossword(props){
     return setGridCopy(gridCopy);
   };
 
-  const CluesAcross = () => {
-    // const cluesAcrossAsArray = crosswordData[0].cluesAcross.split(',');
-    // console.log('CluesAcross() - crosswordData: ', crosswordData);
-    // console.log('crosswordData: ', crosswordData);
+  const Clues = ({ crosswordData }) => {
+    const cluesAcross = crosswordData[0].cluesAcross.split(',');
+    const cluesDown = crosswordData[0].cluesDown.split(',');
+
     return (
       <>
         <h3>Across:</h3>
-        {/*{cluesAcrossAsArray.forEach(clue => <p1>clue</p1>)}*/}
+        {cluesAcross.map(clue => <div key={clue[0]}>{clue}</div>)}
+        <h3>Down:</h3>
+        {cluesDown.map(clue => <div key={clue[0]}>{clue}</div>)}
       </>
     );
+  };
+  const getClueNumber = (outerIndex, innerIndex) => {
+    if (outerIndex === 0) return <>{innerIndex + 1}</>
+    if (innerIndex === 0) return <>{outerIndex + 1}</>
   };
 
   return (
@@ -106,26 +110,29 @@ export default function Crossword(props){
                   row.map((square, innerIndex) => {
                     const style = styles[getStyleRuleName(outerIndex, innerIndex)];
                     return (
-                      <input
-                        autoComplete='off'
-                        data-testid='crossword-square'
-                        id={`${outerIndex},${innerIndex}`}
-                        key={innerIndex}
-                        maxLength='1'
-                        onClick={() => clickHandler(outerIndex, innerIndex)}
-                        onChange={() => setUserHasWon(determineIfUserWon)}
-                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                        style={style}
-                        tabIndex={-1}
-                        readOnly={userHasWon}
-                      />
+                      <div style={styles.squareWrapper}>
+                        <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
+                        <input
+                          autoComplete='off'
+                          data-testid='crossword-square'
+                          id={`${outerIndex},${innerIndex}`}
+                          key={innerIndex}
+                          maxLength='1'
+                          onClick={() => clickHandler(outerIndex, innerIndex)}
+                          onChange={() => setUserHasWon(determineIfUserWon)}
+                          onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
+                          style={style}
+                          tabIndex={-1}
+                          readOnly={userHasWon}
+                        />
+                      </div>
                     )}
                   )
                 }
               </div>
             ))
           }
-          <CluesAcross />
+          {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>Loading...</p>}
         </section>
       </main>
   );

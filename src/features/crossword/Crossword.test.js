@@ -1,19 +1,19 @@
 import React from 'react';
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import {fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'react-dom';
 
 import Crossword from './Crossword.jsx';
 import { styles } from './styles.js';
-import {emptyGridTwoByTwo, emptyGridFiveByFive, getData} from './utils';
+import { emptyGridTwoByTwo, emptyGridFiveByFive } from './utils';
 
 jest.mock('./utils', () => {
   const originalModule = jest.requireActual('./utils');
   return {
     __esModule: true,
     ...originalModule,
-    getData: () => {
-      return [{
+    getData: () => new Promise((res, rej) => {
+      res({
         author: 'Alex Gochenour',
         cluesAcross: '1. A type of application testing,2. 1990s music token',
         cluesDown: '1. Hit this when it\'s hot,2. Becton Dickinson and Company',
@@ -22,8 +22,8 @@ jest.mock('./utils', () => {
         solution: 'abcd',
         theme: 'Test',
         title: 'Test',
-      }];
-    },
+      });
+    }),
   };
 });
 
@@ -108,13 +108,31 @@ describe('Crossword.jsx', ()=> {
     });
   });
   describe('GIVEN: a 2x2 crossword grid,', ()=>{
-    describe('WHEN: the page loads', () => {
-      it('THEN: displays the clues', async() => {
+    describe('WHEN: the first page loads', () => {
+      it('THEN: displays a loading message', () => {
+        render(<Crossword grid={emptyGridTwoByTwo}/>);
+
+        const loading = screen.getAllByText('Loading...')[0];
+
+        expect(loading).toBeInTheDocument();
+      });
+      it('THEN: displays the numbers corresponding to the clues', () => {
+        render(<Crossword grid={emptyGridTwoByTwo}/>);
+
+        const numberOne = screen.getAllByText('1')[0];
+        const numberTwos = screen.getAllByText('2');
+
+        expect(numberOne).toBeInTheDocument();
+        expect(numberTwos[0]).toBeInTheDocument();
+        expect(numberTwos[1]).toBeInTheDocument();
+      });
+    });
+    describe('WHEN: the crossword data has been fetched,', () => {
+      it('THEN: displays the title and clues', () => {
         render(<Crossword grid={emptyGridTwoByTwo}/>);
 
         const clue = screen.getByText('1. A type of application testing');
-
-        await waitFor(expect(clue).toBeInTheDocument());
+        expect(clue).toBeInTheDocument();
       });
     });
     describe.skip('WHEN: The user has correctly filled it out,', () => {
