@@ -1,24 +1,12 @@
 import React, {useMemo, useState} from 'react';
 import {styles} from './styles.js';
-import {createClient} from '@supabase/supabase-js'
+import { getData } from './utils';
 
 export default function Crossword(props){
-  const supabase = createClient(
-    'https://czzbyiyicvjcorsepbfp.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6emJ5aXlpY3ZqY29yc2VwYmZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQ1MTExNjgsImV4cCI6MTk5MDA4NzE2OH0.y06BXLuGUGK4HbOq6seg2l6ndzbbG46-NjOzGj2xRJo'
-  );
-  const getData = async () => {
-    const { data, err } = await supabase
-      .from('Crossword-Solutions')
-      .select('*')
-    if (err) console.error('you broke it: ', err);
-    return data;
-  };
-
+  console.log('RENDER')
   const crosswordPromise = useMemo(async () => {
     return await getData();
   }, []);
-
   let crosswordData;
   crosswordPromise.then((data) => {
     crosswordData = data;
@@ -30,6 +18,7 @@ export default function Crossword(props){
   const [userHasWon, setUserHasWon] = useState(false);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
+    if (userHasWon) return 'squareVictory';
     if (!focused) return 'square';
     const isFocused = (focused[0] === outerIndex && focused[1] === innerIndex);
     return (isFocused) ? 'currentSquare' : 'square';
@@ -39,7 +28,7 @@ export default function Crossword(props){
     setFocused([outerIndex, innerIndex]);
   };
 
-  const nonAlphabetics = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Alt', 'Del', 'Backspace' ];
+  const nonAlphabetics = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Alt', 'Del', 'Backspace'];
 
   const getNewCoordinates = (direction, outerIndex, innerIndex) => {
     switch (direction) {
@@ -51,7 +40,7 @@ export default function Crossword(props){
     }
   };
 
-  const isOutsideGrid = ([i, j]) =>  (
+  const isOutsideGrid = ([i, j]) => (
     i > gridCopy.length - 1
     || i < 0
     || j > gridCopy.length - 1
@@ -93,6 +82,18 @@ export default function Crossword(props){
     return setGridCopy(gridCopy);
   };
 
+  const CluesAcross = () => {
+    // const cluesAcrossAsArray = crosswordData[0].cluesAcross.split(',');
+    // console.log('CluesAcross() - crosswordData: ', crosswordData);
+    // console.log('crosswordData: ', crosswordData);
+    return (
+      <>
+        <h3>Across:</h3>
+        {/*{cluesAcrossAsArray.forEach(clue => <p1>clue</p1>)}*/}
+      </>
+    );
+  };
+
   return (
       <main style={styles.main}>
         <section style={styles.section}>
@@ -112,10 +113,11 @@ export default function Crossword(props){
                         key={innerIndex}
                         maxLength='1'
                         onClick={() => clickHandler(outerIndex, innerIndex)}
-                        onChange={() =>setUserHasWon(determineIfUserWon)}
+                        onChange={() => setUserHasWon(determineIfUserWon)}
                         onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
                         style={style}
                         tabIndex={-1}
+                        readOnly={userHasWon}
                       />
                     )}
                   )
@@ -123,6 +125,7 @@ export default function Crossword(props){
               </div>
             ))
           }
+          <CluesAcross />
         </section>
       </main>
   );
