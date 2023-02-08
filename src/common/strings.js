@@ -1,6 +1,6 @@
 const strings = {
   about: {
-    chinese: '简介',
+    chinese: '簡介',
     english: 'About',
     russian: 'пожаловать',
   },
@@ -18,7 +18,7 @@ const strings = {
   },
   CHINESE: 'chinese',
   contact: {
-    chinese: '联络',
+    chinese: '聯絡',
     english: 'Contact',
     russian: 'контакт',
   },
@@ -84,7 +84,7 @@ const strings = {
     russian: 'страница профиля',
   },
   puzzle: {
-    chinese: '填字游戏',
+    chinese: '填字遊戲',
     english: 'Puzzle',
     russian: 'кроссворд',
   },

@@ -10,6 +10,7 @@ import Admin from './common/icons/admin.png';
 import Blog from './common/icons/blog.png';
 import Contact from './common/icons/contact.png';
 import Puzzle from './common/icons/puzzle.png';
+import Loca from './common/icons/language.png';
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
@@ -118,12 +119,12 @@ function HomePage(){
       //{/*<p>{strings.homeGreeting[language]}</p>*/}
   return (
     <ul>
-      <li><span><img src={About} alt="About icon"/> </span>{strings.about[language]}</li>
-      <li><span><img src={Admin} alt="Admin icon"/> </span>{strings.blog[language]}</li>
-      <li><span><img src={Blog} alt="Blog icon"/> </span>{strings.puzzle[language]}</li>
-      <li><span><img src={Contact} alt="Contact icon"/></span>{strings.contact[language]}</li>
-      <li><span><img src={Puzzle} alt="Puzzle icon"/></span>{strings.admin[language]}</li>
-      <li><span><img src={Puzzle} alt="Puzzle icon"/></span><Language/></li>
+      <li className='five'><a href="#"><span><img src={About} alt="About icon"/> </span>{strings.about[language]}</a></li>
+      <li className='four'><a href="#"><span><img src={Admin} alt="Admin icon"/> </span>{strings.blog[language]}</a></li>
+      <li className='three'><a href="#"><span><img src={Blog} alt="Blog icon"/> </span>{strings.puzzle[language]}</a></li>
+      <li className='two'><a href="#"><span><img src={Contact} alt="Contact icon"/></span>{strings.contact[language]}</a></li>
+      <li className='one'><a href="#"><span><img src={Puzzle} alt="Puzzle icon"/></span>{strings.admin[language]}</a></li>
+      <li className='zero'><a href="#"><span><img src={Loca} alt="Puzzle icon"/></span><Language/></a></li>
     </ul>
   );
 }
