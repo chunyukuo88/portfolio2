@@ -5,5 +5,4 @@ export const routes = {
   login: '/login',
   profile: '/profile',
   puzzle: '/puzzle',
-  contact: '/contact'
 };

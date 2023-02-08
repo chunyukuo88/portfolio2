@@ -7,6 +7,12 @@
   --LanguageBlock: brown;
 }
 
+.main-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 65vh;
+}
 .App {
   box-sizing: border-box;
   margin: 0;
@@ -27,6 +33,10 @@ body {
   background-color: #3e3f46;
   position: relative;
   transform: skewY(-15deg);
+}
+
+.contact-links-wrapper {
+  position: relative;
 }
 
 .menu-block {
