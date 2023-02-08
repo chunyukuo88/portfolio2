@@ -2,6 +2,15 @@ export const styles = {
   squareWrapper: {
     position: 'relative',
   },
+  clue: {
+    textAlign: 'left',
+  },
+  cluesBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    width: '500px',
+  },
   clueNumber: {
     color: 'gray',
     fontSize: '0.75rem',
@@ -10,10 +19,20 @@ export const styles = {
     top: '0.25rem',
     zIndex: '3',
   },
+  gridWrapper: {
+
+  },
+  gridAndSettings: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  crosswordSettings: {
+    backgroundColor: 'orange',
+    width: '2.5rem',
+  },
   row: {
     display: 'flex',
     flexDirection: 'row',
-    color: 'red',
   },
   square: {
     backgroundColor: 'white',
@@ -58,13 +77,13 @@ export const styles = {
       height: '80vh',
   },
   title: {
-      color: 'red',
+      color: 'black',
   },
   section: {
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
     height: '100%',
+    justifyContent: 'center',
   },
 };

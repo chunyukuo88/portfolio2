@@ -9,7 +9,6 @@ import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
 import './App.css';
-import { emptyGridFiveByFive } from './features/crossword/utils';
 
 function App() {
   return (
@@ -81,7 +80,7 @@ function HomePage(){
     <div className='page'>
       <p>{auth.user?.email && `Greetings, ${auth.user.email}!`}</p>
       <p>{strings.homeGreeting[language]}</p>
-      <Crossword grid={emptyGridFiveByFive}/>
+      <Crossword />
     </div>
   );
 }
