@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route, useNavigate  } from 'react-rout
 import { Counter } from './features/counter/Counter.jsx';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './components/RequireAuth.jsx';
-import Language from './features/language/Language';
 import { Login } from './features/auth/Login.jsx';
+import Language from './features/language/Language';
 import Crossword from './features/crossword/Crossword';
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
@@ -123,7 +123,7 @@ function HomePage(){
         <span>
           <img className='main-icons' src={AboutIcon} alt="About icon"/>
         </span>
-        <a href="/puzzle">
+        <a href="#">
           {strings.about[language]}
         </a>
       </li>
@@ -139,7 +139,7 @@ function HomePage(){
         <span>
           <img className='main-icons' src={Puzzle} alt="Puzzle icon"/>
         </span>
-        <a href="#">
+        <a href="/puzzle">
           {strings.puzzle[language]}
         </a>
       </li>
