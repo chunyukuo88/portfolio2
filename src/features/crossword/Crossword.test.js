@@ -92,16 +92,16 @@ describe('Crossword.jsx', ()=> {
 
         const squares = screen.getAllByTestId('crossword-square');
 
-        let upplerLeftCorner = squares[0];
-        expect(upplerLeftCorner).toHaveStyle(styles.square);
+        let upperLeftCorner = squares[0];
+        expect(upperLeftCorner).toHaveStyle(styles.square);
 
-        fireEvent.click(upplerLeftCorner);
-        upplerLeftCorner = squares[0];
-        expect(upplerLeftCorner).toHaveStyle(styles.currentSquare);
+        fireEvent.click(upperLeftCorner);
+        upperLeftCorner = squares[0];
+        expect(upperLeftCorner).toHaveStyle(styles.currentSquare);
 
-        fireEvent.keyDown(upplerLeftCorner, { key: 'ArrowLeft', which: 38, keyCode: 38 });
-        upplerLeftCorner = squares[0];
-        expect(upplerLeftCorner).toHaveStyle(styles.currentSquare);
+        fireEvent.keyDown(upperLeftCorner, { key: 'ArrowLeft', which: 38, keyCode: 38 });
+        upperLeftCorner = squares[0];
+        expect(upperLeftCorner).toHaveStyle(styles.currentSquare);
       });
     });
     describe('WHEN: The user tries to enter a non-alphabet character,', () => {

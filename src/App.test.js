@@ -7,7 +7,8 @@ import Root from './Root';
 import { store } from './globalState/store';
 import { mockStore } from './testUtils';
 import { supabaseClient } from './features/auth/client.js';
-
+import '@testing-library/jest-dom';
+import 'react-dom';
 
 const mockNavFn = jest.fn();
 jest.mock('react-router-dom', () => {
@@ -28,38 +29,38 @@ afterEach(() => {
 describe('GIVEN: The application (App.jsx) has loaded.', ()=>{
   describe('WHEN: ', ()=>{
     test('THEN: ', ()=>{
-      const { container } = render(
+      render(
         <Root store={store}>
           <App />
         </Root>
       );
 
-      const app = container.querySelector('.App');
+      const app = document.querySelector('.App');
 
       expect(app).toBeInTheDocument();
     });
   });
   describe('WHEN: The user clicks the language button thrice,', () => {
     test('THEN: The site cycles through the localization settings.', () => {
-      const { container } = render(
+      render(
         <Root store={store}>
           <App />
         </Root>
       );
 
-      let languageButton = container.querySelector('#language-button');
+      let languageButton = document.querySelector('#language-button');
       expect(languageButton).toHaveTextContent(strings.language[ENGLISH]);
 
       fireEvent.click(languageButton);
-      languageButton = container.querySelector('#language-button');
+      languageButton = document.querySelector('#language-button');
       expect(languageButton).toHaveTextContent(strings.language[CHINESE]);
 
       fireEvent.click(languageButton);
-      languageButton = container.querySelector('#language-button');
+      languageButton = document.querySelector('#language-button');
       expect(languageButton).toHaveTextContent(strings.language[RUSSIAN]);
 
       fireEvent.click(languageButton);
-      languageButton = container.querySelector('#language-button');
+      languageButton = document.querySelector('#language-button');
       expect(languageButton).toHaveTextContent(strings.language[ENGLISH]);
     });
   });
@@ -70,7 +71,7 @@ describe('GIVEN: The application (App.jsx) has loaded.', ()=>{
       ${'counter-button'}  |   ${routes.counter}
       ${'login-button'}    |   ${routes.login}
   `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
-      const { container } = render(
+      render(
         <Root store={store}>
           <App />
         </Root>
@@ -80,6 +81,22 @@ describe('GIVEN: The application (App.jsx) has loaded.', ()=>{
       fireEvent.click(homeButton);
 
       expect(mockNavFn).toBeCalledWith(route);
+    });
+  });
+  describe('WHEN: The user fills in a crossword square, clicks to another route, then returns', () => {
+    test('THEN: The crossword square persists globally.', () => {
+      render(
+        <Root store={store}>
+          <App />
+        </Root>
+      );
+
+      let upperLeftCornerSquare = document.getElementById('0,0');
+
+      fireEvent.keyPress(upperLeftCornerSquare, { key: 'KeyA', which: 65, keyCode: 65 });
+      upperLeftCornerSquare = document.getElementById('0,0');
+
+      expect(upperLeftCornerSquare.value).toEqual('a'); // TODO: upperLeftCornerSquare.value works in the browser console. Why not in Jest?
     });
   });
   describe('WHEN: The user IS logged in and clicks the profile button,', () => {

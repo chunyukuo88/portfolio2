@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateGrid, declareVictory } from './crosswordSlice';
 import { styles } from './styles.js';
+import strings from '../../common/strings';
 import { getData } from './utils';
 
-export default function Crossword(props){
+export default function Crossword(){
+  const grid = useSelector((state) => state.crossword.grid);
+  const userHasWon = useSelector((state) => state.crossword.userWon);
+  const language = useSelector((state) => state.language.value);
+  const dispatch = useDispatch();
   useEffect( () => {
     getData().then(data => {
       const newestPuzzle = data[data.length - 1];
@@ -10,10 +17,7 @@ export default function Crossword(props){
     });
   }, []);
 
-  const { grid } = props;
-  const [ gridCopy, setGridCopy] = useState([...JSON.parse(JSON.stringify(grid))]);
   const [focused, setFocused] = useState(undefined);
-  const [userHasWon, setUserHasWon] = useState(false);
   const [crosswordData, setCrosswordData] = useState(undefined);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
@@ -40,9 +44,9 @@ export default function Crossword(props){
   };
 
   const isOutsideGrid = ([i, j]) => (
-    i > gridCopy.length - 1
+    i > grid.length - 1
     || i < 0
-    || j > gridCopy.length - 1
+    || j > grid.length - 1
     || j < 0
   );
 
@@ -59,9 +63,10 @@ export default function Crossword(props){
   const determineIfUserWon = () => {
     let userHasWon = true;
     let solutionIndex = 0;
-    outerLoop: for (let i = 0; i < gridCopy.length; i++) {
-      for (let j = 0; j < gridCopy.length; j++) {
-        if (!(gridCopy[i][j].value.toLowerCase() === crosswordData.solution[solutionIndex].toLowerCase())) {
+    console.log('determineIfUserWon() - userHasWon: ', userHasWon);
+    outerLoop: for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid.length; j++) {
+        if (!(grid[i][j].value.toLowerCase() === crosswordData.solution[solutionIndex].toLowerCase())) {
           userHasWon = false;
           break outerLoop;
         } else {
@@ -69,6 +74,9 @@ export default function Crossword(props){
         }
       };
     };
+    console.log('determineIfUserWon() - userHasWon: ', userHasWon);
+    if (userHasWon) return dispatch(declareVictory(userHasWon));
+    console.log('not yet won!');
     return userHasWon;
   };
 
@@ -77,8 +85,9 @@ export default function Crossword(props){
     if (nonAlphabetics.includes(key)) {
       return processMovementKey(key, outerIndex, innerIndex);
     }
-    gridCopy[outerIndex][innerIndex].value = key;
-    return setGridCopy(gridCopy);
+    const updatedGrid = JSON.parse(JSON.stringify(grid));
+    updatedGrid[outerIndex][innerIndex].value = key;
+    return dispatch(updateGrid(updatedGrid));
   };
 
   const Clues = ({ crosswordData }) => {
@@ -86,12 +95,16 @@ export default function Crossword(props){
     const cluesDown = crosswordData.cluesDown.split(',');
 
     return (
-      <>
-        <h3>Across:</h3>
-        {cluesAcross.map(clue => <div key={clue[0]}>{clue}</div>)}
-        <h3>Down:</h3>
-        {cluesDown.map(clue => <div key={clue[0]}>{clue}</div>)}
-      </>
+      <section style={styles.cluesBox}>
+        <div>
+          <h3>Across:</h3>
+          {cluesAcross.map(clue => <div style={styles.clue} key={clue[0]}>{clue}</div>)}
+        </div>
+        <div>
+          <h3>Down:</h3>
+          {cluesDown.map(clue => <div style={styles.clue} key={clue[0]}>{clue}</div>)}
+        </div>
+      </section>
     );
   };
   const getClueNumber = (outerIndex, innerIndex) => {
@@ -99,40 +112,55 @@ export default function Crossword(props){
     if (innerIndex === 0) return <>{outerIndex + 1}</>
   };
 
+  const convertTimestamp = (date) => new Date(date).toLocaleDateString();
+
+  const Title = () => {
+    return crosswordData
+      ? <>
+          <h1 style={styles.title}>{crosswordData.title}</h1>
+          <h3>Published on {convertTimestamp(crosswordData.created_at)}</h3>
+          <h3>By {crosswordData.author}</h3>
+        </>
+      : strings.loading[language];
+  }
+
   return (
       <main style={styles.main}>
         <section style={styles.section}>
-          <h1 style={styles.title}>Crossword</h1>
-          { (userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
-          {
-            gridCopy.map((row, outerIndex) => (
-              <div style={styles.row} key={outerIndex}>
-                {
-                  row.map((square, innerIndex) => {
-                    const style = styles[getStyleRuleName(outerIndex, innerIndex)];
-                    return (
-                      <div style={styles.squareWrapper} key={innerIndex}>
-                        <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
-                        <input
-                          autoComplete='off'
-                          data-testid='crossword-square'
-                          id={`${outerIndex},${innerIndex}`}
-                          maxLength='1'
-                          onClick={() => clickHandler(outerIndex, innerIndex)}
-                          onChange={() => setUserHasWon(determineIfUserWon)}
-                          onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                          style={style}
-                          tabIndex={-1}
-                          readOnly={userHasWon}
-                        />
-                      </div>
-                    )}
-                  )
-                }
-              </div>
-            ))
-          }
-          {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>Loading...</p>}
+          <Title />
+          {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
+          <div style={styles.gridAndSettings}>
+            <div style={styles.gridWrapper}>
+              {grid.map((row, outerIndex) => (
+                <div style={styles.row} key={outerIndex}>
+                  {row.map((square, innerIndex) => {
+                      const style = styles[getStyleRuleName(outerIndex, innerIndex)];
+                      return (
+                        <div style={styles.squareWrapper} key={innerIndex}>
+                          <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
+                          <input
+                            autoComplete='off'
+                            data-testid='crossword-square'
+                            id={`${outerIndex},${innerIndex}`}
+                            maxLength='1'
+                            onClick={() => clickHandler(outerIndex, innerIndex)}
+                            onChange={determineIfUserWon}
+                            onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
+                            style={style}
+                            tabIndex={-1}
+                            readOnly={userHasWon}
+                          />
+                        </div>
+                      )})}
+                </div>
+              ))}
+            </div>
+            <div style={styles.crosswordSettings}>
+              <div>help</div>
+              <div>settings</div>
+            </div>
+          </div>
+          {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>{strings.loading[language]}</p>}
         </section>
       </main>
   );
