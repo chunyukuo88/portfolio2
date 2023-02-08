@@ -36,6 +36,11 @@ const strings = {
     english: 'English',
     russian: 'Русский',
   },
+  loading: {
+    chinese: '加載中',
+    english: 'Loading...',
+    russian: 'Загрузка',
+  },
   login: {
     chinese: '登錄',
     english: 'Log in',

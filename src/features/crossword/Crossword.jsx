@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateGrid, declareVictory } from './crosswordSlice';
 import { styles } from './styles.js';
+import strings from '../../common/strings';
 import { getData } from './utils';
 
 export default function Crossword(){
   const grid = useSelector((state) => state.crossword.grid);
   const userHasWon = useSelector((state) => state.crossword.userWon);
+  const language = useSelector((state) => state.language.value);
   const dispatch = useDispatch();
   useEffect( () => {
     getData().then(data => {
@@ -119,7 +121,7 @@ export default function Crossword(){
           <h3>Published on {convertTimestamp(crosswordData.created_at)}</h3>
           <h3>By {crosswordData.author}</h3>
         </>
-      : 'Loading...';
+      : strings.loading[language];
   }
 
   return (
@@ -154,10 +156,11 @@ export default function Crossword(){
               ))}
             </div>
             <div style={styles.crosswordSettings}>
-              w00t
+              <div>help</div>
+              <div>settings</div>
             </div>
           </div>
-          {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>Loading...</p>}
+          {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>{strings.loading[language]}</p>}
         </section>
       </main>
   );

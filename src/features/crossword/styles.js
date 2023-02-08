@@ -9,7 +9,7 @@ export const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    width: '500px',
+    width: '32rem',
   },
   clueNumber: {
     color: 'gray',
@@ -24,11 +24,14 @@ export const styles = {
   },
   gridAndSettings: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   crosswordSettings: {
     backgroundColor: 'orange',
-    width: '2.5rem',
+    width: '4rem',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
   },
   row: {
     display: 'flex',
