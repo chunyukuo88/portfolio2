@@ -1,6 +1,10 @@
 :root {
   --AboutBlock: red;
-  /*--AdminBlock: */
+  --BlogBlock: orange;
+  --PuzzleBlock: green;
+  --ContactBlock: purple;
+  --AdminBlock: aqua;
+  --LanguageBlock: brown;
 }
 
 .App {
@@ -47,18 +51,18 @@ li:nth-child(1) {
 
 li:nth-child(1):hover::before {
   transition: 0.5s;
-  background: red;
+  background: var(--AboutBlock);
   z-index: 6;
 }
 
 li:nth-child(1):hover::after {
   transition: 0.5s;
-  background: red;
+  background: var(--AboutBlock);
   z-index: 6;
 }
 
 li:nth-child(1):hover {
-  background: red;
+  background: var(--AboutBlock);
   z-index: 6;
 }
 
@@ -68,21 +72,20 @@ li:nth-child(2) {
   z-index: 5;
 }
 
+li:nth-child(2):hover {
+  background: var(--BlogBlock);
+  z-index: 5;
+}
+
 li:nth-child(2):hover::before {
-  transition: 0.5s;
-  background: yellow;
+  background: var(--BlogBlock);
   z-index: 5;
 }
 li:nth-child(2):hover::after {
-  transition: 0.5s;
-  background: yellow;
+  background: var(--BlogBlock);
   z-index: 0;
 }
 
-li:nth-child(2):hover {
-  background: yellow;
-  z-index: 5;
-}
 
 
 
@@ -92,18 +95,16 @@ li:nth-child(3) {
 }
 
 li:nth-child(3):hover {
-  background: green;
+  background: var(--PuzzleBlock);
   z-index: 4;
 }
 
 li:nth-child(3):hover::before {
-  transition: 0.5s;
-  background: green;
+  background: var(--PuzzleBlock);
   z-index: 4;
 }
 li:nth-child(3):hover::after {
-  transition: 0.5s;
-  background: green;
+  background: var(--PuzzleBlock);
   z-index: 0;
 }
 
@@ -119,18 +120,16 @@ li:nth-child(4) {
 }
 
 li:nth-child(4):hover {
-  background: purple;
+  background: var(--ContactBlock);
   z-index: 3;
 }
 
 li:nth-child(4):hover::before {
-  transition: 0.5s;
-  background: purple;
+  background: var(--ContactBlock);
   z-index: 3;
 }
 li:nth-child(4):hover::after {
-  transition: 0.5s;
-  background: purple;
+  background: var(--ContactBlock);
   z-index: 0;
 }
 
@@ -141,18 +140,16 @@ li:nth-child(5) {
 }
 
 li:nth-child(5):hover {
-  background: aqua;
+  background: var(--AdminBlock);
   z-index: 2;
 }
 
 li:nth-child(5):hover::before {
-  transition: 0.5s;
-  background: aqua;
+  background: var(--AdminBlock);
   z-index: 2;
 }
 li:nth-child(5):hover::after {
-  transition: 0.5s;
-  background: aqua;
+  background: var(--AdminBlock);
   z-index: 0;
 }
 
@@ -162,19 +159,17 @@ li:nth-child(6) {
 }
 
 li:nth-child(6):hover {
-  background: orange;
+  background: var(--LanguageBlock);
   z-index: 1;
 }
 
 li:nth-child(6):hover::before {
-  transition: 0.5s;
-  background: orange;
+  background: var(--LanguageBlock);
   z-index: 1;
 }
 
 li:nth-child(6):hover::after {
-  transition: 0.5s;
-  background: orange;
+  background: var(--LanguageBlock);
   z-index: 0;
 }
 
@@ -254,4 +249,10 @@ ul li span {
 
 ul li span {
   opacity: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.main-icons {
+  max-height: 1.75rem;
 }

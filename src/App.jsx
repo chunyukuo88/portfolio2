@@ -5,15 +5,15 @@ import { RequireAuth } from './components/RequireAuth.jsx';
 import Language from './features/language/Language';
 import { Login } from './features/auth/Login.jsx';
 import Crossword from './features/crossword/Crossword';
-import About from './common/icons/about.png';
-import Admin from './common/icons/admin.png';
-import Blog from './common/icons/blog.png';
-import Contact from './common/icons/contact.png';
-import Puzzle from './common/icons/puzzle.png';
-import Loca from './common/icons/language.png';
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
+import Admin from '../src/common/icons/admin.svg';
+import LanguageIcon from '../src/common/icons/language.svg';
+import Contact from '../src/common/icons/contact.svg';
+import Puzzle from '../src/common/icons/puzzle.svg';
+import Blog from '../src/common/icons/blog.svg';
+import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
 
 function App() {
@@ -119,12 +119,54 @@ function HomePage(){
       //{/*<p>{strings.homeGreeting[language]}</p>*/}
   return (
     <ul>
-      <li className='five'><a href="#">{strings.about[language]}</a></li>
-      <li className='four'><a href="#">{strings.blog[language]}</a></li>
-      <li className='three'><a href="#">{strings.puzzle[language]}</a></li>
-      <li className='two'><a href="#">{strings.contact[language]}</a></li>
-      <li className='one'><a href="#">{strings.admin[language]}</a></li>
-      <li className='zero'><a href="#"><Language/></a></li>
+      <li className='five'>
+        <span>
+          <img className='main-icons' src={AboutIcon} alt="About icon"/>
+        </span>
+        <a href="/puzzle">
+          {strings.about[language]}
+        </a>
+      </li>
+      <li className='four'>
+        <span>
+          <img className='main-icons' src={Blog} alt="Blog icon"/>
+        </span>
+        <a href="#">
+          {strings.blog[language]}
+        </a>
+      </li>
+      <li className='three'>
+        <span>
+          <img className='main-icons' src={Puzzle} alt="Puzzle icon"/>
+        </span>
+        <a href="#">
+          {strings.puzzle[language]}
+        </a>
+      </li>
+      <li className='two'>
+        <span>
+          <img className='main-icons' src={Contact} alt="Contact icon"/>
+        </span>
+        <a href="#">
+          {strings.contact[language]}
+        </a>
+      </li>
+      <li className='one'>
+        <span>
+          <img className='main-icons' src={Admin} alt="Admin icon"/>
+        </span>
+        <a href="#">
+          {strings.admin[language]}
+        </a>
+      </li>
+      <li className='zero'>
+        <span>
+          <img className='main-icons' src={LanguageIcon} alt="Language icon"/>
+        </span>
+        <a href="#">
+          <Language/>
+        </a>
+      </li>
     </ul>
   );
 }
