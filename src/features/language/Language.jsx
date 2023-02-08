@@ -22,7 +22,7 @@ function Language() {
   };
 
   return (
-    <button onClick={clickHandler}>
+    <button id='language-button' onClick={clickHandler}>
       {strings.language[language]}
     </button>
   );

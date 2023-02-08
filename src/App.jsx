@@ -1,31 +1,30 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate  } from 'react-router-dom';
 import { Counter } from './features/counter/Counter.jsx';
-import { store } from './globalState/store.js';
-import { Provider, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import { RequireAuth } from './components/RequireAuth.jsx';
 import Language from './features/language/Language';
 import { Login } from './features/auth/Login.jsx';
+import Crossword from './features/crossword/Crossword';
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
 import './App.css';
+import { emptyGridFiveByFive } from './features/crossword/utils';
 
 function App() {
   return (
     <div className='App'>
-      <Provider store={store}>
-        <Router>
-          <Header />
-          <Routes>
-            <Route exact path={routes.index} element={<HomePage />}/>
-            <Route exact path={routes.counter} element={<CounterPage />}/>
-            <Route exact path={routes.login} element={<LoginPage />}/>
-            <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
-          </Routes>
-        </Router>
-      </Provider>
+      <Router>
+        <Header />
+        <Routes>
+          <Route exact path={routes.index} element={<HomePage />}/>
+          <Route exact path={routes.counter} element={<CounterPage />}/>
+          <Route exact path={routes.login} element={<LoginPage />}/>
+          <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
+        </Routes>
+      </Router>
     </div>
-  )
+  );
 }
 
 function Header(){
@@ -40,13 +39,16 @@ function Header(){
   return (
     <header>
       <Language />
-      <button onClick={() => navigate(routes.index)}>🏠</button>
-      <button onClick={() => navigate(routes.counter)}>{strings.goToCounter[language]}</button>
-      {auth?.session?.user && <button onClick={() => navigate(routes.profile)}>Profile</button>}
+      <button id='home-button' onClick={() => navigate(routes.index)}>🏠</button>
+      <button id='counter-button' onClick={() => navigate(routes.counter)}>{strings.goToCounter[language]}</button>
+      {auth?.session?.user ?
+        <button id='profile-button' onClick={() => navigate(routes.profile)}>{strings.profile[language]}</button>
+        : null
+      }
       {
         auth?.session?.user
-          ? <button onClick={logoutHandler}>{strings.logout[language]}</button>
-          : <button onClick={() => navigate(routes.login)}>{strings.login[language]}</button>
+          ? <button id='logout-button' onClick={logoutHandler}>{strings.logout[language]}</button>
+          : <button id='login-button' onClick={() => navigate(routes.login)}>{strings.login[language]}</button>
       }
     </header>
   );
@@ -79,8 +81,37 @@ function HomePage(){
     <div className='page'>
       <p>{auth.user?.email && `Greetings, ${auth.user.email}!`}</p>
       <p>{strings.homeGreeting[language]}</p>
+      <Crossword grid={emptyGridFiveByFive}/>
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// TODO: Extract each of the pages for ease of testing, particularly
+// regarding dependency injection and minimization of mocks/spies.
+
+
+
+
+
+
+
+
+
+
+
+
+
