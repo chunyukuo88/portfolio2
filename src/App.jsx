@@ -15,6 +15,7 @@ import Puzzle from '../src/common/icons/puzzle.svg';
 import Blog from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
+import {ContactLinks} from "./components/ContactLinks";
 
 function App() {
   return (
@@ -71,7 +72,7 @@ function Header(){
 function ContactPage(){
   return (
     <>
-      Kontakteirung
+      <ContactLinks />
     </>
   )
 }
@@ -118,8 +119,8 @@ function HomePage(){
       //{/*<p>{auth.user?.email && `Greetings, ${auth.user.email}!`}</p>*/}
       //{/*<p>{strings.homeGreeting[language]}</p>*/}
   return (
-    <ul>
-      <li className='five'>
+    <ul className='main-menu-wrapper'>
+      <li className='menu-block'>
         <span>
           <img className='main-icons' src={AboutIcon} alt="About icon"/>
         </span>
@@ -127,7 +128,7 @@ function HomePage(){
           {strings.about[language]}
         </a>
       </li>
-      <li className='four'>
+      <li className='menu-block'>
         <span>
           <img className='main-icons' src={Blog} alt="Blog icon"/>
         </span>
@@ -135,7 +136,7 @@ function HomePage(){
           {strings.blog[language]}
         </a>
       </li>
-      <li className='three'>
+      <li className='menu-block'>
         <span>
           <img className='main-icons' src={Puzzle} alt="Puzzle icon"/>
         </span>
@@ -143,7 +144,7 @@ function HomePage(){
           {strings.puzzle[language]}
         </a>
       </li>
-      <li className='two'>
+      <li className='menu-block'>
         <span>
           <img className='main-icons' src={Contact} alt="Contact icon"/>
         </span>
@@ -151,7 +152,7 @@ function HomePage(){
           {strings.contact[language]}
         </a>
       </li>
-      <li className='one'>
+      <li className='menu-block'>
         <span>
           <img className='main-icons' src={Admin} alt="Admin icon"/>
         </span>
@@ -159,7 +160,7 @@ function HomePage(){
           {strings.admin[language]}
         </a>
       </li>
-      <li className='zero'>
+      <li className='menu-block'>
         <span>
           <img className='main-icons' src={LanguageIcon} alt="Language icon"/>
         </span>

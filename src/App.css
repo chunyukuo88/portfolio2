@@ -23,13 +23,13 @@ body {
   min-height: 100vh;
 }
 
-ul {
+.main-menu-wrapper {
   background-color: #3e3f46;
   position: relative;
   transform: skewY(-15deg);
 }
 
-ul li {
+.menu-block {
   font-family:  'Cabin', sans-serif;
   background: #3e3f46;
   list-style: none;
@@ -40,48 +40,48 @@ ul li {
   text-align: center;
 }
 
-ul li:nth-child(1) {
+.menu-block:nth-child(1) {
   z-index: 6;
 }
 
-li:nth-child(1) {
+.menu-block:nth-child(1) {
   transition: 0.5s;
   z-index: 6;
 }
 
-li:nth-child(1):hover::before {
+.menu-block:nth-child(1):hover::before {
   transition: 0.5s;
   background: var(--AboutBlock);
   z-index: 6;
 }
 
-li:nth-child(1):hover::after {
+.menu-block:nth-child(1):hover::after {
   transition: 0.5s;
   background: var(--AboutBlock);
   z-index: 6;
 }
 
-li:nth-child(1):hover {
+.menu-block:nth-child(1):hover {
   background: var(--AboutBlock);
   z-index: 6;
 }
 
 
-li:nth-child(2) {
+.menu-block:nth-child(2) {
   transition: 0.5s;
   z-index: 5;
 }
 
-li:nth-child(2):hover {
+.menu-block:nth-child(2):hover {
   background: var(--BlogBlock);
   z-index: 5;
 }
 
-li:nth-child(2):hover::before {
+.menu-block:nth-child(2):hover::before {
   background: var(--BlogBlock);
   z-index: 5;
 }
-li:nth-child(2):hover::after {
+.menu-block:nth-child(2):hover::after {
   background: var(--BlogBlock);
   z-index: 0;
 }
@@ -89,21 +89,21 @@ li:nth-child(2):hover::after {
 
 
 
-li:nth-child(3) {
+.menu-block:nth-child(3) {
   transition: 0.5s;
   z-index: 4;
 }
 
-li:nth-child(3):hover {
+.menu-block:nth-child(3):hover {
   background: var(--PuzzleBlock);
   z-index: 4;
 }
 
-li:nth-child(3):hover::before {
+.menu-block:nth-child(3):hover::before {
   background: var(--PuzzleBlock);
   z-index: 4;
 }
-li:nth-child(3):hover::after {
+.menu-block:nth-child(3):hover::after {
   background: var(--PuzzleBlock);
   z-index: 0;
 }
@@ -114,78 +114,78 @@ li:nth-child(3):hover::after {
 
 
 
-li:nth-child(4) {
+.menu-block:nth-child(4) {
   transition: 0.5s;
   z-index: 3;
 }
 
-li:nth-child(4):hover {
+.menu-block:nth-child(4):hover {
   background: var(--ContactBlock);
   z-index: 3;
 }
 
-li:nth-child(4):hover::before {
+.menu-block:nth-child(4):hover::before {
   background: var(--ContactBlock);
   z-index: 3;
 }
-li:nth-child(4):hover::after {
+.menu-block:nth-child(4):hover::after {
   background: var(--ContactBlock);
   z-index: 0;
 }
 
 
-li:nth-child(5) {
+.menu-block:nth-child(5) {
   transition: 0.5s;
   z-index: 2;
 }
 
-li:nth-child(5):hover {
+.menu-block:nth-child(5):hover {
   background: var(--AdminBlock);
   z-index: 2;
 }
 
-li:nth-child(5):hover::before {
+.menu-block:nth-child(5):hover::before {
   background: var(--AdminBlock);
   z-index: 2;
 }
-li:nth-child(5):hover::after {
+.menu-block:nth-child(5):hover::after {
   background: var(--AdminBlock);
   z-index: 0;
 }
 
-li:nth-child(6) {
+.menu-block:nth-child(6) {
   transition: 0.5s;
   z-index: 1;
 }
 
-li:nth-child(6):hover {
+.menu-block:nth-child(6):hover {
   background: var(--LanguageBlock);
   z-index: 1;
 }
 
-li:nth-child(6):hover::before {
+.menu-block:nth-child(6):hover::before {
   background: var(--LanguageBlock);
   z-index: 1;
 }
 
-li:nth-child(6):hover::after {
+.menu-block:nth-child(6):hover::after {
   background: var(--LanguageBlock);
   z-index: 0;
 }
 
-ul li:hover {
+.menu-block:hover {
   transform: translateX(-2rem);
 }
 
-ul li:hover::before {
+.menu-block:hover::before {
   filter: brightness(0.7);
 }
 
-ul li:hover::after {
+.menu-block:hover::after {
   filter: brightness(0.9);
 }
 
-ul li::before {
+.menu-block::before {
   content: '';
   position: absolute;
   top: 0;
@@ -199,7 +199,7 @@ ul li::before {
 }
 
 
-ul li::after {
+.menu-block::after {
   content: '';
   position: absolute;
   left: 0;
@@ -213,7 +213,7 @@ ul li::after {
   transition: 0.5s;
 }
 
-ul li a {
+.menu-block a {
   text-decoration: none;
   color: #999;
   display: block;
@@ -222,15 +222,15 @@ ul li a {
   transition: 0.5s;
 }
 
-ul li:hover a {
+.menu-block:hover a {
   color: #fff;
 }
 
-ul li:last-child::after {
+.menu-block:last-child::after {
   box-shadow: -9rem 9rem 1.25rem rgba(0,0,0,0.25);
 }
 
-ul li span {
+.menu-block span {
   position: absolute;
   top: 0;
   left: -2.5rem;
@@ -247,7 +247,7 @@ ul li span {
   font-size: 1.25em;
 }
 
-ul li span {
+.menu-block span {
   opacity: 1;
   display: flex;
   justify-content: center;
