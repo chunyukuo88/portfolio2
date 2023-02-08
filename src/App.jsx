@@ -5,6 +5,11 @@ import { RequireAuth } from './components/RequireAuth.jsx';
 import Language from './features/language/Language';
 import { Login } from './features/auth/Login.jsx';
 import Crossword from './features/crossword/Crossword';
+import About from './common/icons/about.png';
+import Admin from './common/icons/admin.png';
+import Blog from './common/icons/blog.png';
+import Contact from './common/icons/contact.png';
+import Puzzle from './common/icons/puzzle.png';
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
@@ -15,12 +20,17 @@ function App() {
     <div className='App'>
       <Router>
         <Header />
-        <Routes>
-          <Route exact path={routes.index} element={<HomePage />}/>
-          <Route exact path={routes.counter} element={<CounterPage />}/>
-          <Route exact path={routes.login} element={<LoginPage />}/>
-          <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
-        </Routes>
+        <div className='content-below-header'>
+          <Routes>
+            <Route exact path={routes.index} element={<HomePage />}/>
+            <Route exact path={routes.counter} element={<CounterPage />}/>
+            <Route exact path={routes.login} element={<LoginPage />}/>
+            <Route exact path={routes.puzzle} element={<PuzzlePage />}/>
+            <Route exact path={routes.contact} element={<ContactPage />}/>
+            <Route exact path={routes.blog} element={<BlogPage />}/>
+            <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
+          </Routes>
+        </div>
       </Router>
     </div>
   );
@@ -36,20 +46,48 @@ function Header(){
     window.location.reload();
   };
   return (
-    <header>
-      <Language />
-      <button id='home-button' onClick={() => navigate(routes.index)}>🏠</button>
-      <button id='counter-button' onClick={() => navigate(routes.counter)}>{strings.goToCounter[language]}</button>
-      {auth?.session?.user ?
-        <button id='profile-button' onClick={() => navigate(routes.profile)}>{strings.profile[language]}</button>
-        : null
-      }
-      {
-        auth?.session?.user
-          ? <button id='logout-button' onClick={logoutHandler}>{strings.logout[language]}</button>
-          : <button id='login-button' onClick={() => navigate(routes.login)}>{strings.login[language]}</button>
-      }
-    </header>
+    <></>
+    // <header>
+    //   <Language />
+    //   <button id='home-button' onClick={() => navigate(routes.index)}>🏠</button>
+    //   <button onClick={() => navigate(routes.puzzle)}>Puzzle</button>
+    //   <button onClick={() => navigate(routes.contact)}>Contact</button>
+    //   <button onClick={() => navigate(routes.blog)}>Blog</button>
+    //   <button id='counter-button' onClick={() => navigate(routes.counter)}>{strings.goToCounter[language]}</button>
+    //   {auth?.session?.user ?
+    //     <button id='profile-button' onClick={() => navigate(routes.profile)}>{strings.profile[language]}</button>
+    //     : null
+    //   }
+    //   {
+    //     auth?.session?.user
+    //       ? <button id='logout-button' onClick={logoutHandler}>{strings.logout[language]}</button>
+    //       : <button id='login-button' onClick={() => navigate(routes.login)}>{strings.login[language]}</button>
+    //   }
+    // </header>
+  );
+}
+
+function ContactPage(){
+  return (
+    <>
+      Kontakteirung
+    </>
+  )
+}
+
+function BlogPage(){
+  return (
+    <>
+      Blogimus
+    </>
+  )
+}
+
+function PuzzlePage(){
+  return (
+    <>
+      <Crossword />
+    </>
   );
 }
 
@@ -76,41 +114,18 @@ function CounterPage(){
 function HomePage(){
   const language = useSelector((state) => state.language.value);
   const auth = useSelector((state) => state.auth.value);
+      //{/*<p>{auth.user?.email && `Greetings, ${auth.user.email}!`}</p>*/}
+      //{/*<p>{strings.homeGreeting[language]}</p>*/}
   return (
-    <div className='page'>
-      <p>{auth.user?.email && `Greetings, ${auth.user.email}!`}</p>
-      <p>{strings.homeGreeting[language]}</p>
-      <Crossword />
-    </div>
+    <ul>
+      <li><span><img src={About} alt="About icon"/> </span>{strings.about[language]}</li>
+      <li><span><img src={Admin} alt="Admin icon"/> </span>{strings.blog[language]}</li>
+      <li><span><img src={Blog} alt="Blog icon"/> </span>{strings.puzzle[language]}</li>
+      <li><span><img src={Contact} alt="Contact icon"/></span>{strings.contact[language]}</li>
+      <li><span><img src={Puzzle} alt="Puzzle icon"/></span>{strings.admin[language]}</li>
+      <li><span><img src={Puzzle} alt="Puzzle icon"/></span><Language/></li>
+    </ul>
   );
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-// TODO: Extract each of the pages for ease of testing, particularly
-// regarding dependency injection and minimization of mocks/spies.
-
-
-
-
-
-
-
-
-
-
-
-
-

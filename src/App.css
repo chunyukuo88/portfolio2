@@ -1,15 +1,42 @@
 .App {
+/** {*/
   font-family: 'Cabin', sans-serif;
   user-select: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #434150;
+}
+
+ul {
   background-color: gray;
+  position: relative;
+  transform: skewY(-15deg);
+}
+
+ul li {
+  position: relative;
+  list-style: none;
+  width: 7.5rem;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  /*display: flex;*/
+/*  justify-content: space-between;*/
+/*  width: 100%;*/
+}
+
+.content-below-header {
+
 }
 
 .page {
-  text-align: center;
+  /*text-align: center;*/
 }

@@ -1,5 +1,27 @@
 const strings = {
+  about: {
+    chinese: '简介',
+    english: 'About',
+    russian: 'пожаловать',
+  },
+  admin: {
+    chinese: '内部管理',
+    english: 'Admin',
+    russian: 'администратор',
+
+
+  },
+  blog: {
+    chinese: '博客',
+    english: 'Blog',
+    russian: 'блог',
+  },
   CHINESE: 'chinese',
+  contact: {
+    chinese: '联络',
+    english: 'Contact',
+    russian: 'контакт',
+  },
   decrement: {
     chinese: '遞減',
     english: 'decrement',
@@ -18,7 +40,7 @@ const strings = {
   },
   homeGreeting: {
     chinese: '咦？又來了',
-    english: 'HELLO THIS IS HOMEPAGE , wlecome to inteweb',
+    english: 'Woobler\'s Other House',
     russian: 'это веб-сайт',
   },
   increment: {
@@ -60,6 +82,11 @@ const strings = {
     chinese: '個人設置',
     english: 'Profile',
     russian: 'страница профиля',
+  },
+  puzzle: {
+    chinese: '填字游戏',
+    english: 'Puzzle',
+    russian: 'кроссворд',
   },
   RUSSIAN: 'russian',
 };
