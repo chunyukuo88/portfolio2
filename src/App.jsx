@@ -119,12 +119,12 @@ function HomePage(){
       //{/*<p>{strings.homeGreeting[language]}</p>*/}
   return (
     <ul>
-      <li className='five'><a href="#"><span><img src={About} alt="About icon"/> </span>{strings.about[language]}</a></li>
-      <li className='four'><a href="#"><span><img src={Admin} alt="Admin icon"/> </span>{strings.blog[language]}</a></li>
-      <li className='three'><a href="#"><span><img src={Blog} alt="Blog icon"/> </span>{strings.puzzle[language]}</a></li>
-      <li className='two'><a href="#"><span><img src={Contact} alt="Contact icon"/></span>{strings.contact[language]}</a></li>
-      <li className='one'><a href="#"><span><img src={Puzzle} alt="Puzzle icon"/></span>{strings.admin[language]}</a></li>
-      <li className='zero'><a href="#"><span><img src={Loca} alt="Puzzle icon"/></span><Language/></a></li>
+      <li className='five'><a href="#">{strings.about[language]}</a></li>
+      <li className='four'><a href="#">{strings.blog[language]}</a></li>
+      <li className='three'><a href="#">{strings.puzzle[language]}</a></li>
+      <li className='two'><a href="#">{strings.contact[language]}</a></li>
+      <li className='one'><a href="#">{strings.admin[language]}</a></li>
+      <li className='zero'><a href="#"><Language/></a></li>
     </ul>
   );
 }
