@@ -112,16 +112,64 @@ li:nth-child(4) {
   z-index: 3;
 }
 
+li:nth-child(4):hover {
+  background: purple;
+  z-index: 3;
+}
+
+li:nth-child(4):hover::before {
+  transition: 0.5s;
+  background: purple;
+  z-index: 3;
+}
+li:nth-child(4):hover::after {
+  transition: 0.5s;
+  background: purple;
+  z-index: 0;
+}
 
 
+li:nth-child(5) {
+  transition: 0.5s;
+  z-index: 2;
+}
 
 li:nth-child(5):hover {
   background: aqua;
-  z-index: 5;
+  z-index: 2;
+}
+
+li:nth-child(5):hover::before {
+  transition: 0.5s;
+  background: aqua;
+  z-index: 2;
+}
+li:nth-child(5):hover::after {
+  transition: 0.5s;
+  background: aqua;
+  z-index: 0;
+}
+
+li:nth-child(6) {
+  transition: 0.5s;
+  z-index: 1;
 }
 
 li:nth-child(6):hover {
-  z-index: 6;
+  background: orange;
+  z-index: 1;
+}
+
+li:nth-child(6):hover::before {
+  transition: 0.5s;
+  background: orange;
+  z-index: 1;
+}
+
+li:nth-child(6):hover::after {
+  transition: 0.5s;
+  background: orange;
+  z-index: 0;
 }
 
 ul li:hover {
@@ -149,11 +197,6 @@ ul li::before {
   transform: skewY(45deg);
 }
 
-
-
-ul li:nth-child(5)::before, ul li:nth-child(5)::after {
-  background: aqua;
-}
 
 ul li::after {
   content: '';
