@@ -44,6 +44,19 @@ describe('Crossword.jsx', ()=> {
         expect(clicked).toHaveStyle(styles.currentSquare);
       });
     });
+    describe('WHEN: the user clicks on a square and types a letter,', ()=>{
+      it('THEN: the square displays the value of that letter.',()=>{
+        render(<Crossword grid={emptyGridTwoByTwo}/>);
+
+        const squares = screen.getAllByTestId('crossword-square');
+
+        const upperLeft = squares[0];
+        fireEvent.click(upperLeft);
+        fireEvent.keyPress(upperLeft, { key: 'Digit1', which: 18, keyCode: 18 })
+
+        expect(upperLeft).toHaveStyle(styles.currentSquare);
+      });
+    });
     describe('WHEN: the user clicks in the center of the grid, then presses an arrow key,', () => {
       it.each`
         key             | which           | keyCode    | resultIndex

@@ -1,10 +1,10 @@
 export const styles = {
   squareWrapper: {
     position: 'relative',
-
   },
   clueNumber: {
     color: 'gray',
+    fontSize: '0.75rem',
     left: '0.25rem',
     position: 'absolute',
     top: '0.25rem',

@@ -5,7 +5,8 @@ import { getData } from './utils';
 export default function Crossword(props){
   useEffect( () => {
     getData().then(data => {
-      setCrosswordData(data);
+      const newestPuzzle = data[data.length - 1];
+      setCrosswordData(newestPuzzle);
     });
   }, []);
 
@@ -60,7 +61,7 @@ export default function Crossword(props){
     let solutionIndex = 0;
     outerLoop: for (let i = 0; i < gridCopy.length; i++) {
       for (let j = 0; j < gridCopy.length; j++) {
-        if (!(gridCopy[i][j].value.toLowerCase() === crosswordData[0].solution[solutionIndex].toLowerCase())) {
+        if (!(gridCopy[i][j].value.toLowerCase() === crosswordData.solution[solutionIndex].toLowerCase())) {
           userHasWon = false;
           break outerLoop;
         } else {
@@ -81,8 +82,8 @@ export default function Crossword(props){
   };
 
   const Clues = ({ crosswordData }) => {
-    const cluesAcross = crosswordData[0].cluesAcross.split(',');
-    const cluesDown = crosswordData[0].cluesDown.split(',');
+    const cluesAcross = crosswordData.cluesAcross.split(',');
+    const cluesDown = crosswordData.cluesDown.split(',');
 
     return (
       <>
@@ -110,13 +111,12 @@ export default function Crossword(props){
                   row.map((square, innerIndex) => {
                     const style = styles[getStyleRuleName(outerIndex, innerIndex)];
                     return (
-                      <div style={styles.squareWrapper}>
+                      <div style={styles.squareWrapper} key={innerIndex}>
                         <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
                         <input
                           autoComplete='off'
                           data-testid='crossword-square'
                           id={`${outerIndex},${innerIndex}`}
-                          key={innerIndex}
                           maxLength='1'
                           onClick={() => clickHandler(outerIndex, innerIndex)}
                           onChange={() => setUserHasWon(determineIfUserWon)}
