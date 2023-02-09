@@ -5,6 +5,7 @@
   --ContactBlock: purple;
   --AdminBlock: aqua;
   --LanguageBlock: brown;
+  --MenuBlockText: #cccccc;
 }
 
 .main-page-container {
@@ -12,6 +13,11 @@
   flex-direction: column;
   justify-content: space-between;
   height: 65vh;
+}
+
+.banner-and-menu-wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
 #alex-gochenour {
@@ -38,7 +44,7 @@ body {
 .main-menu-wrapper {
   background-color: #3e3f46;
   position: relative;
-  transform: skewY(-15deg);
+  transform: skewY(-15deg) translateY(10rem);
   max-width: 10rem;
 }
 
@@ -233,7 +239,7 @@ body {
 
 .menu-block a {
   text-decoration: none;
-  color: #999;
+  color: var(--MenuBlockText);
   display: block;
   text-transform: uppercase;
   letter-spacing: 0.05em;

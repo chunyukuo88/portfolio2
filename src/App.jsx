@@ -97,33 +97,36 @@ function HomePage(){
 
   return (
     <main className='main-page-container'>
-      <GochenourBanner />
-      <ul className='main-menu-wrapper'>
-        <li role='button' className='menu-block'>
-          <span><img className='main-icons' src={AboutIcon} alt="About icon"/></span>
-          <a href="#">{strings.about[language]}</a>
-        </li>
-        <li role='button' className='menu-block'>
-          <span><img className='main-icons' src={Blog} alt="Blog icon"/></span>
-          <a href="#">{strings.blog[language]}</a>
-        </li>
-        <li role='button' className='menu-block'>
-          <span><img className='main-icons' src={Puzzle} alt="Puzzle icon"/></span>
-          <a href="/puzzle">{strings.puzzle[language]}</a>
-        </li>
-        <li role='button' className='menu-block'>
-          <span><img className='main-icons' src={Contact} alt="Contact icon"/></span>
-          <a onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</a>
-        </li>
-        <li role='button' className='menu-block'>
-          <span><img className='main-icons' src={Admin} alt="Admin icon"/></span>
-          <a href="/login">{strings.admin[language]}</a>
-        </li>
-        <li role='button' className='menu-block'>
-          <span><img className='main-icons' src={LanguageIcon} alt="Language icon"/></span>
-          <a href="#"><Language/></a>
-        </li>
-      </ul>
+      <div className='banner-and-menu-wrapper'>
+        <ul className='main-menu-wrapper'>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={AboutIcon} alt="About icon"/></span>
+            <a href="#">{strings.about[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={Blog} alt="Blog icon"/></span>
+            <a href="#">{strings.blog[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={Puzzle} alt="Puzzle icon"/></span>
+            <a href="/puzzle">{strings.puzzle[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={Contact} alt="Contact icon"/></span>
+            <a onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={Admin} alt="Admin icon"/></span>
+            <a href="/login">{strings.admin[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={LanguageIcon} alt="Language icon"/></span>
+            <a href="#"><Language/></a>
+          </li>
+        </ul>
+        <div />
+        <GochenourBanner />
+      </div>
       {displayContactInfo ? <ContactWrapper visible={displayContactInfo} /> : null}
     </main>
   );
