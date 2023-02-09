@@ -8,6 +8,7 @@ import { Login } from './features/auth/Login.jsx';
 import Language from './features/language/Language';
 import Crossword from './features/crossword/Crossword';
 import GochenourBanner from './components/GochenourBanner';
+import AlexBanner from './components/AlexBanner';
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
@@ -95,6 +96,8 @@ function HomePage(){
   const auth = useSelector((state) => state.auth.value);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
 
+  // TODO
+  // <AlexBanner />
   return (
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
@@ -126,6 +129,8 @@ function HomePage(){
         </ul>
         <div />
         <GochenourBanner />
+        <div />
+        <AlexBanner />
       </div>
       {displayContactInfo ? <ContactWrapper visible={displayContactInfo} /> : null}
     </main>
