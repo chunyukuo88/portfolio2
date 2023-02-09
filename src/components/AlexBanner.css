@@ -1,0 +1,57 @@
+#alex-banner-grid {
+    display: flex;
+    flex-direction: row;
+    transform: skewY(25deg) skewX(-45deg) rotate(15deg) translate(1rem, 30rem);
+    max-height: 6.25rem;
+    z-index: -40;
+}
+
+.alex-banner-cell {
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    margin: 0;
+    padding: 0.05rem;
+}
+
+/* The letter A */
+#ac0_1,#ac0_2,#ac0_3,#ac0_4,
+#ac1_0,#ac2_0,
+#ac3_1,#ac3_2,#ac3_3,#ac3_4,#ac2_2,#ac1_2
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
+
+/* The letter L */
+#ac5_0,#ac5_1,#ac5_2,#ac5_3,#ac5_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
+
+/* The letter e */
+#ac7_2,#ac7_3,#ac7_4,
+#ac8_2,#ac8_3,#ac8_4,
+#ac9_2,#ac9_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
+
+/* The letter x */
+#ac11_2,#ac11_4,
+#ac12_3,
+#ac13_2,#ac13_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
