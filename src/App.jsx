@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate  } from 'react-router-dom';
 import { Counter } from './features/counter/Counter.jsx';
 import { ContactWrapper } from './components/ContactWrapper';
+import { AboutBlockWrapper } from './components/AboutBlock';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './components/RequireAuth.jsx';
 import { Login } from './features/auth/Login.jsx';
 import Language from './features/language/Language';
 import Crossword from './features/crossword/Crossword';
 import GochenourBanner from './components/GochenourBanner';
+import AlexBanner from './components/AlexBanner';
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
@@ -94,14 +96,17 @@ function HomePage(){
   const language = useSelector((state) => state.language.value);
   const auth = useSelector((state) => state.auth.value);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
+  const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
 
+  // TODO
+  // <AlexBanner />
   return (
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
-          <li role='button' className='menu-block'>
+          <li role='button' onClick={() => setDisplayAboutBlock(true)} className='menu-block'>
             <span><img className='main-icons' src={AboutIcon} alt="About icon"/></span>
-            <a href="#">{strings.about[language]}</a>
+            <a>{strings.about[language]}</a>
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Blog} alt="Blog icon"/></span>
@@ -121,11 +126,15 @@ function HomePage(){
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={LanguageIcon} alt="Language icon"/></span>
-            <a href="#"><Language/></a>
+            <a><Language/></a>
           </li>
         </ul>
         <div />
         <GochenourBanner />
+        <div />
+        <AlexBanner />
+        <div />
+        {displayAboutBlock ? <AboutBlockWrapper visible={displayAboutBlock} /> : null}
       </div>
       {displayContactInfo ? <ContactWrapper visible={displayContactInfo} /> : null}
     </main>

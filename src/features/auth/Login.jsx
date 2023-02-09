@@ -29,7 +29,7 @@ export const Login = () => {
 
   return (
     <div>
-      <p>{strings.login[language]}</p>
+      <p>Log in (Self-signup coming soon. Right now admin only)</p>
       <form action='?/login' method='POST' className='auth-form'>
         <label htmlFor=''> {strings.email[language]} </label>
         <input onChange={emailHandler} type='text' name='email'/>
