@@ -8,23 +8,23 @@ export const ContactLinks = () => {
   return (
     <ul id='contact-icons-array'>
       <li className='contact-coin'>
-        <a href="#" aria-hidden='true'>
-          <img className='contact-icons' src={GitHub} alt="GitHub icon"/>
+        <a href='https://github.com/chunyukuo88/' target='_blank' aria-hidden='true'>
+          <img className='contact-icons' src={GitHub} alt='GitHub icon'/>
         </a>
       </li>
       <li className='contact-coin'>
-        <a href="#" aria-hidden='true'>
-          <img className='contact-icons' src={NPM} alt="NPM icon"/>
+        <a href='https://www.npmjs.com/package/gochenour' target='_blank' aria-hidden='true'>
+          <img className='contact-icons' src={NPM} alt='NPM icon'/>
         </a>
       </li>
       <li className='contact-coin'>
-        <a href="#" aria-hidden='true'>
-          <img className='contact-icons' src={LinkedIn} alt="LinkedIn icon"/>
+        <a href='https://www.linkedin.com/in/alex-gochenour/' target='_blank' aria-hidden='true'>
+          <img className='contact-icons' src={LinkedIn} alt='LinkedIn icon'/>
         </a>
       </li>
       <li className='contact-coin'>
-        <a href="#" aria-hidden='true'>
-          <img className='contact-icons' src={YouTube} alt="YouTube icon"/>
+        <a href='https://www.youtube.com/channel/UCLt6xXf_MCMnd6neQMWb_5g' target='_blank' aria-hidden='true'>
+          <img className='contact-icons' src={YouTube} alt='YouTube icon'/>
         </a>
       </li>
     </ul>

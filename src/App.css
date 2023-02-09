@@ -13,6 +13,12 @@
   justify-content: space-between;
   height: 65vh;
 }
+
+#alex-gochenour {
+  position: fixed;
+  top: 1rem;
+}
+
 .App {
   box-sizing: border-box;
   margin: 0;
@@ -33,6 +39,7 @@ body {
   background-color: #3e3f46;
   position: relative;
   transform: skewY(-15deg);
+  max-width: 10rem;
 }
 
 .contact-links-wrapper {
@@ -46,8 +53,9 @@ body {
   padding: 1rem;
   position: relative;
   transition: 0.5s;
-  width: 9rem;
+  width: 10.5rem;
   text-align: center;
+  cursor: pointer;
 }
 
 .menu-block:nth-child(1) {
@@ -199,23 +207,23 @@ body {
   content: '';
   position: absolute;
   top: 0;
-  left: -4rem;
-  width: 4rem;
+  left: -2.5rem;
+  width: 2.5rem;
   height: 100%;
+  margin: auto;
   background: #3e3f46;
   filter: brightness(0.7);
   transform-origin: right;
   transform: skewY(45deg);
 }
 
-
 .menu-block::after {
   content: '';
   position: absolute;
   left: 0;
-  top: -4rem;
+  top: -2.5rem;
   width: 100%;
-  height: 4rem;
+  height: 2.5rem;
   background: #3e3f46;
   filter: brightness(0.7);
   transform-origin: bottom;
@@ -263,6 +271,11 @@ body {
   justify-content: center;
 }
 
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+}
 .main-icons {
   max-height: 1.75rem;
+  margin: auto;
 }
