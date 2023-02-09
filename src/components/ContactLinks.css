@@ -62,3 +62,57 @@
     transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, -20px);
     box-shadow: -50px 50px 50px rgba(0,0,0,.5);
 }
+
+.contact-coin:nth-child(1) a:hover {
+    background-color: #2f2f2f;
+}
+
+.contact-coin:nth-child(1) a:hover:after {
+    background-color: #1f1f1f;
+}
+
+.contact-coin:nth-child(1) a:hover:before {
+    background-color: #0c0c0c;
+}
+
+
+
+.contact-coin:nth-child(2) a:hover {
+    background-color: #ee4c4a;
+}
+
+.contact-coin:nth-child(2) a:hover:after {
+    background-color: #96302f;
+}
+
+.contact-coin:nth-child(2) a:hover:before {
+    background-color: #702524;
+}
+
+
+
+.contact-coin:nth-child(3) a:hover {
+    background-color: #31a2e8;
+}
+
+.contact-coin:nth-child(3) a:hover:after {
+    background-color: #23709f;
+}
+
+.contact-coin:nth-child(3) a:hover:before {
+    background-color: #20445b;
+}
+
+
+
+.contact-coin:nth-child(4) a:hover {
+    background-color: red;
+}
+
+.contact-coin:nth-child(4) a:hover:after {
+    background-color: #a90000;
+}
+
+.contact-coin:nth-child(4) a:hover:before {
+    background-color: #700000;
+}

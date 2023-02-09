@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate  } from 'react-router-dom';
 import { Counter } from './features/counter/Counter.jsx';
+import { ContactWrapper } from './components/ContactWrapper';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './components/RequireAuth.jsx';
 import { Login } from './features/auth/Login.jsx';
 import Language from './features/language/Language';
 import Crossword from './features/crossword/Crossword';
+import GochenourBanner from './components/GochenourBanner';
 import { routes } from './routes.js';
 import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
@@ -15,8 +18,7 @@ import Puzzle from '../src/common/icons/puzzle.svg';
 import Blog from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
-import { ContactLinks } from './components/ContactLinks';
-import { useState } from 'react';
+
 
 function App() {
   return (
@@ -95,63 +97,37 @@ function HomePage(){
 
   return (
     <main className='main-page-container'>
-      <ul className='main-menu-wrapper'>
-        <li className='menu-block'>
-          <span>
-            <img className='main-icons' src={AboutIcon} alt="About icon"/>
-          </span>
-          <a href="#">
-            {strings.about[language]}
-          </a>
-        </li>
-        <li className='menu-block'>
-          <span>
-            <img className='main-icons' src={Blog} alt="Blog icon"/>
-          </span>
-          <a href="#">
-            {strings.blog[language]}
-          </a>
-        </li>
-        <li className='menu-block'>
-          <span>
-            <img className='main-icons' src={Puzzle} alt="Puzzle icon"/>
-          </span>
-          <a href="/puzzle">
-            {strings.puzzle[language]}
-          </a>
-        </li>
-        <li className='menu-block'>
-          <span>
-            <img className='main-icons' src={Contact} alt="Contact icon"/>
-          </span>
-          <a onClick={() => setDisplayContactInfo(true)}>
-            {strings.contact[language]}
-          </a>
-        </li>
-        <li className='menu-block'>
-          <span>
-            <img className='main-icons' src={Admin} alt="Admin icon"/>
-          </span>
-          <a href="#">
-            {strings.admin[language]}
-          </a>
-        </li>
-        <li className='menu-block'>
-          <span>
-            <img className='main-icons' src={LanguageIcon} alt="Language icon"/>
-          </span>
-          <a href="#">
-            <Language/>
-          </a>
-        </li>
-      </ul>
-      {
-        displayContactInfo
-        ? <div className='contact-links-wrapper'>
-            <ContactLinks/>
-          </div>
-        : null
-      }
+      <div className='banner-and-menu-wrapper'>
+        <ul className='main-menu-wrapper'>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={AboutIcon} alt="About icon"/></span>
+            <a href="#">{strings.about[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={Blog} alt="Blog icon"/></span>
+            <a href="#">{strings.blog[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={Puzzle} alt="Puzzle icon"/></span>
+            <a href="/puzzle">{strings.puzzle[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={Contact} alt="Contact icon"/></span>
+            <a onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={Admin} alt="Admin icon"/></span>
+            <a href="/login">{strings.admin[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={LanguageIcon} alt="Language icon"/></span>
+            <a href="#"><Language/></a>
+          </li>
+        </ul>
+        <div />
+        <GochenourBanner />
+      </div>
+      {displayContactInfo ? <ContactWrapper visible={displayContactInfo} /> : null}
     </main>
   );
 }

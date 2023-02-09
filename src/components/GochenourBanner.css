@@ -1,0 +1,155 @@
+#gochenour-banner-grid {
+    display: flex;
+    flex-direction: row;
+    transform: skewY(25deg) skewX(-45deg) rotate(15deg) translate(5rem, 17rem);
+    max-height: 6.25rem;
+    z-index: -40;
+}
+
+.gochenour-banner-cell {
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    margin: 0;
+    padding: 0.05rem;
+}
+
+.gochenour-banner-cell:hover {
+    display: none;
+    transition: 0.5s;
+}
+
+#c3_3 {
+    background-color: #cccccc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #ccccc5;
+    filter: brightness(95%);
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    22% {
+        opacity: 0;
+    }
+    22.1% {
+        opacity: 1;
+    }
+    68.3%{
+        opacity: 0;
+    }
+    68.4%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* The letter G */
+#c0_0,#c0_1,#c0_2,#c0_3,#c0_4,
+#c1_0,#c1_4,
+#c2_0,#c2_2,#c2_4,
+#c3_0,#c3_2,
+/*#c3_3,  Leave this comment here.*/
+#c3_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
+
+/* The letter O */
+#c5_2,#c5_3,#c5_4,
+#c6_2,#c6_4,
+#c7_2,#c7_3,#c7_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
+
+/* The letter C */
+#c9_2,#c9_3,#c9_4,
+#c10_2,#c10_4,
+#c11_2, #c11_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 18px 10px #fae2e2;
+    filter: brightness(98%);
+}
+
+/* The letter H */
+#c13_0,#c13_1,#c13_2,#c13_3,#c13_4,
+#c14_2,#c15_2,#c15_3,#c15_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 16px 11px #fff;
+    filter: brightness(98%);
+}
+
+/* The letter E */
+#c17_2, #c18_2,
+#c17_3, #c18_3,
+#c17_4, #c18_4, #c18_5, #c19_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 22px 9px #fff;
+    filter: brightness(98%);
+}
+
+/* The letter E */
+#c21_2,#c21_3,#c21_4,
+#c22_2,#c23_2,#c23_3,#c23_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
+
+/* The letter N */
+#c25_2,#c26_2,#c27_2,
+#c25_3,#c27_3,
+#c25_4,#c26_4,#c27_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #faebeb;
+    filter: brightness(98%);
+}
+
+/* The letter O */
+#c29_2,#c29_3,#c29_4,
+#c30_4,#c31_2,#c31_3,#c31_4
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
+
+/* The letter U */
+#c33_2,#c33_3,#c33_4,
+#c34_2,#c35_2
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
+/* The letter R */
+{
+    background-color: #eeeedc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #fff;
+    filter: brightness(98%);
+}
