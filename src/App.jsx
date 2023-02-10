@@ -5,7 +5,7 @@ import { AboutBlockWrapper } from './components/AboutBlock/AboutBlock';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './features/auth/RequireAuth.jsx';
 
-import { Login } from './features/auth/Login.jsx';
+import { Login } from './pages/Login/Login.jsx';
 import { BlogPage } from './pages/Blog/BlogPage';
 import Language from './features/language/Language';
 import Crossword from './pages/Crossword/Crossword';
@@ -66,9 +66,17 @@ function HomePage(){
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={LanguageIcon} alt="Language icon"/></span>
+            <a><Language/></a>
+          </li>
           <li role='button' onClick={() => setDisplayAboutBlock(true)} className='menu-block'>
             <span><img className='main-icons' src={AboutIcon} alt="About icon"/></span>
             <a>{strings.about[language]}</a>
+          </li>
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={Contact} alt="Contact icon"/></span>
+            <a onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</a>
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={BlogIcon} alt="blog icon"/></span>
@@ -79,16 +87,8 @@ function HomePage(){
             <a href="/puzzle">{strings.puzzle[language]}</a>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={Contact} alt="Contact icon"/></span>
-            <a onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</a>
-          </li>
-          <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Admin} alt="Admin icon"/></span>
             <a href="/login">{strings.admin[language]}</a>
-          </li>
-          <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={LanguageIcon} alt="Language icon"/></span>
-            <a><Language/></a>
           </li>
         </ul>
         <div />
