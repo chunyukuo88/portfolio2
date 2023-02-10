@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateGrid, declareVictory } from './crosswordSlice';
+import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
 import { getData } from './utils';
@@ -154,10 +154,6 @@ export default function Crossword(){
                       )})}
                 </div>
               ))}
-            </div>
-            <div style={styles.crosswordSettings}>
-              <div>help</div>
-              <div>settings</div>
             </div>
           </div>
           {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>{strings.loading[language]}</p>}

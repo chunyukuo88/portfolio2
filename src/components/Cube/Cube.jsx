@@ -1,14 +1,16 @@
-import './Blog.css';
+import './Cube.css';
 
-export function Blog() {
+export function Cube() {
+
+
   return (
-    <div className="cube">
+    <div className='cube'>
       <div className='cube-lid'/>
       <div>
-        <span />
-        <span />
-        <span />
-        <span />
+        <span/>
+        <span/>
+        <span/>
+        <span/>
       </div>
     </div>
   );

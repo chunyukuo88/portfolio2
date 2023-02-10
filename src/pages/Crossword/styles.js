@@ -78,9 +78,10 @@ export const styles = {
   },
   main: {
       height: '80vh',
+      color: 'white'
   },
   title: {
-      color: 'black',
+      color: 'white',
   },
   section: {
     alignItems: 'center',

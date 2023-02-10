@@ -8,8 +8,6 @@ const strings = {
     chinese: '内部管理',
     english: 'Admin',
     russian: 'администратор',
-
-
   },
   blog: {
     chinese: '博客',
@@ -40,8 +38,13 @@ const strings = {
   },
   homeGreeting: {
     chinese: '咦？又來了',
-    english: 'Woobler\'s Other House',
+    english: 'Welcome to my portfolio',
     russian: 'это веб-сайт',
+  },
+  homePage: {
+    chinese: '返回',
+    english: 'Back to main',
+    russian: 'Возвращаться',
   },
   increment: {
     chinese: '增量',
