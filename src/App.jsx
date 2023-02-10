@@ -1,23 +1,25 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate  } from 'react-router-dom';
-import { Counter } from './features/counter/Counter.jsx';
-import { ContactWrapper } from './components/ContactWrapper';
-import { AboutBlockWrapper } from './components/AboutBlock';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ContactWrapper } from './components/ContactTiles/ContactWrapper';
+import { AboutBlockWrapper } from './components/AboutBlock/AboutBlock';
 import { useSelector } from 'react-redux';
-import { RequireAuth } from './components/RequireAuth.jsx';
+import { RequireAuth } from './features/auth/RequireAuth.jsx';
+
 import { Login } from './features/auth/Login.jsx';
+import { BlogPage } from './pages/Blog/BlogPage';
 import Language from './features/language/Language';
-import Crossword from './features/crossword/Crossword';
-import GochenourBanner from './components/GochenourBanner';
-import AlexBanner from './components/AlexBanner';
+import Crossword from './pages/Crossword/Crossword';
+import AlexBanner from './components/LightbulbBanners/AlexBanner';
+import GochenourBanner from './components/LightbulbBanners/GochenourBanner';
+
 import { routes } from './routes.js';
-import { supabaseClient } from './features/auth/client.js';
 import strings from './common/strings.js';
+
 import Admin from '../src/common/icons/admin.svg';
 import LanguageIcon from '../src/common/icons/language.svg';
 import Contact from '../src/common/icons/contact.svg';
 import Puzzle from '../src/common/icons/puzzle.svg';
-import Blog from '../src/common/icons/blog.svg';
+import BlogIcon from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
 
@@ -26,14 +28,12 @@ function App() {
   return (
     <div className='App'>
       <Router>
-        <Header />
         <div className='content-below-header'>
           <Routes>
             <Route exact path={routes.index} element={<HomePage />}/>
-            <Route exact path={routes.counter} element={<CounterPage />}/>
             <Route exact path={routes.login} element={<LoginPage />}/>
             <Route exact path={routes.puzzle} element={<PuzzlePage />}/>
-            <Route exact path={routes.blog} element={<BlogPage />}/>
+            <Route exact path={routes.blog} element={<Blog />}/>
             <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
           </Routes>
         </div>
@@ -42,34 +42,11 @@ function App() {
   );
 }
 
-function Header(){
-  const navigate = useNavigate();
-  const language = useSelector((state) => state.language.value);
-  const auth = useSelector((state) => state.auth.value);
-  const logoutHandler = async () => {
-    await supabaseClient.auth.signOut();
-    window.localStorage.clear();
-    window.location.reload();
-  };
-  return (
-    <></>
-  );
+function Blog(){
+  return (<><BlogPage /></>)
 }
-
-function BlogPage(){
-  return (
-    <>
-      Blogimus
-    </>
-  )
-}
-
 function PuzzlePage(){
-  return (
-    <>
-      <Crossword />
-    </>
-  );
+  return (<><Crossword /></>);
 }
 
 function Profile(){
@@ -77,29 +54,14 @@ function Profile(){
 }
 
 function LoginPage(){
-  return (
-    <div className='page'>
-      <Login />
-    </div>
-  );
-}
-
-function CounterPage(){
-  return (
-    <div className='page counter'>
-      <Counter/>
-    </div>
-  );
+  return (<div className='page'><Login /></div>);
 }
 
 function HomePage(){
   const language = useSelector((state) => state.language.value);
-  const auth = useSelector((state) => state.auth.value);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
 
-  // TODO
-  // <AlexBanner />
   return (
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
@@ -109,8 +71,8 @@ function HomePage(){
             <a>{strings.about[language]}</a>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={Blog} alt="Blog icon"/></span>
-            <a href="#">{strings.blog[language]}</a>
+            <span><img className='main-icons' src={BlogIcon} alt="blog icon"/></span>
+            <a href="/blog">{strings.blog[language]}</a>
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Puzzle} alt="Puzzle icon"/></span>

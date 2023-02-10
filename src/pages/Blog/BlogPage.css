@@ -1,0 +1,12 @@
+.back-to-home {
+    text-decoration: none;
+    color: #00ec00;
+}
+
+.blog-coming-soon {
+    color: white;
+}
+
+.green-cube-wrapper {
+    transform: translateY(256px) translateX(300px);
+}

@@ -1,7 +1,7 @@
-import GitHub from '../common/icons/contact_GH.svg';
-import NPM from '../common/icons/contact_NPM.svg';
-import LinkedIn from '../common/icons/contact_LinkedIn.svg';
-import YouTube from '../common/icons/contact_YouTube.svg';
+import GitHub from '../../common/icons/contact_GH.svg';
+import NPM from '../../common/icons/contact_NPM.svg';
+import LinkedIn from '../../common/icons/contact_LinkedIn.svg';
+import YouTube from '../../common/icons/contact_YouTube.svg';
 import './ContactLinks.css';
 
 export const ContactLinks = () => {
