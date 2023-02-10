@@ -6,6 +6,7 @@ import { AboutBlockWrapper } from './components/AboutBlock';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './components/RequireAuth.jsx';
 import { Login } from './features/auth/Login.jsx';
+import { Blog } from './pages/Blog/Blog';
 import Language from './features/language/Language';
 import Crossword from './features/crossword/Crossword';
 import GochenourBanner from './components/GochenourBanner';
@@ -17,7 +18,7 @@ import Admin from '../src/common/icons/admin.svg';
 import LanguageIcon from '../src/common/icons/language.svg';
 import Contact from '../src/common/icons/contact.svg';
 import Puzzle from '../src/common/icons/puzzle.svg';
-import Blog from '../src/common/icons/blog.svg';
+import BlogIcon from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
 
@@ -57,11 +58,7 @@ function Header(){
 }
 
 function BlogPage(){
-  return (
-    <>
-      Blogimus
-    </>
-  )
+  return <Blog />;
 }
 
 function PuzzlePage(){
@@ -109,8 +106,8 @@ function HomePage(){
             <a>{strings.about[language]}</a>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={Blog} alt="Blog icon"/></span>
-            <a href="#">{strings.blog[language]}</a>
+            <span><img className='main-icons' src={BlogIcon} alt="blog icon"/></span>
+            <a href="/blog">{strings.blog[language]}</a>
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Puzzle} alt="Puzzle icon"/></span>

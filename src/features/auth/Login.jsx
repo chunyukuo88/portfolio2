@@ -28,7 +28,7 @@ export const Login = () => {
   };
 
   return (
-    <div>
+    <div style={{ color: 'white'}}>
       <p>Log in (Self-signup coming soon. Right now admin only)</p>
       <form action='?/login' method='POST' className='auth-form'>
         <label htmlFor=''> {strings.email[language]} </label>
