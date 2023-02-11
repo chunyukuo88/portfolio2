@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { supabaseClient } from './client.js';
-import { updateAuth } from './authSlice.js';
+import { supabaseClient } from '../../features/auth/client.js';
+import { updateAuth } from '../../features/auth/authSlice.js';
 import { useNavigate } from 'react-router-dom';
 import strings from '../../common/strings.js';
 
@@ -30,7 +30,7 @@ export const Login = () => {
   return (
     <div style={{ color: 'white'}}>
       <p>Log in (Self-signup coming soon. Right now admin only)</p>
-      <form action='?/login' method='POST' className='auth-form'>
+      <form action='src/features/auth?/login' method='POST' className='auth-form'>
         <label htmlFor=''> {strings.email[language]} </label>
         <input onChange={emailHandler} type='text' name='email'/>
         <label htmlFor=''> {strings.password[language]} </label>
