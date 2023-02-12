@@ -11,10 +11,16 @@ export default function Crossword(){
   const language = useSelector((state) => state.language.value);
   const dispatch = useDispatch();
   useEffect( () => {
-    getData().then(data => {
-      const newestPuzzle = data[data.length - 1];
-      setCrosswordData(newestPuzzle);
-    });
+    const handlers = {
+      success: (httpResponse => {
+        const { data } = httpResponse;
+        const newestPuzzle = data[data.length - 1];
+        setCrosswordData(newestPuzzle);
+      }),
+      failure: (e) => new Error(e),
+    }
+    getData(process.env.REACT_API_GET_CROSSWORD_INFO, handlers);
+    // getData('https://ji7lq1nwz9.execute-api.us-east-1.amazonaws.com/crossword/allCrosswords', handlers);
   }, []);
 
   const [focused, setFocused] = useState(undefined);
