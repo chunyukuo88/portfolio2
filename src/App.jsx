@@ -25,7 +25,7 @@ import BlogIcon from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
 
-ReactGA.initialize( '353414815');
+ReactGA.initialize('G-D45ZQ66DQ8');
 
 function App() {
   return (

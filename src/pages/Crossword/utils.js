@@ -20,7 +20,6 @@ export const emptyGridTwoByTwo = [
 ];
 
 export const getData = (url, handlers, jwt) => {
-  console.log('url: ', url);
   if (jwt) {
     axios.defaults.headers.common.Authorization = `Bearer ${jwt}`;
   }
