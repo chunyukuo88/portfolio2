@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCredentials } from '../../features/auth/authSlice.js';
-import { useLoginMutation } from '../../features/auth/authApiSlice';
 import strings from '../../common/strings.js';
+import { useAuth } from '../../features/auth/useAuth';
 
-export const Login = (props) => {
-  const { signIn } = props;
+export const Login = () => {
+  const { signIn } = useAuth();
   const userRef = useRef();
   const errRef = useRef();
   const [user, setUser] = useState('');
@@ -35,10 +35,9 @@ export const Login = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const userData = await signIn({ user, pwd }).unwrap();
+      // const userData = await signIn({ user, pwd }).unwrap();
+      const userData = await signIn(user, pwd).unwrap();
       dispatch(setCredentials({ ...userData, user }));
-      setUser();
-      setPwd();
       navigate('/');
     } catch (e) {
       handleError(e)
@@ -50,8 +49,8 @@ export const Login = (props) => {
 
   return (
     <section style={{ color: 'white'}}>
-      <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
-      <h1>Login</h1>
+      <p ref={errRef} style={{ color: 'red'}} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
+      <h1>{strings.login[language]}</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor='username'>Username:</label>
         <input
@@ -65,7 +64,7 @@ export const Login = (props) => {
         />
         <label htmlFor='password'>Password:</label>
         <input 
-          type='text'
+          type='password'
           id='password'
           onChange={handlePwdInput}
           value={pwd}

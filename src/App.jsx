@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ContactWrapper } from './components/ContactTiles/ContactWrapper';
 import { AboutBlockWrapper } from './components/AboutBlock/AboutBlock';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './features/auth/RequireAuth.jsx';
-import { useAuth } from './features/auth/useAuth';
 import ReactGA from 'react-ga4';
 
 import { Login } from './pages/Login/Login.jsx';
@@ -28,14 +27,13 @@ import './App.css';
 ReactGA.initialize('G-D45ZQ66DQ8'); // TODO: env var for this
 
 function App() {
-  const props = useAuth();
   return (
     <div className='App'>
       <Router>
         <div className='content-below-header'>
           <Routes>
             <Route exact path={routes.index} element={<HomePage />}/>
-            <Route exact path={routes.login} element={<LoginPage props={props}/>}/>
+            <Route exact path={routes.login} element={<LoginPage />}/>
             <Route exact path={routes.puzzle} element={<PuzzlePage />}/>
             <Route exact path={routes.blog} element={<Blog />}/>
             <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
@@ -71,28 +69,28 @@ function HomePage(){
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={LanguageIcon} alt="Language icon"/></span>
+            <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
             <a><Language/></a>
           </li>
           <li role='button' onClick={() => setDisplayAboutBlock(true)} className='menu-block'>
-            <span><img className='main-icons' src={AboutIcon} alt="About icon"/></span>
+            <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
             <a>{strings.about[language]}</a>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={Contact} alt="Contact icon"/></span>
+            <span><img className='main-icons' src={Contact} alt='Contact icon'/></span>
             <a onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</a>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={BlogIcon} alt="blog icon"/></span>
-            <a href="/blog">{strings.blog[language]}</a>
+            <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
+            <Link to='/blog'>{strings.blog[language]}</Link>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={Puzzle} alt="Puzzle icon"/></span>
-            <a href="/puzzle">{strings.puzzle[language]}</a>
+            <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
+            <Link to='/puzzle'>{strings.puzzle[language]}</Link>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={Admin} alt="Admin icon"/></span>
-            <a href="/login">{strings.admin[language]}</a>
+            <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
+            <Link to='login' >{strings.admin[language]}</Link>
           </li>
         </ul>
         <div />
