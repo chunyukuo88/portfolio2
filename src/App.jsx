@@ -4,8 +4,8 @@ import { ContactWrapper } from './components/ContactTiles/ContactWrapper';
 import { AboutBlockWrapper } from './components/AboutBlock/AboutBlock';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './features/auth/RequireAuth.jsx';
+import { useAuth } from './features/auth/useAuth';
 import ReactGA from 'react-ga4';
-
 
 import { Login } from './pages/Login/Login.jsx';
 import { BlogPage } from './pages/Blog/BlogPage';
@@ -25,16 +25,17 @@ import BlogIcon from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
 
-ReactGA.initialize('G-D45ZQ66DQ8');
+ReactGA.initialize('G-D45ZQ66DQ8'); // TODO: env var for this
 
 function App() {
+  const props = useAuth();
   return (
     <div className='App'>
       <Router>
         <div className='content-below-header'>
           <Routes>
             <Route exact path={routes.index} element={<HomePage />}/>
-            <Route exact path={routes.login} element={<LoginPage />}/>
+            <Route exact path={routes.login} element={<LoginPage props={props}/>}/>
             <Route exact path={routes.puzzle} element={<PuzzlePage />}/>
             <Route exact path={routes.blog} element={<Blog />}/>
             <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />

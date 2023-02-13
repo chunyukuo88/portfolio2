@@ -13,7 +13,8 @@ export const authSlice = createSlice({
       state.token = accessToken;
     },
     logout: (state, action) => {
-
+      state.user = null;
+      state.token = null;
     }
   },
 });

@@ -5,7 +5,8 @@ import { setCredentials } from '../../features/auth/authSlice.js';
 import { useLoginMutation } from '../../features/auth/authApiSlice';
 import strings from '../../common/strings.js';
 
-export const Login = () => {
+export const Login = (props) => {
+  const { signIn } = props;
   const userRef = useRef();
   const errRef = useRef();
   const [user, setUser] = useState('');
@@ -14,7 +15,6 @@ export const Login = () => {
   const language = useSelector((state) => state.language.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [ login, { isLoading }] = useLoginMutation();
 
   useEffect(() => {
     userRef.current.focus();
@@ -35,7 +35,7 @@ export const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const userData = await login({ user, pwd }).unwrap();
+      const userData = await signIn({ user, pwd }).unwrap();
       dispatch(setCredentials({ ...userData, user }));
       setUser();
       setPwd();
@@ -48,8 +48,8 @@ export const Login = () => {
   const handleUserInput = (event) => setUser(event.target.value);
   const handlePwdInput = (event) => setPwd(event.target.value);
 
-  const content = isLoading ? <h1>Loading...</h1> : (
-    <section>
+  return (
+    <section style={{ color: 'white'}}>
       <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
@@ -75,10 +75,4 @@ export const Login = () => {
       </form>
     </section>
   );
-
-  return (
-    <div style={{ color: 'white'}}>
-      {content}
-    </div>
-  );
-}
+};
