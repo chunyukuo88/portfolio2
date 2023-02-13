@@ -92,6 +92,11 @@ const strings = {
     russian: 'кроссворд',
   },
   RUSSIAN: 'russian',
+  username: {
+    chinese: '用户名',
+    english: 'Username',
+    russian: 'Имя пользователя',
+  },
 };
 
 export default strings;

@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useAuth } from '../../features/auth/useAuth';
+
 import { setCredentials } from '../../features/auth/authSlice.js';
 import strings from '../../common/strings.js';
-import { useAuth } from '../../features/auth/useAuth';
 
 export const Login = () => {
   const { signIn } = useAuth();
@@ -35,7 +36,6 @@ export const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // const userData = await signIn({ user, pwd }).unwrap();
       const userData = await signIn(user, pwd).unwrap();
       dispatch(setCredentials({ ...userData, user }));
       navigate('/');
@@ -52,7 +52,7 @@ export const Login = () => {
       <p ref={errRef} style={{ color: 'red'}} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
       <h1>{strings.login[language]}</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Username:</label>
+        <label htmlFor='username'>{strings.username[language]}</label>
         <input
           type='text'
           id='username'
@@ -62,7 +62,7 @@ export const Login = () => {
           autoComplete='off'
           required
         />
-        <label htmlFor='password'>Password:</label>
+        <label htmlFor='password'>{strings.password[language]}</label>
         <input 
           type='password'
           id='password'
@@ -70,7 +70,7 @@ export const Login = () => {
           value={pwd}
           required
         />
-        <button>Log In</button>
+        <button>{strings.login[language]}</button>
       </form>
     </section>
   );
