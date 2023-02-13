@@ -8,6 +8,8 @@ export const authSlice = createSlice({
   reducers: {
     updateAuth: (state, action) => {
       state.value = action.payload;
+      console.dir(state)
+      console.dir(action)
     },
   },
 });
