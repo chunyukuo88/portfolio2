@@ -1,6 +1,6 @@
 import { BlogPage } from './BlogPage';
 import { render } from '@testing-library/react';
-import { store } from '../../globalState/store';
+import { store } from '../../app/store';
 import ReactGA from 'react-ga4';
 import Root from '../../Root';
 

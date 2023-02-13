@@ -4,7 +4,7 @@ import strings from './common/strings';
 import 'react-router-dom';
 import { routes } from './routes';
 import Root from './Root';
-import { store } from './globalState/store';
+import { store } from './app/store';
 import { mockStore } from './testUtils';
 import { supabaseClient } from './features/auth/client.js';
 import '@testing-library/jest-dom';
