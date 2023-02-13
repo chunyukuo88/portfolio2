@@ -1,6 +1,7 @@
 import React from 'react';
-import {fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import ReactGA from 'react-ga4';
 import 'react-dom';
 
 import Crossword from './Crossword.jsx';
@@ -28,6 +29,14 @@ jest.mock('./utils', () => {
 });
 
 describe('Crossword.jsx', ()=> {
+  describe('WHEN: The page loads', () => {
+    it('THEN: React-ga4 dispatches the event to Google Analytics.', () => {
+      const spy = jest.spyOn(ReactGA, 'send');
+      render(<Crossword grid={emptyGridTwoByTwo}/>);
+
+      expect(spy).toBeCalledTimes();
+    });
+  });
   describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
     describe('WHEN: the user clicks on a square,', ()=>{
       it('THEN: the square becomes highlighted.',()=>{
@@ -63,7 +72,7 @@ describe('Crossword.jsx', ()=> {
         ${'ArrowUp'}    | ${38}           | ${38}      | ${7}
         ${'ArrowDown'}  | ${40}           | ${40}      | ${17}
         ${'ArrowLeft'}  | ${37}           | ${37}      | ${11}
-        ${'ArrowRight'} | ${39}           | ${39}      | ${13} 
+        ${'ArrowRight'} | ${39}           | ${39}      | ${13}
       `('THEN: the square first clicked becomes white again, and the new square becomes highlighted.',
         ({key, which, keyCode, resultIndex}) => {
         render(<Crossword grid={emptyGridFiveByFive}/>);

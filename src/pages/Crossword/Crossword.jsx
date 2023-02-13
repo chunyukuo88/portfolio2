@@ -4,6 +4,7 @@ import { updateGrid, declareVictory } from '../../features/crossword/crosswordSl
 import { styles } from './styles.js';
 import strings from '../../common/strings';
 import { getData } from './utils';
+import ReactGA from 'react-ga4';
 
 export default function Crossword(){
   const grid = useSelector((state) => state.crossword.grid);
@@ -11,10 +12,16 @@ export default function Crossword(){
   const language = useSelector((state) => state.language.value);
   const dispatch = useDispatch();
   useEffect( () => {
-    getData().then(data => {
-      const newestPuzzle = data[data.length - 1];
-      setCrosswordData(newestPuzzle);
-    });
+    ReactGA.send({ hitType: 'pageview', page: '/puzzle' });
+    const handlers = {
+      success: (httpResponse => {
+        const { data } = httpResponse;
+        const newestPuzzle = data[data.length - 1];
+        setCrosswordData(newestPuzzle);
+      }),
+      failure: (e) => new Error(e),
+    }
+    getData(process.env.REACT_APP_GET_CROSSWORD_INFO, handlers);
   }, []);
 
   const [focused, setFocused] = useState(undefined);

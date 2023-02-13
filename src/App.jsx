@@ -4,6 +4,8 @@ import { ContactWrapper } from './components/ContactTiles/ContactWrapper';
 import { AboutBlockWrapper } from './components/AboutBlock/AboutBlock';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './features/auth/RequireAuth.jsx';
+import ReactGA from 'react-ga4';
+
 
 import { Login } from './pages/Login/Login.jsx';
 import { BlogPage } from './pages/Blog/BlogPage';
@@ -23,6 +25,7 @@ import BlogIcon from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
 
+ReactGA.initialize('G-D45ZQ66DQ8');
 
 function App() {
   return (
