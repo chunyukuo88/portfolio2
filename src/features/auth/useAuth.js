@@ -1,20 +1,18 @@
-import React from 'react';
 import { Auth } from 'aws-amplify';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  selectCurrentToken,
   selectCurrentUser,
   setCredentials,
   logout
 } from './authSlice';
 
 export function useAuth(){
-  const token = useSelector(selectCurrentToken);
+  // const token = useSelector(selectCurrentToken);
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
-  const signIn = async (email, password) => {
-    await Auth.signIn(email, password);
+  const signIn = async (username, password) => {
+    await Auth.signIn(username, password);
     console.log('signIn() - 1');
     const session = await Auth.currentSession();
     console.log('signIn() - 2');

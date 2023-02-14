@@ -237,7 +237,7 @@ body {
   transition: 0.5s;
 }
 
-.menu-block a {
+.menu-block div {
   text-decoration: none;
   color: var(--MenuBlockText);
   display: block;
@@ -246,7 +246,7 @@ body {
   transition: 0.5s;
 }
 
-.menu-block:hover a {
+.menu-block:hover div {
   color: #fff;
 }
 

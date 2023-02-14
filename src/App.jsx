@@ -64,33 +64,34 @@ function HomePage(){
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
 
+  const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
   return (
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
-            <a><Language/></a>
+            <div><Language/></div>
           </li>
           <li role='button' onClick={() => setDisplayAboutBlock(true)} className='menu-block'>
             <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
-            <a>{strings.about[language]}</a>
+            <div>{strings.about[language]}</div>
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Contact} alt='Contact icon'/></span>
-            <a onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</a>
+            <div onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</div>
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
-            <Link to='/blog'>{strings.blog[language]}</Link>
+            <Link style={LinkStyling} to='/blog'>{strings.blog[language]}</Link>
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-            <Link to='/puzzle'>{strings.puzzle[language]}</Link>
+            <Link style={LinkStyling} to='/puzzle'>{strings.puzzle[language]}</Link>
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
-            <Link to='login' >{strings.admin[language]}</Link>
+            <Link style={LinkStyling} to='login' >{strings.admin[language]}</Link>
           </li>
         </ul>
         <div />
