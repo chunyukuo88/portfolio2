@@ -27,12 +27,18 @@ export function useAuth(){
     console.log('signIn() - 5');
   };
 
+  const resetPassword = async (username, oldPwd, newPwd) => {
+    const successPromise = await Auth.changePassword(username, oldPwd, newPwd);
+    return successPromise;
+  };
+
   const signOut = async () => {
     await Auth.signOut();
     dispatch(logout);
   };
 
   return {
+    resetPassword,
     signIn,
     signOut,
     user,

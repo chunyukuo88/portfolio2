@@ -2,8 +2,8 @@ import './BlogPage.css';
 import { Cube } from '../../components/Cube/Cube';
 import strings from '../../common/strings';
 import { useSelector } from 'react-redux';
-import {useEffect} from "react";
-import ReactGA from "react-ga4";
+import { useEffect } from 'react';
+import ReactGA from 'react-ga4';
 
 export function BlogPage(){
   const language = useSelector((state) => state.language.value);
@@ -17,7 +17,7 @@ export function BlogPage(){
         Blog feature coming soon!
       </div>
       <p>
-        <a className='back-to-home' href="/">{strings.homePage[language]}</a>
+        <a className='back-to-home' href='/'>{strings.homePage[language]}</a>
       </p>
       <div className='green-cube-wrapper'>
         <Cube />

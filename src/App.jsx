@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { RequireAuth } from './features/auth/RequireAuth.jsx';
 import ReactGA from 'react-ga4';
 
-import { Login } from './pages/Login/Login.jsx';
+import { LoginPage } from './pages/Login/LoginPage.jsx';
 import { BlogPage } from './pages/Blog/BlogPage';
 import Language from './features/language/Language';
 import Crossword from './pages/Crossword/Crossword';
@@ -34,8 +34,8 @@ function App() {
           <Routes>
             <Route exact path={routes.index} element={<HomePage />}/>
             <Route exact path={routes.login} element={<LoginPage />}/>
-            <Route exact path={routes.puzzle} element={<PuzzlePage />}/>
-            <Route exact path={routes.blog} element={<Blog />}/>
+            <Route exact path={routes.puzzle} element={<Crossword />}/>
+            <Route exact path={routes.blog} element={<BlogPage />}/>
             <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
           </Routes>
         </div>
@@ -44,19 +44,8 @@ function App() {
   );
 }
 
-function Blog(){
-  return (<><BlogPage /></>)
-}
-function PuzzlePage(){
-  return (<><Crossword /></>);
-}
-
 function Profile(){
   return <>PROFILE! You are authenticated.</>;
-}
-
-function LoginPage(){
-  return (<div className='page'><Login /></div>);
 }
 
 function HomePage(){

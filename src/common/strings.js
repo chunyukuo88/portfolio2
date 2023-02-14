@@ -81,6 +81,16 @@ const strings = {
     english: 'Password',
     russian: 'пароль',
   },
+  passwordOld: {
+    chinese: '舊密碼',
+    english: 'Old Password',
+    russian: 'Старый пароль',
+  },
+  passwordNew: {
+    chinese: '新密碼',
+    english: 'New Password',
+    russian: 'Новый пароль',
+  },
   profile: {
     chinese: '個人設置',
     english: 'Profile',
@@ -90,6 +100,11 @@ const strings = {
     chinese: '填字遊戲',
     english: 'Puzzle',
     russian: 'кроссворд',
+  },
+  resetPassword: {
+    chinese: '重設密碼',
+    english: 'Reset Password',
+    russian: 'Сброс пароля'
   },
   RUSSIAN: 'russian',
   username: {
