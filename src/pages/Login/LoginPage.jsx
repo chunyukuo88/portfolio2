@@ -1,31 +1,43 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '../../features/auth/useAuth';
-
+import { Cube } from '../../components/Cube/Cube';
 import { setCredentials } from '../../features/auth/authSlice.js';
 import strings from '../../common/strings.js';
+import './LoginPage.css';
 
 export const LoginPage = () => {
+  const language = useSelector((state) => state.language.value);
   const [displayLogin, setDisplayLogin] = useState(true);
 
+  const LinkStyling = { color: '#00ec00', textDecoration: 'none', textTransform: 'uppercase'};
   return (
-    <main>
-      <button onClick={() => setDisplayLogin(!displayLogin)}>Switch</button>
-      {displayLogin ? <LoginContent/> : <ResetPasswordContent />}
+    <main style={{ color: 'white'}}>
+      <button onClick={() => setDisplayLogin(!displayLogin)}>{strings.switch[language]}</button>
+      {displayLogin ? <LoginContent/> : <ChangePassword />}
+      <p>
+        <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
+      </p>
+      <div className='cube-wrapper'>
+        <Cube />
+      </div>
     </main>
   );
 };
 
-const ResetPasswordContent = () => {
+const ChangePassword = () => {
   const language = useSelector((state) => state.language.value);
-  const { resetPassword } = useAuth();
-  const [user, setUser] = useState('');
-  const [errMsg, setErrMsg] = useState('');
-  const [oldPwd, setOldPwd] = useState('');
-  const [newPwd, setNewPwd] = useState('');
   const userRef = useRef();
   const errRef = useRef();
+  const { signIn } = useAuth();
+  const [user, setUser] = useState('');
+  const [oldPwd, setOldPwd] = useState('');
+  const [newPwd, setNewPwd] = useState('');
+  const [errMsg, setErrMsg] = useState('');
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
   const handleError = (error) => {
     if (!error?.originalStatus) setErrMsg('No server response');
     else if (error.originalStatus?.status === 400) setErrMsg('Missing username or password');
@@ -33,27 +45,26 @@ const ResetPasswordContent = () => {
     else setErrMsg('LoginPage failed');
     errRef.current.focus();
   }
-  const submissionHandler = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const result = resetPassword(user, oldPwd, newPwd);
-      console.log('submissionHandler() - result');
+      await signIn(user, oldPwd, newPwd).unwrap();
     } catch (e) {
       handleError(e)
     }
-  };
-
+  }
   const handleUserInput = (event) => setUser(event.target.value);
   const handleOldPwdInput = (event) => setOldPwd(event.target.value);
   const handleNewPwdInput = (event) => setNewPwd(event.target.value);
+
   return (
     <section>
       <p ref={errRef} style={{ color: 'red'}} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
-      <p>Change Password</p>
-      <form onSubmit={submissionHandler}>
+      <h1>change pw</h1>
+      <form onSubmit={handleSubmit}>
         <label htmlFor='username'>{strings.username[language]}</label>
         <input
-          type="text"
+          type='text'
           id='username'
           ref={userRef}
           value={user}
@@ -77,7 +88,7 @@ const ResetPasswordContent = () => {
           value={newPwd}
           required
         />
-        <button>{strings.resetPassword[language]}</button>
+        <button>Change pw</button>
       </form>
     </section>
   );
@@ -110,8 +121,13 @@ const LoginContent = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const userData = await signIn(user, pwd).unwrap();
-      dispatch(setCredentials({ ...userData, user }));
+      // const userData = await signIn(user, pwd).unwrap();
+      const userData = await signIn(user, pwd);
+      const payload = {
+        username: userData.user.username,
+        token: userData.signInUserSession.accessToken.jwtToken,
+      }
+      dispatch(setCredentials(payload));
       navigate('/');
     } catch (e) {
       handleError(e)
@@ -121,7 +137,7 @@ const LoginContent = () => {
   const handlePwdInput = (event) => setPwd(event.target.value);
 
   return (
-    <section style={{ color: 'white'}}>
+    <section>
       <p ref={errRef} style={{ color: 'red'}} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
       <h1>{strings.login[language]}</h1>
       <form onSubmit={handleSubmit}>
@@ -148,4 +164,3 @@ const LoginContent = () => {
     </section>
   );
 }
-

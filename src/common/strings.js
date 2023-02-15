@@ -43,7 +43,7 @@ const strings = {
   },
   homePage: {
     chinese: '返回',
-    english: 'Back to main',
+    english: 'Back',
     russian: 'Возвращаться',
   },
   increment: {
@@ -104,9 +104,19 @@ const strings = {
   resetPassword: {
     chinese: '重設密碼',
     english: 'Reset Password',
-    russian: 'Сброс пароля'
+    russian: 'Сброс пароля',
   },
   RUSSIAN: 'russian',
+  sendCodeToEmail: {
+    chinese: '將一次性代碼傳至郵箱地址',
+    english: 'Send code to email',
+    russian: 'Отправить код на почту',
+  },
+  switch: {
+    chinese: '切換',
+    english: 'Switch',
+    russian: 'переключать',
+  },
   username: {
     chinese: '用户名',
     english: 'Username',

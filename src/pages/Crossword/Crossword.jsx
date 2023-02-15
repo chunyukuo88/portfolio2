@@ -5,6 +5,7 @@ import { styles } from './styles.js';
 import strings from '../../common/strings';
 import { getData } from './utils';
 import ReactGA from 'react-ga4';
+import { Link } from 'react-router-dom';
 
 export default function Crossword(){
   const grid = useSelector((state) => state.crossword.grid);
@@ -131,9 +132,11 @@ export default function Crossword(){
       : strings.loading[language];
   }
 
+  const LinkStyling = { color: '#00ec00', textDecoration: 'none', textTransform: 'uppercase'};
   return (
       <main style={styles.main}>
         <section style={styles.section}>
+          <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
           <Title />
           {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
           <div style={styles.gridAndSettings}>

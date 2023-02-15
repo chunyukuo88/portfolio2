@@ -12,6 +12,7 @@ import Language from './features/language/Language';
 import Crossword from './pages/Crossword/Crossword';
 import AlexBanner from './components/LightbulbBanners/AlexBanner';
 import GochenourBanner from './components/LightbulbBanners/GochenourBanner';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 
 import { routes } from './routes.js';
 import strings from './common/strings.js';
@@ -50,12 +51,14 @@ function Profile(){
 
 function HomePage(){
   const language = useSelector((state) => state.language.value);
+  const auth = useSelector((state) => state.auth.value);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
-
+  console.dir(auth);
   const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
   return (
     <main className='main-page-container'>
+      {(auth?.user?.username) ? <p>{`Signed in as ${auth.user.username}`}</p> : null}
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
           <li role='button' className='menu-block'>
@@ -95,4 +98,4 @@ function HomePage(){
   );
 }
 
-export default App;
+export default withAuthenticator(App);
