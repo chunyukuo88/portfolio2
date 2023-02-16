@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '../../features/auth/useAuth';
 import { Cube } from '../../components/Cube/Cube';
@@ -10,12 +10,26 @@ import './LoginPage.css';
 
 export const LoginPage = () => {
   const language = useSelector((state) => state.language.value);
-  const [displayLogin, setDisplayLogin] = useState(true);
+  const username = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const { signOut } = useAuth();
+
+  const logoutHandler = async () => {
+    await signOut();
+    dispatch(logout);
+  };
+
+  const LoggedInContent = () => (
+    <>
+      <ChangePassword />
+      <button onClick={logoutHandler}>Logout</button>
+    </>
+  );
 
   return (
     <main style={{ color: 'white'}}>
-      <button onClick={() => setDisplayLogin(!displayLogin)}>{strings.switch[language]}</button>
-      {displayLogin ? <LoginContent/> : <ChangePassword />}
+      <h1>You are logged in.</h1>
+      { username ? <LoggedInContent /> : <LoggedOutContent />}
       <p>
         <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
       </p>
@@ -94,12 +108,11 @@ const ChangePassword = () => {
   );
 };
 
-const LoginContent = () => {
+const LoggedOutContent = () => {
   const language = useSelector((state) => state.language.value);
-  const username = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { signIn, signOut } = useAuth();
+  const { signIn } = useAuth();
   const userRef = useRef();
   const errRef = useRef();
   const [user, setUser] = useState('');
@@ -133,25 +146,11 @@ const LoginContent = () => {
       handleError(e)
     }
   }
-  const logoutHandler = async () => {
-    await signOut();
-    const payload = {
-      user: null,
-      token: null
-    };
-    dispatch(logout);
-  };
+
   const handleUserInput = (event) => setUser(event.target.value);
   const handlePwdInput = (event) => setPwd(event.target.value);
 
-  return username
-    ? (
-      <section>
-        <h1>You are logged in.</h1>
-        <div role='button' onClick={logoutHandler}>Logout</div>
-      </section>
-    )
-    : (
+  return (
     <section>
       <p ref={errRef} style={{ color: 'red'}} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
       <h1>{strings.login[language]}</h1>
