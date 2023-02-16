@@ -1,7 +1,5 @@
-export const getData = async (url, handlers) => {
-  // await fetch(url)
-  //   .then((response) => handlers.success(response))
-  //   .catch(() => handlers.failure());
-  const data = await fetch(url);
-  return data;
-};
+export async function getData (url){
+  const result = await fetch(url)
+  const jsonified = await result.json();
+  return jsonified;
+}
