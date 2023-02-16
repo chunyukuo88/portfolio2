@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: 15rem;
   height: 65vh;
 }
 
@@ -44,7 +45,7 @@ body {
 .main-menu-wrapper {
   background-color: #3e3f46;
   position: relative;
-  transform: skewY(-15deg) translateY(10rem);
+  transform: skewY(-15deg) translateY(8rem) translateX(-5rem);
   max-width: 10rem;
 }
 
@@ -237,7 +238,7 @@ body {
   transition: 0.5s;
 }
 
-.menu-block a {
+.menu-block div {
   text-decoration: none;
   color: var(--MenuBlockText);
   display: block;
@@ -246,7 +247,7 @@ body {
   transition: 0.5s;
 }
 
-.menu-block:hover a {
+.menu-block:hover div {
   color: #fff;
 }
 

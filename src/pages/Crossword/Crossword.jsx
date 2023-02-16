@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
+import { LinkStyling } from '../../common/globalStyles';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
 import { getData } from './utils';
 import ReactGA from 'react-ga4';
+import { Link } from 'react-router-dom';
 
 export default function Crossword(){
   const grid = useSelector((state) => state.crossword.grid);
@@ -70,7 +72,6 @@ export default function Crossword(){
   const determineIfUserWon = () => {
     let userHasWon = true;
     let solutionIndex = 0;
-    console.log('determineIfUserWon() - userHasWon: ', userHasWon);
     outerLoop: for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid.length; j++) {
         if (!(grid[i][j].value.toLowerCase() === crosswordData.solution[solutionIndex].toLowerCase())) {
@@ -81,9 +82,7 @@ export default function Crossword(){
         }
       };
     };
-    console.log('determineIfUserWon() - userHasWon: ', userHasWon);
     if (userHasWon) return dispatch(declareVictory(userHasWon));
-    console.log('not yet won!');
     return userHasWon;
   };
 
@@ -134,6 +133,7 @@ export default function Crossword(){
   return (
       <main style={styles.main}>
         <section style={styles.section}>
+          <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
           <Title />
           {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
           <div style={styles.gridAndSettings}>

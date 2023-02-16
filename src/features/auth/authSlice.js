@@ -3,15 +3,21 @@ import { createSlice } from '@reduxjs/toolkit';
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    value: 'Not authenticated',
+    user: null,
+    token: null,
   },
   reducers: {
-    updateAuth: (state, action) => {
-      state.value = action.payload;
+    setCredentials: (state, action) => {
+      const { username, token } = action.payload;
+      state.user = username;
+      state.token = token;
     },
   },
 });
 
-export const { updateAuth } = authSlice.actions;
+export const { setCredentials } = authSlice.actions;
 
 export default authSlice.reducer;
+
+export const selectCurrentUser = (state) => state.auth.user;
+export const selectCurrentToken = (state) => state.auth.token;

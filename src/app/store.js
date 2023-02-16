@@ -15,4 +15,5 @@ export const store = configureStore({
     navigation: navigationReducer,
     temp: tempReducer,
   },
+  devTools: true, // TODO Change this for production
 });

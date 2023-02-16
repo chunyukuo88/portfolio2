@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ContactWrapper } from './components/ContactTiles/ContactWrapper';
 import { AboutBlockWrapper } from './components/AboutBlock/AboutBlock';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './features/auth/RequireAuth.jsx';
 import ReactGA from 'react-ga4';
 
-
-import { Login } from './pages/Login/Login.jsx';
+import { LoginPage } from './pages/Login/LoginPage.jsx';
 import { BlogPage } from './pages/Blog/BlogPage';
 import Language from './features/language/Language';
 import Crossword from './pages/Crossword/Crossword';
@@ -25,7 +24,7 @@ import BlogIcon from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
 
-ReactGA.initialize('G-D45ZQ66DQ8');
+ReactGA.initialize('G-D45ZQ66DQ8'); // TODO: env var for this
 
 function App() {
   return (
@@ -35,8 +34,8 @@ function App() {
           <Routes>
             <Route exact path={routes.index} element={<HomePage />}/>
             <Route exact path={routes.login} element={<LoginPage />}/>
-            <Route exact path={routes.puzzle} element={<PuzzlePage />}/>
-            <Route exact path={routes.blog} element={<Blog />}/>
+            <Route exact path={routes.puzzle} element={<Crossword />}/>
+            <Route exact path={routes.blog} element={<BlogPage />}/>
             <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
           </Routes>
         </div>
@@ -45,53 +44,49 @@ function App() {
   );
 }
 
-function Blog(){
-  return (<><BlogPage /></>)
-}
-function PuzzlePage(){
-  return (<><Crossword /></>);
-}
-
 function Profile(){
   return <>PROFILE! You are authenticated.</>;
 }
 
-function LoginPage(){
-  return (<div className='page'><Login /></div>);
-}
-
 function HomePage(){
   const language = useSelector((state) => state.language.value);
+  const username = useSelector((state) => state.auth.user);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
+  const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
 
   return (
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={LanguageIcon} alt="Language icon"/></span>
-            <a><Language/></a>
+            <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
+            <div><Language/></div>
           </li>
           <li role='button' onClick={() => setDisplayAboutBlock(true)} className='menu-block'>
-            <span><img className='main-icons' src={AboutIcon} alt="About icon"/></span>
-            <a>{strings.about[language]}</a>
+            <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
+            <div>{strings.about[language]}</div>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={Contact} alt="Contact icon"/></span>
-            <a onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</a>
+            <span><img className='main-icons' src={Contact} alt='Contact icon'/></span>
+            <div onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</div>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={BlogIcon} alt="blog icon"/></span>
-            <a href="/blog">{strings.blog[language]}</a>
+            <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
+            <Link style={LinkStyling} to='/blog'>{strings.blog[language]}</Link>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={Puzzle} alt="Puzzle icon"/></span>
-            <a href="/puzzle">{strings.puzzle[language]}</a>
+            <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
+            <Link style={LinkStyling} to='/puzzle'>{strings.puzzle[language]}</Link>
           </li>
           <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={Admin} alt="Admin icon"/></span>
-            <a href="/login">{strings.admin[language]}</a>
+            <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
+            <Link style={LinkStyling} to='login' >
+              {(username)
+                ? username
+                : strings.admin[language]
+              }
+            </Link>
           </li>
         </ul>
         <div />
