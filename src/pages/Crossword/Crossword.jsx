@@ -4,9 +4,9 @@ import { updateGrid, declareVictory } from '../../features/crossword/crosswordSl
 import { LinkStyling } from '../../common/globalStyles';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
-import { getData } from './utils';
 import ReactGA from 'react-ga4';
 import { Link } from 'react-router-dom';
+import { getData } from '../../common/utils';
 
 export default function Crossword(){
   const grid = useSelector((state) => state.crossword.grid);
@@ -15,15 +15,15 @@ export default function Crossword(){
   const dispatch = useDispatch();
   useEffect( () => {
     ReactGA.send({ hitType: 'pageview', page: '/puzzle' });
-    const handlers = {
-      success: (httpResponse => {
-        const { data } = httpResponse;
-        const newestPuzzle = data[data.length - 1];
-        setCrosswordData(newestPuzzle);
-      }),
-      failure: (e) => new Error(e),
+    async function getTheData(){
+      const result = await fetch(process.env.REACT_APP_GET_CROSSWORD_INFO)
+      const jsonified = await result.json();
+      const newestPuzzle = jsonified[jsonified.length - 1];
+      return newestPuzzle;
     }
-    getData(process.env.REACT_APP_GET_CROSSWORD_INFO, handlers);
+    getTheData()
+      .then(data => setCrosswordData(data))
+      .catch(err => console.error(e));
   }, []);
 
   const [focused, setFocused] = useState(undefined);

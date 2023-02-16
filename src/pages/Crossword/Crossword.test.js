@@ -2,45 +2,42 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ReactGA from 'react-ga4';
+import { Provider } from 'react-redux';
 import 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import Crossword from './Crossword.jsx';
 import { styles } from './styles.js';
-import { emptyGridTwoByTwo, emptyGridFiveByFive } from './utils';
+import { emptyGridTwoByTwo } from './utils';
+import { mockStore } from '../../testUtils';
+import * as UTILS from '../../common/utils';
 
-jest.mock('./utils', () => {
-  const originalModule = jest.requireActual('./utils');
-  return {
-    __esModule: true,
-    ...originalModule,
-    getData: () => new Promise((res, rej) => {
-      res({
-        author: 'Alex Gochenour',
-        cluesAcross: '1. A type of application testing,2. 1990s music token',
-        cluesDown: '1. Hit this when it\'s hot,2. Becton Dickinson and Company',
-        created_at: '2023-02-05T22:22:03+00:00',
-        id: 1,
-        solution: 'abcd',
-        theme: 'Test',
-        title: 'Test',
-      });
-    }),
-  };
-});
 
 describe('Crossword.jsx', ()=> {
   describe('WHEN: The page loads', () => {
     it('THEN: React-ga4 dispatches the event to Google Analytics.', () => {
       const spy = jest.spyOn(ReactGA, 'send');
-      render(<Crossword grid={emptyGridTwoByTwo}/>);
+      render(
+        <Provider store={mockStore}>
+          <Router>
+            <Crossword grid={emptyGridTwoByTwo}/>
+          </Router>
+        </Provider>
+    );
 
-      expect(spy).toBeCalledTimes();
+      expect(spy).toBeCalledTimes(1);
     });
   });
   describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
     describe('WHEN: the user clicks on a square,', ()=>{
       it('THEN: the square becomes highlighted.',()=>{
-        render(<Crossword grid={emptyGridTwoByTwo}/>);
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword grid={emptyGridTwoByTwo}/>
+            </Router>
+          </Provider>
+        );
 
         const squares = screen.getAllByTestId('crossword-square');
 
@@ -55,7 +52,13 @@ describe('Crossword.jsx', ()=> {
     });
     describe('WHEN: the user clicks on a square and types a letter,', ()=>{
       it('THEN: the square displays the value of that letter.',()=>{
-        render(<Crossword grid={emptyGridTwoByTwo}/>);
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword grid={emptyGridTwoByTwo}/>
+            </Router>
+          </Provider>
+        );
 
         const squares = screen.getAllByTestId('crossword-square');
 
@@ -75,29 +78,41 @@ describe('Crossword.jsx', ()=> {
         ${'ArrowRight'} | ${39}           | ${39}      | ${13}
       `('THEN: the square first clicked becomes white again, and the new square becomes highlighted.',
         ({key, which, keyCode, resultIndex}) => {
-        render(<Crossword grid={emptyGridFiveByFive}/>);
+          render(
+            <Provider store={mockStore}>
+              <Router>
+                <Crossword grid={emptyGridTwoByTwo}/>
+              </Router>
+            </Provider>
+          );
 
-        const squares = screen.getAllByTestId('crossword-square');
+          const squares = screen.getAllByTestId('crossword-square');
 
-        let centerSquare = squares[12];
-        expect(centerSquare).toHaveStyle(styles.square);
+          let centerSquare = squares[12];
+          expect(centerSquare).toHaveStyle(styles.square);
 
-        fireEvent.click(centerSquare);
-        centerSquare = squares[12];
-        let resultantSquare = squares[resultIndex];
+          fireEvent.click(centerSquare);
+          centerSquare = squares[12];
+          let resultantSquare = squares[resultIndex];
 
-        expect(centerSquare).toHaveStyle(styles.currentSquare);
-        expect(resultantSquare).toHaveStyle(styles.square);
+          expect(centerSquare).toHaveStyle(styles.currentSquare);
+          expect(resultantSquare).toHaveStyle(styles.square);
 
-        fireEvent.keyDown(centerSquare, { key, which, keyCode });
-        resultantSquare = squares[resultIndex];
+          fireEvent.keyDown(centerSquare, { key, which, keyCode });
+          resultantSquare = squares[resultIndex];
 
-        expect(resultantSquare).toHaveStyle(styles.currentSquare);
-      });
+          expect(resultantSquare).toHaveStyle(styles.currentSquare);
+        });
     });
     describe('WHEN: the user is at the left edge of the crossword and presses the left keyboard button,', () => {
       it('THEN: nothing happens.', () => {
-        render(<Crossword grid={emptyGridTwoByTwo}/>);
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword grid={emptyGridTwoByTwo}/>
+            </Router>
+          </Provider>
+        );
 
         const squares = screen.getAllByTestId('crossword-square');
 
@@ -115,7 +130,13 @@ describe('Crossword.jsx', ()=> {
     });
     describe('WHEN: The user tries to enter a non-alphabet character,', () => {
       it('THEN: nothing happens.', () => {
-        render(<Crossword grid={emptyGridTwoByTwo}/>);
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword grid={emptyGridTwoByTwo}/>
+            </Router>
+          </Provider>
+        );
 
         let squares = screen.getAllByTestId('crossword-square');
         let upperLeftCorner = squares[0];
@@ -132,14 +153,26 @@ describe('Crossword.jsx', ()=> {
   describe('GIVEN: a 2x2 crossword grid,', ()=>{
     describe('WHEN: the first page loads', () => {
       it('THEN: displays a loading message', () => {
-        render(<Crossword grid={emptyGridTwoByTwo}/>);
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword grid={emptyGridTwoByTwo}/>
+            </Router>
+          </Provider>
+        );
 
         const loading = screen.getAllByText('Loading...')[0];
 
         expect(loading).toBeInTheDocument();
       });
       it('THEN: displays the numbers corresponding to the clues', () => {
-        render(<Crossword grid={emptyGridTwoByTwo}/>);
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword grid={emptyGridTwoByTwo}/>
+            </Router>
+          </Provider>
+        );
 
         const numberOne = screen.getAllByText('1')[0];
         const numberTwos = screen.getAllByText('2');
@@ -151,46 +184,57 @@ describe('Crossword.jsx', ()=> {
     });
     describe('WHEN: the crossword data has been fetched,', () => {
       it('THEN: displays the title and clues', () => {
-        render(<Crossword grid={emptyGridTwoByTwo}/>);
+        jest.spyOn(UTILS, 'getData').mockImplementationOnce();
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword grid={emptyGridTwoByTwo}/>
+            </Router>
+          </Provider>
+        );
 
         const clue = screen.getByText('1. A type of application testing');
         expect(clue).toBeInTheDocument();
       });
     });
-    describe.skip('WHEN: The user has correctly filled it out,', () => {
-      render(<Crossword grid={emptyGridTwoByTwo}/>);
-      const squares = screen.getAllByTestId('crossword-square');
-      const upperLeftCorner = squares[0];
-      const upperRightCorner = squares[1];
-      const lowerLeftCorner = squares[2];
-      const lowerRightCorner = squares[3];
-      fireEvent.click(upperLeftCorner);
-      fireEvent.keyPress(upperLeftCorner, { key: 'KeyA', which: 65, keyCode: 65 });
-      fireEvent.click(upperRightCorner);
-      fireEvent.keyPress(upperRightCorner, { key: 'KeyB', which: 66, keyCode: 66 });
-      fireEvent.click(lowerLeftCorner);
-      fireEvent.keyPress(upperLeftCorner, { key: 'KeyC', which: 67, keyCode: 67 });
-      fireEvent.click(lowerRightCorner);
-      fireEvent.keyPress(lowerRightCorner, { key: 'KeyD', which: 68, keyCode: 68 });
-      test('THEN: the victory banner is displayed.', () => {
-        const victoryBanner = screen.queryByText('Victory! Gud jerb');
-
-        expect(victoryBanner).toBeInTheDocument();
-      });
-      test('THEN: the grid is immutable.', () => {
-        fireEvent.click(upperLeftCorner);
-        fireEvent.keyPress(upperLeftCorner, { key: 'Del', which: 46, keyCode: 46 });
-        fireEvent.keyPress(upperLeftCorner, { key: 'Backspace', which: 8, keyCode: 8 });
-        fireEvent.keyPress(upperLeftCorner, { key: 'KeyB', which: 66, keyCode: 66 });
-
-        expect(upperLeftCorner.value).toEqual('a');
-      });
-      test('THEN: all squares have the victory styling.', () => {
-        expect(upperLeftCorner).toHaveStyle(styles.squareVictory);
-        expect(upperRightCorner).toHaveStyle(styles.squareVictory);
-        expect(lowerLeftCorner).toHaveStyle(styles.squareVictory);
-        expect(lowerRightCorner).toHaveStyle(styles.squareVictory);
-      });
-    });
+    // describe.skip('WHEN: The user has correctly filled it out,', () => {
+    //   render(
+    //     <Provider store={mockStore}>
+    //       <Crossword grid={emptyGridTwoByTwo}/>
+    //     </Provider>
+    //   );
+    //   const squares = screen.getAllByTestId('crossword-square');
+    //   const upperLeftCorner = squares[0];
+    //   const upperRightCorner = squares[1];
+    //   const lowerLeftCorner = squares[2];
+    //   const lowerRightCorner = squares[3];
+    //   fireEvent.click(upperLeftCorner);
+    //   fireEvent.keyPress(upperLeftCorner, { key: 'KeyA', which: 65, keyCode: 65 });
+    //   fireEvent.click(upperRightCorner);
+    //   fireEvent.keyPress(upperRightCorner, { key: 'KeyB', which: 66, keyCode: 66 });
+    //   fireEvent.click(lowerLeftCorner);
+    //   fireEvent.keyPress(upperLeftCorner, { key: 'KeyC', which: 67, keyCode: 67 });
+    //   fireEvent.click(lowerRightCorner);
+    //   fireEvent.keyPress(lowerRightCorner, { key: 'KeyD', which: 68, keyCode: 68 });
+    //   test('THEN: the victory banner is displayed.', () => {
+    //     const victoryBanner = screen.queryByText('Victory! Gud jerb');
+    //
+    //     expect(victoryBanner).toBeInTheDocument();
+    //   });
+    //   test('THEN: the grid is immutable.', () => {
+    //     fireEvent.click(upperLeftCorner);
+    //     fireEvent.keyPress(upperLeftCorner, { key: 'Del', which: 46, keyCode: 46 });
+    //     fireEvent.keyPress(upperLeftCorner, { key: 'Backspace', which: 8, keyCode: 8 });
+    //     fireEvent.keyPress(upperLeftCorner, { key: 'KeyB', which: 66, keyCode: 66 });
+    //
+    //     expect(upperLeftCorner.value).toEqual('a');
+    //   });
+    //   test('THEN: all squares have the victory styling.', () => {
+    //     expect(upperLeftCorner).toHaveStyle(styles.squareVictory);
+    //     expect(upperRightCorner).toHaveStyle(styles.squareVictory);
+    //     expect(lowerLeftCorner).toHaveStyle(styles.squareVictory);
+    //     expect(lowerRightCorner).toHaveStyle(styles.squareVictory);
+    //   });
+    // });
   });
 });

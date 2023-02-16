@@ -8,15 +8,8 @@ import crosswordReducer from './features/crossword/crosswordSlice';
 const mockAuthSlice = createSlice({
   name: 'auth',
   initialState: {
-    value: {
-      session: {
-        accessToken: 'foo',
-        user: 'bar',
-      },
-      user: {
-        email: 'test@test.com'
-      },
-    },
+    user: null,
+    token: null,
   },
   reducers: {
     updateAuth: (state, action) => {
@@ -24,6 +17,27 @@ const mockAuthSlice = createSlice({
     },
   },
 });
+const mockCrosswordSlice = createSlice({
+  name: 'crossword',
+  initialState: {
+    grid: [
+      [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
+      [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
+      [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
+      [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
+      [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
+    ],
+    userWon: false
+  },
+  reducers: {
+    updateGrid: (state, action) => {
+      state.grid = action.payload;
+    },
+    declareVictory: (state) => {
+      state.userWon = true;
+    }
+  }
+})
 
 export const mockStore = configureStore({
   reducer: {
