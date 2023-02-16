@@ -18,7 +18,6 @@ export const LoginPage = () => {
 
   const logoutHandler = async () => {
     signOut().then(data => {
-      console.log('Logged out. Data: ', data);
       const logOutPayload = {
         user: null,
         token: null,
