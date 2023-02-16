@@ -7,7 +7,7 @@ import { setCredentials } from '../../features/auth/authSlice.js';
 import { LinkStyling } from '../../common/globalStyles';
 import strings from '../../common/strings.js';
 import './LoginPage.css';
-import {routes} from "../../routes";
+import {routes} from '../../routes';
 
 export const LoginPage = () => {
   const language = useSelector((state) => state.language.value);
@@ -159,29 +159,35 @@ const LoggedOutContent = () => {
   const handlePwdInput = (event) => setPwd(event.target.value);
 
   return (
-    <section>
+    <section className='logged-out-section'>
       <p ref={errRef} style={{ color: 'red'}} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
-      <h1>{strings.login[language]}</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>{strings.username[language]}</label>
-        <input
-          type='text'
-          id='username'
-          ref={userRef}
-          value={user}
-          onChange={handleUserInput}
-          autoComplete='off'
-          required
-        />
-        <label htmlFor='password'>{strings.password[language]}</label>
-        <input
-          type='password'
-          id='password'
-          onChange={handlePwdInput}
-          value={pwd}
-          required
-        />
-        <button>{strings.login[language]}</button>
+      <h1 className='logged-out-section-heading'>{strings.login[language]}</h1>
+      <form className='logout-out-form' onSubmit={handleSubmit}>
+        <div className='inputs-wrapper'>
+          <div className='username-input'>
+            <input
+              type='text'
+              id='username'
+              ref={userRef}
+              value={user}
+              onChange={handleUserInput}
+              placeholder={strings.username[language]}
+              autoComplete='off'
+              required
+            />
+          </div>
+          <div className='password-input'>
+            <input
+              type='password'
+              id='password'
+              onChange={handlePwdInput}
+              placeholder={strings.password[language]}
+              value={pwd}
+              required
+            />
+          </div>
+        </div>
+        <button className='login-button'>{strings.login[language]}</button>
       </form>
     </section>
   );

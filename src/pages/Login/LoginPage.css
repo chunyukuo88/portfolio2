@@ -1,3 +1,54 @@
 .cube-wrapper {
-    transform: translateY(100px) translateX(400px);
+    transform: translateY(3rem) translateX(25rem);
+}
+
+.logged-out-section,
+.inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logged-out-section-heading {
+    font-size: 4rem;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(#00ec00, #233d21);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logout-out-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.username-input {
+    display: inline;
+    text-align: left;
+}
+
+#username,
+#password {
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    height: 2rem;
+    width: 12rem;
+}
+
+.login-button {
+    background: linear-gradient(#151515,#00ec00);
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+    cursor: pointer;
+    height: 6.5em;
+    margin: 0.25rem;
+    transition: 0.2s;
+}
+
+.login-button:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
 }

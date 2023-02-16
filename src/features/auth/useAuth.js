@@ -1,10 +1,8 @@
-import { useCallback, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from './authSlice';
 
 export function useAuth(){
-  const [codeWasSent, setCodeWasSent] = useState();
   const user = useSelector(selectCurrentUser);
 
   const signIn = async (username, password) => {
@@ -19,24 +17,6 @@ export function useAuth(){
       .catch(e => console.error(e));
   };
 
-  const forgotPassword = useCallback(
-  async (username) => {
-    Auth.forgotPassword(username).then(data => console.log(data));
-    setCodeWasSent(true);
-  }, []);
-
-  /**
-  * @username string The username, rather than their email address.
-  * @password string The new password
-  * @code string This is what gets sent to the user's email.
-  * */
-  const forgotPasswordSubmit = useCallback(
-    async (username, password, code) => {
-      await Auth.forgotPasswordSubmit(username, code, password);
-    },
-    [],
-  );
-
   const signOut = async () => {
     const promise = await Auth.signOut();
     return promise;
@@ -44,9 +24,6 @@ export function useAuth(){
 
   return {
     changePassword,
-    codeWasSent,
-    forgotPassword,
-    forgotPasswordSubmit,
     signIn,
     signOut,
     user,
