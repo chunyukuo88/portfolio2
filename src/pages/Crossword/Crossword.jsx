@@ -8,9 +8,11 @@ import ReactGA from 'react-ga4';
 import { Link } from 'react-router-dom';
 import { getData } from '../../common/utils';
 import { routes } from '../../routes';
+import PublishCrosswordPanel from "./PublishCrosswordPanel";
 
 export default function Crossword(){
   const grid = useSelector((state) => state.crossword.grid);
+  const username = useSelector((state) => state.auth.user);
   const userHasWon = useSelector((state) => state.crossword.userWon);
   const language = useSelector((state) => state.language.value);
   const dispatch = useDispatch();
@@ -80,7 +82,10 @@ export default function Crossword(){
         }
       };
     };
-    if (userHasWon) return dispatch(declareVictory(userHasWon));
+    if (userHasWon) {
+      ReactGA.send({ hitType: 'user victory', page: routes.puzzle });
+      return dispatch(declareVictory(userHasWon));
+    }
     return userHasWon;
   };
 
@@ -128,41 +133,47 @@ export default function Crossword(){
       : strings.loading[language];
   }
 
+  const CrosswordGame = () => (
+    <section style={styles.section}>
+      <Title />
+      {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
+      <div style={styles.gridAndSettings}>
+        <div style={styles.gridWrapper}>
+          {grid.map((row, outerIndex) => (
+            <div style={styles.row} key={outerIndex}>
+              {row.map((square, innerIndex) => {
+                const style = styles[getStyleRuleName(outerIndex, innerIndex)];
+                return (
+                  <div style={styles.squareWrapper} key={innerIndex}>
+                    <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
+                    <input
+                      autoComplete='off'
+                      data-testid='crossword-square'
+                      id={`${outerIndex},${innerIndex}`}
+                      maxLength='1'
+                      onClick={() => clickHandler(outerIndex, innerIndex)}
+                      onChange={determineIfUserWon}
+                      onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
+                      style={style}
+                      tabIndex={-1}
+                      readOnly={userHasWon}
+                    />
+                  </div>
+                )})}
+            </div>
+          ))}
+        </div>
+      </div>
+      {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>{strings.loading[language]}</p>}
+    </section>
+  );
   return (
       <main style={styles.main}>
-        <section style={styles.section}>
-          <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
-          <Title />
-          {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
-          <div style={styles.gridAndSettings}>
-            <div style={styles.gridWrapper}>
-              {grid.map((row, outerIndex) => (
-                <div style={styles.row} key={outerIndex}>
-                  {row.map((square, innerIndex) => {
-                      const style = styles[getStyleRuleName(outerIndex, innerIndex)];
-                      return (
-                        <div style={styles.squareWrapper} key={innerIndex}>
-                          <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
-                          <input
-                            autoComplete='off'
-                            data-testid='crossword-square'
-                            id={`${outerIndex},${innerIndex}`}
-                            maxLength='1'
-                            onClick={() => clickHandler(outerIndex, innerIndex)}
-                            onChange={determineIfUserWon}
-                            onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                            style={style}
-                            tabIndex={-1}
-                            readOnly={userHasWon}
-                          />
-                        </div>
-                      )})}
-                </div>
-              ))}
-            </div>
-          </div>
-          {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>{strings.loading[language]}</p>}
-        </section>
+        <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
+        {username
+          ? <PublishCrosswordPanel />
+          : <CrosswordGame />
+        }
       </main>
   );
 }

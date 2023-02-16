@@ -78,7 +78,9 @@ export const styles = {
   },
   main: {
       height: '80vh',
-      color: 'white'
+      color: 'white',
+      display: 'flex',
+      justifyContent: 'space-between',
   },
   title: {
       color: 'white',
