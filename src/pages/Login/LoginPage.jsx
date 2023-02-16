@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '../../features/auth/useAuth';
 import { Cube } from '../../components/Cube/Cube';
 import { setCredentials } from '../../features/auth/authSlice.js';
+import { LinkStyling } from '../../common/globalStyles';
 import strings from '../../common/strings.js';
 import './LoginPage.css';
 
@@ -11,7 +12,6 @@ export const LoginPage = () => {
   const language = useSelector((state) => state.language.value);
   const [displayLogin, setDisplayLogin] = useState(true);
 
-  const LinkStyling = { color: '#00ec00', textDecoration: 'none', textTransform: 'uppercase'};
   return (
     <main style={{ color: 'white'}}>
       <button onClick={() => setDisplayLogin(!displayLogin)}>{strings.switch[language]}</button>

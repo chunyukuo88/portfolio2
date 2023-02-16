@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
+import { LinkStyling } from '../../common/globalStyles';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
 import { getData } from './utils';
@@ -129,7 +130,6 @@ export default function Crossword(){
       : strings.loading[language];
   }
 
-  const LinkStyling = { color: '#00ec00', textDecoration: 'none', textTransform: 'uppercase'};
   return (
       <main style={styles.main}>
         <section style={styles.section}>

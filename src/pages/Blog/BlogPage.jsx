@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ReactGA from 'react-ga4';
 import strings from '../../common/strings';
+import { LinkStyling } from '../../common/globalStyles';
 import './BlogPage.css';
 
 export function BlogPage(){
@@ -12,7 +13,6 @@ export function BlogPage(){
     ReactGA.send({ hitType: 'pageview', page: '/blog' });
   }, []);
 
-  const LinkStyling = { color: '#00ec00', textDecoration: 'none', textTransform: 'uppercase'};
   return (
     <main>
       <div className='blog-coming-soon'>
