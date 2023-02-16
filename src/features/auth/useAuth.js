@@ -3,7 +3,6 @@ import { Auth } from 'aws-amplify';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   selectCurrentUser,
-  setCredentials,
   logout
 } from './authSlice';
 
@@ -15,6 +14,7 @@ export function useAuth(){
   const signIn = async (username, password) => {
     await Auth.signIn(username, password);
     const currentUser = await Auth.currentAuthenticatedUser();
+    console.log('useAuth() - signIn() - currentUser: ', currentUser);
     return currentUser;
   };
 
@@ -26,11 +26,8 @@ export function useAuth(){
 
   const forgotPassword = useCallback(
   async (username) => {
-    console.log('forgotPassword() - 1');
     Auth.forgotPassword(username).then(data => console.log(data));
-    console.log('forgotPassword() - 2');
     setCodeWasSent(true);
-    console.log('forgotPassword() - 3');
   }, []);
 
   /**

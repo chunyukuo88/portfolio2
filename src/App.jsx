@@ -54,11 +54,13 @@ function HomePage(){
   const auth = useSelector((state) => state.auth.value);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
-  console.dir(auth);
   const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
+
+  auth?.user && console.log('auth.user: ', auth.user);
+
   return (
     <main className='main-page-container'>
-      {(auth?.user?.username) ? <p>{`Signed in as ${auth.user.username}`}</p> : null}
+      {(auth?.user) ? <p>{`Signed in as ${auth.user.username}`}</p> : null}
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
           <li role='button' className='menu-block'>

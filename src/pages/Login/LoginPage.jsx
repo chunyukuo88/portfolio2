@@ -121,10 +121,9 @@ const LoginContent = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // const userData = await signIn(user, pwd).unwrap();
       const userData = await signIn(user, pwd);
       const payload = {
-        username: userData.user.username,
+        username: userData.username,
         token: userData.signInUserSession.accessToken.jwtToken,
       }
       dispatch(setCredentials(payload));

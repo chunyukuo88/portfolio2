@@ -71,7 +71,6 @@ export default function Crossword(){
   const determineIfUserWon = () => {
     let userHasWon = true;
     let solutionIndex = 0;
-    console.log('determineIfUserWon() - userHasWon: ', userHasWon);
     outerLoop: for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid.length; j++) {
         if (!(grid[i][j].value.toLowerCase() === crosswordData.solution[solutionIndex].toLowerCase())) {
@@ -82,9 +81,7 @@ export default function Crossword(){
         }
       };
     };
-    console.log('determineIfUserWon() - userHasWon: ', userHasWon);
     if (userHasWon) return dispatch(declareVictory(userHasWon));
-    console.log('not yet won!');
     return userHasWon;
   };
 
