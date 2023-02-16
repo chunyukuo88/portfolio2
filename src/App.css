@@ -45,7 +45,7 @@ body {
 .main-menu-wrapper {
   background-color: #3e3f46;
   position: relative;
-  transform: skewY(-15deg) translateY(10rem);
+  transform: skewY(-15deg) translateY(8rem) translateX(-5rem);
   max-width: 10rem;
 }
 

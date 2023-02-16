@@ -84,7 +84,7 @@ function HomePage(){
             <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
             <Link style={LinkStyling} to='login' >
               {(username)
-                ? `Hi,  ${username}`
+                ? username
                 : strings.admin[language]
               }
             </Link>

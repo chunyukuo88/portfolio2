@@ -39,8 +39,8 @@ export function useAuth(){
   );
 
   const signOut = async () => {
-    await Auth.signOut();
-    dispatch(logout);
+    const promise = await Auth.signOut();
+    return promise;
   };
 
   return {
