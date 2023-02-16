@@ -1,12 +1,11 @@
 import { useCallback, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import {useDispatch, useSelector} from 'react-redux';
-import { selectCurrentUser, logout } from './authSlice';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from './authSlice';
 
 export function useAuth(){
   const [codeWasSent, setCodeWasSent] = useState();
   const user = useSelector(selectCurrentUser);
-  const dispatch = useDispatch();
 
   const signIn = async (username, password) => {
     await Auth.signIn(username, password);

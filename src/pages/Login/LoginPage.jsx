@@ -3,24 +3,34 @@ import { Link, useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '../../features/auth/useAuth';
 import { Cube } from '../../components/Cube/Cube';
-import { setCredentials, logout } from '../../features/auth/authSlice.js';
+import { setCredentials } from '../../features/auth/authSlice.js';
 import { LinkStyling } from '../../common/globalStyles';
 import strings from '../../common/strings.js';
 import './LoginPage.css';
+import {routes} from "../../routes";
 
 export const LoginPage = () => {
   const language = useSelector((state) => state.language.value);
   const username = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { signOut } = useAuth();
 
   const logoutHandler = async () => {
-    await signOut();
-    dispatch(logout);
+    signOut().then(data => {
+      console.log('Logged out. Data: ', data);
+      const logOutPayload = {
+        user: null,
+        token: null,
+      };
+      dispatch(setCredentials(logOutPayload));
+      navigate(routes.index);
+    });
   };
 
   const LoggedInContent = () => (
     <>
+      <h1>You are logged in.</h1>
       <ChangePassword />
       <button onClick={logoutHandler}>Logout</button>
     </>
@@ -28,7 +38,6 @@ export const LoginPage = () => {
 
   return (
     <main style={{ color: 'white'}}>
-      <h1>You are logged in.</h1>
       { username ? <LoggedInContent /> : <LoggedOutContent />}
       <p>
         <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
@@ -141,7 +150,7 @@ const LoggedOutContent = () => {
         token: userData.signInUserSession.accessToken.jwtToken,
       }
       dispatch(setCredentials(payload));
-      navigate('/');
+      navigate(routes.index);
     } catch (e) {
       handleError(e)
     }

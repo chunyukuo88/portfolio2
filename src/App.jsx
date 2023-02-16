@@ -12,7 +12,6 @@ import Language from './features/language/Language';
 import Crossword from './pages/Crossword/Crossword';
 import AlexBanner from './components/LightbulbBanners/AlexBanner';
 import GochenourBanner from './components/LightbulbBanners/GochenourBanner';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 
 import { routes } from './routes.js';
 import strings from './common/strings.js';
@@ -102,4 +101,4 @@ function HomePage(){
   );
 }
 
-export default withAuthenticator(App);
+export default App;
