@@ -1,10 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  selectCurrentUser,
-  logout
-} from './authSlice';
+import { selectCurrentUser, logout } from './authSlice';
 
 export function useAuth(){
   const [codeWasSent, setCodeWasSent] = useState();
@@ -14,7 +11,6 @@ export function useAuth(){
   const signIn = async (username, password) => {
     await Auth.signIn(username, password);
     const currentUser = await Auth.currentAuthenticatedUser();
-    console.log('useAuth() - signIn() - currentUser: ', currentUser);
     return currentUser;
   };
 

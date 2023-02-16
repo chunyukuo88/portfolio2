@@ -51,16 +51,13 @@ function Profile(){
 
 function HomePage(){
   const language = useSelector((state) => state.language.value);
-  const auth = useSelector((state) => state.auth.value);
+  const username = useSelector((state) => state.auth.user);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
   const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
 
-  auth?.user && console.log('auth.user: ', auth.user);
-
   return (
     <main className='main-page-container'>
-      {(auth?.user) ? <p>{`Signed in as ${auth.user.username}`}</p> : null}
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
           <li role='button' className='menu-block'>
@@ -85,7 +82,12 @@ function HomePage(){
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
-            <Link style={LinkStyling} to='login' >{strings.admin[language]}</Link>
+            <Link style={LinkStyling} to='login' >
+              {(username)
+                ? `Hi,  ${username}`
+                : strings.admin[language]
+              }
+            </Link>
           </li>
         </ul>
         <div />
