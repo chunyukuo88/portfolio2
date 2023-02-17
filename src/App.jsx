@@ -13,8 +13,8 @@ import Crossword from './pages/Crossword/Crossword';
 import AlexBanner from './components/LightbulbBanners/AlexBanner';
 import GochenourBanner from './components/LightbulbBanners/GochenourBanner';
 
-import { routes } from './routes.js';
 import strings from './common/strings.js';
+import { routes } from './routes.js';
 
 import Admin from '../src/common/icons/admin.svg';
 import LanguageIcon from '../src/common/icons/language.svg';
@@ -24,7 +24,7 @@ import BlogIcon from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
 
-ReactGA.initialize('G-D45ZQ66DQ8'); // TODO: env var for this
+ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
 function App() {
   return (

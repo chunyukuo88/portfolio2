@@ -6,7 +6,6 @@ import { routes } from './routes';
 import Root from './Root';
 import { store } from './app/store';
 import { mockStore } from './testUtils';
-import { supabaseClient } from './features/auth/client.js';
 import '@testing-library/jest-dom';
 import 'react-dom';
 

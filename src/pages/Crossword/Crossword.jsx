@@ -8,7 +8,7 @@ import ReactGA from 'react-ga4';
 import { Link } from 'react-router-dom';
 import { getData } from '../../common/utils';
 import { routes } from '../../routes';
-import PublishCrosswordPanel from "./PublishCrosswordPanel";
+import PublishCrosswordPanel from './PublishCrosswordPanel';
 
 export default function Crossword(){
   const grid = useSelector((state) => state.crossword.grid);
@@ -70,6 +70,7 @@ export default function Crossword(){
   };
 
   const determineIfUserWon = () => {
+    console.log('determineIfUserWon');
     let userHasWon = true;
     let solutionIndex = 0;
     outerLoop: for (let i = 0; i < grid.length; i++) {
@@ -90,6 +91,7 @@ export default function Crossword(){
   };
 
   const keyDownHandler = (event, outerIndex, innerIndex) => {
+    console.log('keyDownHandler()');
     const { key } = event;
     if (nonAlphabetics.includes(key)) {
       return processMovementKey(key, outerIndex, innerIndex);
@@ -136,7 +138,7 @@ export default function Crossword(){
   const CrosswordGame = () => (
     <section style={styles.section}>
       <Title />
-      {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
+      {(userHasWon) ? <h1>Victory! Good job</h1> : null}
       <div style={styles.gridAndSettings}>
         <div style={styles.gridWrapper}>
           {grid.map((row, outerIndex) => (
@@ -156,7 +158,7 @@ export default function Crossword(){
                       onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
                       style={style}
                       tabIndex={-1}
-                      readOnly={userHasWon}
+                      // readOnly={userHasWon}
                     />
                   </div>
                 )})}
