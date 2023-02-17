@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import './PublishCrosswordPanel.css';
 import { useSelector } from 'react-redux';
-import {createHttpRequest, postData} from "../../common/utils";
+import {createHttpRequest, postData} from '../../common/utils';
+import { LinkStyling } from '../../common/globalStyles';
+import { Link } from 'react-router-dom';
+import strings from '../../common/strings';
 
 function PublishCrosswordPanel() {
   const token = useSelector ((state) => state.auth.token);
+  const language = useSelector((state) => state.language.value);
   const [solution, setSolution] = useState('');
   const [title, setTitle] = useState('');
   const [theme, setTheme] = useState('');
@@ -34,6 +38,7 @@ function PublishCrosswordPanel() {
   const handleDownClues = (event) => setDownClues(event.target.value);
   return (
     <section className='publish-panel'>
+      <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
       <h1 className='publish-panel-title'>Create a New Crossword</h1>
       <form onSubmit={submissionHandler}>
         <label className='publish-panel-label'>
@@ -41,7 +46,7 @@ function PublishCrosswordPanel() {
           <input
             className='publish-panel-input'
             data-testid='crossword-panel-solution'
-            type="text"
+            type='text'
             onChange={handleSolution}
             placeholder='Flatten all rows into a string'
           />
@@ -51,7 +56,7 @@ function PublishCrosswordPanel() {
           <input
             className='publish-panel-input'
             data-testid='crossword-panel-title'
-            type="text"
+            type='text'
             onChange={handleTitle}
             placeholder='Three Arabic Words'
           />
@@ -61,7 +66,7 @@ function PublishCrosswordPanel() {
           <input
             className='publish-panel-input'
             data-testid='crossword-panel-theme'
-            type="text"
+            type='text'
             onChange={handleTheme}
           />
         </label>
@@ -70,7 +75,7 @@ function PublishCrosswordPanel() {
           <input
             className='publish-panel-input'
             data-testid='crossword-panel-across'
-            type="text"
+            type='text'
             onChange={handleAcrossClues}
             placeholder='A comma-delineated string'
           />
@@ -80,7 +85,7 @@ function PublishCrosswordPanel() {
           <input
             className='publish-panel-input'
             data-testid='crossword-panel-down'
-            type="text"
+            type='text'
             onChange={handleDownClues}
             placeholder='A comma-delineated string'
           />

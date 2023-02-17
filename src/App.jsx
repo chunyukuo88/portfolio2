@@ -23,6 +23,7 @@ import Puzzle from '../src/common/icons/puzzle.svg';
 import BlogIcon from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
+import PublishCrosswordPanel from "./pages/Crossword/PublishCrosswordPanel";
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
@@ -37,6 +38,7 @@ function App() {
             <Route exact path={routes.puzzle} element={<Crossword />}/>
             <Route exact path={routes.blog} element={<BlogPage />}/>
             <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
+            <Route exact path={routes.publishCrossword} element={<RequireAuth><PublishCrosswordPanel /></RequireAuth>} />
           </Routes>
         </div>
       </Router>
@@ -73,15 +75,23 @@ function HomePage(){
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
-            <Link style={LinkStyling} to='/blog'>{strings.blog[language]}</Link>
+            <Link style={LinkStyling} to={routes.blog}>{strings.blog[language]}</Link>
           </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-            <Link style={LinkStyling} to='/puzzle'>{strings.puzzle[language]}</Link>
+            <Link style={LinkStyling} to={routes.puzzle}>{strings.puzzle[language]}</Link>
           </li>
+          {
+            username
+              ? <li role='button' className='menu-block'>
+                <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
+                <Link style={LinkStyling} to={routes.publishCrossword}>Publish Crossword</Link>
+              </li>
+              : null
+          }
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
-            <Link style={LinkStyling} to='login' >
+            <Link style={LinkStyling} to={routes.login} >
               {(username)
                 ? username
                 : strings.admin[language]
