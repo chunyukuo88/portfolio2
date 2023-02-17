@@ -5,6 +5,8 @@ import Root from './Root';
 import { store } from './app/store';
 import { Auth } from 'aws-amplify';
 
+console.log(process.env.NODE_ENV);
+
 Auth.configure({
   region: `${process.env.REACT_APP_REGION}`,
   userPoolId: `${process.env.REACT_APP_USER_POOL_ID}`,
