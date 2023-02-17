@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
 import ReactGA from 'react-ga4';
 import { getData } from '../../common/utils';
-import { routes } from '../../routes';
-import {emptyGridFiveByFive} from './utils';
+import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
+import { LinkStyling } from '../../common/globalStyles';
+import { Link } from 'react-router-dom';
+
 
 export default function Crossword(){
-  const username = useSelector((state) => state.auth.user);
-  const [userHasWon, setUserHasWon] = useState(false);
+  const grid = useSelector((state) => state.crossword.grid);
+  const userHasWon = useSelector((state) => state.crossword.userWon);
   const language = useSelector((state) => state.language.value);
-  const [grid, setGrid] = useState(emptyGridFiveByFive);
+  const [focused, setFocused] = useState(undefined);
+  const [crosswordData, setCrosswordData] = useState(undefined);
+  const dispatch = useDispatch();
 
   useEffect( () => {
-    ReactGA.send({ hitType: 'pageview', page: routes.puzzle });
+    ReactGA.send({ hitType: 'pageview', page: '/puzzle' });
     getData(process.env.REACT_APP_GET_CROSSWORD_INFO)
       .then(data => {
         const newestPuzzle = data[data.length - 1];
         setCrosswordData(newestPuzzle);
       })
-      .catch(err => console.error(err));
+      .catch((e) => new Error(e));
   }, []);
 
-  const [focused, setFocused] = useState(undefined);
-  const [crosswordData, setCrosswordData] = useState(undefined);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
     if (userHasWon) return 'squareVictory';
@@ -79,10 +81,7 @@ export default function Crossword(){
         }
       };
     };
-    if (userHasWon) {
-      ReactGA.send({ hitType: 'user victory', page: routes.puzzle });
-      setUserHasWon(true);
-    }
+    if (userHasWon) return dispatch(declareVictory(userHasWon));
     return userHasWon;
   };
 
@@ -93,7 +92,7 @@ export default function Crossword(){
     }
     const updatedGrid = JSON.parse(JSON.stringify(grid));
     updatedGrid[outerIndex][innerIndex].value = key;
-    setGrid(updatedGrid);
+    return dispatch(updateGrid(updatedGrid));
   };
 
   const Clues = ({ crosswordData }) => {
@@ -123,47 +122,51 @@ export default function Crossword(){
   const Title = () => {
     return crosswordData
       ? <>
-          <h1 style={styles.title}>{crosswordData.title}</h1>
-          <h3>Published on {convertTimestamp(crosswordData.created_at)}</h3>
-          <h3>By {crosswordData.author}</h3>
-        </>
+        <h1 style={styles.title}>{crosswordData.title}</h1>
+        <h3>Published on {convertTimestamp(crosswordData.created_at)}</h3>
+        <h3>By {crosswordData.author}</h3>
+      </>
       : strings.loading[language];
   }
 
   return (
-    <section style={styles.section}>
-      <Title />
-      {(userHasWon) ? <h1>Victory! Good job</h1> : null}
-      <div style={styles.gridAndSettings}>
-        <div style={styles.gridWrapper}>
-          {grid.map((row, outerIndex) => (
-            <div style={styles.row} key={outerIndex}>
-              {
-                row.map((square, innerIndex) => {
-                const style = styles[getStyleRuleName(outerIndex, innerIndex)];
-                return (
-                  <div style={styles.squareWrapper} key={innerIndex}>
-                    <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
-                    <input
-                      autoComplete='off'
-                      data-testid='crossword-square'
-                      id={`${outerIndex},${innerIndex}`}
-                      maxLength='1'
-                      onClick={() => clickHandler(outerIndex, innerIndex)}
-                      onChange={determineIfUserWon}
-                      onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                      style={style}
-                      tabIndex={-1}
-                      readOnly={userHasWon}
-                    />
-                  </div>
-                )})
-              }
-            </div>
-          ))}
+    <main style={styles.main}>
+      <section style={styles.section}>
+        <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
+        <Title />
+        {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
+        <div style={styles.gridAndSettings}>
+          <div style={styles.gridWrapper}>
+            {grid.map((row, outerIndex) => (
+              <div style={styles.row} key={outerIndex}>
+                {row.map((square, innerIndex) => {
+                  const style = styles[getStyleRuleName(outerIndex, innerIndex)];
+                  return (
+                    <div style={styles.squareWrapper} key={innerIndex}>
+                      <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
+                      <input
+                        autoComplete='off'
+                        data-testid='crossword-square'
+                        id={`${outerIndex},${innerIndex}`}
+                        maxLength='1'
+                        onClick={() => clickHandler(outerIndex, innerIndex)}
+                        onChange={determineIfUserWon}
+                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
+                        style={style}
+                        tabIndex={-1}
+                        readOnly={userHasWon}
+                      />
+                    </div>
+                  )})}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>{strings.loading[language]}</p>}
-    </section>
+        {crosswordData ?
+          <Clues crosswordData={crosswordData}/>
+          : <p>{strings.loading[language]}</p>
+        }
+      </section>
+    </main>
   );
 }
