@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
-import { LinkStyling } from '../../common/globalStyles';
+import { useSelector } from 'react-redux';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
 import ReactGA from 'react-ga4';
-import { Link } from 'react-router-dom';
 import { getData } from '../../common/utils';
 import { routes } from '../../routes';
-import PublishCrosswordPanel from './PublishCrosswordPanel';
+import {emptyGridFiveByFive} from './utils';
 
 export default function Crossword(){
-  const grid = useSelector((state) => state.crossword.grid);
   const username = useSelector((state) => state.auth.user);
-  const userHasWon = useSelector((state) => state.crossword.userWon);
+  const [userHasWon, setUserHasWon] = useState(false);
   const language = useSelector((state) => state.language.value);
-  const dispatch = useDispatch();
+  const [grid, setGrid] = useState(emptyGridFiveByFive);
+
   useEffect( () => {
     ReactGA.send({ hitType: 'pageview', page: routes.puzzle });
     getData(process.env.REACT_APP_GET_CROSSWORD_INFO)
@@ -70,7 +67,6 @@ export default function Crossword(){
   };
 
   const determineIfUserWon = () => {
-    console.log('determineIfUserWon');
     let userHasWon = true;
     let solutionIndex = 0;
     outerLoop: for (let i = 0; i < grid.length; i++) {
@@ -85,20 +81,19 @@ export default function Crossword(){
     };
     if (userHasWon) {
       ReactGA.send({ hitType: 'user victory', page: routes.puzzle });
-      return dispatch(declareVictory(userHasWon));
+      setUserHasWon(true);
     }
     return userHasWon;
   };
 
   const keyDownHandler = (event, outerIndex, innerIndex) => {
-    console.log('keyDownHandler()');
     const { key } = event;
     if (nonAlphabetics.includes(key)) {
       return processMovementKey(key, outerIndex, innerIndex);
     }
     const updatedGrid = JSON.parse(JSON.stringify(grid));
     updatedGrid[outerIndex][innerIndex].value = key;
-    return dispatch(updateGrid(updatedGrid));
+    setGrid(updatedGrid);
   };
 
   const Clues = ({ crosswordData }) => {
@@ -135,7 +130,7 @@ export default function Crossword(){
       : strings.loading[language];
   }
 
-  const CrosswordGame = () => (
+  return (
     <section style={styles.section}>
       <Title />
       {(userHasWon) ? <h1>Victory! Good job</h1> : null}
@@ -143,7 +138,8 @@ export default function Crossword(){
         <div style={styles.gridWrapper}>
           {grid.map((row, outerIndex) => (
             <div style={styles.row} key={outerIndex}>
-              {row.map((square, innerIndex) => {
+              {
+                row.map((square, innerIndex) => {
                 const style = styles[getStyleRuleName(outerIndex, innerIndex)];
                 return (
                   <div style={styles.squareWrapper} key={innerIndex}>
@@ -158,24 +154,16 @@ export default function Crossword(){
                       onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
                       style={style}
                       tabIndex={-1}
-                      // readOnly={userHasWon}
+                      readOnly={userHasWon}
                     />
                   </div>
-                )})}
+                )})
+              }
             </div>
           ))}
         </div>
       </div>
       {crosswordData ? <Clues crosswordData={crosswordData}/> : <p>{strings.loading[language]}</p>}
     </section>
-  );
-  return (
-      <main style={styles.main}>
-        <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
-        {username
-          ? <PublishCrosswordPanel />
-          : <CrosswordGame />
-        }
-      </main>
   );
 }
