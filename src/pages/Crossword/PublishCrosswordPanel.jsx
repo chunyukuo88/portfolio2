@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
 import './PublishCrosswordPanel.css';
+import { useSelector } from 'react-redux';
+import {createHttpRequest, postData} from "../../common/utils";
 
 function PublishCrosswordPanel() {
+  const token = useSelector ((state) => state.auth.token);
   const [solution, setSolution] = useState('');
   const [title, setTitle] = useState('');
   const [theme, setTheme] = useState('');
-  const [acrossClues, setAcrossClues] = useState('');
-  const [downClues, setDownClues] = useState('');
+  const [cluesAcross, setAcrossClues] = useState('');
+  const [cluesDown, setDownClues] = useState('');
 
-  const submissionHandler = (event) => {
+  const submissionHandler = async (event) => {
     event.preventDefault();
-
+    const formattedData = [
+      {
+        solution,
+        author: 'Alex Gochenour',
+        title,
+        theme,
+        cluesAcross,
+        cluesDown,
+      }
+    ];
+    const mappedData = createHttpRequest('POST', token, formattedData);
+    await postData(process.env.REACT_APP_POST_CROSSWORD_INFO, mappedData);
   };
 
   const handleSolution = (event) => setSolution(event.target.value);
@@ -26,6 +40,7 @@ function PublishCrosswordPanel() {
           <span className='label-text'>Solution: </span>
           <input
             className='publish-panel-input'
+            data-testid='crossword-panel-solution'
             type="text"
             onChange={handleSolution}
             placeholder='Flatten all rows into a string'
@@ -35,6 +50,7 @@ function PublishCrosswordPanel() {
           <span className='label-text'>Title: </span>
           <input
             className='publish-panel-input'
+            data-testid='crossword-panel-title'
             type="text"
             onChange={handleTitle}
             placeholder='Three Arabic Words'
@@ -42,12 +58,18 @@ function PublishCrosswordPanel() {
         </label>
         <label className='publish-panel-label'>
           <span className='label-text'>Theme: </span>
-          <input className='publish-panel-input' type="text" onChange={handleTheme}/>
+          <input
+            className='publish-panel-input'
+            data-testid='crossword-panel-theme'
+            type="text"
+            onChange={handleTheme}
+          />
         </label>
         <label className='publish-panel-label'>
           <span className='label-text'>Across: </span>
           <input
             className='publish-panel-input'
+            data-testid='crossword-panel-across'
             type="text"
             onChange={handleAcrossClues}
             placeholder='A comma-delineated string'
@@ -57,6 +79,7 @@ function PublishCrosswordPanel() {
           <span className='label-text'>Down: </span>
           <input
             className='publish-panel-input'
+            data-testid='crossword-panel-down'
             type="text"
             onChange={handleDownClues}
             placeholder='A comma-delineated string'

@@ -1,15 +1,16 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ReactGA from 'react-ga4';
-import { Provider } from 'react-redux';
 import 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { mockStore, mockStoreLoggedIn } from '../../testUtils';
+import { Provider } from 'react-redux';
+
+import ReactGA from 'react-ga4';
 
 import Crossword from './Crossword.jsx';
 import { styles } from './styles.js';
 import { emptyGridTwoByTwo } from './utils';
-import {mockStore, mockStoreLoggedIn} from '../../testUtils';
 import * as UTILS from '../../common/utils';
 
 describe('Crossword.jsx', ()=> {
@@ -254,22 +255,6 @@ describe('Crossword.jsx', ()=> {
           expect(lowerLeftCorner).toHaveStyle(styles.squareVictory);
           expect(lowerRightCorner).toHaveStyle(styles.squareVictory);
         });
-      });
-    });
-  });
-  describe('GIVEN: the user is logged in,', () => {
-    describe('WHEN: The page loads,', () => {
-      test('THEN: there is a panel allowing the user to publish new crosswords.', () => {
-        render(
-          <Provider store={mockStoreLoggedIn}>
-            <Router>
-              <Crossword grid={emptyGridTwoByTwo}/>
-            </Router>
-          </Provider>
-        );
-        const publishPanel = screen.getByText('Create a New Crossword');
-
-        expect(publishPanel).toBeInTheDocument();
       });
     });
   });
