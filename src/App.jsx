@@ -55,7 +55,7 @@ function HomePage(){
   const username = useSelector((state) => state.auth.user);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
-  const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
+  // const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
   const navigate = useNavigate();
 
   return (
@@ -72,17 +72,17 @@ function HomePage(){
           </li>
           <li role='button' onClick={() => navigate(routes.blog)} className='menu-block'>
             <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
-            <Link style={LinkStyling} to={routes.blog}>{strings.blog[language]}</Link>
+            <Link to={routes.blog}>{strings.blog[language]}</Link>
           </li>
           <li role='button' onClick={() => navigate(routes.puzzle)} className='menu-block'>
             <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-            <Link style={LinkStyling} to={routes.puzzle}>{strings.puzzle[language]}</Link>
+            <Link to={routes.puzzle}>{strings.puzzle[language]}</Link>
           </li>
           {
             username
               ? <li role='button' onClick={() => navigate(routes.publishCrossword)} className='menu-block'>
                 <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-                <Link style={LinkStyling} to={routes.publishCrossword}>Publish Crossword</Link>
+                <Link to={routes.publishCrossword}>Publish Crossword</Link>
               </li>
               : null
           }
@@ -92,7 +92,7 @@ function HomePage(){
           </li>
           <li role='button' onClick={() => navigate(routes.login)} className='menu-block'>
             <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
-            <Link style={LinkStyling} to={routes.login} >
+            <Link to={routes.login} >
               {(username)
                 ? username
                 : strings.admin[language]
