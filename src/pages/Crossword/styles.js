@@ -19,9 +19,6 @@ export const styles = {
     top: '0.25rem',
     zIndex: '3',
   },
-  gridWrapper: {
-
-  },
   gridAndSettings: {
     display: 'flex',
     flexDirection: 'row',

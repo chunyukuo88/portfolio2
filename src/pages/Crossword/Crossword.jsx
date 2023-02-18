@@ -103,11 +103,11 @@ export default function Crossword(){
       <section style={styles.cluesBox}>
         <div>
           <h3>Across:</h3>
-          {cluesAcross.map(clue => <div style={styles.clue} key={clue[0]}>{clue}</div>)}
+          {cluesAcross.map((clue, key) => <div style={styles.clue} key={key}>{clue}</div>)}
         </div>
         <div>
           <h3>Down:</h3>
-          {cluesDown.map(clue => <div style={styles.clue} key={clue[0]}>{clue}</div>)}
+          {cluesDown.map((clue, key) => <div style={styles.clue} key={key}>{clue}</div>)}
         </div>
       </section>
     );
@@ -127,7 +127,11 @@ export default function Crossword(){
         <h3>By {crosswordData.author}</h3>
       </>
       : strings.loading[language];
-  }
+  };
+
+  const CrosswordGrid = () => {
+
+  };
 
   return (
     <main style={styles.main}>
