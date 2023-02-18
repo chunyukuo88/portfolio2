@@ -146,9 +146,9 @@ export default function Crossword(){
                       <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
                       <input
                         autoComplete='off'
+                        maxLength='1'
                         data-testid='crossword-square'
                         id={`${outerIndex},${innerIndex}`}
-                        maxLength='1'
                         onClick={() => clickHandler(outerIndex, innerIndex)}
                         onChange={determineIfUserWon}
                         onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
