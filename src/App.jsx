@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { ContactWrapper } from './components/ContactTiles/ContactWrapper';
 import { AboutBlockWrapper } from './components/AboutBlock/AboutBlock';
 import { useSelector } from 'react-redux';
@@ -55,43 +55,44 @@ function HomePage(){
   const username = useSelector((state) => state.auth.user);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
-  const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
+  // const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
+  const navigate = useNavigate();
 
   return (
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
-          <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
-            <div><Language/></div>
-          </li>
           <li role='button' onClick={() => setDisplayAboutBlock(true)} className='menu-block'>
             <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
             <div>{strings.about[language]}</div>
           </li>
-          <li role='button' className='menu-block'>
+          <li role='button' onClick={() => setDisplayContactInfo(true)} className='menu-block'>
             <span><img className='main-icons' src={Contact} alt='Contact icon'/></span>
-            <div onClick={() => setDisplayContactInfo(true)}>{strings.contact[language]}</div>
+            <div>{strings.contact[language]}</div>
           </li>
-          <li role='button' className='menu-block'>
+          <li role='button' onClick={() => navigate(routes.blog)} className='menu-block'>
             <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
-            <Link style={LinkStyling} to={routes.blog}>{strings.blog[language]}</Link>
+            <Link to={routes.blog}>{strings.blog[language]}</Link>
           </li>
-          <li role='button' className='menu-block'>
+          <li role='button' onClick={() => navigate(routes.puzzle)} className='menu-block'>
             <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-            <Link style={LinkStyling} to={routes.puzzle}>{strings.puzzle[language]}</Link>
+            <Link to={routes.puzzle}>{strings.puzzle[language]}</Link>
           </li>
           {
             username
-              ? <li role='button' className='menu-block'>
+              ? <li role='button' onClick={() => navigate(routes.publishCrossword)} className='menu-block'>
                 <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-                <Link style={LinkStyling} to={routes.publishCrossword}>Publish Crossword</Link>
+                <Link to={routes.publishCrossword}>Publish Crossword</Link>
               </li>
               : null
           }
           <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
+            <div><Language/></div>
+          </li>
+          <li role='button' onClick={() => navigate(routes.login)} className='menu-block'>
             <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
-            <Link style={LinkStyling} to={routes.login} >
+            <Link to={routes.login} >
               {(username)
                 ? username
                 : strings.admin[language]

@@ -1,11 +1,11 @@
 :root {
-  --AboutBlock: red;
-  --BlogBlock: #ffa700;
-  --PuzzleBlock: green;
-  --ContactBlock: purple;
-  --AdminBlock: aqua;
-  --LanguageBlock: brown;
-  --MenuBlockText: #cccccc;
+  --AboutBlock: #ff9500;
+  --ContactBlock: #ffa200;
+  --BlogBlock: #ffaa00;
+  --PuzzleBlock: #ffb700;
+  --LanguageBlock: #ffd000;
+  --AdminBlock: #ffc300;
+  --MenuBlockText: #ffffff;
 }
 
 .main-page-container {
@@ -43,7 +43,6 @@ body {
 }
 
 .main-menu-wrapper {
-  background-color: #3e3f46;
   position: relative;
   transform: skewY(-15deg) translateY(8rem) translateX(-5rem);
   max-width: 10rem;
@@ -63,6 +62,10 @@ body {
   width: 10.5rem;
   text-align: center;
   cursor: pointer;
+}
+
+.menu-block {
+  color: black;
 }
 
 .menu-block:nth-child(1) {
@@ -199,6 +202,7 @@ body {
 }
 
 .menu-block:hover {
+  color: black;
   transform: translateX(-1rem);
 }
 
@@ -238,6 +242,7 @@ body {
   transition: 0.5s;
 }
 
+a,
 .menu-block div {
   text-decoration: none;
   color: var(--MenuBlockText);
@@ -247,8 +252,9 @@ body {
   transition: 0.5s;
 }
 
+a:hover,
 .menu-block:hover div {
-  color: #fff;
+  color: black;
 }
 
 .menu-block:last-child::after {
