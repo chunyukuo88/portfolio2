@@ -95,23 +95,26 @@ export default function Crossword(){
     return dispatch(updateGrid(updatedGrid));
   };
 
-  const Clues = ({ crosswordData }) => {
+  const CluesAcross = ({ crosswordData }) => {
     const cluesAcross = crosswordData.cluesAcross.split(',');
-    const cluesDown = crosswordData.cluesDown.split(',');
-
     return (
-      <section style={styles.cluesBox}>
-        <div>
-          <h3>Across:</h3>
-          {cluesAcross.map((clue, key) => <div style={styles.clue} key={key}>{clue}</div>)}
-        </div>
-        <div>
-          <h3>Down:</h3>
-          {cluesDown.map((clue, key) => <div style={styles.clue} key={key}>{clue}</div>)}
-        </div>
-      </section>
+      <div style={styles.cluesBox}>
+        <h3>Across:</h3>
+        {cluesAcross.map((clue, key) => <div style={styles.clue} key={key}>{clue}</div>)}
+      </div>
     );
   };
+
+  const CluesDown = ({ crosswordData }) => {
+    const cluesDown = crosswordData.cluesDown.split(',');
+    return (
+      <div style={styles.cluesBox}>
+        <h3>Down:</h3>
+        {cluesDown.map((clue, key) => <div style={styles.clue} key={key}>{clue}</div>)}
+      </div>
+    );
+  };
+
   const getClueNumber = (outerIndex, innerIndex) => {
     if (outerIndex === 0) return <>{innerIndex + 1}</>
     if (innerIndex === 0) return <>{outerIndex + 1}</>
@@ -129,15 +132,11 @@ export default function Crossword(){
       : strings.loading[language];
   };
 
-  const CrosswordGrid = () => {
-
-  };
-
   return (
     <main style={styles.main}>
+      <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
+      <Title />
       <section style={styles.section}>
-        <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
-        <Title />
         {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
         <div style={styles.gridAndSettings}>
           <div style={styles.gridWrapper}>
@@ -166,11 +165,17 @@ export default function Crossword(){
             ))}
           </div>
         </div>
-        {crosswordData ?
-          <Clues crosswordData={crosswordData}/>
-          : <p>{strings.loading[language]}</p>
-        }
       </section>
+      <div style={}>
+
+      </div>
+      {crosswordData ?
+        <div>
+          <CluesAcross crosswordData={crosswordData}/>
+          <CluesDown crosswordData={crosswordData}/>
+        </div>
+        : <p>{strings.loading[language]}</p>
+      }
     </main>
   );
 }

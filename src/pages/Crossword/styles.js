@@ -1,15 +1,6 @@
 export const styles = {
-  squareWrapper: {
-    position: 'relative',
-  },
   clue: {
     textAlign: 'left',
-  },
-  cluesBox: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    width: '32rem',
   },
   clueNumber: {
     color: 'gray',
@@ -19,9 +10,11 @@ export const styles = {
     top: '0.25rem',
     zIndex: '3',
   },
-  gridAndSettings: {
+  cluesBox: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    width: '32rem',
   },
   crosswordSettings: {
     backgroundColor: 'orange',
@@ -30,9 +23,38 @@ export const styles = {
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
+  currentSquare: {
+    backgroundColor: 'cyan',
+    caretColor: 'transparent',
+    fontSize: '2rem',
+    height: '3rem',
+    outline: 'solid black 1px',
+    position: 'relative',
+    textAlign: 'center',
+    textTransform: 'capitalize',
+    width: '3rem',
+    zIndex: '2',
+  },
+  gridAndSettings: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  main: {
+    height: '80vh',
+    color: 'white',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
   row: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  section: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    justifyContent: 'center',
   },
   square: {
     backgroundColor: 'white',
@@ -69,32 +91,10 @@ export const styles = {
     width: '3rem',
     zIndex: '2',
   },
-  currentSquare: {
-    backgroundColor: 'cyan',
-    caretColor: 'transparent',
-    fontSize: '2rem',
-    height: '3rem',
-    outline: 'solid black 1px',
+  squareWrapper: {
     position: 'relative',
-    textAlign: 'center',
-    textTransform: 'capitalize',
-    width: '3rem',
-    zIndex: '2',
-  },
-  main: {
-      height: '80vh',
-      color: 'white',
-      display: 'flex',
-      justifyContent: 'space-between',
   },
   title: {
-      color: 'white',
-  },
-  section: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    justifyContent: 'center',
+    color: 'white',
   },
 };
