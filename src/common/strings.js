@@ -57,9 +57,9 @@ const strings = {
     russian: 'увеличение на сумму',
   },
   language: {
-    chinese: '華語',
-    english: 'English',
-    russian: 'Русский',
+    chinese: '換語言',
+    english: 'Language',
+    russian: 'Язык',
   },
   loading: {
     chinese: '加載中',

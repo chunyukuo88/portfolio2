@@ -61,10 +61,6 @@ function HomePage(){
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
-          <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
-            <div><Language/></div>
-          </li>
           <li role='button' onClick={() => setDisplayAboutBlock(true)} className='menu-block'>
             <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
             <div>{strings.about[language]}</div>
@@ -89,6 +85,10 @@ function HomePage(){
               </li>
               : null
           }
+          <li role='button' className='menu-block'>
+            <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
+            <div><Language/></div>
+          </li>
           <li role='button' className='menu-block'>
             <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
             <Link style={LinkStyling} to={routes.login} >
