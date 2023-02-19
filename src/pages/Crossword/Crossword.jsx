@@ -138,6 +138,36 @@ export default function Crossword(){
     //   <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
     //   <Title />
     <>
+      <section id='interactive-section' >
+        {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
+        <div style={styles.gridAndSettings}>
+          <div style={styles.gridWrapper}>
+            {grid.map((row, outerIndex) => (
+              <div style={styles.row} key={outerIndex}>
+                {row.map((square, innerIndex) => {
+                  const style = styles[getStyleRuleName(outerIndex, innerIndex)];
+                  return (
+                    <div style={styles.squareWrapper} key={innerIndex}>
+                      <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
+                      <input
+                        autoComplete='off'
+                        maxLength='1'
+                        data-testid='crossword-square'
+                        id={`${outerIndex},${innerIndex}`}
+                        onClick={() => clickHandler(outerIndex, innerIndex)}
+                        onChange={determineIfUserWon}
+                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
+                        style={style}
+                        tabIndex={-1}
+                        readOnly={userHasWon}
+                      />
+                    </div>
+                  )})}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <main id='back-wall'>
           <section id='content-cube' >
             <div id='cube-face-up' >
@@ -153,36 +183,7 @@ export default function Crossword(){
               }
             </div>
             <div id='cube-face-front' >
-              <section style={styles.section}>
-                {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
-                <div style={styles.gridAndSettings}>
-                  <div style={styles.gridWrapper}>
-                    {grid.map((row, outerIndex) => (
-                      <div style={styles.row} key={outerIndex}>
-                        {row.map((square, innerIndex) => {
-                          const style = styles[getStyleRuleName(outerIndex, innerIndex)];
-                          return (
-                            <div style={styles.squareWrapper} key={innerIndex}>
-                              <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
-                              <input
-                                autoComplete='off'
-                                maxLength='1'
-                                data-testid='crossword-square'
-                                id={`${outerIndex},${innerIndex}`}
-                                onClick={() => clickHandler(outerIndex, innerIndex)}
-                                onChange={determineIfUserWon}
-                                onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                                style={style}
-                                tabIndex={-1}
-                                readOnly={userHasWon}
-                              />
-                            </div>
-                          )})}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </section>
+
             </div>
           </section>
           <div id='side-wall' />

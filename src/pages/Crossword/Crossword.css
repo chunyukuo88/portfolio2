@@ -67,3 +67,13 @@
     width: 300px;
     z-index: 1000;
 }
+
+#interactive-section {
+    transform: translateX(-8rem) translateY(7.5rem);
+    alignItems: center;
+    display: flex;
+    flexDirection: column;
+    height: 100%;
+    justifyContent: center;
+    zIndex: 1000;
+}

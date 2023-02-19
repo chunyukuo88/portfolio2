@@ -45,6 +45,7 @@ export const styles = {
     justifyContent: 'space-between',
   },
   row: {
+    border: 'none',
     display: 'flex',
     flexDirection: 'row',
   },
