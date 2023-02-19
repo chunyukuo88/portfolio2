@@ -24,7 +24,7 @@ export const styles = {
     justifyContent: 'space-evenly',
   },
   currentSquare: {
-    backgroundColor: 'cyan',
+    backgroundColor: 'yellow',
     caretColor: 'transparent',
     fontSize: '2rem',
     height: '3rem',

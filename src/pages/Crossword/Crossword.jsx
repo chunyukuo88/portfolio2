@@ -136,8 +136,7 @@ export default function Crossword(){
   return (
     <>
       <section id='interactive-section' >
-        {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
-        <div style={styles.gridWrapper}>
+        <div>
             {grid.map((row, outerIndex) => (
               <div style={styles.row} key={outerIndex}>
                 {row.map((square, innerIndex) => {
@@ -146,16 +145,16 @@ export default function Crossword(){
                     <div style={styles.squareWrapper} key={innerIndex}>
                       <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
                       <input
-                        autoComplete='off'
-                        maxLength='1'
                         data-testid='crossword-square'
                         id={`${outerIndex},${innerIndex}`}
-                        onClick={() => clickHandler(outerIndex, innerIndex)}
-                        onChange={determineIfUserWon}
-                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
+                        autoComplete='off'
+                        maxLength='1'
                         style={style}
                         tabIndex={-1}
                         readOnly={userHasWon}
+                        onClick={() => clickHandler(outerIndex, innerIndex)}
+                        onChange={determineIfUserWon}
+                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
                       />
                     </div>
                   )})}
