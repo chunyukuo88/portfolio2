@@ -12,9 +12,8 @@ export const styles = {
   },
   cluesBox: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-evenly',
-    width: '32rem',
   },
   crosswordSettings: {
     backgroundColor: 'orange',
@@ -55,6 +54,7 @@ export const styles = {
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'center',
+    zIndex: '1000',
   },
   square: {
     backgroundColor: 'white',

@@ -7,6 +7,7 @@ import { getData } from '../../common/utils';
 import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
 import { LinkStyling } from '../../common/globalStyles';
 import { Link } from 'react-router-dom';
+import './Crossword.css';
 
 
 export default function Crossword(){
@@ -133,49 +134,60 @@ export default function Crossword(){
   };
 
   return (
-    <main style={styles.main}>
-      <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
-      <Title />
-      <section style={styles.section}>
-        {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
-        <div style={styles.gridAndSettings}>
-          <div style={styles.gridWrapper}>
-            {grid.map((row, outerIndex) => (
-              <div style={styles.row} key={outerIndex}>
-                {row.map((square, innerIndex) => {
-                  const style = styles[getStyleRuleName(outerIndex, innerIndex)];
-                  return (
-                    <div style={styles.squareWrapper} key={innerIndex}>
-                      <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
-                      <input
-                        autoComplete='off'
-                        maxLength='1'
-                        data-testid='crossword-square'
-                        id={`${outerIndex},${innerIndex}`}
-                        onClick={() => clickHandler(outerIndex, innerIndex)}
-                        onChange={determineIfUserWon}
-                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                        style={style}
-                        tabIndex={-1}
-                        readOnly={userHasWon}
-                      />
-                    </div>
-                  )})}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <div style={}>
-
-      </div>
-      {crosswordData ?
-        <div>
-          <CluesAcross crosswordData={crosswordData}/>
-          <CluesDown crosswordData={crosswordData}/>
-        </div>
-        : <p>{strings.loading[language]}</p>
-      }
-    </main>
+    // <main style={styles.main}>
+    //   <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
+    //   <Title />
+    <>
+      <main id='back-wall'>
+          <section id='content-cube' >
+            <div id='cube-face-up' >
+              {crosswordData
+                ? <CluesDown crosswordData={crosswordData}/>
+                : <p>{strings.loading[language]}</p>
+              }
+            </div>
+            <div id='cube-face-west' >
+              {crosswordData
+                ? <CluesAcross crosswordData={crosswordData}/>
+                : <p>{strings.loading[language]}</p>
+              }
+            </div>
+            <div id='cube-face-front' >
+              <section style={styles.section}>
+                {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
+                <div style={styles.gridAndSettings}>
+                  <div style={styles.gridWrapper}>
+                    {grid.map((row, outerIndex) => (
+                      <div style={styles.row} key={outerIndex}>
+                        {row.map((square, innerIndex) => {
+                          const style = styles[getStyleRuleName(outerIndex, innerIndex)];
+                          return (
+                            <div style={styles.squareWrapper} key={innerIndex}>
+                              <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
+                              <input
+                                autoComplete='off'
+                                maxLength='1'
+                                data-testid='crossword-square'
+                                id={`${outerIndex},${innerIndex}`}
+                                onClick={() => clickHandler(outerIndex, innerIndex)}
+                                onChange={determineIfUserWon}
+                                onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
+                                style={style}
+                                tabIndex={-1}
+                                readOnly={userHasWon}
+                              />
+                            </div>
+                          )})}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+          <div id='side-wall' />
+      </main>
+      <div id='floor' />
+    </>
   );
 }

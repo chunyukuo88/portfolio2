@@ -1,0 +1,69 @@
+:root {
+    --gridWidth: 200px;
+    --gridHeight: 300px;
+    --sideFaceTranslation: -100px;
+}
+
+#back-wall {
+    position: absolute;
+    width: 50rem;
+    height: 34.30rem;
+    background: red;
+    z-index: -2;
+    transform: translateX(-12rem) translateY(-12rem);
+}
+
+#side-wall {
+    position: relative;
+    left: 50rem;
+    bottom: 21.25rem;
+
+    width: 30rem;
+    height: 34.30rem;
+    background: #800000;
+    z-index: -1;
+    transform: skewY(45deg) translateY(-10rem);
+}
+
+#floor {
+    position: relative;
+    top: 34.30rem;
+    left: 25rem;
+    width: 50rem;
+    height: 30rem;
+    z-index: -3;
+
+    background: #d50000;
+    transform: skewX(45deg) translateX(-10rem) translateY(-12rem);
+}
+
+#content-cube {
+    position: relative;
+    margin-left: 100%;
+    margin-top: 30%;
+
+    display: grid;
+    grid: var(--gridWidth) var(--gridHeight) / var(--gridWidth) var(--gridHeight);
+    justify-content: center;
+    transform: translateX(15.6rem) translateY(0.625rem) ;
+}
+
+#cube-face-up {
+    background: #cece00;
+    transform: skewX(45deg) translateX(calc(var(--sideFaceTranslation) * 2));
+    width: 300px;
+}
+
+#cube-face-west {
+    background: #b0b000;
+    transform: skewY(45deg) translateX(-500px) translateY(600px);
+    height: 300px;
+    width: 200px;
+}
+
+#cube-face-front {
+    background: yellow;
+    transform: translateX(var(--sideFaceTranslation));
+    width: 300px;
+    z-index: 1000;
+}
