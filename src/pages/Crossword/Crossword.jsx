@@ -7,6 +7,8 @@ import { getData } from '../../common/utils';
 import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
 import { LinkStyling } from '../../common/globalStyles';
 import { Link } from 'react-router-dom';
+import './Crossword.css';
+import { routes } from '../../routes';
 
 
 export default function Crossword(){
@@ -15,6 +17,8 @@ export default function Crossword(){
   const language = useSelector((state) => state.language.value);
   const [focused, setFocused] = useState(undefined);
   const [crosswordData, setCrosswordData] = useState(undefined);
+  const [westFaceClicked, setWestFaceClicked] = useState(false);
+  const [topFaceClicked, setTopFaceClicked] = useState(false);
   const dispatch = useDispatch();
 
   useEffect( () => {
@@ -95,23 +99,26 @@ export default function Crossword(){
     return dispatch(updateGrid(updatedGrid));
   };
 
-  const Clues = ({ crosswordData }) => {
+  const CluesAcross = ({ crosswordData }) => {
     const cluesAcross = crosswordData.cluesAcross.split(',');
-    const cluesDown = crosswordData.cluesDown.split(',');
-
     return (
-      <section style={styles.cluesBox}>
-        <div>
-          <h3>Across:</h3>
-          {cluesAcross.map(clue => <div style={styles.clue} key={clue[0]}>{clue}</div>)}
-        </div>
-        <div>
-          <h3>Down:</h3>
-          {cluesDown.map(clue => <div style={styles.clue} key={clue[0]}>{clue}</div>)}
-        </div>
-      </section>
+      <div className='clues-box'>
+        <h3 className='clues-direction'>Across:</h3>
+        {cluesAcross.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
+      </div>
     );
   };
+
+  const CluesDown = ({ crosswordData }) => {
+    const cluesDown = crosswordData.cluesDown.split(',');
+    return (
+      <div className='clues-box'>
+        <h3 className='clues-direction'>Down:</h3>
+        {cluesDown.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
+      </div>
+    );
+  };
+
   const getClueNumber = (outerIndex, innerIndex) => {
     if (outerIndex === 0) return <>{innerIndex + 1}</>
     if (innerIndex === 0) return <>{outerIndex + 1}</>
@@ -121,22 +128,25 @@ export default function Crossword(){
 
   const Title = () => {
     return crosswordData
-      ? <>
-        <h1 style={styles.title}>{crosswordData.title}</h1>
-        <h3>Published on {convertTimestamp(crosswordData.created_at)}</h3>
-        <h3>By {crosswordData.author}</h3>
-      </>
+      ? <section id='crossword-info'>
+          <h2>{crosswordData.title}</h2>
+          <h3>By {crosswordData.author}</h3>
+          <h3>{convertTimestamp(crosswordData.created_at)}</h3>
+        </section>
       : strings.loading[language];
-  }
+  };
+
+  const linkStyle = {
+    color: 'black',
+    textDecoration: 'none',
+    textTransform: 'uppercase',
+    width: '3rem',
+  };
 
   return (
-    <main style={styles.main}>
-      <section style={styles.section}>
-        <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
-        <Title />
-        {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
-        <div style={styles.gridAndSettings}>
-          <div style={styles.gridWrapper}>
+    <>
+      <section id='interactive-section' >
+        <div>
             {grid.map((row, outerIndex) => (
               <div style={styles.row} key={outerIndex}>
                 {row.map((square, innerIndex) => {
@@ -145,28 +155,55 @@ export default function Crossword(){
                     <div style={styles.squareWrapper} key={innerIndex}>
                       <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
                       <input
-                        autoComplete='off'
                         data-testid='crossword-square'
                         id={`${outerIndex},${innerIndex}`}
+                        autoComplete='off'
                         maxLength='1'
-                        onClick={() => clickHandler(outerIndex, innerIndex)}
-                        onChange={determineIfUserWon}
-                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
                         style={style}
                         tabIndex={-1}
                         readOnly={userHasWon}
+                        onClick={() => clickHandler(outerIndex, innerIndex)}
+                        onChange={determineIfUserWon}
+                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
                       />
                     </div>
                   )})}
               </div>
             ))}
           </div>
+        <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
+          <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
         </div>
-        {crosswordData ?
-          <Clues crosswordData={crosswordData}/>
-          : <p>{strings.loading[language]}</p>
-        }
       </section>
-    </main>
+      <main id='back-wall'>
+          <section id='content-cube' >
+            <div
+              role='button'
+              className={topFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
+              onClick={() => setTopFaceClicked(!topFaceClicked)}
+            >
+              {crosswordData
+                ? <CluesDown crosswordData={crosswordData}/>
+                : <p>{strings.loading[language]}</p>
+              }
+            </div>
+            <div
+              role='button'
+              className={westFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
+              onClick={() => setWestFaceClicked(!westFaceClicked)}
+            >
+              {crosswordData
+                ? <CluesAcross crosswordData={crosswordData}/>
+                : <p>{strings.loading[language]}</p>
+              }
+            </div>
+            <div id='cube-face-front' >
+              <Title />
+            </div>
+          </section>
+          <div id='side-wall' />
+      </main>
+      <div id='floor' />
+    </>
   );
 }

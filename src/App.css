@@ -8,6 +8,10 @@
   --MenuBlockText: #ffffff;
 }
 
+.content-below-header {
+  transform: translateY(-8rem);
+}
+
 .main-page-container {
   display: flex;
   flex-direction: column;
@@ -19,6 +23,7 @@
 .banner-and-menu-wrapper {
   display: flex;
   flex-direction: row;
+  transform: translateY(4rem);
 }
 
 #alex-gochenour {
