@@ -17,6 +17,8 @@ export default function Crossword(){
   const language = useSelector((state) => state.language.value);
   const [focused, setFocused] = useState(undefined);
   const [crosswordData, setCrosswordData] = useState(undefined);
+  const [westFaceClicked, setWestFaceClicked] = useState(false);
+  const [topFaceClicked, setTopFaceClicked] = useState(false);
   const dispatch = useDispatch();
 
   useEffect( () => {
@@ -100,9 +102,9 @@ export default function Crossword(){
   const CluesAcross = ({ crosswordData }) => {
     const cluesAcross = crosswordData.cluesAcross.split(',');
     return (
-      <div style={styles.cluesBox}>
-        <h3>Across:</h3>
-        {cluesAcross.map((clue, key) => <div style={styles.clue} key={key}>{clue}</div>)}
+      <div className='clues-box'>
+        <h3 className='clues-direction'>Across:</h3>
+        {cluesAcross.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
       </div>
     );
   };
@@ -110,9 +112,9 @@ export default function Crossword(){
   const CluesDown = ({ crosswordData }) => {
     const cluesDown = crosswordData.cluesDown.split(',');
     return (
-      <div style={styles.cluesBox}>
-        <h3>Down:</h3>
-        {cluesDown.map((clue, key) => <div style={styles.clue} key={key}>{clue}</div>)}
+      <div className='clues-box'>
+        <h3 className='clues-direction'>Down:</h3>
+        {cluesDown.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
       </div>
     );
   };
@@ -126,12 +128,19 @@ export default function Crossword(){
 
   const Title = () => {
     return crosswordData
-      ? <>
-        <h2 style={styles.title}>{crosswordData.title}</h2>
-        <h3>By {crosswordData.author}</h3>
-        <h3>{convertTimestamp(crosswordData.created_at)}</h3>
-      </>
+      ? <section id='crossword-info'>
+          <h2>{crosswordData.title}</h2>
+          <h3>By {crosswordData.author}</h3>
+          <h3>{convertTimestamp(crosswordData.created_at)}</h3>
+        </section>
       : strings.loading[language];
+  };
+
+  const linkStyle = {
+    color: 'black',
+    textDecoration: 'none',
+    textTransform: 'uppercase',
+    width: '3rem',
   };
 
   return (
@@ -162,19 +171,27 @@ export default function Crossword(){
               </div>
             ))}
           </div>
-        <div style={{ zIndex: 10000}}>
-          <Link style={LinkStyling} to={routes.index}>{strings.homePage[language]}</Link>
+        <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
+          <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
         </div>
       </section>
       <main id='back-wall'>
           <section id='content-cube' >
-            <div id='cube-face-up' >
+            <div
+              role='button'
+              className={topFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
+              onClick={() => setTopFaceClicked(!topFaceClicked)}
+            >
               {crosswordData
                 ? <CluesDown crosswordData={crosswordData}/>
                 : <p>{strings.loading[language]}</p>
               }
             </div>
-            <div id='cube-face-west' >
+            <div
+              role='button'
+              className={westFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
+              onClick={() => setWestFaceClicked(!westFaceClicked)}
+            >
               {crosswordData
                 ? <CluesAcross crosswordData={crosswordData}/>
                 : <p>{strings.loading[language]}</p>

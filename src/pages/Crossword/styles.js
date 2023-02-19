@@ -1,7 +1,4 @@
 export const styles = {
-  clue: {
-    textAlign: 'left',
-  },
   clueNumber: {
     color: 'gray',
     fontSize: '0.75rem',
@@ -9,12 +6,6 @@ export const styles = {
     position: 'absolute',
     top: '0.25rem',
     zIndex: '3',
-  },
-  cluesBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    padding: '1rem',
   },
   crosswordSettings: {
     backgroundColor: 'orange',
@@ -24,7 +15,7 @@ export const styles = {
     justifyContent: 'space-evenly',
   },
   currentSquare: {
-    backgroundColor: 'yellow',
+    backgroundColor: 'cyan',
     caretColor: 'transparent',
     fontSize: '2rem',
     height: '3rem',
@@ -35,7 +26,6 @@ export const styles = {
     width: '3rem',
     zIndex: '2',
   },
-
   row: {
     border: 'none',
     display: 'flex',
@@ -78,8 +68,5 @@ export const styles = {
   },
   squareWrapper: {
     position: 'relative',
-  },
-  title: {
-    color: 'black',
   },
 };

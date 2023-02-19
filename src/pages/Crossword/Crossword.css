@@ -2,13 +2,20 @@
     --gridWidth: 12.5rem;
     --gridHeight: 18.75rem;
     --sideFaceTranslation: -6.25rem;
+    --backWall: #d3cda8;
+    --sideWall: #a29e82;
+    --floor: #ffe191;
+
+    --cubeTop: #ffe191;
+    --cubeFront: #fef6c9;
+    --cubeSide: #a29e82;
 }
 
 #back-wall {
     position: absolute;
     width: 50rem;
     height: 34.30rem;
-    background: red;
+    background: var(--backWall);
     z-index: -2;
     transform: translateX(-12rem) translateY(-12rem);
 }
@@ -19,7 +26,7 @@
 
     width: 30rem;
     height: 34.30rem;
-    background: #800000;
+    background: var(--sideWall);
     z-index: -1;
     transform: skewY(45deg) translateY(-10rem);
 }
@@ -31,7 +38,7 @@
     height: 30rem;
     z-index: -3;
 
-    background: #d50000;
+    background: var(--floor);
     transform: skewX(45deg) translateX(-10rem) translateY(-12rem);
 }
 
@@ -46,32 +53,40 @@
     justify-content: center;
     transform: translateX(15.6rem) translateY(0.625rem) ;
 }
-#cube-face-up {
-    background: #cece00;
+.top-face-not-clicked {
+    cursor: pointer;
+    background: var(--cubeTop);
     transform: skewX(45deg) translateX(calc(var(--sideFaceTranslation) * 2));
     width: 18.75rem;
-    transition: 1s;
+    transition: 0.5s;
 }
-#cube-face-up:hover {
-    transition: 1s;
+.top-face-clicked {
+    border-radius: 1rem 1rem 0 0;
+    cursor: pointer;
     transform: skewX(0deg) translateX(var(--sideFaceTranslation));
-    background: yellow;
+    width: 18.75rem;
+    background: var(--cubeFront);
+    transition: 0.5s;
 }
-#cube-face-west {
-    background: #b0b000;
+.west-face-not-clicked {
+    background: var(--cubeSide);
     transform: skewY(45deg) translateX(-31.25rem) translateY(37.5rem);
     height: 18.75rem;
     width: 12.5rem;
-    transition: 1s;
+    transition: 0.5s;
     cursor: pointer;
 }
-#cube-face-west:hover {
+.west-face-clicked {
+    border-radius: 1rem 0 0 0;
     transform: skewY(0deg) translateX(-31.25rem) translateY(12.5rem);
+    background: var(--cubeFront);
+    cursor: pointer;
+    height: 18.75rem;
+    width: 12.5rem;
     transition: 0.5s;
-    background: yellow;
 }
 #cube-face-front {
-    background: yellow;
+    background: var(--cubeFront);
     transform: translateX(var(--sideFaceTranslation));
     width: 18.75rem;
     z-index: 1000;
@@ -82,12 +97,28 @@
 }
 
 #interactive-section {
-    display: flex;
-    flexDirection: column;
-    alignItems: center;
-    justifyContent: center;
+    position: relative;
+    top: 2rem;
     height: 100%;
 
     zIndex: 1000;
     transform: translateX(-8rem) translateY(7.5rem);
+}
+
+#crossword-info {
+    color: black;
+    text-align: center;
+}
+
+.clues-box {
+    padding: 1rem;
+}
+
+.clues-direction {
+    text-align: center;
+}
+
+.clue {
+    text-align: left;
+    padding: 0.125rem;
 }
