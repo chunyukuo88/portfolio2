@@ -126,22 +126,18 @@ export default function Crossword(){
   const Title = () => {
     return crosswordData
       ? <>
-        <h1 style={styles.title}>{crosswordData.title}</h1>
-        <h3>Published on {convertTimestamp(crosswordData.created_at)}</h3>
+        <h2 style={styles.title}>{crosswordData.title}</h2>
         <h3>By {crosswordData.author}</h3>
+        <h3>{convertTimestamp(crosswordData.created_at)}</h3>
       </>
       : strings.loading[language];
   };
 
   return (
-    // <main style={styles.main}>
-    //   <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
-    //   <Title />
     <>
       <section id='interactive-section' >
         {(userHasWon) ? <h1>Victory! Gud jerb</h1> : null}
-        <div style={styles.gridAndSettings}>
-          <div style={styles.gridWrapper}>
+        <div style={styles.gridWrapper}>
             {grid.map((row, outerIndex) => (
               <div style={styles.row} key={outerIndex}>
                 {row.map((square, innerIndex) => {
@@ -166,6 +162,8 @@ export default function Crossword(){
               </div>
             ))}
           </div>
+        <div style={{ zIndex: 10000}}>
+          <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
         </div>
       </section>
       <main id='back-wall'>
@@ -183,7 +181,7 @@ export default function Crossword(){
               }
             </div>
             <div id='cube-face-front' >
-
+              <Title />
             </div>
           </section>
           <div id='side-wall' />

@@ -14,6 +14,7 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
+    padding: '1rem',
   },
   crosswordSettings: {
     backgroundColor: 'orange',
@@ -34,28 +35,11 @@ export const styles = {
     width: '3rem',
     zIndex: '2',
   },
-  gridAndSettings: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  main: {
-    height: '80vh',
-    color: 'white',
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
+
   row: {
     border: 'none',
     display: 'flex',
     flexDirection: 'row',
-  },
-  section: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    justifyContent: 'center',
-    zIndex: '1000',
   },
   square: {
     backgroundColor: 'white',
@@ -96,6 +80,6 @@ export const styles = {
     position: 'relative',
   },
   title: {
-    color: 'white',
+    color: 'black',
   },
 };

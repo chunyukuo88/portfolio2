@@ -1,7 +1,7 @@
 :root {
-    --gridWidth: 200px;
-    --gridHeight: 300px;
-    --sideFaceTranslation: -100px;
+    --gridWidth: 12.5rem;
+    --gridHeight: 18.75rem;
+    --sideFaceTranslation: -6.25rem;
 }
 
 #back-wall {
@@ -24,6 +24,7 @@
     z-index: -1;
     transform: skewY(45deg) translateY(-10rem);
 }
+
 
 #floor {
     position: relative;
@@ -51,29 +52,49 @@
 #cube-face-up {
     background: #cece00;
     transform: skewX(45deg) translateX(calc(var(--sideFaceTranslation) * 2));
-    width: 300px;
+    width: 18.75rem;
+    transition: 1s;
+}
+
+#cube-face-up:hover {
+    transition: 1s;
+    transform: skewX(0deg) translateX(var(--sideFaceTranslation));
+    background: yellow;
 }
 
 #cube-face-west {
     background: #b0b000;
-    transform: skewY(45deg) translateX(-500px) translateY(600px);
-    height: 300px;
-    width: 200px;
+    transform: skewY(45deg) translateX(-31.25rem) translateY(37.5rem);
+    height: 18.75rem;
+    width: 12.5rem;
+    transition: 1s;
+    cursor: pointer;
+}
+
+#cube-face-west:hover {
+    transform: skewY(0deg) translateX(-31.25rem) translateY(12.5rem);
+    transition: 1s;
+    background: yellow;
 }
 
 #cube-face-front {
     background: yellow;
     transform: translateX(var(--sideFaceTranslation));
-    width: 300px;
+    width: 18.75rem;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #interactive-section {
-    transform: translateX(-8rem) translateY(7.5rem);
-    alignItems: center;
     display: flex;
     flexDirection: column;
-    height: 100%;
+    alignItems: center;
     justifyContent: center;
+    height: 100%;
+
     zIndex: 1000;
+    transform: translateX(-8rem) translateY(7.5rem);
 }
