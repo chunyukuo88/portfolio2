@@ -12,7 +12,6 @@
     z-index: -2;
     transform: translateX(-12rem) translateY(-12rem);
 }
-
 #side-wall {
     position: relative;
     left: 50rem;
@@ -24,8 +23,6 @@
     z-index: -1;
     transform: skewY(45deg) translateY(-10rem);
 }
-
-
 #floor {
     position: relative;
     top: 34.30rem;
@@ -38,6 +35,7 @@
     transform: skewX(45deg) translateX(-10rem) translateY(-12rem);
 }
 
+
 #content-cube {
     position: relative;
     margin-left: 100%;
@@ -48,20 +46,17 @@
     justify-content: center;
     transform: translateX(15.6rem) translateY(0.625rem) ;
 }
-
 #cube-face-up {
     background: #cece00;
     transform: skewX(45deg) translateX(calc(var(--sideFaceTranslation) * 2));
     width: 18.75rem;
     transition: 1s;
 }
-
 #cube-face-up:hover {
     transition: 1s;
     transform: skewX(0deg) translateX(var(--sideFaceTranslation));
     background: yellow;
 }
-
 #cube-face-west {
     background: #b0b000;
     transform: skewY(45deg) translateX(-31.25rem) translateY(37.5rem);
@@ -70,13 +65,11 @@
     transition: 1s;
     cursor: pointer;
 }
-
 #cube-face-west:hover {
     transform: skewY(0deg) translateX(-31.25rem) translateY(12.5rem);
-    transition: 1s;
+    transition: 0.5s;
     background: yellow;
 }
-
 #cube-face-front {
     background: yellow;
     transform: translateX(var(--sideFaceTranslation));

@@ -8,6 +8,7 @@ import { updateGrid, declareVictory } from '../../features/crossword/crosswordSl
 import { LinkStyling } from '../../common/globalStyles';
 import { Link } from 'react-router-dom';
 import './Crossword.css';
+import { routes } from '../../routes';
 
 
 export default function Crossword(){
@@ -162,7 +163,7 @@ export default function Crossword(){
             ))}
           </div>
         <div style={{ zIndex: 10000}}>
-          <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
+          <Link style={LinkStyling} to={routes.index}>{strings.homePage[language]}</Link>
         </div>
       </section>
       <main id='back-wall'>
