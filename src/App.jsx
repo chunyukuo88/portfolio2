@@ -61,7 +61,7 @@ function HomePage(){
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
-          <li role='button' onClick={() => setDisplayAboutBlock(true)} className='menu-block'>
+          <li role='button' onClick={() => setDisplayAboutBlock(!displayAboutBlock)} className='menu-block'>
             <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
             <div>{strings.about[language]}</div>
           </li>

@@ -2,13 +2,16 @@
     --gridWidth: 12.5rem;
     --gridHeight: 18.75rem;
     --sideFaceTranslation: -6.25rem;
-    --backWall: #d3cda8;
-    --sideWall: #a29e82;
-    --floor: #ffe191;
+    --backWall: #dc7201;
+    --sideWall: #D62828;
+    --floor: rgba(243, 177, 187, 0.82);
 
-    --cubeTop: #ffe191;
-    --cubeFront: #fef6c9;
-    --cubeSide: #a29e82;
+    --cubeTop: #F77F00;
+    --cubeSide: #D62828;
+
+    --cubeFront: rgba(243, 177, 187);
+    --brShadow: -6px 6px 15px rgba(0,0,0,0.5);
+    --tlShadow: 6px -6px 15px rgba(255,255,255,0.8);
 }
 
 #back-wall {
@@ -61,7 +64,7 @@
     transition: 0.5s;
 }
 .top-face-clicked {
-    border-radius: 1rem 1rem 0 0;
+    border-radius: 3rem 3rem 0 0;
     cursor: pointer;
     transform: skewX(0deg) translateX(var(--sideFaceTranslation));
     width: 18.75rem;
@@ -77,13 +80,13 @@
     cursor: pointer;
 }
 .west-face-clicked {
-    border-radius: 1rem 0 0 0;
+    border-radius: 3rem 0 0 0;
     transform: skewY(0deg) translateX(-31.25rem) translateY(12.5rem);
-    background: var(--cubeFront);
     cursor: pointer;
     height: 18.75rem;
     width: 12.5rem;
     transition: 0.5s;
+    background: var(--cubeFront);
 }
 #cube-face-front {
     background: var(--cubeFront);
@@ -106,7 +109,24 @@
 }
 
 #crossword-info {
-    color: black;
+    background-color: rgba(243, 177, 187, 0.82);
+    font-size: 1.5rem;
+    color: #f5a5c5;
+    text-shadow:
+            -0.0075em 0.0075em 3px white,
+            -0.0075em 0.0075em 3px white,
+            0.005em 0.005em 0 #f5a5c5,
+            0.01em 0.01em 0 #f09ab6,
+            0.015em 0.015em 0 #e91e63,
+            0.02em 0.02em 2px #e91e63,
+            0.025em 0.025em 2px #e91e63,
+            0.03em 0.03em 2px #e91e63,
+            0.035em 0.035em 2px #e91e63;
+
+
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
     text-align: center;
 }
 
