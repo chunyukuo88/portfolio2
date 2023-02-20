@@ -53,7 +53,6 @@ function Profile(){
 function HomePage(){
   const language = useSelector((state) => state.language.value);
   const username = useSelector((state) => state.auth.user);
-  const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
   const navigate = useNavigate();
 
@@ -64,10 +63,6 @@ function HomePage(){
           <li role='button' onClick={() => setDisplayAboutBlock(!displayAboutBlock)} className='menu-block'>
             <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
             <div>{strings.about[language]}</div>
-          </li>
-          <li role='button' onClick={() => setDisplayContactInfo(true)} className='menu-block'>
-            <span><img className='main-icons' src={Contact} alt='Contact icon'/></span>
-            <div>{strings.contact[language]}</div>
           </li>
           <li role='button' onClick={() => navigate(routes.blog)} className='menu-block'>
             <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
@@ -106,7 +101,7 @@ function HomePage(){
         <div />
         {displayAboutBlock ? <AboutBlockWrapper visible={displayAboutBlock} /> : null}
       </div>
-      {displayContactInfo ? <ContactWrapper visible={displayContactInfo} /> : null}
+      <ContactWrapper />
     </main>
   );
 }
