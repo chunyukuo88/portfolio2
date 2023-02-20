@@ -133,7 +133,7 @@ export default function Crossword(){
           <h3>By {crosswordData.author}</h3>
           <h3>{convertTimestamp(crosswordData.created_at)}</h3>
         </section>
-      : strings.loading[language];
+      : <Loading />;
   };
 
   const linkStyle = {
@@ -142,6 +142,8 @@ export default function Crossword(){
     textTransform: 'uppercase',
     width: '3rem',
   };
+
+  const Loading = () => <p>{strings.loading[language]}</p>;
 
   return (
     <>
@@ -184,7 +186,7 @@ export default function Crossword(){
             >
               {crosswordData
                 ? <CluesDown crosswordData={crosswordData}/>
-                : <p>{strings.loading[language]}</p>
+                : <Loading />
               }
             </div>
             <div
@@ -194,7 +196,7 @@ export default function Crossword(){
             >
               {crosswordData
                 ? <CluesAcross crosswordData={crosswordData}/>
-                : <p>{strings.loading[language]}</p>
+                : <Loading />
               }
             </div>
             <div id='cube-face-front' >

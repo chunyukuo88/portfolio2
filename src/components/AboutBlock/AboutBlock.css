@@ -2,7 +2,7 @@
     background: var(--BlogBlock);
     position: relative;
     transform: skewY(15deg) translateX(-45rem) translateY(20rem);
-    width: 12rem;
+    width: 18rem;
     height: 21rem;
     z-index: 10;
     box-shadow: 1rem 1rem 1rem rgba(0,0,0,0.25);
@@ -15,7 +15,7 @@
     filter: brightness(0.7);
     transform-origin: right;
     transform: skewX(-45deg) translateY(-2rem) translateX(-1rem);
-    width: 12rem;
+    width: 18rem;
     height: 2rem;
 }
 
@@ -26,11 +26,17 @@
     background: #9f6900;
     filter: brightness(0.7);
     transform-origin: right;
-    transform: skewY(-45deg) translateX(13rem) translateX(-1rem);
+    transform: skewY(-45deg) translateY(6rem) translateX(18rem);
     width: 2rem;
     height: 21rem;
 }
 
 .about-block-content-wrapper {
+    text-align: justify;
+    text-justify: auto;
+    padding: 0.5rem;
+}
+
+.about-block-content-wrapper p {
     padding: 0.5rem;
 }

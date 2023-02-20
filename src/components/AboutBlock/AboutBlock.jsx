@@ -6,9 +6,8 @@ export function AboutBlock(){
     <div id='shadow'>
       <section className='about-block'>
         <div className='about-block-content-wrapper'>
-          <span className='bread-emoji'>🍞</span>
-          <p>Hi! I'm Alex Gochenour, the original Bread Monster</p>
-          <p>I am a full-stack JavaScript developer deploying to AWS via the Serverless Framework and sometimes EC2. I'm passionate about best practices: TDD, pair programming, and Scrum are where it's at.</p>
+          <p>Hi! I'm Alex Gochenour.</p>
+          <p>I'm a full-stack JavaScript developer deploying to Amazon Web Services (AWS) using the Serverless Framework and sometimes EC2. I'm passionate about best practices: TDD, pair programming, and Scrum are where it's at.</p>
         </div>
       </section>
     </div>

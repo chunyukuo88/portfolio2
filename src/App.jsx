@@ -55,7 +55,6 @@ function HomePage(){
   const username = useSelector((state) => state.auth.user);
   const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
-  // const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
   const navigate = useNavigate();
 
   return (
