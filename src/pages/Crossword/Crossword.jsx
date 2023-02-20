@@ -88,13 +88,23 @@ export default function Crossword(){
     return userHasWon;
   };
 
+  const auxKeys = ['Alt', 'Shift', 'Control', 'Escape', 'Meta', 'ContextMenu', 'Enter', 'Home', 'End', 'ScrollLock', 'PageUp', 'PageDown', 'Insert'];
+  const deleteKeys = ['Delete', 'Backspace'];
   const keyDownHandler = (event, outerIndex, innerIndex) => {
     const { key } = event;
+    console.log(key);
     if (nonAlphabetics.includes(key)) {
       return processMovementKey(key, outerIndex, innerIndex);
     }
+    if (auxKeys.includes(key)) return;
+    if (deleteKeys.includes(key)) {
+      const updatedGrid = JSON.parse(JSON.stringify(grid));
+      updatedGrid[outerIndex][innerIndex].value = '';
+      return dispatch(updateGrid(updatedGrid));
+    }
     const updatedGrid = JSON.parse(JSON.stringify(grid));
     updatedGrid[outerIndex][innerIndex].value = key;
+    determineIfUserWon();
     return dispatch(updateGrid(updatedGrid));
   };
 
@@ -155,7 +165,7 @@ export default function Crossword(){
                   return (
                     <div style={styles.squareWrapper} key={innerIndex}>
                       <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
-                      <input
+                      <div
                         data-testid='crossword-square'
                         id={`${outerIndex},${innerIndex}`}
                         autoComplete='off'
@@ -166,7 +176,9 @@ export default function Crossword(){
                         onClick={() => clickHandler(outerIndex, innerIndex)}
                         onChange={determineIfUserWon}
                         onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                      />
+                      >
+                        {grid[outerIndex][innerIndex].value}
+                      </div>
                     </div>
                   )})}
               </div>
