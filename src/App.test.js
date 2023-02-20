@@ -5,7 +5,7 @@ import 'react-router-dom';
 import { routes } from './routes';
 import Root from './Root';
 import { store } from './app/store';
-import { mockStore } from './testUtils';
+import { mockStoreLoggedIn } from './testUtils';
 import '@testing-library/jest-dom';
 import 'react-dom';
 
@@ -25,61 +25,95 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe('GIVEN: The application (App.jsx) has loaded.', ()=>{
-  describe('WHEN: ', ()=>{
-    test('THEN: ', ()=>{
-      render(
-        <Root store={store}>
-          <App />
-        </Root>
-      );
+describe('App.jsx', () => {
+  describe('GIVEN: The user has not logged in.', ()=>{
+    describe('WHEN: ', ()=>{
+      test('THEN: ', ()=>{
+        render(
+          <Root store={store}>
+            <App />
+          </Root>
+        );
 
-      const app = document.querySelector('.App');
+        const app = document.querySelector('.App');
 
-      expect(app).toBeInTheDocument();
+        expect(app).toBeInTheDocument();
+      });
+    });
+    describe('WHEN: The user clicks the language button thrice,', () => {
+      test('THEN: The site cycles through the localization settings.', () => {
+        render(
+          <Root store={store}>
+            <App />
+          </Root>
+        );
+
+        let languageButton = document.querySelector('#language-button');
+        expect(languageButton).toHaveTextContent(strings.language[ENGLISH]);
+
+        fireEvent.click(languageButton);
+        languageButton = document.querySelector('#language-button');
+        expect(languageButton).toHaveTextContent(strings.language[CHINESE]);
+
+        fireEvent.click(languageButton);
+        languageButton = document.querySelector('#language-button');
+        expect(languageButton).toHaveTextContent(strings.language[RUSSIAN]);
+
+        fireEvent.click(languageButton);
+        languageButton = document.querySelector('#language-button');
+        expect(languageButton).toHaveTextContent(strings.language[ENGLISH]);
+      });
+    });
+    describe('WHEN: The user clicks a navigation button,', () => {
+      test.each`
+        buttonId             |   route
+        ${'puzzle-button'}   |   ${routes.puzzle}
+        ${'blog-button'}     |   ${routes.blog}
+        ${'login-button'}    |   ${routes.login}
+    `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
+        render(
+          <Root store={store}>
+            <App />
+          </Root>
+        );
+
+        const homeButton = document.getElementById(buttonId);
+        fireEvent.click(homeButton);
+
+        expect(mockNavFn).toBeCalledWith(route);
+      });
+    });
+    describe('WHEN: the user clicks the About block on the main menu,', () => {
+      it('THEN: the About block appears.', () => {
+        render(
+          <Root store={store}>
+            <App />
+          </Root>
+        );
+
+        let aboutBlock = document.querySelector('.about-block');
+        expect(aboutBlock).not.toBeInTheDocument();
+        const aboutBlockSummoner = document.querySelectorAll('.menu-block')[0];
+        fireEvent.click(aboutBlockSummoner);
+
+        aboutBlock = document.querySelector('.about-block');
+        expect(aboutBlock).toBeInTheDocument();
+      });
     });
   });
-  describe('WHEN: The user clicks the language button thrice,', () => {
-    test('THEN: The site cycles through the localization settings.', () => {
-      render(
-        <Root store={store}>
-          <App />
-        </Root>
-      );
+  describe('GIVEN: the user has logged in', () => {
+    describe('WHEN: the user clicks the publish crossword puzzle menu ', () => {
+      it('THEN: they get routed to the publish puzzle page.', () => {
+        render(
+          <Root store={mockStoreLoggedIn}>
+            <App />
+          </Root>
+        );
+        const publishPuzzleBlock = document.querySelectorAll('.menu-block')[3];
+        fireEvent.click(publishPuzzleBlock);
 
-      let languageButton = document.querySelector('#language-button');
-      expect(languageButton).toHaveTextContent(strings.language[ENGLISH]);
-
-      fireEvent.click(languageButton);
-      languageButton = document.querySelector('#language-button');
-      expect(languageButton).toHaveTextContent(strings.language[CHINESE]);
-
-      fireEvent.click(languageButton);
-      languageButton = document.querySelector('#language-button');
-      expect(languageButton).toHaveTextContent(strings.language[RUSSIAN]);
-
-      fireEvent.click(languageButton);
-      languageButton = document.querySelector('#language-button');
-      expect(languageButton).toHaveTextContent(strings.language[ENGLISH]);
-    });
-  });
-  describe('WHEN: The user is NOT logged in and clicks a navigation button,', () => {
-    test.each`
-      buttonId             |   route
-      ${'puzzle-button'}   |   ${routes.puzzle}
-      ${'blog-button'}     |   ${routes.blog}
-      ${'login-button'}    |   ${routes.login}
-  `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
-      render(
-        <Root store={store}>
-          <App />
-        </Root>
-      );
-
-      const homeButton = document.getElementById(buttonId);
-      fireEvent.click(homeButton);
-
-      expect(mockNavFn).toBeCalledWith(route);
+        expect(mockNavFn).toBeCalledWith(routes.publishCrossword);
+      });
     });
   });
 });
