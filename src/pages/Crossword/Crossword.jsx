@@ -92,7 +92,6 @@ export default function Crossword(){
   const deleteKeys = ['Delete', 'Backspace'];
   const keyDownHandler = (event, outerIndex, innerIndex) => {
     const { key } = event;
-    console.log(key);
     if (nonAlphabetics.includes(key)) {
       return processMovementKey(key, outerIndex, innerIndex);
     }

@@ -139,15 +139,13 @@ describe('Crossword.jsx', ()=> {
             </Provider>
           );
 
-          let squares = screen.getAllByTestId('crossword-square');
-          let upperLeftCorner = squares[0];
-          expect(upperLeftCorner.value).toEqual('');
+          let upperLeftCorner = document.getElementById('0,0');
+          expect(upperLeftCorner.innerHTML).toEqual('');
 
-          fireEvent.keyPress(upperLeftCorner, { key: 'Digit1', which: 18, keyCode: 18 });
-          squares = screen.getAllByTestId('crossword-square');
-          upperLeftCorner = squares[0];
+          fireEvent.keyPress(upperLeftCorner, { key: 'Enter', which: 13, keyCode: 13 });
+          upperLeftCorner = document.getElementById('0,0');
 
-          expect(upperLeftCorner.value).toEqual('');
+          expect(upperLeftCorner.innerHTML).toEqual('');
         });
       });
     });
