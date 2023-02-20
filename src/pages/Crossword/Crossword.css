@@ -6,10 +6,10 @@
     --sideWall: #D62828;
     --floor: rgba(243, 177, 187, 0.82);
 
-    --cubeTop: #F77F00;
-    --cubeSide: #D62828;
+    --cubeTop: #7cc6ff;
+    --cubeSide: #648ed9;
 
-    --cubeFront: rgba(243, 177, 187);
+    --cubeFront: rgba(177, 209, 243);
     --brShadow: -6px 6px 15px rgba(0,0,0,0.5);
     --tlShadow: 6px -6px 15px rgba(255,255,255,0.8);
 }
@@ -110,18 +110,18 @@
 
 #crossword-info {
     font-size: 1.5rem;
-    color: #f5a5c5;
-    background-color: rgba(243, 177, 187, 0.82);
+    color: rgb(165 203 245);
+    background-color: rgba(177 209 243);
     text-shadow:
             -0.0075em 0.0075em 3px white,
             -0.0075em 0.0075em 3px white,
-            0.005em 0.005em 0 #f5a5c5,
-            0.01em 0.01em 0 #f09ab6,
-            0.015em 0.015em 0 #e91e63,
-            0.02em 0.02em 2px #e91e63,
-            0.025em 0.025em 2px #e91e63,
-            0.03em 0.03em 2px #e91e63,
-            0.035em 0.035em 2px #e91e63;
+            0.005em 0.005em 0 #a5e9f5,
+            0.01em 0.01em 0 #9ae3f0,
+            0.015em 0.015em 0 #1e75e9,
+            0.02em 0.02em 2px #1e75e9,
+            0.025em 0.025em 2px #1e75e9,
+            0.03em 0.03em 2px #1e75e9,
+            0.035em 0.035em 2px #1e75e9;
 
 
     font-weight: bold;
