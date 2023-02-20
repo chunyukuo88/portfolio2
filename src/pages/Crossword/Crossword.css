@@ -39,22 +39,22 @@
     left: 50rem;
     bottom: 21.25rem;
 
-    width: 30rem;
+    width: 20rem;
     height: 34.30rem;
     background: var(--sideWall);
     z-index: -1;
-    transform: skewY(45deg) translateY(-10rem);
+    transform: skewY(45deg) translateY(-15rem);
 }
 #floor {
     position: relative;
     top: 34.30rem;
     left: 25rem;
     width: 50rem;
-    height: 30rem;
+    height: 20rem;
     z-index: -3;
 
     background: var(--floor);
-    transform: skewX(45deg) translateX(-10rem) translateY(-12rem);
+    transform: skewX(45deg) translateX(-15rem) translateY(-12rem);
 }
 
 
