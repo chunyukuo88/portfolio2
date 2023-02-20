@@ -36,17 +36,12 @@ function App() {
             <Route exact path={routes.login} element={<LoginPage />}/>
             <Route exact path={routes.puzzle} element={<Crossword />}/>
             <Route exact path={routes.blog} element={<BlogPage />}/>
-            <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
             <Route exact path={routes.publishCrossword} element={<RequireAuth><PublishCrosswordPanel /></RequireAuth>} />
           </Routes>
         </div>
       </Router>
     </div>
   );
-}
-
-function Profile(){
-  return <>PROFILE! You are authenticated.</>;
 }
 
 function HomePage(){
