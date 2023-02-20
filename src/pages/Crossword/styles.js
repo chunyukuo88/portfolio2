@@ -1,6 +1,6 @@
 export const styles = {
   clueNumber: {
-    color: 'gray',
+    color: '#1e75e9',
     fontSize: '0.75rem',
     left: '0.25rem',
     position: 'absolute',
@@ -15,7 +15,7 @@ export const styles = {
     justifyContent: 'space-evenly',
   },
   currentSquare: {
-    backgroundColor: 'cyan',
+    backgroundColor: '#7590c1',
     caretColor: 'transparent',
     fontSize: '2rem',
     height: '3rem',
@@ -32,7 +32,7 @@ export const styles = {
     flexDirection: 'row',
   },
   square: {
-    backgroundColor: 'white',
+    backgroundColor: '#cfdee8',
     caretColor: 'transparent',
     fontSize: '2rem',
     height: '3rem',

@@ -4,8 +4,7 @@ import LinkedIn from '../../common/icons/contact_LinkedIn.svg';
 import YouTube from '../../common/icons/contact_YouTube.svg';
 import './ContactLinks.css';
 
-export const ContactLinks = () => {
-  return (
+export const ContactLinks = () => (
     <ul id='contact-icons-array'>
       <li className='contact-coin'>
         <a href='https://github.com/chunyukuo88/' target='_blank' rel="noreferrer" aria-hidden='true'>
@@ -28,5 +27,4 @@ export const ContactLinks = () => {
         </a>
       </li>
     </ul>
-  )
-}
+  );

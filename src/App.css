@@ -9,7 +9,7 @@
 }
 
 .content-below-header {
-  transform: translateY(-8rem);
+  transform: translateY(-14rem);
 }
 
 .main-page-container {
@@ -17,13 +17,13 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: 15rem;
-  height: 65vh;
+  height: 63vh;
 }
 
 .banner-and-menu-wrapper {
   display: flex;
   flex-direction: row;
-  transform: translateY(4rem);
+  transform: translateY(14rem);
 }
 
 #alex-gochenour {

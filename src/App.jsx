@@ -53,22 +53,16 @@ function Profile(){
 function HomePage(){
   const language = useSelector((state) => state.language.value);
   const username = useSelector((state) => state.auth.user);
-  const [displayContactInfo, setDisplayContactInfo] = useState(false);
   const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
-  // const LinkStyling = { color: '#cccccc', textDecoration: 'none', textTransform: 'uppercase'};
   const navigate = useNavigate();
 
   return (
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
-          <li role='button' onClick={() => setDisplayAboutBlock(true)} className='menu-block'>
+          <li role='button' onClick={() => setDisplayAboutBlock(!displayAboutBlock)} className='menu-block'>
             <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
             <div>{strings.about[language]}</div>
-          </li>
-          <li role='button' onClick={() => setDisplayContactInfo(true)} className='menu-block'>
-            <span><img className='main-icons' src={Contact} alt='Contact icon'/></span>
-            <div>{strings.contact[language]}</div>
           </li>
           <li role='button' onClick={() => navigate(routes.blog)} className='menu-block'>
             <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
@@ -107,7 +101,7 @@ function HomePage(){
         <div />
         {displayAboutBlock ? <AboutBlockWrapper visible={displayAboutBlock} /> : null}
       </div>
-      {displayContactInfo ? <ContactWrapper visible={displayContactInfo} /> : null}
+      <ContactWrapper />
     </main>
   );
 }

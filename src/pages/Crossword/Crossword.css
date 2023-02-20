@@ -2,13 +2,28 @@
     --gridWidth: 12.5rem;
     --gridHeight: 18.75rem;
     --sideFaceTranslation: -6.25rem;
-    --backWall: #d3cda8;
-    --sideWall: #a29e82;
-    --floor: #ffe191;
+    --backWall: rgb(153, 188, 225);
+    --sideWall: var(--cubeSide);
+    --floor: var(--cubeTop);
 
-    --cubeTop: #ffe191;
-    --cubeFront: #fef6c9;
-    --cubeSide: #a29e82;
+    --cubeTop: #bacbd6;
+    --cubeSide: #7590c1;
+
+    --cubeFront: rgba(177, 209, 243);
+    --brShadow: -6px 6px 15px rgba(0,0,0,0.5);
+    --tlShadow: 6px -6px 15px rgba(255,255,255,0.8);
+    --neumorphicFontColor: rgb(165 203 245);
+    --neumorphicBackground: rgba(177 209 243);
+    --neumorphicShadow:
+            -0.0075em 0.0075em 3px white,
+            -0.0075em 0.0075em 3px white,
+            0.005em 0.005em 0 #a5e9f5,
+            0.01em 0.01em 0 #9ae3f0,
+            0.015em 0.015em 0 #1e75e9,
+            0.02em 0.02em 2px #1e75e9,
+            0.025em 0.025em 2px #1e75e9,
+            0.03em 0.03em 2px #1e75e9,
+            0.035em 0.035em 2px #1e75e9;
 }
 
 #back-wall {
@@ -24,22 +39,22 @@
     left: 50rem;
     bottom: 21.25rem;
 
-    width: 30rem;
+    width: 20rem;
     height: 34.30rem;
     background: var(--sideWall);
     z-index: -1;
-    transform: skewY(45deg) translateY(-10rem);
+    transform: skewY(45deg) translateY(-15rem);
 }
 #floor {
     position: relative;
     top: 34.30rem;
     left: 25rem;
     width: 50rem;
-    height: 30rem;
+    height: 20rem;
     z-index: -3;
 
     background: var(--floor);
-    transform: skewX(45deg) translateX(-10rem) translateY(-12rem);
+    transform: skewX(45deg) translateX(-15rem) translateY(-12rem);
 }
 
 
@@ -58,32 +73,32 @@
     background: var(--cubeTop);
     transform: skewX(45deg) translateX(calc(var(--sideFaceTranslation) * 2));
     width: 18.75rem;
-    transition: 0.5s;
+    transition: 0.2s;
 }
 .top-face-clicked {
-    border-radius: 1rem 1rem 0 0;
+    border-radius: 3rem 3rem 0 0;
     cursor: pointer;
     transform: skewX(0deg) translateX(var(--sideFaceTranslation));
     width: 18.75rem;
     background: var(--cubeFront);
-    transition: 0.5s;
+    transition: 0.2s;
 }
 .west-face-not-clicked {
     background: var(--cubeSide);
     transform: skewY(45deg) translateX(-31.25rem) translateY(37.5rem);
     height: 18.75rem;
     width: 12.5rem;
-    transition: 0.5s;
+    transition: 0.2s;
     cursor: pointer;
 }
 .west-face-clicked {
-    border-radius: 1rem 0 0 0;
+    border-radius: 3rem 0 0 0;
     transform: skewY(0deg) translateX(-31.25rem) translateY(12.5rem);
-    background: var(--cubeFront);
     cursor: pointer;
     height: 18.75rem;
     width: 12.5rem;
-    transition: 0.5s;
+    transition: 0.2s;
+    background: var(--cubeFront);
 }
 #cube-face-front {
     background: var(--cubeFront);
@@ -106,19 +121,37 @@
 }
 
 #crossword-info {
-    color: black;
+    font-size: 1.5rem;
+    color: var(--neumorphicFontColor);
+    background-color: var(--neumorphicBackground);
+    text-shadow: var(--neumorphicShadow);
+
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
     text-align: center;
 }
 
 .clues-box {
-    padding: 1rem;
+    padding: 0 1rem 0 1rem;
 }
 
 .clues-direction {
+    text-transform: uppercase;
     text-align: center;
+}
+
+.clues-direction-clicked {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
+    color: var(--neumorphicFontColor);
+    background-color: var(--neumorphicBackground);
+    text-shadow: var(--neumorphicShadow);
 }
 
 .clue {
     text-align: left;
-    padding: 0.125rem;
+    /*color: #bb3838;*/
+    color: black;
 }

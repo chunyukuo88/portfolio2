@@ -5,7 +5,6 @@ import strings from '../../common/strings';
 import ReactGA from 'react-ga4';
 import { getData } from '../../common/utils';
 import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
-import { LinkStyling } from '../../common/globalStyles';
 import { Link } from 'react-router-dom';
 import './Crossword.css';
 import { routes } from '../../routes';
@@ -89,13 +88,23 @@ export default function Crossword(){
     return userHasWon;
   };
 
+  const auxKeys = ['Alt', 'Shift', 'Control', 'Escape', 'Meta', 'ContextMenu', 'Enter', 'Home', 'End', 'ScrollLock', 'PageUp', 'PageDown', 'Insert'];
+  const deleteKeys = ['Delete', 'Backspace'];
   const keyDownHandler = (event, outerIndex, innerIndex) => {
     const { key } = event;
+    console.log(key);
     if (nonAlphabetics.includes(key)) {
       return processMovementKey(key, outerIndex, innerIndex);
     }
+    if (auxKeys.includes(key)) return;
+    if (deleteKeys.includes(key)) {
+      const updatedGrid = JSON.parse(JSON.stringify(grid));
+      updatedGrid[outerIndex][innerIndex].value = '';
+      return dispatch(updateGrid(updatedGrid));
+    }
     const updatedGrid = JSON.parse(JSON.stringify(grid));
     updatedGrid[outerIndex][innerIndex].value = key;
+    determineIfUserWon();
     return dispatch(updateGrid(updatedGrid));
   };
 
@@ -103,7 +112,7 @@ export default function Crossword(){
     const cluesAcross = crosswordData.cluesAcross.split(',');
     return (
       <div className='clues-box'>
-        <h3 className='clues-direction'>Across:</h3>
+        <h3 className={westFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Across:</h3>
         {cluesAcross.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
       </div>
     );
@@ -113,7 +122,7 @@ export default function Crossword(){
     const cluesDown = crosswordData.cluesDown.split(',');
     return (
       <div className='clues-box'>
-        <h3 className='clues-direction'>Down:</h3>
+        <h3 className={topFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Down:</h3>
         {cluesDown.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
       </div>
     );
@@ -129,11 +138,11 @@ export default function Crossword(){
   const Title = () => {
     return crosswordData
       ? <section id='crossword-info'>
-          <h2>{crosswordData.title}</h2>
+          <h2>{`"${crosswordData.title}"`}</h2>
           <h3>By {crosswordData.author}</h3>
           <h3>{convertTimestamp(crosswordData.created_at)}</h3>
         </section>
-      : strings.loading[language];
+      : <Loading />;
   };
 
   const linkStyle = {
@@ -142,6 +151,8 @@ export default function Crossword(){
     textTransform: 'uppercase',
     width: '3rem',
   };
+
+  const Loading = () => <p>{strings.loading[language]}</p>;
 
   return (
     <>
@@ -154,7 +165,7 @@ export default function Crossword(){
                   return (
                     <div style={styles.squareWrapper} key={innerIndex}>
                       <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
-                      <input
+                      <div
                         data-testid='crossword-square'
                         id={`${outerIndex},${innerIndex}`}
                         autoComplete='off'
@@ -165,7 +176,9 @@ export default function Crossword(){
                         onClick={() => clickHandler(outerIndex, innerIndex)}
                         onChange={determineIfUserWon}
                         onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                      />
+                      >
+                        {grid[outerIndex][innerIndex].value}
+                      </div>
                     </div>
                   )})}
               </div>
@@ -184,7 +197,7 @@ export default function Crossword(){
             >
               {crosswordData
                 ? <CluesDown crosswordData={crosswordData}/>
-                : <p>{strings.loading[language]}</p>
+                : <Loading />
               }
             </div>
             <div
@@ -194,7 +207,7 @@ export default function Crossword(){
             >
               {crosswordData
                 ? <CluesAcross crosswordData={crosswordData}/>
-                : <p>{strings.loading[language]}</p>
+                : <Loading />
               }
             </div>
             <div id='cube-face-front' >
