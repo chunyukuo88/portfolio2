@@ -18,7 +18,6 @@ import { routes } from './routes.js';
 
 import Admin from '../src/common/icons/admin.svg';
 import LanguageIcon from '../src/common/icons/language.svg';
-import Contact from '../src/common/icons/contact.svg';
 import Puzzle from '../src/common/icons/puzzle.svg';
 import BlogIcon from '../src/common/icons/blog.svg';
 import AboutIcon from '../src/common/icons/about.svg';
@@ -64,11 +63,11 @@ function HomePage(){
             <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
             <div>{strings.about[language]}</div>
           </li>
-          <li role='button' onClick={() => navigate(routes.blog)} className='menu-block'>
+          <li id='blog-button' role='button' onClick={() => navigate(routes.blog)} className='menu-block'>
             <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
             <Link to={routes.blog}>{strings.blog[language]}</Link>
           </li>
-          <li role='button' onClick={() => navigate(routes.puzzle)} className='menu-block'>
+          <li id='puzzle-button' role='button' onClick={() => navigate(routes.puzzle)} className='menu-block'>
             <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
             <Link to={routes.puzzle}>{strings.puzzle[language]}</Link>
           </li>
@@ -84,7 +83,7 @@ function HomePage(){
             <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
             <div><Language/></div>
           </li>
-          <li role='button' onClick={() => navigate(routes.login)} className='menu-block'>
+          <li id='login-button' role='button' onClick={() => navigate(routes.login)} className='menu-block'>
             <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
             <Link to={routes.login} >
               {(username)

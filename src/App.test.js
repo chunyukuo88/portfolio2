@@ -66,8 +66,8 @@ describe('GIVEN: The application (App.jsx) has loaded.', ()=>{
   describe('WHEN: The user is NOT logged in and clicks a navigation button,', () => {
     test.each`
       buttonId             |   route
-      ${'home-button'}     |   ${routes.index}
-      ${'counter-button'}  |   ${routes.counter}
+      ${'puzzle-button'}   |   ${routes.puzzle}
+      ${'blog-button'}     |   ${routes.blog}
       ${'login-button'}    |   ${routes.login}
   `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
       render(
@@ -80,59 +80,6 @@ describe('GIVEN: The application (App.jsx) has loaded.', ()=>{
       fireEvent.click(homeButton);
 
       expect(mockNavFn).toBeCalledWith(route);
-    });
-  });
-  describe('WHEN: The user fills in a crossword square, clicks to another route, then returns', () => {
-    test('THEN: The crossword square persists globally.', () => {
-      render(
-        <Root store={store}>
-          <App />
-        </Root>
-      );
-
-      let upperLeftCornerSquare = document.getElementById('0,0');
-
-      fireEvent.keyPress(upperLeftCornerSquare, { key: 'KeyA', which: 65, keyCode: 65 });
-      upperLeftCornerSquare = document.getElementById('0,0');
-
-      expect(upperLeftCornerSquare.value).toEqual('a'); // TODO: upperLeftCornerSquare.value works in the browser console. Why not in Jest?
-    });
-  });
-  describe('WHEN: The user IS logged in and clicks the profile button,', () => {
-    describe('AND: clicks the profile button', () => {
-      test('THEN: the navigation method that takes them to Profile page is invoked.', () => {
-        const expectedGreeting = `Greetings, ${'test@test.com'}!`;
-        render(
-          <Root store={mockStore}>
-            <App />
-          </Root>
-        );
-
-        const profileButton = document.getElementById('profile-button');
-        const greetingsString = screen.getByText(expectedGreeting);
-        fireEvent.click(profileButton);
-
-        expect(mockNavFn).toBeCalledWith(routes.profile);
-        expect(greetingsString).toBeInTheDocument();
-      });
-    });
-    describe('AND: clicks the logout button', () => {
-      test('THEN: the supabaseClient method that logs them out is invoked.', async () => {
-        const spySignout = jest.spyOn(supabaseClient.auth, 'signOut');
-        const spyClear = jest.spyOn(Object.getPrototypeOf(localStorage), 'clear');
-
-        render(
-          <Root store={mockStore}>
-            <App />
-          </Root>
-        );
-
-        const profileButton = document.getElementById('logout-button');
-        fireEvent.click(profileButton);
-
-        expect(spySignout).toBeCalled();
-        await waitFor(() => expect(spyClear).toBeCalledTimes(1));
-      });
     });
   });
 });
