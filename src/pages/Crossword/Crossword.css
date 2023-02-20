@@ -61,7 +61,7 @@
     background: var(--cubeTop);
     transform: skewX(45deg) translateX(calc(var(--sideFaceTranslation) * 2));
     width: 18.75rem;
-    transition: 0.5s;
+    transition: 0.2s;
 }
 .top-face-clicked {
     border-radius: 3rem 3rem 0 0;
@@ -69,14 +69,14 @@
     transform: skewX(0deg) translateX(var(--sideFaceTranslation));
     width: 18.75rem;
     background: var(--cubeFront);
-    transition: 0.5s;
+    transition: 0.2s;
 }
 .west-face-not-clicked {
     background: var(--cubeSide);
     transform: skewY(45deg) translateX(-31.25rem) translateY(37.5rem);
     height: 18.75rem;
     width: 12.5rem;
-    transition: 0.5s;
+    transition: 0.2s;
     cursor: pointer;
 }
 .west-face-clicked {
@@ -85,7 +85,7 @@
     cursor: pointer;
     height: 18.75rem;
     width: 12.5rem;
-    transition: 0.5s;
+    transition: 0.2s;
     background: var(--cubeFront);
 }
 #cube-face-front {
@@ -109,9 +109,9 @@
 }
 
 #crossword-info {
-    background-color: rgba(243, 177, 187, 0.82);
     font-size: 1.5rem;
     color: #f5a5c5;
+    background-color: rgba(243, 177, 187, 0.82);
     text-shadow:
             -0.0075em 0.0075em 3px white,
             -0.0075em 0.0075em 3px white,
@@ -131,14 +131,34 @@
 }
 
 .clues-box {
-    padding: 1rem;
+    padding: 0 1rem 0 1rem;
 }
 
 .clues-direction {
+    text-transform: uppercase;
     text-align: center;
+}
+
+.clues-direction-clicked {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
+    color: #f5a5c5;
+    background-color: rgba(243, 177, 187, 0.82);
+    text-shadow:
+            -0.0075em 0.0075em 3px white,
+            -0.0075em 0.0075em 3px white,
+            0.005em 0.005em 0 #f5a5c5,
+            0.01em 0.01em 0 #f09ab6,
+            0.015em 0.015em 0 #e91e63,
+            0.02em 0.02em 2px #e91e63,
+            0.025em 0.025em 2px #e91e63,
+            0.03em 0.03em 2px #e91e63,
+            0.035em 0.035em 2px #e91e63;
 }
 
 .clue {
     text-align: left;
-    padding: 0.125rem;
+    /*color: #bb3838;*/
+    color: black;
 }

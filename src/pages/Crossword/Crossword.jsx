@@ -5,7 +5,6 @@ import strings from '../../common/strings';
 import ReactGA from 'react-ga4';
 import { getData } from '../../common/utils';
 import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
-import { LinkStyling } from '../../common/globalStyles';
 import { Link } from 'react-router-dom';
 import './Crossword.css';
 import { routes } from '../../routes';
@@ -103,7 +102,7 @@ export default function Crossword(){
     const cluesAcross = crosswordData.cluesAcross.split(',');
     return (
       <div className='clues-box'>
-        <h3 className='clues-direction'>Across:</h3>
+        <h3 className={westFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Across:</h3>
         {cluesAcross.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
       </div>
     );
@@ -113,7 +112,7 @@ export default function Crossword(){
     const cluesDown = crosswordData.cluesDown.split(',');
     return (
       <div className='clues-box'>
-        <h3 className='clues-direction'>Down:</h3>
+        <h3 className={topFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Down:</h3>
         {cluesDown.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
       </div>
     );

@@ -1,6 +1,6 @@
 export const styles = {
   clueNumber: {
-    color: 'gray',
+    color: '#bb3838',
     fontSize: '0.75rem',
     left: '0.25rem',
     position: 'absolute',
@@ -32,7 +32,7 @@ export const styles = {
     flexDirection: 'row',
   },
   square: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(234,195,201,0.82)',
     caretColor: 'transparent',
     fontSize: '2rem',
     height: '3rem',
