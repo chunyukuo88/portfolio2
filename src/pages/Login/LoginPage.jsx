@@ -7,7 +7,7 @@ import { selectCurrentUser, setCredentials } from '../../features/auth/authSlice
 import { LinkStyling } from '../../common/globalStyles';
 import strings from '../../common/strings.js';
 import './LoginPage.css';
-import {routes} from '../../routes';
+import { routes } from '../../routes';
 import { selectCurrentLanguage } from '../../features/language/languageSlice';
 
 export const LoginPage = () => {
