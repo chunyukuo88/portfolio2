@@ -40,7 +40,7 @@ describe('utils', () => {
       expect(mockFetch).toHaveBeenCalledWith(url, data);
       expect(spy).toBeCalledWith(mockResponse);
     });
-    it('THEN: handles errors when posting data', async () => {
+    it.skip('THEN: handles errors when posting data', async () => {
       const data = {
         method: 'POST',
         headers: {

@@ -27,7 +27,7 @@ export default function Crossword(){
   const dispatch = useDispatch();
 
   useEffect( () => {
-    ReactGA.send({ hitType: 'pageview', page: '/puzzle' });
+    ReactGA.send({ hitType: 'pageview', page: routes.puzzle });
     getData(process.env.REACT_APP_GET_CROSSWORD_INFO)
       .then(data => {
         const newestPuzzle = data[data.length - 1];
