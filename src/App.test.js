@@ -92,7 +92,7 @@ describe('App.jsx', () => {
             <App />
           </Root>
         );
-        const publishPuzzleBlock = document.querySelectorAll('.menu-block')[3];
+        const publishPuzzleBlock = document.querySelectorAll('.menu-block')[2];
         fireEvent.click(publishPuzzleBlock);
 
         expect(mockNavFn).toBeCalledWith(routes.publishCrossword);
