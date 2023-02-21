@@ -1,5 +1,5 @@
 import App from './App';
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import strings from './common/strings';
 import 'react-router-dom';
 import { routes } from './routes';
@@ -83,23 +83,6 @@ describe('App.jsx', () => {
         expect(mockNavFn).toBeCalledWith(route);
       });
     });
-    // describe('WHEN: the user clicks the About block on the main menu,', () => {
-    //   it('THEN: the About block appears.', () => {
-    //     render(
-    //       <Root store={store}>
-    //         <App />
-    //       </Root>
-    //     );
-    //
-    //     let aboutBlock = document.querySelector('.about-block');
-    //     expect(aboutBlock).not.toBeInTheDocument();
-    //     const aboutBlockSummoner = document.querySelectorAll('.menu-block')[0];
-    //     fireEvent.click(aboutBlockSummoner);
-    //
-    //     aboutBlock = document.querySelector('.about-block');
-    //     expect(aboutBlock).toBeInTheDocument();
-    //   });
-    // });
   });
   describe('GIVEN: the user has logged in', () => {
     describe('WHEN: the user clicks the publish crossword puzzle menu ', () => {
