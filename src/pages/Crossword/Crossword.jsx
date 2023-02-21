@@ -4,16 +4,22 @@ import { styles } from './styles.js';
 import strings from '../../common/strings';
 import ReactGA from 'react-ga4';
 import { getData } from '../../common/utils';
-import { updateGrid, declareVictory } from '../../features/crossword/crosswordSlice';
+import {
+  updateGrid, 
+  declareVictory, 
+  selectCurrentGrid, 
+  selectUserHasWon
+} from '../../features/crossword/crosswordSlice';
 import { Link } from 'react-router-dom';
 import './Crossword.css';
 import { routes } from '../../routes';
+import { selectCurrentLanguage } from '../../features/language/languageSlice';
 
 
 export default function Crossword(){
-  const grid = useSelector((state) => state.crossword.grid);
-  const userHasWon = useSelector((state) => state.crossword.userWon);
-  const language = useSelector((state) => state.language.value);
+  const grid = useSelector(selectCurrentGrid);
+  const userHasWon = useSelector(selectUserHasWon);
+  const language = useSelector(selectCurrentLanguage);
   const [focused, setFocused] = useState(undefined);
   const [crosswordData, setCrosswordData] = useState(undefined);
   const [westFaceClicked, setWestFaceClicked] = useState(false);
@@ -71,7 +77,7 @@ export default function Crossword(){
     return setFocused([i,j]);
   };
 
-  const determineIfUserWon = () => {
+  const determineIfUserWon = (grid) => {
     let userHasWon = true;
     let solutionIndex = 0;
     outerLoop: for (let i = 0; i < grid.length; i++) {
@@ -103,8 +109,8 @@ export default function Crossword(){
     }
     const updatedGrid = JSON.parse(JSON.stringify(grid));
     updatedGrid[outerIndex][innerIndex].value = key;
-    determineIfUserWon();
-    return dispatch(updateGrid(updatedGrid));
+    dispatch(updateGrid(updatedGrid));
+    return determineIfUserWon(grid);
   };
 
   const CluesAcross = ({ crosswordData }) => {
@@ -137,7 +143,7 @@ export default function Crossword(){
   const Title = () => {
     return crosswordData
       ? <section id='crossword-info'>
-          <h2>{`"${crosswordData.title}"`}</h2>
+          <h2>{`'${crosswordData.title}'`}</h2>
           <h3>By {crosswordData.author}</h3>
           <h3>{convertTimestamp(crosswordData.created_at)}</h3>
         </section>

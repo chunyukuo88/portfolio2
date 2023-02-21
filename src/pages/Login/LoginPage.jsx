@@ -3,15 +3,16 @@ import { Link, useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '../../features/auth/useAuth';
 import { Cube } from '../../components/Cube/Cube';
-import { setCredentials } from '../../features/auth/authSlice.js';
+import { selectCurrentUser, setCredentials } from '../../features/auth/authSlice.js';
 import { LinkStyling } from '../../common/globalStyles';
 import strings from '../../common/strings.js';
 import './LoginPage.css';
 import {routes} from '../../routes';
+import { selectCurrentLanguage } from '../../features/language/languageSlice';
 
 export const LoginPage = () => {
-  const language = useSelector((state) => state.language.value);
-  const username = useSelector((state) => state.auth.user);
+  const language = useSelector(selectCurrentLanguage);
+  const username = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { signOut } = useAuth();
@@ -49,7 +50,7 @@ export const LoginPage = () => {
 };
 
 const ChangePassword = () => {
-  const language = useSelector((state) => state.language.value);
+  const language = useSelector(selectCurrentLanguage);
   const userRef = useRef();
   const errRef = useRef();
   const { signIn } = useAuth();
@@ -117,7 +118,7 @@ const ChangePassword = () => {
 };
 
 const LoggedOutContent = () => {
-  const language = useSelector((state) => state.language.value);
+  const language = useSelector(selectCurrentLanguage);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { signIn } = useAuth();

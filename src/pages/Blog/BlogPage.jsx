@@ -6,9 +6,10 @@ import ReactGA from 'react-ga4';
 import strings from '../../common/strings';
 import { LinkStyling } from '../../common/globalStyles';
 import './BlogPage.css';
+import { selectCurrentLanguage } from '../../features/language/languageSlice';
 
 export function BlogPage(){
-  const language = useSelector((state) => state.language.value);
+  const language = useSelector(selectCurrentLanguage);
   useEffect(() => {
     ReactGA.send({ hitType: 'pageview', page: '/blog' });
   }, []);

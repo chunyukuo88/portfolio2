@@ -12,7 +12,6 @@ function Language() {
       case ENGLISH: return CHINESE;
       case CHINESE: return RUSSIAN;
       case RUSSIAN: return ENGLISH;
-      default: return ENGLISH;
     };
   };
 

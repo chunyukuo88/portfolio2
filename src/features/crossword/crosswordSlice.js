@@ -22,6 +22,8 @@ export const crosswordSlice = createSlice({
   }
 });
 
+export const selectCurrentGrid = (state) => state.crossword.grid;
+export const selectUserHasWon = (state) => state.crossword.userWon;
 export const { updateGrid, declareVictory } = crosswordSlice.actions;
 
 export default crosswordSlice.reducer;
