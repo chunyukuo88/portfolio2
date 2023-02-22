@@ -34,26 +34,21 @@ describe('utils', () => {
       const mockResponse = { status: 200 };
       const mockFetch = jest.fn().mockResolvedValue(mockResponse);
       global.fetch = mockFetch;
-      const spy = jest.spyOn(console, 'log');
+      const spy = jest.spyOn(console, 'log').mockImplementationOnce(() => {});
       await postData(url, data);
 
       expect(mockFetch).toHaveBeenCalledWith(url, data);
       expect(spy).toBeCalledWith(mockResponse);
     });
     it.skip('THEN: handles errors when posting data', async () => {
-      const data = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ message: 'Hello, world!' })
-      };
+      fetch.mockImplementationOnce(() => Promise.reject("API is down"));
 
-      const mockError = new Error('Something went wrong.');
-      const mockFetch = jest.fn().mockRejectedValueOnce(mockError);
-      global.fetch = mockFetch;
+      const spy = jest.spyOn(console, 'error');
 
-      await expect(postData(url, data)).resolves.toThrow(mockError);
+      await postData(url, {});
+
+      await expect(spy).toHaveBeenCalledTimes(1);
     });
   });
 });
+

@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useAuth } from '../../features/auth/useAuth';
 import { selectCurrentLanguage } from '../../features/language/languageSlice';
 import strings from '../../common/strings.js';
 
-export const ChangePassword = () => {
+export const ChangePassword = ({ changePassword }) => {
   const language = useSelector(selectCurrentLanguage);
   const userRef = useRef();
-  const { changePassword } = useAuth();
   const [user, setUser] = useState('');
   const [oldPwd, setOldPwd] = useState('');
   const [newPwd, setNewPwd] = useState('');
@@ -17,14 +15,12 @@ export const ChangePassword = () => {
   }, []);
   const handleError = (error) => {
     if (!error?.originalStatus) setErrMsg('No server response');
-    else if (error.originalStatus?.status === 400) setErrMsg('Missing username or password');
-    else if (error.originalStatus?.status === 401) setErrMsg('Unauthorized');
-    else setErrMsg('LoginPage failed');
+    else setErrMsg('Unauthorized');
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await changePassword(user, oldPwd, newPwd).unwrap();
+      await changePassword(user, oldPwd, newPwd);
     } catch (e) {
       handleError(e)
     }
@@ -64,7 +60,7 @@ export const ChangePassword = () => {
           value={newPwd}
           required
         />
-        <button>{strings.resetPassword[language]}</button>
+        <button id='reset-password-button'>{strings.resetPassword[language]}</button>
       </form>
     </section>
   );

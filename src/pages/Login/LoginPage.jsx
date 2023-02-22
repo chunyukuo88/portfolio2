@@ -17,7 +17,7 @@ export const LoginPage = () => {
   const username = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { signIn, signOut } = useAuth();
+  const { changePassword, signIn, signOut } = useAuth();
 
   const logoutHandler = async () => {
     signOut().then(data => {
@@ -33,13 +33,13 @@ export const LoginPage = () => {
   const LoggedInContent = () => (
     <>
       <h1>You are logged in.</h1>
-      <ChangePassword />
+      <ChangePassword changePassword={changePassword} />
       <button onClick={logoutHandler}>Logout</button>
     </>
   );
 
   return (
-    <main style={{ color: 'white'}}>
+    <main id='login-page' style={{ color: 'white'}}>
       { username ? <LoggedInContent /> : <LoggedOutContent signIn={signIn} />}
       <p>
         <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
