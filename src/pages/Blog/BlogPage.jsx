@@ -7,11 +7,12 @@ import strings from '../../common/strings';
 import { LinkStyling } from '../../common/globalStyles';
 import './BlogPage.css';
 import { selectCurrentLanguage } from '../../features/language/languageSlice';
+import { routes } from '../../routes';
 
 export function BlogPage(){
   const language = useSelector(selectCurrentLanguage);
   useEffect(() => {
-    ReactGA.send({ hitType: 'pageview', page: '/blog' });
+    ReactGA.send({ hitType: 'pageview', page: routes.blog });
   }, []);
 
   return (
