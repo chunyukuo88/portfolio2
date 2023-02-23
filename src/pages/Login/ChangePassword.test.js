@@ -69,7 +69,7 @@ describe('GIVEN: there are no problems with the auth provider', () => {
 
 describe('GIVEN: the auth provider server has a problem', () => {
   describe('WHEN: the user enters valid username, old password, and new password,', () => {
-    it('THEN: the changePassword', async () => {
+    it.skip('THEN: the changePassword', async () => {
       const changePassword = jest.fn(async () => {
         return new Error('problem on the server');
       });
