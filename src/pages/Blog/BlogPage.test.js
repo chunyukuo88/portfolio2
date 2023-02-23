@@ -1,15 +1,19 @@
 import { BlogPage } from './BlogPage';
 import { render } from '@testing-library/react';
-import { store } from '../../app/store';
 import ReactGA from 'react-ga4';
-import Root from '../../Root';
+import { Provider } from 'react-redux';
+import { mockStore } from '../../testUtils';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { routes } from '../../routes';
 
 describe('WHEN: The page loads,', () => {
   it('THEN: renders properly', () => {
     render(
-      <Root store={store}>
-        <BlogPage/>
-      </Root>
+      <Provider store={mockStore}>
+        <Router>
+          <BlogPage/>
+        </Router>
+      </Provider>
     );
     const component = document.querySelector('main');
 
@@ -17,11 +21,13 @@ describe('WHEN: The page loads,', () => {
   });
   it('THEN: ReactGA sends info to Google Analytics.', () => {
     const spy = jest.spyOn(ReactGA, 'send');
-    const payload = { hitType: 'pageview', page: '/blog' };
+    const payload = { hitType: 'pageview', page: routes.blog };
     render(
-      <Root store={store}>
-        <BlogPage/>
-      </Root>
+      <Provider store={mockStore}>
+        <Router>
+          <BlogPage/>
+        </Router>
+      </Provider>
     );
 
     expect(spy).toBeCalledTimes(1);

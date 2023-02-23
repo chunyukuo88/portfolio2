@@ -1,5 +1,4 @@
 import './AboutBlock.css';
-import { animated, useTransition } from 'react-spring';
 
 export function AboutBlock(){
   return (
@@ -12,22 +11,4 @@ export function AboutBlock(){
       </section>
     </div>
   )
-}
-
-export function AboutBlockWrapper({ visible }){
-  const transition = useTransition(visible, {
-    from: { x: 1000, y: 0, opacity: 1 },
-    enter: { x: 0, y: 0, opacity: 1 },
-    leave: { x: 0, y: 0, opacity: 1 },
-  });
-  return (
-    <div className='contact-links-wrapper'>
-      {
-        transition((style, item) => item
-          ? <animated.div style={style}><AboutBlock /></animated.div>
-          : ''
-        )
-      }
-    </div>
-  );
 }

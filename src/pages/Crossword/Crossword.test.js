@@ -10,7 +10,6 @@ import ReactGA from 'react-ga4';
 
 import Crossword from './Crossword.jsx';
 import { styles } from './styles.js';
-import { emptyGridTwoByTwo } from './utils';
 import * as UTILS from '../../common/utils';
 
 describe('Crossword.jsx', ()=> {
@@ -21,12 +20,50 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword grid={emptyGridTwoByTwo}/>
+              <Crossword/>
             </Router>
           </Provider>
         );
 
         expect(spy).toBeCalledTimes(1);
+      });
+    });
+    describe('WHEN: The user clicks the side of the cube,', () => {
+      it('THEN: the side transforms.', () => {
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword/>
+            </Router>
+          </Provider>
+        );
+
+        let westFace = screen.getAllByTestId('west-face')[0];
+        expect(westFace).toHaveClass('west-face-not-clicked');
+
+        fireEvent.click(westFace);
+        westFace = screen.getAllByTestId('west-face')[0];
+
+        expect(westFace).toHaveClass('west-face-clicked');
+      });
+    });
+    describe('WHEN: The user clicks the top of the cube,', () => {
+      it('THEN: the top transforms.', () => {
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword />
+            </Router>
+          </Provider>
+        );
+
+        let topFace = screen.getAllByTestId('top-face')[0];
+        expect(topFace).toHaveClass('top-face-not-clicked');
+
+        fireEvent.click(topFace);
+        topFace = screen.getAllByTestId('top-face')[0];
+
+        expect(topFace).toHaveClass('top-face-clicked');
       });
     });
     describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
@@ -35,7 +72,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -56,7 +93,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -82,7 +119,7 @@ describe('Crossword.jsx', ()=> {
             render(
               <Provider store={mockStore}>
                 <Router>
-                  <Crossword grid={emptyGridTwoByTwo}/>
+                  <Crossword />
                 </Router>
               </Provider>
             );
@@ -110,7 +147,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -130,24 +167,28 @@ describe('Crossword.jsx', ()=> {
         });
       });
       describe('WHEN: The user tries to enter a non-alphabet character,', () => {
-        it('THEN: nothing happens.', () => {
+        it.each`
+          key             | which           | keyCode
+          ${'Enter'}      | ${13}           | ${13}
+          ${'Alt'}        | ${18}           | ${18}
+          ${'Control'}    | ${17}           | ${17}
+          ${'Escape'}     | ${27}           | ${27}
+        `('THEN: nothing happens.', ({ key, which, keyCode }) => {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
 
-          let squares = screen.getAllByTestId('crossword-square');
-          let upperLeftCorner = squares[0];
-          expect(upperLeftCorner.value).toEqual('');
+          let upperLeftCorner = document.getElementById('0,0');
+          expect(upperLeftCorner.innerHTML).toEqual('');
 
-          fireEvent.keyPress(upperLeftCorner, { key: 'Digit1', which: 18, keyCode: 18 });
-          squares = screen.getAllByTestId('crossword-square');
-          upperLeftCorner = squares[0];
+          fireEvent.keyPress(upperLeftCorner, { key, which, keyCode });
+          upperLeftCorner = document.getElementById('0,0');
 
-          expect(upperLeftCorner.value).toEqual('');
+          expect(upperLeftCorner.innerHTML).toEqual('');
         });
       });
     });
@@ -157,7 +198,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -170,7 +211,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -185,29 +226,30 @@ describe('Crossword.jsx', ()=> {
       });
       describe('WHEN: the crossword data has been fetched,', () => {
         test.skip('THEN: displays the title and clues', () => {
-          jest.spyOn(UTILS, 'getData').mockImplementationOnce(() => {
-            return [
-              {
-                author: 'Alex Gochenour',
-                cluesAcross: '1. A type of application testing,2. 1990s music token',
-                cluesDown: '1. Hit this when it\'s hot,2. Becton Dickinson and Company',
-                created_at: '2023-02-05T22:22:03+00:00',
-                id: 1,
-                solution: 'abcd',
-                theme: 'Test',
-                title: 'Test',
-              },
-            ];
-          });
+          const mockData = [
+            {
+              author: 'Alex Gochenour',
+              cluesAcross: '1. A type of application testing,2. 1990s music token',
+              cluesDown: '1. Hit this when it\'s hot,2. Becton Dickinson and Company',
+              created_at: '2023-02-05T22:22:03+00:00',
+              id: 1,
+              solution: 'abcd',
+              theme: 'Test',
+              title: 'Test',
+            },
+          ];
+          const mockFetch = jest.fn().mockResolvedValue(mockData);
+          global.fetch = mockFetch;
+
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
-
           const clue = screen.getByText('1. A type of application testing');
+
           expect(clue).toBeInTheDocument();
         });
       });
@@ -215,7 +257,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword grid={emptyGridTwoByTwo}/>
+              <Crossword />
             </Router>
           </Provider>
         );

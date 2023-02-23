@@ -1,7 +1,7 @@
 .about-block {
     background: var(--BlogBlock);
     position: relative;
-    transform: skewY(15deg) translateX(-45rem) translateY(20rem);
+    transform: skewY(15deg) translateX(-42rem) translateY(20rem);
     width: 18rem;
     height: 21rem;
     z-index: 10;

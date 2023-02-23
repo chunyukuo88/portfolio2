@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { ContactWrapper } from './components/ContactTiles/ContactWrapper';
-import { AboutBlockWrapper } from './components/AboutBlock/AboutBlock';
+import { AboutBlock } from './components/AboutBlock/AboutBlock';
+import PublishCrosswordPanel from './pages/Crossword/PublishCrosswordPanel';
 import { useSelector } from 'react-redux';
 import { RequireAuth } from './features/auth/RequireAuth.jsx';
 import ReactGA from 'react-ga4';
@@ -18,12 +18,11 @@ import { routes } from './routes.js';
 
 import Admin from '../src/common/icons/admin.svg';
 import LanguageIcon from '../src/common/icons/language.svg';
-import Contact from '../src/common/icons/contact.svg';
 import Puzzle from '../src/common/icons/puzzle.svg';
 import BlogIcon from '../src/common/icons/blog.svg';
-import AboutIcon from '../src/common/icons/about.svg';
 import './App.css';
-import PublishCrosswordPanel from "./pages/Crossword/PublishCrosswordPanel";
+import { selectCurrentLanguage } from './features/language/languageSlice';
+import { selectCurrentUser } from './features/auth/authSlice';
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
@@ -37,7 +36,6 @@ function App() {
             <Route exact path={routes.login} element={<LoginPage />}/>
             <Route exact path={routes.puzzle} element={<Crossword />}/>
             <Route exact path={routes.blog} element={<BlogPage />}/>
-            <Route exact path={routes.profile} element={<RequireAuth><Profile /></RequireAuth>} />
             <Route exact path={routes.publishCrossword} element={<RequireAuth><PublishCrosswordPanel /></RequireAuth>} />
           </Routes>
         </div>
@@ -46,29 +44,20 @@ function App() {
   );
 }
 
-function Profile(){
-  return <>PROFILE! You are authenticated.</>;
-}
-
 function HomePage(){
-  const language = useSelector((state) => state.language.value);
-  const username = useSelector((state) => state.auth.user);
-  const [displayAboutBlock, setDisplayAboutBlock] = useState(false);
+  const language = useSelector(selectCurrentLanguage);
+  const username = useSelector(selectCurrentUser);
   const navigate = useNavigate();
 
   return (
     <main className='main-page-container'>
       <div className='banner-and-menu-wrapper'>
         <ul className='main-menu-wrapper'>
-          <li role='button' onClick={() => setDisplayAboutBlock(!displayAboutBlock)} className='menu-block'>
-            <span><img className='main-icons' src={AboutIcon} alt='About icon'/></span>
-            <div>{strings.about[language]}</div>
-          </li>
-          <li role='button' onClick={() => navigate(routes.blog)} className='menu-block'>
+          <li id='blog-button' role='button' onClick={() => navigate(routes.blog)} className='menu-block'>
             <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
             <Link to={routes.blog}>{strings.blog[language]}</Link>
           </li>
-          <li role='button' onClick={() => navigate(routes.puzzle)} className='menu-block'>
+          <li id='puzzle-button' role='button' onClick={() => navigate(routes.puzzle)} className='menu-block'>
             <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
             <Link to={routes.puzzle}>{strings.puzzle[language]}</Link>
           </li>
@@ -84,7 +73,7 @@ function HomePage(){
             <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
             <div><Language/></div>
           </li>
-          <li role='button' onClick={() => navigate(routes.login)} className='menu-block'>
+          <li id='login-button' role='button' onClick={() => navigate(routes.login)} className='menu-block'>
             <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
             <Link to={routes.login} >
               {(username)
@@ -99,7 +88,7 @@ function HomePage(){
         <div />
         <AlexBanner />
         <div />
-        {displayAboutBlock ? <AboutBlockWrapper visible={displayAboutBlock} /> : null}
+        <AboutBlock />
       </div>
       <ContactWrapper />
     </main>

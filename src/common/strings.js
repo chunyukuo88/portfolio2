@@ -98,7 +98,7 @@ const strings = {
   },
   puzzle: {
     chinese: '填字遊戲',
-    english: 'Puzzle',
+    english: 'Crossword',
     russian: 'кроссворд',
   },
   resetPassword: {
