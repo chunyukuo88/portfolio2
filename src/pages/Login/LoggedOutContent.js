@@ -23,7 +23,6 @@ export const LoggedOutContent = ({ signIn }) => {
   }, [user, pwd]);
   const handleError = (error) => {
     if (!error?.originalStatus) setErrMsg('No server response');
-    else if (error.originalStatus?.status === 400) setErrMsg('Missing username or password');
     else if (error.originalStatus?.status === 401) setErrMsg('Unauthorized');
     else setErrMsg('LoginPage failed');
   };

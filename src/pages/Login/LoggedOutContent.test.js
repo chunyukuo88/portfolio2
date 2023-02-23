@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import { LoggedOutContent } from './LoggedOutContent';
+import {routes} from "../../routes";
 
 describe('LoggedOutContent', () => {
   describe('GIVEN: The there are no problems signing in', () => {
@@ -25,8 +26,28 @@ describe('LoggedOutContent', () => {
         fireEvent.change(username, { target: { value: un } });
         fireEvent.change(password, { target: { value: pw } });
         fireEvent.click(button);
-
         expect(signIn).toBeCalledWith(un, pw);
+      });
+      it('THEN: the user gets routed to the index.', () => {
+        const signIn = jest.fn();
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <LoggedOutContent signIn={signIn} />
+            </Router>
+          </Provider>
+        );
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+        const button = document.querySelector('.login-button');
+        const un = 'foo';
+        const pw = 'bar';
+
+        fireEvent.change(username, { target: { value: un } });
+        fireEvent.change(password, { target: { value: pw } });
+        fireEvent.click(button);
+        expect(signIn).toBeCalledWith(un, pw);
+        expect(window.location.pathname).toEqual(routes.index);
       });
     });
   });
