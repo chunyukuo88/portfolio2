@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useAuth } from '../../features/auth/useAuth';
 import { useSelector, useDispatch } from 'react-redux';
+import {routes} from "../../routes";
 
 // jest.mock('../../features/auth/useAuth');
 // jest.mock('react-redux');
@@ -30,7 +31,7 @@ describe('GIVEN: user is logged in', () => {
     });
   });
   describe('WHEN: the user clicks the button to log out',() => {
-    it.skip('THEN: the app logs the user out.', async () => {
+    it('THEN: the app logs the user out.', async () => {
       render(
         <Provider store={mockStoreLoggedIn}>
           <Router>
@@ -41,7 +42,9 @@ describe('GIVEN: user is logged in', () => {
       const button = screen.getByText('Logout');
       fireEvent.click(button);
 
-      expect(useDispatch().dispatch).toBeCalled();
+      await waitFor(() => {
+        expect(window.location.pathname).toEqual(routes.index);
+      });
     });
   });
 });
