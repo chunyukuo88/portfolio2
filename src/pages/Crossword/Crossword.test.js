@@ -21,12 +21,50 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword grid={emptyGridTwoByTwo}/>
+              <Crossword/>
             </Router>
           </Provider>
         );
 
         expect(spy).toBeCalledTimes(1);
+      });
+    });
+    describe('WHEN: The user clicks the side of the cube,', () => {
+      it('THEN: the side transforms.', () => {
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword/>
+            </Router>
+          </Provider>
+        );
+
+        let westFace = screen.getAllByTestId('west-face')[0];
+        expect(westFace).toHaveClass('west-face-not-clicked');
+
+        fireEvent.click(westFace);
+        westFace = screen.getAllByTestId('west-face')[0];
+
+        expect(westFace).toHaveClass('west-face-clicked');
+      });
+    });
+    describe('WHEN: The user clicks the top of the cube,', () => {
+      it('THEN: the top transforms.', () => {
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <Crossword />
+            </Router>
+          </Provider>
+        );
+
+        let topFace = screen.getAllByTestId('top-face')[0];
+        expect(topFace).toHaveClass('top-face-not-clicked');
+
+        fireEvent.click(topFace);
+        topFace = screen.getAllByTestId('top-face')[0];
+
+        expect(topFace).toHaveClass('top-face-clicked');
       });
     });
     describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
@@ -35,7 +73,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -56,7 +94,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -82,7 +120,7 @@ describe('Crossword.jsx', ()=> {
             render(
               <Provider store={mockStore}>
                 <Router>
-                  <Crossword grid={emptyGridTwoByTwo}/>
+                  <Crossword />
                 </Router>
               </Provider>
             );
@@ -110,7 +148,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -134,7 +172,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -155,7 +193,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -168,7 +206,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -200,7 +238,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword grid={emptyGridTwoByTwo}/>
+                <Crossword />
               </Router>
             </Provider>
           );
@@ -213,7 +251,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword grid={emptyGridTwoByTwo}/>
+              <Crossword />
             </Router>
           </Provider>
         );

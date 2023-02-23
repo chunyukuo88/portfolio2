@@ -197,6 +197,7 @@ export default function Crossword(){
           <section id='content-cube' >
             <div
               role='button'
+              data-testid='top-face'
               className={topFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
               onClick={() => setTopFaceClicked(!topFaceClicked)}
             >
@@ -207,6 +208,7 @@ export default function Crossword(){
             </div>
             <div
               role='button'
+              data-testid='west-face'
               className={westFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
               onClick={() => setWestFaceClicked(!westFaceClicked)}
             >

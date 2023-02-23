@@ -52,7 +52,7 @@ describe('LoggedOutContent', () => {
     });
   });
   describe('GIVEN: The there are problems signing in', () => {
-    describe('WHEN: The user enters a username and password and submits', () => {
+    describe('WHEN: The user enters invalid username and password and submits', () => {
       it('THEN: the an error is displayed', async () => {
         const signIn = jest.fn(() => {
           return Promise.reject({ originalStatus: { status: 401 }});
