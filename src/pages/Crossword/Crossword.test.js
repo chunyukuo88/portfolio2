@@ -10,7 +10,6 @@ import ReactGA from 'react-ga4';
 
 import Crossword from './Crossword.jsx';
 import { styles } from './styles.js';
-import { emptyGridTwoByTwo } from './utils';
 import * as UTILS from '../../common/utils';
 
 describe('Crossword.jsx', ()=> {
@@ -168,7 +167,13 @@ describe('Crossword.jsx', ()=> {
         });
       });
       describe('WHEN: The user tries to enter a non-alphabet character,', () => {
-        it('THEN: nothing happens.', () => {
+        it.each`
+          key             | which           | keyCode
+          ${'Enter'}      | ${13}           | ${13}
+          ${'Alt'}        | ${18}           | ${18}
+          ${'Control'}    | ${17}           | ${17}
+          ${'Escape'}     | ${27}           | ${27}
+        `('THEN: nothing happens.', ({ key, which, keyCode }) => {
           render(
             <Provider store={mockStore}>
               <Router>
@@ -180,7 +185,7 @@ describe('Crossword.jsx', ()=> {
           let upperLeftCorner = document.getElementById('0,0');
           expect(upperLeftCorner.innerHTML).toEqual('');
 
-          fireEvent.keyPress(upperLeftCorner, { key: 'Enter', which: 13, keyCode: 13 });
+          fireEvent.keyPress(upperLeftCorner, { key, which, keyCode });
           upperLeftCorner = document.getElementById('0,0');
 
           expect(upperLeftCorner.innerHTML).toEqual('');
@@ -221,20 +226,21 @@ describe('Crossword.jsx', ()=> {
       });
       describe('WHEN: the crossword data has been fetched,', () => {
         test.skip('THEN: displays the title and clues', () => {
-          jest.spyOn(UTILS, 'getData').mockImplementationOnce(() => {
-            return [
-              {
-                author: 'Alex Gochenour',
-                cluesAcross: '1. A type of application testing,2. 1990s music token',
-                cluesDown: '1. Hit this when it\'s hot,2. Becton Dickinson and Company',
-                created_at: '2023-02-05T22:22:03+00:00',
-                id: 1,
-                solution: 'abcd',
-                theme: 'Test',
-                title: 'Test',
-              },
-            ];
-          });
+          const mockData = [
+            {
+              author: 'Alex Gochenour',
+              cluesAcross: '1. A type of application testing,2. 1990s music token',
+              cluesDown: '1. Hit this when it\'s hot,2. Becton Dickinson and Company',
+              created_at: '2023-02-05T22:22:03+00:00',
+              id: 1,
+              solution: 'abcd',
+              theme: 'Test',
+              title: 'Test',
+            },
+          ];
+          const mockFetch = jest.fn().mockResolvedValue(mockData);
+          global.fetch = mockFetch;
+
           render(
             <Provider store={mockStore}>
               <Router>
@@ -242,8 +248,8 @@ describe('Crossword.jsx', ()=> {
               </Router>
             </Provider>
           );
-
           const clue = screen.getByText('1. A type of application testing');
+
           expect(clue).toBeInTheDocument();
         });
       });

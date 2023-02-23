@@ -15,7 +15,6 @@ import './Crossword.css';
 import { routes } from '../../routes';
 import { selectCurrentLanguage } from '../../features/language/languageSlice';
 
-
 export default function Crossword(){
   const grid = useSelector(selectCurrentGrid);
   const userHasWon = useSelector(selectUserHasWon);
@@ -56,7 +55,6 @@ export default function Crossword(){
       case nonAlphabetics[1]: return [outerIndex + 1, innerIndex];
       case nonAlphabetics[2]: return [outerIndex, innerIndex - 1];
       case nonAlphabetics[3]: return [outerIndex, innerIndex + 1];
-      default: return [outerIndex, innerIndex];
     }
   };
 
