@@ -1,14 +1,9 @@
-import {LoggedOutContent, LoginPage} from './LoginPage';
+import { LoggedOutContent, LoginPage } from './LoginPage';
 import { mockStore, mockStoreLoggedIn } from '../../testUtils';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { useAuth } from '../../features/auth/useAuth';
-import { useSelector, useDispatch } from 'react-redux';
-import {routes} from "../../routes";
-
-// jest.mock('../../features/auth/useAuth');
-// jest.mock('react-redux');
+import { routes } from '../../routes';
 
 afterEach(() => {
   jest.clearAllMocks();

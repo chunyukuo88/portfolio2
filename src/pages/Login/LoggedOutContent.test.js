@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import { LoggedOutContent } from './LoggedOutContent';
-import {routes} from "../../routes";
+import { routes } from '../../routes';
 
 describe('LoggedOutContent', () => {
   describe('GIVEN: The there are no problems signing in', () => {
@@ -53,8 +53,7 @@ describe('LoggedOutContent', () => {
   });
   describe('GIVEN: The there are problems signing in', () => {
     describe('WHEN: The user enters a username and password and submits', () => {
-      // TODO: Figure out why the error state is not happening in this test.
-      it.skip('THEN: the an error is displayed', async () => {
+      it('THEN: the an error is displayed', async () => {
         const signIn = jest.fn(() => {
           return Promise.reject({ originalStatus: { status: 401 }});
         });
@@ -73,11 +72,40 @@ describe('LoggedOutContent', () => {
 
         fireEvent.change(username, { target: { value: un } });
         fireEvent.change(password, { target: { value: pw } });
-         fireEvent.click(button);
+        fireEvent.click(button);
 
-        const errorMsg = await screen.getByText('Missing username or password');
+        await waitFor(() => {
+          const errorMsg = screen.getByText('Unauthorized');
+          expect(errorMsg).toBeInTheDocument();
+        });
+      });
+    });
+    describe('WHEN: Any other error occurs', () => {
+      it('THEN: displays an error simply stating that the page has failed', async () => {
+        const signIn = jest.fn(() => {
+          return Promise.reject({ originalStatus: { status: 402 }});
+        });
+        render(
+          <Provider store={mockStore}>
+            <Router>
+              <LoggedOutContent signIn={signIn} />
+            </Router>
+          </Provider>
+        );
+        const username = screen.getByTestId('username-input');
+        const password = screen.getByTestId('password-input');
+        const button = document.querySelector('.login-button');
+        const un = 'foo';
+        const pw = 'bar';
 
-        expect(errorMsg).toBeInTheDocument();
+        fireEvent.change(username, { target: { value: un } });
+        fireEvent.change(password, { target: { value: pw } });
+        fireEvent.click(button);
+
+        await waitFor(() => {
+          const errorMsg = screen.getByText('LoginPage failed');
+          expect(errorMsg).toBeInTheDocument();
+        });
       });
     });
   });
