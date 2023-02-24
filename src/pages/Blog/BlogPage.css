@@ -4,9 +4,16 @@
 }
 
 .blog-coming-soon {
+    margin-top: 10%;
     color: white;
 }
 
 .green-cube-wrapper {
-    transform: translateY(100px) translateX(400px);
+    margin-top: 10%;
+}
+
+.blog-coming-soon,
+.green-cube-wrapper,
+.back-to-home {
+    margin-left: 50%;
 }

@@ -1,9 +1,10 @@
 #gochenour-banner-grid {
     display: flex;
     flex-direction: row;
-    transform: skewY(25deg) skewX(-45deg) rotate(15deg) translate(5rem, 17rem);
     max-height: 6.25rem;
     z-index: -40;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .gochenour-banner-cell {

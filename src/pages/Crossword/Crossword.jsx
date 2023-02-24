@@ -159,69 +159,71 @@ export default function Crossword(){
 
   return (
     <>
+      <div id='room-container'>
+        <main id='back-wall'>
+            <section id='content-cube' >
+              <div
+                role='button'
+                data-testid='top-face'
+                className={topFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
+                onClick={() => setTopFaceClicked(!topFaceClicked)}
+              >
+                {crosswordData
+                  ? <CluesDown crosswordData={crosswordData}/>
+                  : <Loading />
+                }
+              </div>
+              <div
+                role='button'
+                data-testid='west-face'
+                className={westFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
+                onClick={() => setWestFaceClicked(!westFaceClicked)}
+              >
+                {crosswordData
+                  ? <CluesAcross crosswordData={crosswordData}/>
+                  : <Loading />
+                }
+              </div>
+              <div id='cube-face-front' >
+                <Title />
+              </div>
+            </section>
+            <div id='side-wall' />
+        </main>
+        <div id='floor' />
+      </div>
       <section id='interactive-section' >
         <div>
-            {grid.map((row, outerIndex) => (
-              <div style={styles.row} key={outerIndex}>
-                {row.map((square, innerIndex) => {
-                  const style = styles[getStyleRuleName(outerIndex, innerIndex)];
-                  return (
-                    <div style={styles.squareWrapper} key={innerIndex}>
-                      <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
-                      <div
-                        data-testid='crossword-square'
-                        id={`${outerIndex},${innerIndex}`}
-                        autoComplete='off'
-                        maxLength='1'
-                        style={style}
-                        tabIndex={-1}
-                        readOnly={userHasWon}
-                        onClick={() => clickHandler(outerIndex, innerIndex)}
-                        onChange={determineIfUserWon}
-                        onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
-                      >
-                        {grid[outerIndex][innerIndex].value}
-                      </div>
+          {grid.map((row, outerIndex) => (
+            <div style={styles.row} key={outerIndex}>
+              {row.map((square, innerIndex) => {
+                const style = styles[getStyleRuleName(outerIndex, innerIndex)];
+                return (
+                  <div style={styles.squareWrapper} key={innerIndex}>
+                    <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
+                    <div
+                      data-testid='crossword-square'
+                      id={`${outerIndex},${innerIndex}`}
+                      autoComplete='off'
+                      maxLength='1'
+                      style={style}
+                      tabIndex={-1}
+                      readOnly={userHasWon}
+                      onClick={() => clickHandler(outerIndex, innerIndex)}
+                      onChange={determineIfUserWon}
+                      onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
+                    >
+                      {grid[outerIndex][innerIndex].value}
                     </div>
-                  )})}
-              </div>
-            ))}
-          </div>
+                  </div>
+                )})}
+            </div>
+          ))}
+        </div>
         <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
           <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
         </div>
       </section>
-      <main id='back-wall'>
-          <section id='content-cube' >
-            <div
-              role='button'
-              data-testid='top-face'
-              className={topFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
-              onClick={() => setTopFaceClicked(!topFaceClicked)}
-            >
-              {crosswordData
-                ? <CluesDown crosswordData={crosswordData}/>
-                : <Loading />
-              }
-            </div>
-            <div
-              role='button'
-              data-testid='west-face'
-              className={westFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
-              onClick={() => setWestFaceClicked(!westFaceClicked)}
-            >
-              {crosswordData
-                ? <CluesAcross crosswordData={crosswordData}/>
-                : <Loading />
-              }
-            </div>
-            <div id='cube-face-front' >
-              <Title />
-            </div>
-          </section>
-          <div id='side-wall' />
-      </main>
-      <div id='floor' />
     </>
   );
 }

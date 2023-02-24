@@ -20,7 +20,7 @@ export function BlogPage(){
       <div className='blog-coming-soon'>
         Blog feature coming soon!
       </div>
-      <p>
+      <p className='back-to-home '>
         <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
       </p>
       <div className='green-cube-wrapper'>

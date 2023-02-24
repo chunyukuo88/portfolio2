@@ -27,19 +27,6 @@ afterEach(() => {
 
 describe('App.jsx', () => {
   describe('GIVEN: The user has not logged in.', ()=>{
-    describe('WHEN: ', ()=>{
-      test('THEN: ', ()=>{
-        render(
-          <Root store={store}>
-            <App />
-          </Root>
-        );
-
-        const app = document.querySelector('.App');
-
-        expect(app).toBeInTheDocument();
-      });
-    });
     describe('WHEN: The user clicks the language button thrice,', () => {
       test('THEN: The site cycles through the localization settings.', () => {
         render(
