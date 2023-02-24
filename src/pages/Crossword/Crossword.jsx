@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import './Crossword.css';
 import { routes } from '../../routes';
 import { selectCurrentLanguage } from '../../features/language/languageSlice';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
 export default function Crossword(){
   const grid = useSelector(selectCurrentGrid);
@@ -160,40 +161,42 @@ export default function Crossword(){
   return (
     <>
       <div id='room-container'>
-        <main id='back-wall'>
-            <section id='content-cube' >
-              <div
-                role='button'
-                data-testid='top-face'
-                className={topFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
-                onClick={() => setTopFaceClicked(!topFaceClicked)}
-              >
-                {crosswordData
-                  ? <CluesDown crosswordData={crosswordData}/>
-                  : <Loading />
-                }
-              </div>
-              <div
-                role='button'
-                data-testid='west-face'
-                className={westFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
-                onClick={() => setWestFaceClicked(!westFaceClicked)}
-              >
-                {crosswordData
-                  ? <CluesAcross crosswordData={crosswordData}/>
-                  : <Loading />
-                }
-              </div>
-              <div id='cube-face-front' >
-                <Title />
-              </div>
-            </section>
-            <div id='side-wall' />
-        </main>
-        <div id='floor' />
+        <ErrorBoundary>
+          <main id='back-wall'>
+              <section id='content-cube' >
+                <div
+                  role='button'
+                  data-testid='top-face'
+                  className={topFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
+                  onClick={() => setTopFaceClicked(!topFaceClicked)}
+                >
+                  {crosswordData
+                    ? <CluesDown crosswordData={crosswordData}/>
+                    : <Loading />
+                  }
+                </div>
+                <div
+                  role='button'
+                  data-testid='west-face'
+                  className={westFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
+                  onClick={() => setWestFaceClicked(!westFaceClicked)}
+                >
+                  {crosswordData
+                    ? <CluesAcross crosswordData={crosswordData}/>
+                    : <Loading />
+                  }
+                </div>
+                <div id='cube-face-front' >
+                  <Title />
+                </div>
+              </section>
+              <div id='side-wall' />
+          </main>
+          <div id='floor' />
+        </ErrorBoundary>
       </div>
       <section id='interactive-section' >
-        <div>
+        <ErrorBoundary>
           {grid.map((row, outerIndex) => (
             <div style={styles.row} key={outerIndex}>
               {row.map((square, innerIndex) => {
@@ -219,7 +222,7 @@ export default function Crossword(){
                 )})}
             </div>
           ))}
-        </div>
+        </ErrorBoundary>
         <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
           <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
         </div>
