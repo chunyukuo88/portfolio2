@@ -22,8 +22,7 @@ export default function Crossword(){
   const language = useSelector(selectCurrentLanguage);
   const [focused, setFocused] = useState(undefined);
   const [crosswordData, setCrosswordData] = useState(undefined);
-  const [westFaceClicked, setWestFaceClicked] = useState(false);
-  const [topFaceClicked, setTopFaceClicked] = useState(false);
+  const [frontFaceClicked, setFrontFaceClicked] = useState(false);
   const dispatch = useDispatch();
 
   useEffect( () => {
@@ -116,7 +115,7 @@ export default function Crossword(){
     const cluesAcross = crosswordData.cluesAcross.split(',');
     return (
       <div className='clues-box'>
-        <h3 className={westFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Across:</h3>
+        <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Across:</h3>
         {cluesAcross.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
       </div>
     );
@@ -126,7 +125,7 @@ export default function Crossword(){
     const cluesDown = crosswordData.cluesDown.split(',');
     return (
       <div className='clues-box'>
-        <h3 className={topFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Down:</h3>
+        <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Down:</h3>
         {cluesDown.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
       </div>
     );
@@ -165,10 +164,8 @@ export default function Crossword(){
           <main id='back-wall'>
               <section id='content-cube' >
                 <div
-                  role='button'
                   data-testid='top-face'
-                  className={topFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
-                  onClick={() => setTopFaceClicked(!topFaceClicked)}
+                  className={frontFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
                 >
                   {crosswordData
                     ? <CluesDown crosswordData={crosswordData}/>
@@ -176,17 +173,19 @@ export default function Crossword(){
                   }
                 </div>
                 <div
-                  role='button'
                   data-testid='west-face'
-                  className={westFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
-                  onClick={() => setWestFaceClicked(!westFaceClicked)}
+                  className={frontFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
                 >
                   {crosswordData
                     ? <CluesAcross crosswordData={crosswordData}/>
                     : <Loading />
                   }
                 </div>
-                <div id='cube-face-front' >
+                <div
+                  role='button'
+                  onClick={() => setFrontFaceClicked(!frontFaceClicked)}
+                  id='cube-face-front'
+                >
                   <Title />
                 </div>
               </section>

@@ -10,7 +10,6 @@ import ReactGA from 'react-ga4';
 
 import Crossword from './Crossword.jsx';
 import { styles } from './styles.js';
-import * as UTILS from '../../common/utils';
 
 describe('Crossword.jsx', ()=> {
   describe('GIVEN: the user is not logged in,', () => {
@@ -28,8 +27,8 @@ describe('Crossword.jsx', ()=> {
         expect(spy).toBeCalledTimes(1);
       });
     });
-    describe('WHEN: The user clicks the side of the cube,', () => {
-      it('THEN: the side transforms.', () => {
+    describe('WHEN: The user clicks the front face of the cube,', () => {
+      it('THEN: the side and top of the cube transform.', () => {
         render(
           <Provider store={mockStore}>
             <Router>
@@ -38,31 +37,17 @@ describe('Crossword.jsx', ()=> {
           </Provider>
         );
 
+        const frontFace = document.getElementById('cube-face-front');
         let westFace = screen.getAllByTestId('west-face')[0];
-        expect(westFace).toHaveClass('west-face-not-clicked');
-
-        fireEvent.click(westFace);
-        westFace = screen.getAllByTestId('west-face')[0];
-
-        expect(westFace).toHaveClass('west-face-clicked');
-      });
-    });
-    describe('WHEN: The user clicks the top of the cube,', () => {
-      it('THEN: the top transforms.', () => {
-        render(
-          <Provider store={mockStore}>
-            <Router>
-              <Crossword />
-            </Router>
-          </Provider>
-        );
-
         let topFace = screen.getAllByTestId('top-face')[0];
+        expect(westFace).toHaveClass('west-face-not-clicked');
         expect(topFace).toHaveClass('top-face-not-clicked');
 
-        fireEvent.click(topFace);
+        fireEvent.click(frontFace);
+        westFace = screen.getAllByTestId('west-face')[0];
         topFace = screen.getAllByTestId('top-face')[0];
 
+        expect(westFace).toHaveClass('west-face-clicked');
         expect(topFace).toHaveClass('top-face-clicked');
       });
     });
