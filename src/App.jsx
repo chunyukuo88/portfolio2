@@ -1,97 +1,48 @@
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { ContactWrapper } from './components/ContactTiles/ContactWrapper';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AboutBlock } from './components/AboutBlock/AboutBlock';
 import PublishCrosswordPanel from './pages/Crossword/PublishCrosswordPanel';
-import { useSelector } from 'react-redux';
 import { RequireAuth } from './features/auth/RequireAuth.jsx';
 import ReactGA from 'react-ga4';
 
 import { LoginPage } from './pages/Login/LoginPage.jsx';
 import { BlogPage } from './pages/Blog/BlogPage';
-import Language from './features/language/Language';
 import Crossword from './pages/Crossword/Crossword';
 import AlexBanner from './components/LightbulbBanners/AlexBanner';
 import GochenourBanner from './components/LightbulbBanners/GochenourBanner';
-
-import strings from './common/strings.js';
 import { routes } from './routes.js';
-
-import Admin from '../src/common/icons/admin.svg';
-import LanguageIcon from '../src/common/icons/language.svg';
-import Puzzle from '../src/common/icons/puzzle.svg';
-import BlogIcon from '../src/common/icons/blog.svg';
+import MainMenu from './components/MainMenu/MainMenu';
 import './App.css';
-import { selectCurrentLanguage } from './features/language/languageSlice';
-import { selectCurrentUser } from './features/auth/authSlice';
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
-function App() {
-  return (
-    <div className='App'>
-      <Router>
-        <div className='content-below-header'>
-          <Routes>
-            <Route exact path={routes.index} element={<HomePage />}/>
-            <Route exact path={routes.login} element={<LoginPage />}/>
-            <Route exact path={routes.puzzle} element={<Crossword />}/>
-            <Route exact path={routes.blog} element={<BlogPage />}/>
-            <Route exact path={routes.publishCrossword} element={<RequireAuth><PublishCrosswordPanel /></RequireAuth>} />
-          </Routes>
-        </div>
-      </Router>
+const App = () => (
+  <>
+    <div className='banners'>
+      <AlexBanner />
+      <GochenourBanner />
     </div>
-  );
-}
+    <Router>
+        <Routes>
+          <Route exact path={routes.index} element={<HomePage />}/>
+          <Route exact path={routes.login} element={<LoginPage />}/>
+          <Route exact path={routes.puzzle} element={<Crossword />}/>
+          <Route exact path={routes.blog} element={<BlogPage />}/>
+          <Route exact path={routes.publishCrossword} element={<RequireAuth><PublishCrosswordPanel /></RequireAuth>} />
+        </Routes>
+    </Router>
+  </>
+);
 
 function HomePage(){
-  const language = useSelector(selectCurrentLanguage);
-  const username = useSelector(selectCurrentUser);
-  const navigate = useNavigate();
-
   return (
-    <main className='main-page-container'>
+    <>
       <div className='banner-and-menu-wrapper'>
-        <ul className='main-menu-wrapper'>
-          <li id='blog-button' role='button' onClick={() => navigate(routes.blog)} className='menu-block'>
-            <span><img className='main-icons' src={BlogIcon} alt='blog icon'/></span>
-            <Link to={routes.blog}>{strings.blog[language]}</Link>
-          </li>
-          <li id='puzzle-button' role='button' onClick={() => navigate(routes.puzzle)} className='menu-block'>
-            <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-            <Link to={routes.puzzle}>{strings.puzzle[language]}</Link>
-          </li>
-          {
-            username
-              ? <li role='button' onClick={() => navigate(routes.publishCrossword)} className='menu-block'>
-                <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-                <Link to={routes.publishCrossword}>Publish Crossword</Link>
-              </li>
-              : null
-          }
-          <li role='button' className='menu-block'>
-            <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
-            <div><Language/></div>
-          </li>
-          <li id='login-button' role='button' onClick={() => navigate(routes.login)} className='menu-block'>
-            <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
-            <Link to={routes.login} >
-              {(username)
-                ? username
-                : strings.admin[language]
-              }
-            </Link>
-          </li>
-        </ul>
-        <div />
-        <GochenourBanner />
-        <div />
-        <AlexBanner />
-        <div />
+        <div/><div/><div/>
+        <MainMenu />
+        <div/>
         <AboutBlock />
       </div>
-      <ContactWrapper />
-    </main>
+    </>
   );
 }
 

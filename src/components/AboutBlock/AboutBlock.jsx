@@ -1,8 +1,10 @@
+import { ContactLinks } from '../ContactTiles/ContactLinks';
 import './AboutBlock.css';
 
 export function AboutBlock(){
   return (
     <div id='shadow'>
+      <ContactLinks />
       <section className='about-block'>
         <div className='about-block-content-wrapper'>
           <p>Hi! I'm Alex Gochenour.</p>
@@ -10,5 +12,6 @@ export function AboutBlock(){
         </div>
       </section>
     </div>
-  )
+  );
 }
+

@@ -1,11 +1,11 @@
 .about-block {
     background: var(--BlogBlock);
     position: relative;
-    transform: skewY(15deg) translateX(-42rem) translateY(20rem);
-    width: 18rem;
-    height: 21rem;
+    width: 24rem;
+    height: 13rem;
     z-index: 10;
-    box-shadow: 1rem 1rem 1rem rgba(0,0,0,0.25);
+    transform: skewY(15deg);
+    box-shadow: 4rem -3rem 3rem 4px rgb(0 0 0 / 25%);
 }
 
 .about-block::before {
@@ -15,7 +15,7 @@
     filter: brightness(0.7);
     transform-origin: right;
     transform: skewX(-45deg) translateY(-2rem) translateX(-1rem);
-    width: 18rem;
+    width: 24rem;
     height: 2rem;
 }
 
@@ -26,9 +26,9 @@
     background: #9f6900;
     filter: brightness(0.7);
     transform-origin: right;
-    transform: skewY(-45deg) translateY(6rem) translateX(18rem);
+    transform: skewY(-45deg) translateY(12rem) translateX(24rem);
     width: 2rem;
-    height: 21rem;
+    height: 13rem;
 }
 
 .about-block-content-wrapper {
