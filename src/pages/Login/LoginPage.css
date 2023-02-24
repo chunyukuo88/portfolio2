@@ -1,5 +1,5 @@
 .cube-wrapper {
-    transform: translateY(3rem) translateX(25rem);
+    margin-left: 65%;
 }
 
 .logged-out-section,

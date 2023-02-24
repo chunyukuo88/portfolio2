@@ -40,7 +40,7 @@ export const LoginPage = () => {
   return (
     <main id='login-page' style={{ color: 'white'}}>
       { username ? <LoggedInContent /> : <LoggedOutContent signIn={signIn} />}
-      <p>
+      <p className='back-to-home'>
         <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
       </p>
       <div className='cube-wrapper'>
