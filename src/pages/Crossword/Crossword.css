@@ -73,7 +73,6 @@
     transform: translateX(15.5rem) translateY(15.5rem);;
 }
 .top-face-not-clicked {
-    cursor: pointer;
     background: var(--cubeTop);
     transform: skewX(45deg) translateX(calc(var(--sideFaceTranslation) * 2));
     width: 18.75rem;
@@ -81,7 +80,6 @@
 }
 .top-face-clicked {
     border-radius: 3rem 3rem 0 0;
-    cursor: pointer;
     transform: skewX(0deg) translateX(var(--sideFaceTranslation));
     width: 18.75rem;
     background: var(--cubeFront);
@@ -106,6 +104,7 @@
 }
 #cube-face-front {
     background: var(--cubeFront);
+    cursor: pointer;
     transform: translateX(var(--sideFaceTranslation));
     width: 18.75rem;
     z-index: 1000;
