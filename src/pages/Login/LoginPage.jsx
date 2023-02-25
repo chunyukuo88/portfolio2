@@ -1,19 +1,18 @@
 import { Link, useNavigate} from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ChangePassword } from './ChangePassword';
 import { useAuth } from '../../features/auth/useAuth';
 import { Cube } from '../../components/Cube/Cube';
-import { selectCurrentUser, setCredentials } from '../../features/auth/authSlice.js';
+import { setCredentials } from '../../features/auth/authSlice.js';
 import { LinkStyling } from '../../common/globalStyles';
-import { selectCurrentLanguage } from '../../features/language/languageSlice';
+import { useCommonGlobals } from '../../common/hooks';
 import { LoggedOutContent } from './LoggedOutContent';
 import strings from '../../common/strings.js';
 import { routes } from '../../routes';
 import './LoginPage.css';
 
 export const LoginPage = () => {
-  const language = useSelector(selectCurrentLanguage);
-  const username = useSelector(selectCurrentUser);
+  const [ language, username ] = useCommonGlobals(routes.login);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { changePassword, signIn, signOut } = useAuth();
