@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
@@ -33,6 +33,9 @@ export default function Crossword(){
       .catch((e) => new Error(e));
   }, []);
 
+  useLayoutEffect(() => {
+    crosswordData && determineIfUserWon(grid);
+  }, [grid]);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
     if (userHasWon) return 'squareVictory';
@@ -90,23 +93,16 @@ export default function Crossword(){
     return userHasWon;
   };
 
-  const auxKeys = ['Alt', 'Shift', 'Control', 'Escape', 'Meta', 'ContextMenu', 'Enter', 'Home', 'End', 'ScrollLock', 'PageUp', 'PageDown', 'Insert'];
-  const deleteKeys = ['Delete', 'Backspace'];
+  const auxKeys = [ 'Delete', 'Backspace', 'Alt', 'Shift', 'Control', 'Escape', 'Meta', 'ContextMenu', 'Enter', 'Home', 'End', 'ScrollLock', 'PageUp', 'PageDown', 'Insert'];
   const keyDownHandler = (event, outerIndex, innerIndex) => {
     const { key } = event;
+    if (auxKeys.includes(key)) return;
     if (nonAlphabetics.includes(key)) {
       return processMovementKey(key, outerIndex, innerIndex);
     }
-    if (auxKeys.includes(key)) return;
-    if (deleteKeys.includes(key)) {
-      const updatedGrid = JSON.parse(JSON.stringify(grid));
-      updatedGrid[outerIndex][innerIndex].value = '';
-      return dispatch(updateGrid(updatedGrid));
-    }
     const updatedGrid = JSON.parse(JSON.stringify(grid));
     updatedGrid[outerIndex][innerIndex].value = key;
-    dispatch(updateGrid(updatedGrid));
-    return determineIfUserWon(grid);
+    return dispatch(updateGrid(updatedGrid));
   };
 
   const CluesAcross = ({ crosswordData }) => {
@@ -210,7 +206,6 @@ export default function Crossword(){
                       tabIndex={-1}
                       readOnly={userHasWon}
                       onClick={() => clickHandler(outerIndex, innerIndex)}
-                      onChange={determineIfUserWon}
                       onKeyDown={(e) => keyDownHandler(e, outerIndex, innerIndex)}
                     >
                       {grid[outerIndex][innerIndex].value}

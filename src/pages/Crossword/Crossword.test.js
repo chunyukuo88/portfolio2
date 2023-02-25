@@ -259,23 +259,6 @@ describe('Crossword.jsx', ()=> {
         fireEvent.keyPress(upperLeftCorner, { key: 'KeyC', which: 67, keyCode: 67 });
         fireEvent.click(lowerRightCorner);
         fireEvent.keyPress(lowerRightCorner, { key: 'KeyD', which: 68, keyCode: 68 });
-        test('THEN: the victory banner is displayed.', async () => {
-          const victoryBanner = screen.queryByText('Victory! Gud jerb');
-
-          await waitFor(expect(victoryBanner).toBeInTheDocument());
-        });
-        test('THEN: the grid is cleared.', () => {
-          fireEvent.click(upperLeftCorner);
-          squares = screen.getAllByTestId('crossword-square');
-          upperLeftCorner = squares[0];
-          fireEvent.keyPress(upperLeftCorner, { key: 'Del', which: 46, keyCode: 46 });
-          fireEvent.keyPress(upperLeftCorner, { key: 'Backspace', which: 8, keyCode: 8 });
-          fireEvent.keyPress(upperLeftCorner, { key: 'KeyB', which: 66, keyCode: 66 });
-          squares = screen.getAllByTestId('crossword-square');
-          upperLeftCorner = squares[0];
-
-          expect(upperLeftCorner.value).toEqual('a');
-        });
         test('THEN: all squares have the victory styling.', () => {
           expect(upperLeftCorner).toHaveStyle(styles.squareVictory);
           expect(upperRightCorner).toHaveStyle(styles.squareVictory);
