@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
-import ReactGA from 'react-ga4';
 import { getData } from '../../common/utils';
 import {
   updateGrid, 
@@ -13,20 +12,19 @@ import {
 import { Link } from 'react-router-dom';
 import './Crossword.css';
 import { routes } from '../../routes';
-import { selectCurrentLanguage } from '../../features/language/languageSlice';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+import { useCommonGlobals } from '../../common/hooks';
 
 export default function Crossword(){
+  const [ language ] = useCommonGlobals(routes.puzzle);
   const grid = useSelector(selectCurrentGrid);
   const userHasWon = useSelector(selectUserHasWon);
-  const language = useSelector(selectCurrentLanguage);
   const [focused, setFocused] = useState(undefined);
   const [crosswordData, setCrosswordData] = useState(undefined);
   const [frontFaceClicked, setFrontFaceClicked] = useState(false);
   const dispatch = useDispatch();
 
   useEffect( () => {
-    ReactGA.send({ hitType: 'pageview', page: routes.puzzle });
     getData(process.env.REACT_APP_GET_CROSSWORD_INFO)
       .then(data => {
         const newestPuzzle = data[data.length - 1];

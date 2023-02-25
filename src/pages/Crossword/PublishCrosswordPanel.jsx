@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './PublishCrosswordPanel.css';
 import { useSelector } from 'react-redux';
-import {createHttpRequest, postData} from '../../common/utils';
+import { createHttpRequest, postData } from '../../common/utils';
 import { LinkStyling } from '../../common/globalStyles';
 import { Link } from 'react-router-dom';
 import strings from '../../common/strings';
