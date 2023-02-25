@@ -9,6 +9,7 @@ export function SkillsPole(){
       <li className='skill-block'>Svelte</li>
       <li className='skill-block'>Docker</li>
       <li className='skill-block'>Serverless Framework</li>
+      <li className='skill-block'></li>
     </ul>
   );
 }
