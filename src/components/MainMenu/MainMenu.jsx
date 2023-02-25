@@ -1,13 +1,13 @@
-import {routes} from "../../routes";
-import BlogIcon from "../../common/icons/blog.svg";
-import {Link, useNavigate} from "react-router-dom";
-import strings from "../../common/strings";
-import Puzzle from "../../common/icons/puzzle.svg";
-import LanguageIcon from "../../common/icons/language.svg";
-import Language from "../../features/language/Language";
-import Admin from "../../common/icons/admin.svg";
-import {selectCurrentLanguage} from "../../features/language/languageSlice";
-import {selectCurrentUser} from "../../features/auth/authSlice";
+import {routes} from '../../routes';
+import BlogIcon from '../../common/icons/blog.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import strings from '../../common/strings';
+import Puzzle from '../../common/icons/puzzle.svg';
+import LanguageIcon from '../../common/icons/language.svg';
+import Language from '../../features/language/Language';
+import Admin from '../../common/icons/admin.svg';
+import {selectCurrentLanguage} from '../../features/language/languageSlice';
+import {selectCurrentUser} from '../../features/auth/authSlice';
 import { useSelector } from 'react-redux';
 import './MainMenu.css';
 

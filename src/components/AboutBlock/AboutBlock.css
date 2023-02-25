@@ -1,3 +1,9 @@
+#about-block-wrapper {
+    display: flex;
+    justify-content: center;
+    align-self: end;
+}
+
 .about-block {
     background: var(--BlogBlock);
     position: relative;

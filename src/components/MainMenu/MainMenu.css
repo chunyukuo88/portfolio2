@@ -1,7 +1,9 @@
 .main-menu-wrapper {
     justify-self: center;
+    align-self: end;
     transform: skewY(-15deg);
-    max-width: 10rem;
+    max-width: 10em;
+    margin-bottom: 0;
 }
 
 .contact-links-wrapper {
