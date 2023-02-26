@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import ReduxIcon from '../../common/icons/tech_redux-icon.svg';
 import LambdaIcon from '../../common/icons/tech_lambda-icon.svg'
 import NodeIcon from '../../common/icons/tech_node-js-icon.svg';

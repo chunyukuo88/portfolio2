@@ -1,10 +1,14 @@
+:root {
+    --SkillBlockTop: #ffffab;
+    --SkillBlockSide: #837600;
+}
+
 .skill-block {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
 
-    font-family:  'Cabin', sans-serif;
     list-style: none;
     text-align: center;
     width: 10rem;
@@ -30,7 +34,7 @@
     width: 10rem;
     height: 2.3rem;
     margin: auto;
-    background: #939ab9;
+    background: var(--SkillBlockTop);
     filter: brightness(0.7);
     transform-origin: left;
     transform: skew(312deg) translateY(-36px) translateX(20px);
@@ -43,7 +47,7 @@
     width: 2.5rem;
     height: 4rem;
     margin: auto;
-    background: #3e3f46;
+    background: var(--SkillBlockSide);
     filter: brightness(0.7);
     transform: skewY(-42deg) translateX(12.5rem) translateY(162px);
 }
@@ -65,7 +69,7 @@
     width: 10rem;
     height: 2.3rem;
     margin: auto;
-    background: #939ab9;
+    background: var(--SkillBlockTop);
     filter: brightness(0.7);
     transform-origin: left;
     transform: skew(312deg) translateY(-36px) translateX(20px);
@@ -78,7 +82,7 @@
     width: 2.5rem;
     height: 4rem;
     margin: auto;
-    background: #3e3f46;
+    background: var(--SkillBlockSide);
     filter: brightness(0.7);
     transform: skewY(-42deg) translateX(12.5rem) translateY(162px);
 }
@@ -100,7 +104,7 @@
     width: 10rem;
     height: 2.3rem;
     margin: auto;
-    background: #939ab9;
+    background: var(--SkillBlockTop);
     filter: brightness(0.7);
     transform-origin: left;
     transform: skew(312deg) translateY(-36px) translateX(20px);
@@ -113,7 +117,7 @@
     width: 2.5rem;
     height: 4rem;
     margin: auto;
-    background: #3e3f46;
+    background: var(--SkillBlockSide);
     filter: brightness(0.7);
     transform: skewY(-42deg) translateX(12.5rem) translateY(162px);
 }
@@ -135,7 +139,7 @@
     width: 10rem;
     height: 2.3rem;
     margin: auto;
-    background: #939ab9;
+    background: var(--SkillBlockTop);
     filter: brightness(0.7);
     transform-origin: left;
     transform: skew(312deg) translateY(-36px) translateX(20px);
@@ -149,7 +153,7 @@
     width: 2.5rem;
     height: 4rem;
     margin: auto;
-    background: #3e3f46;
+    background: var(--SkillBlockSide);
     filter: brightness(0.7);
     transform: skewY(-42deg) translateX(12.5rem) translateY(162px);
 }
@@ -170,7 +174,7 @@
     width: 10rem;
     height: 2.3rem;
     margin: auto;
-    background: #939ab9;
+    background: var(--SkillBlockTop);
     filter: brightness(0.7);
     transform-origin: left;
     transform: skew(312deg) translateY(-36px) translateX(20px);
@@ -183,7 +187,7 @@
     width: 2.5rem;
     height: 4rem;
     margin: auto;
-    background: #3e3f46;
+    background: var(--SkillBlockSide);
     filter: brightness(0.7);
     transform: skewY(-42deg) translateX(12.5rem) translateY(162px);
 }
@@ -204,7 +208,7 @@
     width: 10rem;
     height: 2.3rem;
     margin: auto;
-    background: #939ab9;
+    background: var(--SkillBlockTop);
     filter: brightness(0.7);
     transform-origin: left;
     transform: skew(312deg) translateY(-36px) translateX(20px);
@@ -217,14 +221,7 @@
     width: 2.5rem;
     height: 4rem;
     margin: auto;
-    background: #3e3f46;
+    background: var(--SkillBlockSide);
     filter: brightness(0.7);
     transform: skewY(-42deg) translateX(12.5rem) translateY(162px);
 }
-
-/*.skill-block:last-child {*/
-/*    height: 1px;*/
-/*}*/
-/*.skill-block:last-child::after {*/
-/*    box-shadow: -3rem 3rem 1.25rem rgba(0,0,0,0.25);*/
-/*}*/
