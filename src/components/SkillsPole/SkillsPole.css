@@ -222,9 +222,9 @@
     transform: skewY(-42deg) translateX(12.5rem) translateY(162px);
 }
 
-.skill-block:last-child {
-    height: 1px;
-}
-.skill-block:last-child::after {
-    box-shadow: -3rem 3rem 1.25rem rgba(0,0,0,0.25);
-}
+/*.skill-block:last-child {*/
+/*    height: 1px;*/
+/*}*/
+/*.skill-block:last-child::after {*/
+/*    box-shadow: -3rem 3rem 1.25rem rgba(0,0,0,0.25);*/
+/*}*/
