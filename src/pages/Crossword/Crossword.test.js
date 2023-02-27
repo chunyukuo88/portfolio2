@@ -3,8 +3,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { mockStore } from '../../testUtils';
 import { Provider } from 'react-redux';
+import { mockStore } from '../../testUtils';
 
 import ReactGA from 'react-ga4';
 
