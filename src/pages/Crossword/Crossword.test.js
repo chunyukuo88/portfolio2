@@ -209,35 +209,6 @@ describe('Crossword.jsx', ()=> {
           expect(numberTwos[1]).toBeInTheDocument();
         });
       });
-      describe('WHEN: the crossword data has been fetched,', () => {
-        test.skip('THEN: displays the title and clues', () => {
-          const mockData = [
-            {
-              author: 'Alex Gochenour',
-              cluesAcross: '1. A type of application testing,2. 1990s music token',
-              cluesDown: '1. Hit this when it\'s hot,2. Becton Dickinson and Company',
-              created_at: '2023-02-05T22:22:03+00:00',
-              id: 1,
-              solution: 'abcd',
-              theme: 'Test',
-              title: 'Test',
-            },
-          ];
-          const mockFetch = jest.fn().mockResolvedValue(mockData);
-          global.fetch = mockFetch;
-
-          render(
-            <Provider store={mockStore}>
-              <Router>
-                <Crossword />
-              </Router>
-            </Provider>
-          );
-          const clue = screen.getByText('1. A type of application testing');
-
-          expect(clue).toBeInTheDocument();
-        });
-      });
       describe.skip('WHEN: The user has correctly filled it out,', () => {
         render(
           <Provider store={mockStore}>
