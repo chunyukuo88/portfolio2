@@ -22,10 +22,12 @@ export default function Crossword(){
   const dispatch = useDispatch();
 
   useEffect( () => {
-    getData(process.env.REACT_APP_GET_CROSSWORD_INFO)
+    console.log('useEffect()')
+    getData(process.env.REACT_APP_GET_SINGLE_CROSSWORD)
+    // getData(process.env.REACT_APP_GET_CROSSWORD_INFO)
       .then(data => {
-        const newestPuzzle = data[data.length - 1];
-        setCrosswordData(newestPuzzle);
+        console.log('data: ', data);
+        setCrosswordData(data);
       })
       .catch((e) => new Error(e));
   }, []);
