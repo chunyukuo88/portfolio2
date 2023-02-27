@@ -147,7 +147,7 @@
 .clues-direction-clicked {
     text-transform: uppercase;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--neumorphicFontColor);
     background-color: var(--neumorphicBackground);
     text-shadow: var(--neumorphicShadow);
