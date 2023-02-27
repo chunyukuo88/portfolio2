@@ -1,15 +1,17 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CluesCube } from './CluesCube';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
-import {useDispatch, useSelector} from 'react-redux';
-import {useCommonGlobals} from '../../common/hooks';
-import {styles} from './styles.js';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { useCommonGlobals } from '../../common/hooks';
+import { getData } from '../../common/utils';
+import { declareVictory, selectCurrentGrid, selectUserHasWon, updateGrid } from '../../features/crossword/crosswordSlice';
+
+import { routes } from '../../routes';
+import { styles } from './styles.js';
 import strings from '../../common/strings';
-import {getData} from '../../common/utils';
-import {declareVictory, selectCurrentGrid, selectUserHasWon, updateGrid} from '../../features/crossword/crosswordSlice';
-import {Link} from 'react-router-dom';
-import {routes} from '../../routes';
 import './Crossword.css';
-import {CluesCube} from "./CluesCube";
 
 export default function Crossword(){
   const [ language ] = useCommonGlobals(routes.puzzle);
