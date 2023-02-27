@@ -1,19 +1,15 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { styles } from './styles.js';
-import strings from '../../common/strings';
-import { getData } from '../../common/utils';
-import {
-  updateGrid, 
-  declareVictory, 
-  selectCurrentGrid, 
-  selectUserHasWon
-} from '../../features/crossword/crosswordSlice';
-import { Link } from 'react-router-dom';
-import './Crossword.css';
-import { routes } from '../../routes';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
-import { useCommonGlobals } from '../../common/hooks';
+import {useDispatch, useSelector} from 'react-redux';
+import {useCommonGlobals} from '../../common/hooks';
+import {styles} from './styles.js';
+import strings from '../../common/strings';
+import {getData} from '../../common/utils';
+import {declareVictory, selectCurrentGrid, selectUserHasWon, updateGrid} from '../../features/crossword/crosswordSlice';
+import {Link} from 'react-router-dom';
+import {routes} from '../../routes';
+import './Crossword.css';
+import {CluesCube} from "./CluesCube";
 
 export default function Crossword(){
   const [ language ] = useCommonGlobals(routes.puzzle);
@@ -21,7 +17,6 @@ export default function Crossword(){
   const userHasWon = useSelector(selectUserHasWon);
   const [focused, setFocused] = useState(undefined);
   const [crosswordData, setCrosswordData] = useState(undefined);
-  const [frontFaceClicked, setFrontFaceClicked] = useState(false);
   const dispatch = useDispatch();
 
   useEffect( () => {
@@ -105,41 +100,9 @@ export default function Crossword(){
     return dispatch(updateGrid(updatedGrid));
   };
 
-  const CluesAcross = ({ crosswordData }) => {
-    const cluesAcross = crosswordData.cluesAcross.split(',');
-    return (
-      <div className='clues-box'>
-        <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Across:</h3>
-        {cluesAcross.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
-      </div>
-    );
-  };
-
-  const CluesDown = ({ crosswordData }) => {
-    const cluesDown = crosswordData.cluesDown.split(',');
-    return (
-      <div className='clues-box'>
-        <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Down:</h3>
-        {cluesDown.map((clue, key) => <div className='clue' key={key}>{clue}</div>)}
-      </div>
-    );
-  };
-
   const getClueNumber = (outerIndex, innerIndex) => {
     if (outerIndex === 0) return <>{innerIndex + 1}</>
     if (innerIndex === 0) return <>{outerIndex + 1}</>
-  };
-
-  const convertTimestamp = (date) => new Date(date).toLocaleDateString();
-
-  const Title = () => {
-    return crosswordData
-      ? <section id='crossword-info'>
-          <h2>{`'${crosswordData.title}'`}</h2>
-          <h3>By {crosswordData.author}</h3>
-          <h3>{convertTimestamp(crosswordData.created_at)}</h3>
-        </section>
-      : <Loading />;
   };
 
   const linkStyle = {
@@ -149,44 +112,10 @@ export default function Crossword(){
     width: '3rem',
   };
 
-  const Loading = () => <p>{strings.loading[language]}</p>;
-
   return (
     <>
       <div id='room-container'>
-        <ErrorBoundary>
-          <main id='back-wall'>
-              <section id='content-cube' >
-                <div
-                  data-testid='top-face'
-                  className={frontFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
-                >
-                  {crosswordData
-                    ? <CluesDown crosswordData={crosswordData}/>
-                    : <Loading />
-                  }
-                </div>
-                <div
-                  data-testid='west-face'
-                  className={frontFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
-                >
-                  {crosswordData
-                    ? <CluesAcross crosswordData={crosswordData}/>
-                    : <Loading />
-                  }
-                </div>
-                <div
-                  role='button'
-                  onClick={() => setFrontFaceClicked(!frontFaceClicked)}
-                  id='cube-face-front'
-                >
-                  <Title />
-                </div>
-              </section>
-              <div id='side-wall' />
-          </main>
-          <div id='floor' />
-        </ErrorBoundary>
+      <CluesCube {...{language, crosswordData} }/>
       </div>
       <section id='interactive-section' >
         <ErrorBoundary>
