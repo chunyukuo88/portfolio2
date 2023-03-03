@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AboutBlock } from './components/AboutBlock/AboutBlock';
-import PublishCrosswordPanel from './pages/Crossword/PublishCrosswordPanel';
+import PublishContent from './pages/PublishContent/PublishContent';
 import { RequireAuth } from './features/auth/RequireAuth.jsx';
 import ReactGA from 'react-ga4';
 
@@ -28,7 +28,7 @@ const App = () => (
           <Route exact path={routes.login} element={<LoginPage />}/>
           <Route exact path={routes.puzzle} element={<Crossword />}/>
           <Route exact path={routes.blog} element={<BlogPage />}/>
-          <Route exact path={routes.publishCrossword} element={<RequireAuth><PublishCrosswordPanel /></RequireAuth>} />
+          <Route exact path={routes.publishCrossword} element={<RequireAuth><PublishContent /></RequireAuth>} />
         </Routes>
     </Router>
   </>

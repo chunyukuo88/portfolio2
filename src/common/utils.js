@@ -9,7 +9,7 @@ export async function postData(url, data){
     const response = await fetch(url, data)
     console.log(response);
   } catch (e) {
-    console.error(e);
+    console.error('The POST request failed. Here is why:', e);
   }
 }
 

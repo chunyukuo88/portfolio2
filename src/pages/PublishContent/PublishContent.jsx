@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import './PublishCrosswordPanel.css';
+import './PublishContent.css';
 import { useSelector } from 'react-redux';
 import { createHttpRequest, postData } from '../../common/utils';
 import { LinkStyling } from '../../common/globalStyles';
 import { Link } from 'react-router-dom';
 import strings from '../../common/strings';
 
-function PublishCrosswordPanel() {
+function PublishContent() {
   const token = useSelector ((state) => state.auth.token);
   const language = useSelector((state) => state.language.value);
   const [solution, setSolution] = useState('');
@@ -36,6 +36,24 @@ function PublishCrosswordPanel() {
   const handleTheme = (event) => setTheme(event.target.value);
   const handleAcrossClues = (event) => setAcrossClues(event.target.value);
   const handleDownClues = (event) => setDownClues(event.target.value);
+
+  const testRedis = async () => {
+    const data = {
+      title: 'Another bomb!',
+      theme: 'Who killed heavy!',
+      imageUrl: 'Test image URL 2',
+      likes: 0,
+      views: 0,
+    };
+    const mappedData = createHttpRequest('POST', token, data);
+    try {
+      await postData('https://50wd0yhu15.execute-api.us-east-1.amazonaws.com/blog/write', mappedData)
+    } catch (e) {
+      console.error('errorz: ', e);
+    }
+
+  };
+
   return (
     <section className='publish-panel'>
       <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
@@ -94,8 +112,11 @@ function PublishCrosswordPanel() {
           <button className='publish-panel-button'>Publish</button>
         </div>
       </form>
+      <button onClick={async () => await testRedis()}>
+        Test Redis
+      </button>
     </section>
   );
 }
 
-export default PublishCrosswordPanel;
+export default PublishContent;
