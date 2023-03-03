@@ -6,7 +6,12 @@ export function NewBlogPost({ token }) {
   const [ title, setTitle ] = useState('');
   const [ body, setBody ] = useState('');
   const [ imageUrl, setImageUrl ] = useState('');
-  const [] = useState('');
+
+  const clearAllInputs = () => {
+    setTitle('');
+    setBody('');
+    setImageUrl('');
+  };
 
   const submissionHandler = async (event) => {
     event.preventDefault();
@@ -19,7 +24,10 @@ export function NewBlogPost({ token }) {
     };
     const mappedData = createHttpRequest('POST', token, data);
     try {
-      await postData(process.env.REACT_APP_POST_BLOG_ENTRY, mappedData);
+      console.log(process.env.REACT_APP_POST_BLOG_ENTRY);
+      await postData('https://50wd0yhu15.execute-api.us-east-1.amazonaws.com/blog/write', mappedData);
+      alert('Success!');
+      return clearAllInputs();
     } catch (e) {
       console.error('There was a problem publishing your rubbish content: ', e);
     }

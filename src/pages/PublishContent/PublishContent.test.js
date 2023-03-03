@@ -49,7 +49,7 @@ describe('GIVEN: the user is logged in,', () => {
       const theme = screen.getByTestId('crossword-panel-theme');
       const across = screen.getByTestId('crossword-panel-across');
       const down = screen.getByTestId('crossword-panel-down');
-      const button = screen.getByText('Publish');
+      const button = screen.getAllByText('Publish')[1];
 
       fireEvent.change(solution, { target: { value: 'solution' } });
       fireEvent.change(title, { target: { value: 'title' } });
