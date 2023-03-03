@@ -1,13 +1,36 @@
-.publish-panel,
-.publish-panel-title,
-.publish-panel-label {
-    display: block;
-    text-align: right;
+.publish-panel {
+    margin: 3rem;
+    display: grid;
+    grid-template-columns: 45% 10% 45%;
+    height: 65%;
 }
 
-.publish-panel-label,
+.content-card {
+    border: .25rem solid yellow;
+    border-radius: 0.25rem;
+    padding: .25rem;
+}
+
+.publish-panel-title {
+    color: yellow;
+    text-align: center;
+}
+
+.publish-panel-label {
+    display: flex;
+    justify-content: end;
+    margin: 0.5rem;
+}
+
+.content-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
 .label-text {
     margin: 0.5rem;
+    color: yellow;
 }
 
 .button-wrapper {
@@ -19,12 +42,18 @@
     height: 2rem;
     border-radius: 0.25rem;
     border: none;
+    width: 80%;
 }
 
 .publish-panel-button {
-    width: 100%;
+    width: 95%;
     height: 4rem;
     cursor: pointer;
     border-radius: 0.25rem;
     border: none;
+    bottom: 0.5rem;
+}
+
+#blog-body-input {
+    height: 4rem;
 }

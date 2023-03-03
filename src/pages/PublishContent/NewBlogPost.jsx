@@ -19,21 +19,26 @@ export function NewBlogPost({ token }) {
     };
     const mappedData = createHttpRequest('POST', token, data);
     try {
-      await postData(process.env.REACT_APP_POST_BLOG_ENTRY, mappedData)
+      await postData(process.env.REACT_APP_POST_BLOG_ENTRY, mappedData);
     } catch (e) {
-      console.error('An error occurred whilst attempting to publish some rubbish content: ', e);
+      console.error('There was a problem publishing your rubbish content: ', e);
     }
   };
 
   const handleTitle = (event) => setTitle(event.target.value);
-  const handleBody = (event) => setBody(event.target.value);
+  const handleBody = (event) => {
+    setBody(event.target.value);
+  }
   const handleImg = (event) => setImageUrl(event.target.value);
 
   return (
-    <section>
+    <section className='content-card'>
       <h1 className='publish-panel-title'>Write a Blog Post</h1>
-      <form onSubmit={submissionHandler}>
-        <label>
+      <form
+        className='content-form'
+        onSubmit={submissionHandler}
+      >
+        <label className='publish-panel-label'>
           <span className='label-text'>Title: </span>
           <input
             type="text"
@@ -43,17 +48,18 @@ export function NewBlogPost({ token }) {
             placeholder='With other companies in mind'
           />
         </label>
-        <label>
+        <label className='publish-panel-label'>
           <span className='label-text'>Body: </span>
-          <input
+          <textarea
             type="text"
+            id='blog-body-input'
             className='publish-panel-input'
             data-testid='blog-panel-body'
             onChange={handleBody}
             placeholder='Max 512 MB'
           />
         </label>
-        <label>
+        <label className='publish-panel-label'>
           <span className='label-text'>Image URL: </span>
           <input
             type="text"

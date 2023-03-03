@@ -31,9 +31,12 @@ export function NewCrossword({ token }){
   const handleDownClues = (event) => setDownClues(event.target.value);
 
   return (
-    <section>
+    <section className='content-card'>
       <h1 className='publish-panel-title'>Create a New Crossword</h1>
-      <form onSubmit={submissionHandler}>
+      <form
+        className='content-form'
+        onSubmit={submissionHandler}
+      >
         <label className='publish-panel-label'>
           <span className='label-text'>Solution: </span>
           <input

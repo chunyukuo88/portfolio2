@@ -14,14 +14,23 @@ function PublishContent() {
   const token = useSelector(selectCurrentToken);
   const language = useSelector(selectCurrentLanguage);
 
+  const withCenter = {
+    ...LinkStyling,
+    textAlign: 'center',
+    margin: '3rem',
+  };
+
   return (
-    <section className='publish-panel'>
-      <Link style={LinkStyling} to={routes.index}>
+    <>
+      <Link style={withCenter} to={routes.index}>
         {strings.homePage[language]}
       </Link>
-      <NewBlogPost  token={token}/>
-      <NewCrossword token={token}/>
-    </section>
+      <section className='publish-panel'>
+        <NewBlogPost  token={token}/>
+        <div />
+        <NewCrossword token={token}/>
+      </section>
+    </>
   );
 }
 
