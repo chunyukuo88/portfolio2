@@ -1,13 +1,16 @@
 export async function getData(url){
-  const result = await fetch(url)
+  const result = await fetch(url);
   const jsonified = await result.json();
   return jsonified;
 }
 
 export async function postData(url, data){
-  fetch(url, data)
-    .then(res => console.log(res))
-    .catch(err => console.error(err));
+  try {
+    const response = await fetch(url, data)
+    console.log(response);
+  } catch (e) {
+    console.error('The POST request failed. Here is why:', e);
+  }
 }
 
 export const createHttpRequest = (method, token, data) => ({

@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
-import './PublishCrosswordPanel.css';
-import { useSelector } from 'react-redux';
 import { createHttpRequest, postData } from '../../common/utils';
-import { LinkStyling } from '../../common/globalStyles';
-import { Link } from 'react-router-dom';
-import strings from '../../common/strings';
 
-function PublishCrosswordPanel() {
-  const token = useSelector ((state) => state.auth.token);
-  const language = useSelector((state) => state.language.value);
+export function NewCrossword({ token }){
   const [solution, setSolution] = useState('');
   const [title, setTitle] = useState('');
   const [theme, setTheme] = useState('');
@@ -36,11 +29,14 @@ function PublishCrosswordPanel() {
   const handleTheme = (event) => setTheme(event.target.value);
   const handleAcrossClues = (event) => setAcrossClues(event.target.value);
   const handleDownClues = (event) => setDownClues(event.target.value);
+
   return (
-    <section className='publish-panel'>
-      <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
+    <section className='content-card'>
       <h1 className='publish-panel-title'>Create a New Crossword</h1>
-      <form onSubmit={submissionHandler}>
+      <form
+        className='content-form'
+        onSubmit={submissionHandler}
+      >
         <label className='publish-panel-label'>
           <span className='label-text'>Solution: </span>
           <input
@@ -95,7 +91,6 @@ function PublishCrosswordPanel() {
         </div>
       </form>
     </section>
+
   );
 }
-
-export default PublishCrosswordPanel;

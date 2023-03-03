@@ -1,15 +1,19 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { mockStore } from '../../testUtils';
 import { Provider } from 'react-redux';
 
+import { mockStore } from '../../testUtils';
 import ReactGA from 'react-ga4';
-
 import Crossword from './Crossword.jsx';
 import { styles } from './styles.js';
+// import { getData } from '../../common/utils';
+//
+// jest.mock('../../common/utils', () => ({
+//   getData: jest.fn(),
+// }));
 
 describe('Crossword.jsx', ()=> {
   describe('GIVEN: the user is not logged in,', () => {
@@ -209,63 +213,47 @@ describe('Crossword.jsx', ()=> {
           expect(numberTwos[1]).toBeInTheDocument();
         });
       });
-      describe('WHEN: the crossword data has been fetched,', () => {
-        test.skip('THEN: displays the title and clues', () => {
-          const mockData = [
-            {
-              author: 'Alex Gochenour',
-              cluesAcross: '1. A type of application testing,2. 1990s music token',
-              cluesDown: '1. Hit this when it\'s hot,2. Becton Dickinson and Company',
-              created_at: '2023-02-05T22:22:03+00:00',
-              id: 1,
-              solution: 'abcd',
-              theme: 'Test',
-              title: 'Test',
-            },
-          ];
-          const mockFetch = jest.fn().mockResolvedValue(mockData);
-          global.fetch = mockFetch;
-
-          render(
-            <Provider store={mockStore}>
-              <Router>
-                <Crossword />
-              </Router>
-            </Provider>
-          );
-          const clue = screen.getByText('1. A type of application testing');
-
-          expect(clue).toBeInTheDocument();
-        });
-      });
-      describe.skip('WHEN: The user has correctly filled it out,', () => {
-        render(
-          <Provider store={mockStore}>
-            <Router>
-              <Crossword />
-            </Router>
-          </Provider>
-        );
-        let squares = screen.getAllByTestId('crossword-square');
-        let upperLeftCorner = squares[0];
-        let upperRightCorner = squares[1];
-        let lowerLeftCorner = squares[2];
-        let lowerRightCorner = squares[3];
-        fireEvent.click(upperLeftCorner);
-        fireEvent.keyPress(upperLeftCorner, { key: 'KeyA', which: 65, keyCode: 65 });
-        fireEvent.click(upperRightCorner);
-        fireEvent.keyPress(upperRightCorner, { key: 'KeyB', which: 66, keyCode: 66 });
-        fireEvent.click(lowerLeftCorner);
-        fireEvent.keyPress(upperLeftCorner, { key: 'KeyC', which: 67, keyCode: 67 });
-        fireEvent.click(lowerRightCorner);
-        fireEvent.keyPress(lowerRightCorner, { key: 'KeyD', which: 68, keyCode: 68 });
-        test('THEN: all squares have the victory styling.', () => {
-          expect(upperLeftCorner).toHaveStyle(styles.squareVictory);
-          expect(upperRightCorner).toHaveStyle(styles.squareVictory);
-          expect(lowerLeftCorner).toHaveStyle(styles.squareVictory);
-          expect(lowerRightCorner).toHaveStyle(styles.squareVictory);
-        });
-      });
+      // describe('WHEN: The user has correctly filled it out,', () => {
+      //   test.skip('THEN: all squares have the victory styling.', async () => {
+      //     const mockData = [{
+      //       id: 1,
+      //       solution: 'abcd',
+      //       cluesAcross: '1. Some clue,2. Some other clue',
+      //       cluesDown: '1. Moris,2. Borris',
+      //       title: 'foo',
+      //       author: 'bar',
+      //       created_at: Date.now(),
+      //     }];
+      //     getData.mockResolvedValueOnce(mockData);
+      //     const { debug } = render(
+      //       <Provider store={mockStore}>
+      //         <Router>
+      //           <Crossword />
+      //         </Router>
+      //       </Provider>
+      //     );
+      //
+      //     let squares = screen.getAllByTestId('crossword-square');
+      //     let upperLeftCorner = squares[0];
+      //     let upperRightCorner = squares[1];
+      //     let lowerLeftCorner = squares[2];
+      //     let lowerRightCorner = squares[3];
+      //
+      //     fireEvent.click(upperLeftCorner);
+      //     fireEvent.keyPress(upperLeftCorner, { key: 'KeyA', which: 65, keyCode: 65 });
+      //     fireEvent.click(upperRightCorner);
+      //     fireEvent.keyPress(upperRightCorner, { key: 'KeyB', which: 66, keyCode: 66 });
+      //     fireEvent.click(lowerLeftCorner);
+      //     fireEvent.keyPress(upperLeftCorner, { key: 'KeyC', which: 67, keyCode: 67 });
+      //     fireEvent.click(lowerRightCorner);
+      //     fireEvent.keyPress(lowerRightCorner, { key: 'KeyD', which: 68, keyCode: 68 });
+      //
+      //     expect(upperLeftCorner).toHaveStyle(styles.squareVictory);
+      //     expect(upperRightCorner).toHaveStyle(styles.squareVictory);
+      //     expect(lowerLeftCorner).toHaveStyle(styles.squareVictory);
+      //     expect(lowerRightCorner).toHaveStyle(styles.squareVictory);
+      //   });
+      // });
     });
   });
 });
