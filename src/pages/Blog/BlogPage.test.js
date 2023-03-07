@@ -4,14 +4,18 @@ import { mockStore } from '../../testUtils';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { routes } from '../../routes';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import ReactGA from 'react-ga4';
 
 const spy = jest.spyOn(ReactGA, 'send');
 const payload = { hitType: 'pageview', page: routes.blog };
+import { getData } from '../../common/utils';
 
+jest.mock('../../common/utils');
+
+let result;
 beforeEach(() => {
-  render(
+  result = render(
     <Provider store={mockStore}>
       <Router>
         <BlogPage/>
@@ -31,8 +35,29 @@ describe('WHEN: The page loads,', () => {
     expect(spy).toBeCalledWith(payload);
   });
   it('THEN: It shows blog posts.', () => {
-    const blogTitle = document.querySelectorAll('.blog-title')[0];
+    const expectedBlogData = [
+      {
+        "entityId": "01GTJJTGBTCA1CV7EGPDD6FFT0",
+        "title": "My first blog post",
+        "theme": "test",
+        "imageUrl": "test",
+        "likes": 0,
+        "views": 0
+      },
+      {
+        "entityId": "01GTJK868MG6FBXK37BMYH42GR",
+        "title": "A second blog post",
+        "theme": "test",
+        "imageUrl": "test",
+        "likes": 0,
+        "views": 0
+      },
+    ];
+    getData.mockReturnValueOnce(expectedBlogData);
+    const blogTitle1 = screen.getByText(expectedBlogData[0].title);
+    const blogTitle2 = screen.getByText(expectedBlogData[1].title);
 
-    expect(blogTitle).toBeInTheDocument();
+    expect(blogTitle1).toBeInTheDocument();
+    expect(blogTitle2).toBeInTheDocument();
   });
 });
