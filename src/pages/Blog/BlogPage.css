@@ -1,19 +1,6 @@
 .back-to-home {
+    margin: 2rem;
     text-decoration: none;
     color: #00ec00;
-}
-
-.blog-coming-soon {
-    margin-top: 10%;
-    color: white;
-}
-
-.green-cube-wrapper {
-    margin-top: 10%;
-}
-
-.blog-coming-soon,
-.green-cube-wrapper,
-.back-to-home {
-    margin-left: 50%;
+    text-align: center;
 }

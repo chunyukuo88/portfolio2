@@ -1,4 +1,3 @@
-import { Cube } from '../../components/Cube/Cube';
 import { Link } from 'react-router-dom';
 import strings from '../../common/strings';
 import { LinkStyling } from '../../common/globalStyles';
@@ -9,17 +8,18 @@ import { useCommonGlobals } from '../../common/hooks';
 export function BlogPage(){
   const [ language ] = useCommonGlobals(routes.blog);
 
+
+
   return (
     <main>
-      <div className='blog-coming-soon'>
-        Blog feature coming soon!
-      </div>
-      <p className='back-to-home '>
-        <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
+      <p className='back-to-home'>
+        <Link style={LinkStyling} to={routes.index}>
+          {strings.homePage[language]}
+        </Link>
       </p>
-      <div className='green-cube-wrapper'>
-        <Cube />
-      </div>
+      <article>
+        <title className='blog-title'></title>
+      </article>
     </main>
   );
 }
