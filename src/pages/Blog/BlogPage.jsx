@@ -31,6 +31,12 @@ export function BlogPage(){
       {blogData ? blogData.map((article, key) => (
         <article key={key}>
           <header className='blog-title'>{article.title}</header>
+          <img src={article.imageUrl} alt={`Image for blog with key ${key}`}/>
+          <p className='blog-body'>{article.theme}</p>
+          <div className='blog-views'>
+            <span>Views: {article.views}</span>
+            <span>Likes: {article.likes}</span>
+          </div>
         </article>
       )) : <Loading />}
     </main>
