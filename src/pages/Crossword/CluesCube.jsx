@@ -31,10 +31,10 @@ export const CluesCube = memo(function ({ language, crosswordData }) {
   const Title = () => {
     return crosswordData
       ? <section id='crossword-info'>
-        <h2>{`'${crosswordData.title}'`}</h2>
-        <h3>By {crosswordData.author}</h3>
-        <h3>{convertTimestamp(crosswordData.created_at)}</h3>
-      </section>
+          <h2>{`'${crosswordData.title}'`}</h2>
+          <h3>By {crosswordData.author}</h3>
+          <h3>{convertTimestamp(crosswordData.created_at)}</h3>
+        </section>
       : <Loading/>;
   };
 

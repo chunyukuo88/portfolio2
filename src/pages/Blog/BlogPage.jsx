@@ -10,13 +10,16 @@ import { getData } from '../../common/utils';
 export function BlogPage(){
   const [ language ] = useCommonGlobals(routes.blog);
   const [ blogData, setBlogData ] = useState(null);
-  useEffect(async () => {
-    async function fetchData() {
-      const data = await getData();
-      setBlogData(data);
-    }
-    await fetchData();
-  });
+  const Loading = () => <p>{strings.loading[language]}</p>;
+
+  useEffect(() => {
+    getData(process.env.REACT_APP_GET_BLOG_ENTRIES)
+      .then(data => {
+        setBlogData(data);
+        console.log('data: ', blogData);
+      }
+    );
+  }, []);
 
   return (
     <main>
@@ -25,11 +28,11 @@ export function BlogPage(){
           {strings.homePage[language]}
         </Link>
       </p>
-      {blogData ? blogData.map(article => (
-        <article>
-          <title className='blog-title'>{article.title}</title>
+      {blogData ? blogData.map((article, key) => (
+        <article key={key}>
+          <header className='blog-title'>{article.title}</header>
         </article>
-      )) : null}
+      )) : <Loading />}
     </main>
   );
 }
