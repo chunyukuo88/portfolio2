@@ -1,10 +1,32 @@
+.blog-page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .back-to-home {
-    margin: 2rem;
-    text-decoration: none;
-    color: #00ec00;
-    text-align: center;
+    font-size: 2em;
+    position: fixed;
+    top: 2em;
+    left: 2em;
+}
+
+
+.article {
+    margin: 5em 0;
+    max-width: 50em;
 }
 
 .blog-title {
+    font-size: 4em;
     color: yellow;
+    text-align: center;
+}
+
+.blog-body {
+    text-align: justify;
+}
+
+.blog-views-and-likes {
+    margin: auto;
 }

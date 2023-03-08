@@ -22,23 +22,28 @@ export function BlogPage(){
   }, []);
 
   return (
-    <main>
+    <main className='blog-page-content'>
       <p className='back-to-home'>
         <Link style={LinkStyling} to={routes.index}>
           {strings.homePage[language]}
         </Link>
       </p>
-      {blogData ? blogData.map((article, key) => (
-        <article key={key}>
-          <header className='blog-title'>{article.title}</header>
-          <img src={article.imageUrl} alt={`Image for blog with key ${key}`}/>
-          <p className='blog-body'>{article.theme}</p>
-          <div className='blog-views'>
-            <span>Views: {article.views}</span>
-            <span>Likes: {article.likes}</span>
-          </div>
-        </article>
-      )) : <Loading />}
+      <section>
+        {blogData
+          ? blogData.map((article, key) => (
+              <article className='article' key={key}>
+                  <header className='blog-title'>{article.title}</header>
+                  <img src={article.imageUrl} alt={`Image for blog with key ${key}`}/>
+                  <p className='blog-body'>{article.theme}</p>
+                  <div className='blog-views-and-likes'>
+                    <span>Views: {article.views}</span>
+                    <span>Likes: {article.likes}</span>
+                  </div>
+              </article>
+            ))
+          : <Loading />
+        }
+      </section>
     </main>
   );
 }
