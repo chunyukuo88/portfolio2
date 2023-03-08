@@ -1,5 +1,6 @@
 .blog-page-content {
     display: flex;
+    color: yellow;
     justify-content: center;
     align-items: center;
 }
@@ -11,16 +12,25 @@
     left: 2em;
 }
 
-
 .article {
+    background-color: var(--ContactBlock);
+    border: var(--AboutBlock) solid 0.125em;
+    color: black;
+    border-radius: 0.5em;
     margin: 5em 0;
     max-width: 50em;
+    padding: 2em;
+    box-shadow: 0.5em 0.5em 1em var(--SiteBackgroundShadow);
 }
 
 .blog-title {
     font-size: 4em;
-    color: yellow;
     text-align: center;
+    margin-bottom: 0.25em;
+}
+
+.blog-image {
+    max-width: 100%;
 }
 
 .blog-body {
@@ -28,5 +38,6 @@
 }
 
 .blog-views-and-likes {
-    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
 }
