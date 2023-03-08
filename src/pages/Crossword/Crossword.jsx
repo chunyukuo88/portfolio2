@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CluesCube } from './CluesCube';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';

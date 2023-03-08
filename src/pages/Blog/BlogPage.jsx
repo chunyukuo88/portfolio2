@@ -6,11 +6,11 @@ import './BlogPage.css';
 import { routes } from '../../routes';
 import { useCommonGlobals } from '../../common/hooks';
 import { getData } from '../../common/utils';
+import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
 
 export function BlogPage(){
   const [ language ] = useCommonGlobals(routes.blog);
   const [ blogData, setBlogData ] = useState(null);
-  const Loading = () => <p>{strings.loading[language]}</p>;
 
   useEffect(() => {
     getData(process.env.REACT_APP_GET_BLOG_ENTRIES)
@@ -41,7 +41,7 @@ export function BlogPage(){
                   </div>
               </article>
             ))
-          : <Loading />
+          : <LoadingSpinner language={language} />
         }
       </section>
     </main>
