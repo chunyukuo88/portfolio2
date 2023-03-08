@@ -1,10 +1,8 @@
-import React, { memo, useState } from 'react';
-import strings from '../../common/strings';
+import { memo, useState } from 'react';
+import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
 
 export const CluesCube = memo(function ({ language, crosswordData }) {
   const [frontFaceClicked, setFrontFaceClicked] = useState(false);
-
-  const Loading = () => <p>{strings.loading[language]}</p>;
 
   const convertTimestamp = (date) => new Date(date).toLocaleDateString();
 
@@ -31,11 +29,11 @@ export const CluesCube = memo(function ({ language, crosswordData }) {
   const Title = () => {
     return crosswordData
       ? <section id='crossword-info'>
-        <h2>{`'${crosswordData.title}'`}</h2>
-        <h3>By {crosswordData.author}</h3>
-        <h3>{convertTimestamp(crosswordData.created_at)}</h3>
-      </section>
-      : <Loading/>;
+          <h2>{`'${crosswordData.title}'`}</h2>
+          <h3>By {crosswordData.author}</h3>
+          <h3>{convertTimestamp(crosswordData.created_at)}</h3>
+        </section>
+      : <LoadingSpinner language={language} />;
   };
 
   return (
@@ -48,7 +46,7 @@ export const CluesCube = memo(function ({ language, crosswordData }) {
           >
             {crosswordData
               ? <CluesDown crosswordData={crosswordData}/>
-              : <Loading/>
+              : <LoadingSpinner language={language} />
             }
           </div>
           <div
@@ -57,7 +55,7 @@ export const CluesCube = memo(function ({ language, crosswordData }) {
           >
             {crosswordData
               ? <CluesAcross crosswordData={crosswordData}/>
-              : <Loading/>
+              : <LoadingSpinner language={language} />
             }
           </div>
           <div

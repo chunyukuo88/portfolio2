@@ -1,5 +1,5 @@
 export const LinkStyling = {
-  color: '#00ec00',
+  color: 'var(--neumorphicBackground)',
   textDecoration: 'none',
   textTransform: 'uppercase',
 };

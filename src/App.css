@@ -6,6 +6,8 @@
   --LanguageBlock: #ffd000;
   --AdminBlock: #ffc300;
   --MenuBlockText: #ffffff;
+  --SiteBackground: #434150;
+  --SiteBackgroundShadow: #2d2c3a;
 }
 body {
   font-family: 'Cabin', sans-serif;

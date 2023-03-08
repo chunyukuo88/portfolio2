@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ReactGA from 'react-ga4';
 import { selectCurrentLanguage } from '../features/language/languageSlice';

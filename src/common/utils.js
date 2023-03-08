@@ -5,11 +5,12 @@ export async function getData(url){
 }
 
 export async function postData(url, data){
+  const { log, error } = console;
   try {
     const response = await fetch(url, data)
-    console.log(response);
+    log(response);
   } catch (e) {
-    console.error('The POST request failed. Here is why:', e);
+    error('The POST request failed. Here is why:', e);
   }
 }
 

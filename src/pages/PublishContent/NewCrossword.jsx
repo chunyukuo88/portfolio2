@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createHttpRequest, postData } from '../../common/utils';
 
 export function NewCrossword({ token }){

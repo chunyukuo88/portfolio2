@@ -45,7 +45,7 @@ describe('utils', () => {
         throw new Error('API is down');
       });
       global.fetch = mockFetch;
-      const spy = jest.spyOn(console, 'error');
+      const spy = jest.spyOn(console, 'error').mockImplementationOnce(jest.fn());
 
       await postData(url, {});
 
