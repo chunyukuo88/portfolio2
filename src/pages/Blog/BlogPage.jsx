@@ -16,7 +16,6 @@ export function BlogPage(){
     getData(process.env.REACT_APP_GET_BLOG_ENTRIES)
       .then(data => {
         setBlogData(data);
-        console.log('data: ', blogData);
       }
     );
   }, []);
@@ -36,7 +35,7 @@ export function BlogPage(){
                   <img
                     className='blog-image'
                     src={article.imageUrl}
-                    alt={`Image for blog with key ${key}`}
+                    alt={`For blog with key ${key}`}
                   />
                   <p className='blog-body'>{article.theme}</p>
                   <div className='blog-views-and-likes'>
