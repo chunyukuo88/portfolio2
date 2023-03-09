@@ -3,11 +3,12 @@ import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
 
 export const CluesCube = memo(function ({ language, crosswordData }) {
   const [frontFaceClicked, setFrontFaceClicked] = useState(false);
+  const clueDilimiter = '&&';
 
   const convertTimestamp = (date) => new Date(date).toLocaleDateString();
 
   const CluesAcross = ({crosswordData}) => {
-    const cluesAcross = crosswordData.cluesAcross.split(',');
+    const cluesAcross = crosswordData.cluesAcross.split(clueDilimiter);
     return (
       <div className='clues-box'>
         <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Across:</h3>
@@ -17,7 +18,7 @@ export const CluesCube = memo(function ({ language, crosswordData }) {
   };
 
   const CluesDown = ({crosswordData}) => {
-    const cluesDown = crosswordData.cluesDown.split(',');
+    const cluesDown = crosswordData.cluesDown.split(clueDilimiter);
     return (
       <div className='clues-box'>
         <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Down:</h3>

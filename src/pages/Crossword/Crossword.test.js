@@ -11,6 +11,9 @@ import ReactGA from 'react-ga4';
 import Crossword from './Crossword.jsx';
 import { styles } from './styles.js';
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
 describe('Crossword.jsx', ()=> {
   describe('GIVEN: the user is not logged in,', () => {
@@ -181,25 +184,24 @@ describe('Crossword.jsx', ()=> {
     describe('GIVEN: the user has filled in the grid,', () => {
       describe('WHEN: the user has filled it in correctly,', () => {
         it('THEN: it triggers an animation.', async () => {
-          jest
-            .spyOn(utils, 'getData')
-            .mockResolvedValueOnce([{
-              author: "Alex Gochenour",
-              cluesAcross: "1. Samsung Apple Google and,2. Corny Columbian snack,3. A moribund person,4. Not subtle,5. One way to pluralize 'serum'",
-              cluesDown: "1. Nigerian financial hub,2. A stand of trees,3. Spanish word for 'has',4. A cake or an art,5. Origami or oil paint for example,",
-              created_at: "2023-02-17T22:02:19.133891+00:00",
-              id: 6,
-              solution: "lgtooarepagonerovertseras",
-              theme: "",
-              title: "For Famous Flutist",
-            }]);
-          const { debug } = render(
+          jest.spyOn(utils, 'getData').mockResolvedValueOnce([{
+            author: "Alex Gochenour",
+            cluesAcross: "1. Samsung Apple Google and,2. Corny Columbian snack,3. A moribund person,4. Not subtle,5. One way to pluralize 'serum'",
+            cluesDown: "1. Nigerian financial hub,2. A stand of trees,3. Spanish word for 'has',4. A cake or an art,5. Origami or oil paint for example,",
+            created_at: "2023-02-17T22:02:19.133891+00:00",
+            id: 6,
+            solution: "lgtooarepagonerovertseras",
+            theme: "",
+            title: "For Famous Flutist",
+          }]);
+          render(
             <Provider store={mockStore}>
               <Router>
                 <Crossword />
               </Router>
             </Provider>
           );
+
           let cells = document.querySelectorAll('.crossword-square');
           fireEvent.click( cells[0]);
           fireEvent.keyDown(cells[0], { key: 'l', keyCode: 76 });
@@ -222,25 +224,25 @@ describe('Crossword.jsx', ()=> {
           fireEvent.click( cells[9]);
           fireEvent.keyDown(cells[9], { key: 'a', keyCode: 65 });
           fireEvent.click( cells[10]);
-          fireEvent.keyDown(cells[10], { key: 'o', keyCode: 79 });
+          fireEvent.keyDown(cells[10], { key: 'g', keyCode: 71 });
           fireEvent.click( cells[11]);
-          fireEvent.keyDown(cells[11], { key: 'v', keyCode: 86 });
+          fireEvent.keyDown(cells[11], { key: 'o', keyCode: 79 });
           fireEvent.click( cells[12]);
-          fireEvent.keyDown(cells[12], { key: 'e', keyCode: 69 });
+          fireEvent.keyDown(cells[12], { key: 'n', keyCode: 78 });
           fireEvent.click( cells[13]);
-          fireEvent.keyDown(cells[13], { key: 'r', keyCode: 82 });
+          fireEvent.keyDown(cells[13], { key: 'e', keyCode: 69 });
           fireEvent.click( cells[14]);
-          fireEvent.keyDown(cells[14], { key: 't', keyCode: 84 });
+          fireEvent.keyDown(cells[14], { key: 'r', keyCode: 82 });
           fireEvent.click( cells[15]);
-          fireEvent.keyDown(cells[15], { key: 'g', keyCode: 71 });
+          fireEvent.keyDown(cells[15], { key: 'o', keyCode: 79 });
           fireEvent.click( cells[16]);
-          fireEvent.keyDown(cells[16], { key: 'o', keyCode: 79 });
+          fireEvent.keyDown(cells[16], { key: 'v', keyCode: 86 });
           fireEvent.click( cells[17]);
-          fireEvent.keyDown(cells[17], { key: 'n', keyCode: 78 });
+          fireEvent.keyDown(cells[17], { key: 'e', keyCode: 69 });
           fireEvent.click( cells[18]);
-          fireEvent.keyDown(cells[18], { key: 'e', keyCode: 69 });
+          fireEvent.keyDown(cells[18], { key: 'r', keyCode: 82 });
           fireEvent.click( cells[19]);
-          fireEvent.keyDown(cells[19], { key: 'r', keyCode: 82 });
+          fireEvent.keyDown(cells[19], { key: 't', keyCode: 84 });
           fireEvent.click( cells[20]);
           fireEvent.keyDown(cells[20], { key: 's', keyCode: 83 });
           fireEvent.click( cells[21]);
@@ -254,14 +256,7 @@ describe('Crossword.jsx', ()=> {
 
           cells = screen.getAllByTestId('crossword-square');
 
-          await waitFor(() => {
-            expect(cells[0]).toHaveClass('squareVictory');
-          });
-        });
-      });
-      describe('WHEN: the user has NOT filled it in correctly,', () => {
-        it('THEN: it does not trigger an animation.', () => {
-
+          expect(cells[0]).toHaveStyle(styles.squareVictory);
         });
       });
     });
