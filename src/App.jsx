@@ -18,10 +18,6 @@ ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
 const App = () => (
   <>
-    <div className='banners'>
-      <AlexBanner />
-      <GochenourBanner />
-    </div>
     <Router>
         <Routes>
           <Route exact path={routes.index} element={<HomePage />}/>
@@ -38,7 +34,12 @@ function HomePage(){
   return (
     <>
       <div className='banner-and-menu-wrapper'>
-        <div/><div/><div/>
+        <div/>
+        <div className='banners'>
+          <AlexBanner />
+          <GochenourBanner />
+        </div>
+        <div/>
         <MainMenu />
         <SkillsPole />
         <AboutBlock />
