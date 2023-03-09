@@ -51,7 +51,7 @@ describe('Crossword.jsx', ()=> {
         expect(topFace).toHaveClass('top-face-clicked');
       });
     });
-    describe('GIVEN: The 5x5 crossword grid is empty,', ()=>{
+    describe('GIVEN: The crossword grid is empty,', ()=>{
       describe('WHEN: the user clicks on a square,', ()=>{
         it('THEN: the square becomes highlighted.',()=>{
           render(
@@ -177,7 +177,7 @@ describe('Crossword.jsx', ()=> {
         });
       });
     });
-    describe('GIVEN: a 2x2 crossword grid,', ()=>{
+    describe('GIVEN: a crossword grid,', ()=>{
       describe('WHEN: the first page loads', () => {
         it('THEN: displays a loading message', () => {
           render(
