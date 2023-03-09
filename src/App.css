@@ -9,6 +9,7 @@
   --SiteBackground: #434150;
   --SiteBackgroundShadow: #2d2c3a;
 }
+
 body {
   font-family: 'Cabin', sans-serif;
   user-select: none;
@@ -21,9 +22,11 @@ body {
   margin-top: 2rem;
 }
 .banner-and-menu-wrapper {
-  margin: 10em 0;
+  height: 80vh;
   display: grid;
+  grid-template-rows: 50% 50%;
   grid-template-columns: 40% 20% 40%;
   justify-content: center;
 }
+
 
