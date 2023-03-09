@@ -23,42 +23,42 @@ export function SkillsPole(){
         onMouseLeave={() => setDisplayRedux(true)}
         className='skill-block'
       >
-        {displayRedux ? 'React + Redux' : <span><img className='tech-icons' src={ReduxIcon} alt='redux icon'/></span>}
+        {displayRedux ? 'React + Redux' : <span><img data-testid='redux-icon' className='tech-icons' src={ReduxIcon} alt='redux icon'/></span>}
       </li>
       <li
         onMouseEnter={() => setDisplayLambda(false)}
         onMouseLeave={() => setDisplayLambda(true)}
         className='skill-block'
       >
-        {displayLambda ? 'AWS' : <span><img className='tech-icons' src={LambdaIcon} alt='aws-icon'/></span>}
+        {displayLambda ? 'AWS' : <span><img data-testid='aws-icon' className='tech-icons' src={LambdaIcon} alt='aws-icon'/></span>}
       </li>
       <li
         onMouseEnter={() => setDisplayNode(false)}
         onMouseLeave={() => setDisplayNode(true)}
         className='skill-block'
       >
-        {displayNode ? 'Node.js' : <span><img className='tech-icons' src={NodeIcon} alt='node-icon'/></span>}
+        {displayNode ? 'Node.js' : <span><img data-testid='node-icon' className='tech-icons' src={NodeIcon} alt='node-icon'/></span>}
       </li>
       <li
         onMouseEnter={() => setDisplaySvelte(false)}
         onMouseLeave={() => setDisplaySvelte(true)}
         className='skill-block'
       >
-        {displaySvelte ? 'Svelte' : <span><img className='tech-icons' src={SvelteIcon} alt='svelte-icon'/></span>}
+        {displaySvelte ? 'Svelte' : <span><img data-testid='svelte-icon' className='tech-icons' src={SvelteIcon} alt='svelte-icon'/></span>}
       </li>
       <li
         onMouseEnter={() => setDisplayDocker(false)}
         onMouseLeave={() => setDisplayDocker(true)}
         className='skill-block'
       >
-        {displayDocker ? 'Docker' : <span><img className='tech-icons' src={DockerIcon} alt='docker-icon'/></span>}
+        {displayDocker ? 'Docker' : <span><img data-testid='docker-icon' className='tech-icons' src={DockerIcon} alt='docker-icon'/></span>}
       </li>
       <li
         onMouseEnter={() => setDisplaySls(false)}
         onMouseLeave={() => setDisplaySls(true)}
         className='skill-block'
       >
-        {displaySls ? 'Serverless Framework' : <span><img className='tech-icons' src={ServerlessIcon} alt='serverless-icon' /></span>}
+        {displaySls ? 'Serverless Framework' : <span><img data-testid='serverless-icon' className='tech-icons' src={ServerlessIcon} alt='serverless-icon' /></span>}
       </li>
     </ul>
   );
