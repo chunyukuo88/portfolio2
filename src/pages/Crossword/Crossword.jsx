@@ -129,6 +129,7 @@ export default function Crossword(){
                     <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
                     <div
                       data-testid='crossword-square'
+                      className='crossword-square'
                       id={`${outerIndex},${innerIndex}`}
                       autoComplete='off'
                       maxLength='1'
