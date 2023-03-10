@@ -18,6 +18,7 @@ export default function Crossword(){
   const grid = useSelector(selectCurrentGrid);
   const userHasWon = useSelector(selectUserHasWon);
   const [focused, setFocused] = useState(undefined);
+  const [hasError, setHasError] = useState(false);
   const [crosswordData, setCrosswordData] = useState(undefined);
   const dispatch = useDispatch();
 
@@ -26,7 +27,7 @@ export default function Crossword(){
       .then(data => {
         setCrosswordData(data[0]);
       })
-      .catch((e) => new Error(e));
+      .catch((e) => setHasError(true));
   }, []);
 
   useLayoutEffect(() => {
@@ -90,6 +91,7 @@ export default function Crossword(){
   };
 
   const auxKeys = [ 'Delete', 'Backspace', 'Alt', 'Shift', 'Control', 'Escape', 'Meta', 'ContextMenu', 'Enter', 'Home', 'End', 'ScrollLock', 'PageUp', 'PageDown', 'Insert'];
+
   const keyDownHandler = (event, outerIndex, innerIndex) => {
     const { key } = event;
     if (auxKeys.includes(key)) return;
@@ -116,7 +118,10 @@ export default function Crossword(){
   return (
     <>
       <div id='room-container'>
-      <CluesCube {...{language, crosswordData} }/>
+      {hasError
+        ? <div>{strings.errorCrosswordUnavailable[language]}</div>
+        : <CluesCube {...{language, crosswordData}} />
+      }
       </div>
       <section id='interactive-section' >
         <ErrorBoundary>
