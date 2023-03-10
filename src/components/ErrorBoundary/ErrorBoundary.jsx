@@ -7,12 +7,10 @@ class ErrorBoundary extends Component {
   }
 
   static getDerivedStateFromError(error) {
-    // 更新 state 以至於下一個 render 會顯示 fallback UI
     return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
-    // 你也可以把錯誤記錄到一個錯誤回報系統服務
     console.error(error, errorInfo);
   }
 

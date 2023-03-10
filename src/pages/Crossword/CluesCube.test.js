@@ -14,8 +14,8 @@ const mockData = {
   author: 'Alex Gochenour',
   title: 'For Famous Flutist',
   theme: "",
-  cluesAcross: '1. Samsung Apple Google and,2. Corny Columbian snack,3. A moribund person,4. Not subtle,5. One way to pluralize serum',
-  cluesDown: '1. Nigerian financial hub,2. A stand of trees,3. Spanish word for has,4. A cake or an art,5. Origami or oil paint for example'
+  cluesAcross: '1. Samsung Apple Google and&&2. Corny Columbian snack&&3. A moribund person&&4. Not subtle&&5. One way to pluralize serum',
+  cluesDown: '1. Nigerian financial hub&&2. A stand of trees&&3. Spanish word for has&&4. A cake or an art&&5. Origami or oil paint for example'
 };
 
 

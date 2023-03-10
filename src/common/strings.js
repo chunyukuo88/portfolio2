@@ -30,6 +30,11 @@ const strings = {
     english: 'Email',
     russian: 'е-мейл',
   },
+  errorCrosswordUnavailable: {
+    chinese: '填字遊戲後端暫時無法訪問，請明天再來！',
+    english: 'The Crossword API is down for routine maintenance. Please try again tomorrow.',
+    russian: 'API для кроссворда недоступно из-за планового обслуживания. Пожалуйста, попробуйте снова завтра.',
+  },
   ENGLISH: 'english',
   goToCounter: {
     chinese: '計數機',

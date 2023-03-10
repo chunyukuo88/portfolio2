@@ -1,8 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import humidityReducer from './features/humidity/humiditySlice';
 import languageReducer from './features/language/languageSlice';
-import navigationReducer from './features/navigation/navigationSlice';
-import tempReducer from './features/temp/tempSlice';
 
 const mockAuthSlice = createSlice({
   name: 'auth',
@@ -42,10 +39,7 @@ export const mockStore = configureStore({
   reducer: {
     auth: mockAuthSlice.reducer,
     crossword: mockCrosswordSlice.reducer,
-    humidity: humidityReducer,
     language: languageReducer,
-    navigation: navigationReducer,
-    temp: tempReducer,
   },
 });
 
@@ -65,9 +59,6 @@ export const mockStoreLoggedIn = configureStore({
   reducer: {
     auth: mockAuthSliceLoggedIn.reducer,
     crossword: mockCrosswordSlice.reducer,
-    humidity: humidityReducer,
     language: languageReducer,
-    navigation: navigationReducer,
-    temp: tempReducer,
   },
 });
