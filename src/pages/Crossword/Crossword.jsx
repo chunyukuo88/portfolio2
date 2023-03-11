@@ -19,19 +19,21 @@ export default function Crossword(){
   const userHasWon = useSelector(selectUserHasWon);
   const [focused, setFocused] = useState(undefined);
   const [hasError, setHasError] = useState(false);
-  const [crosswordData, setCrosswordData] = useState(undefined);
+  const [todaysPuzzle, setTodaysPuzzle] = useState(undefined);
+  const [allPuzzles, setAllPuzzles] = useState(undefined);
   const dispatch = useDispatch();
 
   useEffect( () => {
-    getData(process.env.REACT_APP_GET_SINGLE_CROSSWORD)
+    getData(process.env.REACT_APP_GET_ALL_CROSSWORDS)
       .then(data => {
-        setCrosswordData(data[0]);
+        setAllPuzzles(data);
+        setTodaysPuzzle(data[0]);
       })
       .catch((e) => setHasError(true));
   }, []);
 
   useLayoutEffect(() => {
-    crosswordData && determineIfUserWon(grid);
+    todaysPuzzle && determineIfUserWon(grid);
   }, [grid]);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
@@ -78,7 +80,7 @@ export default function Crossword(){
     let solutionIndex = 0;
     outerLoop: for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid.length; j++) {
-        if (!(grid[i][j].value.toLowerCase() === crosswordData.solution[solutionIndex].toLowerCase())) {
+        if (!(grid[i][j].value.toLowerCase() === todaysPuzzle.solution[solutionIndex].toLowerCase())) {
           userHasWon = false;
           break outerLoop;
         } else {
@@ -120,7 +122,7 @@ export default function Crossword(){
       <div id='room-container'>
       {hasError
         ? <div>{strings.errorCrosswordUnavailable[language]}</div>
-        : <CluesCube {...{language, crosswordData}} />
+        : <CluesCube {...{language, crosswordData: todaysPuzzle}} />
       }
       </div>
       <section id='interactive-section' >
@@ -151,6 +153,13 @@ export default function Crossword(){
             </div>
           ))}
         </ErrorBoundary>
+        <select name="all-puzzles" id="all-puzzles-select">
+          {allPuzzles ? allPuzzles.map(puzzle => (
+            <option key={puzzle.solution} value={puzzle.title}>
+              {puzzle.title}
+            </option>
+          )) : null}
+        </select>
         <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
           <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
         </div>

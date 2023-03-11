@@ -16,16 +16,28 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-const anActualCrosswordFromTheDatabase = {
-  author: "Alex Gochenour",
-  cluesAcross: "1. Samsung Apple Google and,2. Corny Columbian snack,3. A moribund person,4. Not subtle,5. One way to pluralize 'serum'",
-  cluesDown: "1. Nigerian financial hub,2. A stand of trees,3. Spanish word for 'has',4. A cake or an art,5. Origami or oil paint for example,",
-  created_at: "2023-02-17T22:02:19.133891+00:00",
-  id: 6,
-  solution: "lgtooarepagonerovertseras",
-  theme: "",
-  title: "For Famous Flutist",
-};
+const crosswordsFromDatabase = [
+  {
+    author: "Alex Gochenour",
+    cluesAcross: "1. Samsung Apple Google and,2. Corny Columbian snack,3. A moribund person,4. Not subtle,5. One way to pluralize 'serum'",
+    cluesDown: "1. Nigerian financial hub,2. A stand of trees,3. Spanish word for 'has',4. A cake or an art,5. Origami or oil paint for example,",
+    created_at: "2023-02-17T22:02:19.133891+00:00",
+    id: 6,
+    solution: "lgtooarepagonerovertseras",
+    theme: "",
+    title: "For Famous Flutist",
+  },
+  {
+    author: "Alex Gochenour",
+    cluesAcross: "1. Skewered meats&&2. My Alex (in Arabic)&&3. End all&&4. Awful giants&&5. Scrambled abyss",
+    cluesDown: "1. Alternate to 1-ACROSS&&2. Song of lament&&3. Yogi or Smoky&&4. They connect wheels&&5. UW's School of",
+    created_at: "2023-02-07 22:56:55+00",
+    id: 6,
+    solution: "kebabalexibeallogresbyssa",
+    theme: "",
+    title: "Three Arabic Words",
+  },
+];
 
 function correctlyFillOutCrossword(cells) {
   fireEvent.click( cells[0]);
@@ -150,6 +162,29 @@ describe('Crossword.jsx', ()=> {
 
       expect(westFace).toHaveClass('west-face-clicked');
       expect(topFace).toHaveClass('top-face-clicked');
+    });
+  });
+  describe('WHEN: The user clicks the dropdown menu,', () => {
+    it('THEN: It displays older crossword puzzles,', async () => {
+      jest.spyOn(utils, 'getData').mockReturnValueOnce(
+        new Promise((resolve, reject) => {
+          resolve(crosswordsFromDatabase);
+        })
+      );
+      render(
+        <Provider store={mockStore}>
+          <Router>
+            <Crossword/>
+          </Router>
+        </Provider>
+      );
+
+      await waitFor(() => {
+        const menuOptions = screen.getAllByRole('option');
+        expect(menuOptions).toHaveLength(2);
+        expect(menuOptions[0]).toHaveTextContent('For Famous Flutist');
+        expect(menuOptions[1]).toHaveTextContent('Three Arabic Words');
+      });
     });
   });
   describe('GIVEN: The crossword grid is empty,', ()=>{
