@@ -1,14 +1,14 @@
 import { memo, useState } from 'react';
 import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
 
-export const CluesCube = memo(function ({ language, crosswordData }) {
+export const CluesCube = memo(function ({ language, todaysPuzzle }) {
   const [frontFaceClicked, setFrontFaceClicked] = useState(false);
   const clueDilimiter = '&&';
 
   const convertTimestamp = (date) => new Date(date).toLocaleDateString();
 
-  const CluesAcross = ({crosswordData}) => {
-    const cluesAcross = crosswordData.cluesAcross.split(clueDilimiter);
+  const CluesAcross = ({todaysPuzzle}) => {
+    const cluesAcross = todaysPuzzle.cluesAcross.split(clueDilimiter);
     return (
       <div className='clues-box'>
         <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Across:</h3>
@@ -17,8 +17,8 @@ export const CluesCube = memo(function ({ language, crosswordData }) {
     );
   };
 
-  const CluesDown = ({crosswordData}) => {
-    const cluesDown = crosswordData.cluesDown.split(clueDilimiter);
+  const CluesDown = ({todaysPuzzle}) => {
+    const cluesDown = todaysPuzzle.cluesDown.split(clueDilimiter);
     return (
       <div className='clues-box'>
         <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Down:</h3>
@@ -28,11 +28,11 @@ export const CluesCube = memo(function ({ language, crosswordData }) {
   };
 
   const Title = () => {
-    return crosswordData
+    return todaysPuzzle
       ? <section id='crossword-info'>
-          <h2>{`'${crosswordData.title}'`}</h2>
-          <h3>By {crosswordData.author}</h3>
-          <h3>{convertTimestamp(crosswordData.created_at)}</h3>
+          <h2>{`'${todaysPuzzle.title}'`}</h2>
+          <h3>By {todaysPuzzle.author}</h3>
+          <h3>{convertTimestamp(todaysPuzzle.created_at)}</h3>
         </section>
       : <LoadingSpinner language={language} />;
   };
@@ -45,8 +45,8 @@ export const CluesCube = memo(function ({ language, crosswordData }) {
             data-testid='top-face'
             className={frontFaceClicked ? 'top-face-clicked' : 'top-face-not-clicked'}
           >
-            {crosswordData
-              ? <CluesDown crosswordData={crosswordData}/>
+            {todaysPuzzle
+              ? <CluesDown todaysPuzzle={todaysPuzzle}/>
               : <LoadingSpinner language={language} />
             }
           </div>
@@ -54,8 +54,8 @@ export const CluesCube = memo(function ({ language, crosswordData }) {
             data-testid='west-face'
             className={frontFaceClicked ? 'west-face-clicked' : 'west-face-not-clicked'}
           >
-            {crosswordData
-              ? <CluesAcross crosswordData={crosswordData}/>
+            {todaysPuzzle
+              ? <CluesAcross todaysPuzzle={todaysPuzzle}/>
               : <LoadingSpinner language={language} />
             }
           </div>

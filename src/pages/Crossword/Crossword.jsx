@@ -19,8 +19,8 @@ export default function Crossword(){
   const userHasWon = useSelector(selectUserHasWon);
   const [focused, setFocused] = useState(undefined);
   const [hasError, setHasError] = useState(false);
-  const [todaysPuzzle, setTodaysPuzzle] = useState(undefined);
-  const [allPuzzles, setAllPuzzles] = useState(undefined);
+  const [todaysPuzzle, setTodaysPuzzle] = useState(null);
+  const [allPuzzles, setAllPuzzles] = useState(null);
   const dispatch = useDispatch();
 
   useEffect( () => {
@@ -29,6 +29,7 @@ export default function Crossword(){
         setAllPuzzles(data);
         setTodaysPuzzle(data[0]);
       })
+      // TODO Add error card.
       .catch((e) => setHasError(true));
   }, []);
 
@@ -117,13 +118,39 @@ export default function Crossword(){
     width: '3rem',
   };
 
+  const optionHandler = (event) => {
+    const { value } = event.target;
+    const selectedPuzzle = allPuzzles.find(puzzle => puzzle.title === value);
+    setTodaysPuzzle(selectedPuzzle);
+  };
+
+  const DropdownMenu = () => (
+    <select
+      onChange={optionHandler}
+      name="all-puzzles"
+      id="all-puzzles-select"
+    >
+      {allPuzzles ? allPuzzles.map(puzzle => (
+        <option key={puzzle.solution} value={puzzle.title}>
+          {puzzle.title}
+        </option>
+      )) : null}
+    </select>
+  );
+
+  const BackButton = () => (
+    <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
+      <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
+    </div>
+  )
+
   return (
     <>
       <div id='room-container'>
-      {hasError
-        ? <div>{strings.errorCrosswordUnavailable[language]}</div>
-        : <CluesCube {...{language, crosswordData: todaysPuzzle}} />
-      }
+        {todaysPuzzle
+          ? <CluesCube language={language} todaysPuzzle={todaysPuzzle} />
+          : <div>{strings.errorCrosswordUnavailable[language]}</div>
+        }
       </div>
       <section id='interactive-section' >
         <ErrorBoundary>
@@ -153,16 +180,8 @@ export default function Crossword(){
             </div>
           ))}
         </ErrorBoundary>
-        <select name="all-puzzles" id="all-puzzles-select">
-          {allPuzzles ? allPuzzles.map(puzzle => (
-            <option key={puzzle.solution} value={puzzle.title}>
-              {puzzle.title}
-            </option>
-          )) : null}
-        </select>
-        <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
-          <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
-        </div>
+        <DropdownMenu />
+        <BackButton />
       </section>
     </>
   );

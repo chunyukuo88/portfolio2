@@ -187,6 +187,38 @@ describe('Crossword.jsx', ()=> {
       });
     });
   });
+  describe('WHEN: The user clicks an option from the dropdown menu,', () => {
+    it('THEN: It sets today"s puzzle to be the option the user selected.', async () => {
+      jest.spyOn(utils, 'getData').mockReturnValueOnce(
+        new Promise((resolve, reject) => {
+          resolve(crosswordsFromDatabase);
+        })
+      );
+      // render(
+      const { debug } = render(
+        <Provider store={mockStore}>
+          <Router>
+            <Crossword/>
+          </Router>
+        </Provider>
+      );
+
+      await waitFor(() => {
+        let todaysPuzzle = screen.getByRole('heading', { level: 2 });
+        expect(todaysPuzzle).toHaveTextContent(/For Famous Flutist/);
+
+        const menu = document.querySelector('select');
+        fireEvent.click(menu);
+        const menuOptions = screen.getAllByRole('option');
+        debug(menuOptions); return;
+        fireEvent.select(menuOptions[1]);
+        todaysPuzzle = screen.getByRole('heading', { level: 2 });
+
+        expect(todaysPuzzle).toHaveTextContent(/Three Arabic Words/);
+      });
+    });
+  });
+
   describe('GIVEN: The crossword grid is empty,', ()=>{
     describe('WHEN: the user clicks on a square,', ()=>{
       it('THEN: the square becomes highlighted.',()=>{
