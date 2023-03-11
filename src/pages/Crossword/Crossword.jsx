@@ -147,7 +147,7 @@ export default function Crossword(){
   return (
     <>
       <div id='room-container'>
-        {todaysPuzzle
+        {todaysPuzzle && !hasError
           ? <CluesCube language={language} todaysPuzzle={todaysPuzzle} />
           : <div>{strings.errorCrosswordUnavailable[language]}</div>
         }

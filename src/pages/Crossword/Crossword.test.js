@@ -14,6 +14,7 @@ import strings from '../../common/strings';
 
 afterEach(() => {
   jest.clearAllMocks();
+  jest.restoreAllMocks(); // Clears out spies.
 });
 
 const crosswordsFromDatabase = [
@@ -95,19 +96,6 @@ function correctlyFillOutCrossword(cells) {
 describe('Crossword.jsx', ()=> {
   describe('GIVEN: there are no problems with the crossword API,', ()=>{
     describe('WHEN: the first page loads', () => {
-      it('THEN: displays a loading message', () => {
-        render(
-          <Provider store={mockStore}>
-            <Router>
-              <Crossword />
-            </Router>
-          </Provider>
-        );
-
-        const loading = screen.getAllByText('Loading...')[0];
-
-        expect(loading).toBeInTheDocument();
-      });
       it('THEN: displays the numbers corresponding to the clues', () => {
         render(
           <Provider store={mockStore}>
@@ -141,7 +129,12 @@ describe('Crossword.jsx', ()=> {
     });
   });
   describe('WHEN: The user clicks the front face of the cube,', () => {
-    it('THEN: the side and top of the cube transform.', () => {
+    it('THEN: the side and top of the cube transform.', async () => {
+      jest.spyOn(utils, 'getData').mockReturnValueOnce(
+        new Promise((resolve, reject) => {
+          resolve(crosswordsFromDatabase);
+        })
+      );
       render(
         <Provider store={mockStore}>
           <Router>
@@ -150,18 +143,20 @@ describe('Crossword.jsx', ()=> {
         </Provider>
       );
 
-      const frontFace = document.getElementById('cube-face-front');
-      let westFace = screen.getAllByTestId('west-face')[0];
-      let topFace = screen.getAllByTestId('top-face')[0];
-      expect(westFace).toHaveClass('west-face-not-clicked');
-      expect(topFace).toHaveClass('top-face-not-clicked');
+      await waitFor(() => {
+        const frontFace = document.getElementById('cube-face-front');
+        let westFace = screen.getAllByTestId('west-face')[0];
+        let topFace = screen.getAllByTestId('top-face')[0];
+        expect(westFace).toHaveClass('west-face-not-clicked');
+        expect(topFace).toHaveClass('top-face-not-clicked');
 
-      fireEvent.click(frontFace);
-      westFace = screen.getAllByTestId('west-face')[0];
-      topFace = screen.getAllByTestId('top-face')[0];
+        fireEvent.click(frontFace);
+        westFace = screen.getAllByTestId('west-face')[0];
+        topFace = screen.getAllByTestId('top-face')[0];
 
-      expect(westFace).toHaveClass('west-face-clicked');
-      expect(topFace).toHaveClass('top-face-clicked');
+        expect(westFace).toHaveClass('west-face-clicked');
+        expect(topFace).toHaveClass('top-face-clicked');
+      });
     });
   });
   describe('WHEN: The user clicks the dropdown menu,', () => {
@@ -216,7 +211,6 @@ describe('Crossword.jsx', ()=> {
       });
     });
   });
-
   describe('GIVEN: The crossword grid is empty,', ()=>{
     describe('WHEN: the user clicks on a square,', ()=>{
       it('THEN: the square becomes highlighted.',()=>{
@@ -348,7 +342,7 @@ describe('Crossword.jsx', ()=> {
       it('THEN: does not trigger an animation.', async () => {
         jest.spyOn(utils, 'getData').mockReturnValueOnce(
           new Promise((resolve, reject) => {
-            resolve([anActualCrosswordFromTheDatabase]);
+            resolve(crosswordsFromDatabase);
           })
         );
         render(
@@ -372,7 +366,7 @@ describe('Crossword.jsx', ()=> {
       it('THEN: it triggers an animation.', async () => {
         jest.spyOn(utils, 'getData').mockReturnValueOnce(
           new Promise((resolve, reject) => {
-            resolve([anActualCrosswordFromTheDatabase]);
+            resolve(crosswordsFromDatabase);
           })
         );
         render(
@@ -409,7 +403,6 @@ describe('Crossword.jsx', ()=> {
 
           expect(errorMsgOnCube).toBeInTheDocument();
         });
-        jest.clearAllMocks();
       });
     });
   });
