@@ -194,8 +194,7 @@ describe('Crossword.jsx', ()=> {
           resolve(crosswordsFromDatabase);
         })
       );
-      // render(
-      const { debug } = render(
+      render(
         <Provider store={mockStore}>
           <Router>
             <Crossword/>
@@ -210,8 +209,7 @@ describe('Crossword.jsx', ()=> {
         const menu = document.querySelector('select');
         fireEvent.click(menu);
         const menuOptions = screen.getAllByRole('option');
-        debug(menuOptions); return;
-        fireEvent.select(menuOptions[1]);
+        fireEvent.change(menu, { target: { value: menuOptions[1].innerHTML } });
         todaysPuzzle = screen.getByRole('heading', { level: 2 });
 
         expect(todaysPuzzle).toHaveTextContent(/Three Arabic Words/);
