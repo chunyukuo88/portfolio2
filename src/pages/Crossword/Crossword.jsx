@@ -6,7 +6,14 @@ import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCommonGlobals } from '../../common/hooks';
 import { getData } from '../../common/utils';
-import { declareVictory, selectCurrentGrid, selectUserHasWon, updateGrid } from '../../features/crossword/crosswordSlice';
+import {
+  declareVictory,
+  resetVictoryState,
+  selectCurrentGrid,
+  selectUserHasWon,
+  updateGrid,
+  resetGrid,
+} from '../../features/crossword/crosswordSlice';
 
 import { routes } from '../../routes';
 import { styles } from './styles.js';
@@ -122,6 +129,8 @@ export default function Crossword(){
     const { value } = event.target;
     const selectedPuzzle = allPuzzles.find(puzzle => puzzle.title === value);
     setTodaysPuzzle(selectedPuzzle);
+    dispatch(resetGrid());
+    return dispatch(resetVictoryState(false));
   };
 
   const DropdownMenu = () => (
