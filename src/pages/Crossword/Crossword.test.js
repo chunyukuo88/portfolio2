@@ -176,9 +176,10 @@ describe('Crossword.jsx', ()=> {
 
       await waitFor(() => {
         const menuOptions = screen.getAllByRole('option');
-        expect(menuOptions).toHaveLength(2);
-        expect(menuOptions[0]).toHaveTextContent('For Famous Flutist');
-        expect(menuOptions[1]).toHaveTextContent('Three Arabic Words');
+        expect(menuOptions).toHaveLength(3);
+        expect(menuOptions[0]).toHaveTextContent('-- Previous Puzzles --');
+        expect(menuOptions[1]).toHaveTextContent('For Famous Flutist');
+        expect(menuOptions[2]).toHaveTextContent('Three Arabic Words');
       });
     });
   });
@@ -207,7 +208,7 @@ describe('Crossword.jsx', ()=> {
         fireEvent.change(menu, { target: { value: menuOptions[1].innerHTML } });
         todaysPuzzle = screen.getByRole('heading', { level: 2 });
 
-        expect(todaysPuzzle).toHaveTextContent(/Three Arabic Words/);
+        expect(todaysPuzzle).toHaveTextContent(/For Famous Flutist/);
       });
     });
   });
