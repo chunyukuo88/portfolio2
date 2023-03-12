@@ -14,18 +14,31 @@ import strings from '../../common/strings';
 
 afterEach(() => {
   jest.clearAllMocks();
+  jest.restoreAllMocks(); // Clears out spies.
 });
 
-const anActualCrosswordFromTheDatabase = {
-  author: "Alex Gochenour",
-  cluesAcross: "1. Samsung Apple Google and,2. Corny Columbian snack,3. A moribund person,4. Not subtle,5. One way to pluralize 'serum'",
-  cluesDown: "1. Nigerian financial hub,2. A stand of trees,3. Spanish word for 'has',4. A cake or an art,5. Origami or oil paint for example,",
-  created_at: "2023-02-17T22:02:19.133891+00:00",
-  id: 6,
-  solution: "lgtooarepagonerovertseras",
-  theme: "",
-  title: "For Famous Flutist",
-};
+const crosswordsFromDatabase = [
+  {
+    author: "Alex Gochenour",
+    cluesAcross: "1. Samsung Apple Google and,2. Corny Columbian snack,3. A moribund person,4. Not subtle,5. One way to pluralize 'serum'",
+    cluesDown: "1. Nigerian financial hub,2. A stand of trees,3. Spanish word for 'has',4. A cake or an art,5. Origami or oil paint for example,",
+    created_at: "2023-02-17T22:02:19.133891+00:00",
+    id: 6,
+    solution: "lgtooarepagonerovertseras",
+    theme: "",
+    title: "For Famous Flutist",
+  },
+  {
+    author: "Alex Gochenour",
+    cluesAcross: "1. Skewered meats&&2. My Alex (in Arabic)&&3. End all&&4. Awful giants&&5. Scrambled abyss",
+    cluesDown: "1. Alternate to 1-ACROSS&&2. Song of lament&&3. Yogi or Smoky&&4. They connect wheels&&5. UW's School of",
+    created_at: "2023-02-07 22:56:55+00",
+    id: 6,
+    solution: "kebabalexibeallogresbyssa",
+    theme: "",
+    title: "Three Arabic Words",
+  },
+];
 
 function correctlyFillOutCrossword(cells) {
   fireEvent.click( cells[0]);
@@ -83,19 +96,6 @@ function correctlyFillOutCrossword(cells) {
 describe('Crossword.jsx', ()=> {
   describe('GIVEN: there are no problems with the crossword API,', ()=>{
     describe('WHEN: the first page loads', () => {
-      it('THEN: displays a loading message', () => {
-        render(
-          <Provider store={mockStore}>
-            <Router>
-              <Crossword />
-            </Router>
-          </Provider>
-        );
-
-        const loading = screen.getAllByText('Loading...')[0];
-
-        expect(loading).toBeInTheDocument();
-      });
       it('THEN: displays the numbers corresponding to the clues', () => {
         render(
           <Provider store={mockStore}>
@@ -129,7 +129,12 @@ describe('Crossword.jsx', ()=> {
     });
   });
   describe('WHEN: The user clicks the front face of the cube,', () => {
-    it('THEN: the side and top of the cube transform.', () => {
+    it('THEN: the side and top of the cube transform.', async () => {
+      jest.spyOn(utils, 'getData').mockReturnValueOnce(
+        new Promise((resolve, reject) => {
+          resolve(crosswordsFromDatabase);
+        })
+      );
       render(
         <Provider store={mockStore}>
           <Router>
@@ -138,18 +143,73 @@ describe('Crossword.jsx', ()=> {
         </Provider>
       );
 
-      const frontFace = document.getElementById('cube-face-front');
-      let westFace = screen.getAllByTestId('west-face')[0];
-      let topFace = screen.getAllByTestId('top-face')[0];
-      expect(westFace).toHaveClass('west-face-not-clicked');
-      expect(topFace).toHaveClass('top-face-not-clicked');
+      await waitFor(() => {
+        const frontFace = document.getElementById('cube-face-front');
+        let westFace = screen.getAllByTestId('west-face')[0];
+        let topFace = screen.getAllByTestId('top-face')[0];
+        expect(westFace).toHaveClass('west-face-not-clicked');
+        expect(topFace).toHaveClass('top-face-not-clicked');
 
-      fireEvent.click(frontFace);
-      westFace = screen.getAllByTestId('west-face')[0];
-      topFace = screen.getAllByTestId('top-face')[0];
+        fireEvent.click(frontFace);
+        westFace = screen.getAllByTestId('west-face')[0];
+        topFace = screen.getAllByTestId('top-face')[0];
 
-      expect(westFace).toHaveClass('west-face-clicked');
-      expect(topFace).toHaveClass('top-face-clicked');
+        expect(westFace).toHaveClass('west-face-clicked');
+        expect(topFace).toHaveClass('top-face-clicked');
+      });
+    });
+  });
+  describe('WHEN: The user clicks the dropdown menu,', () => {
+    it('THEN: It displays older crossword puzzles,', async () => {
+      jest.spyOn(utils, 'getData').mockReturnValueOnce(
+        new Promise((resolve, reject) => {
+          resolve(crosswordsFromDatabase);
+        })
+      );
+      render(
+        <Provider store={mockStore}>
+          <Router>
+            <Crossword/>
+          </Router>
+        </Provider>
+      );
+
+      await waitFor(() => {
+        const menuOptions = screen.getAllByRole('option');
+        expect(menuOptions).toHaveLength(3);
+        expect(menuOptions[0]).toHaveTextContent('-- Previous Puzzles --');
+        expect(menuOptions[1]).toHaveTextContent('For Famous Flutist');
+        expect(menuOptions[2]).toHaveTextContent('Three Arabic Words');
+      });
+    });
+  });
+  describe('WHEN: The user clicks an option from the dropdown menu,', () => {
+    it('THEN: It sets today"s puzzle to be the option the user selected.', async () => {
+      jest.spyOn(utils, 'getData').mockReturnValueOnce(
+        new Promise((resolve, reject) => {
+          resolve(crosswordsFromDatabase);
+        })
+      );
+      render(
+        <Provider store={mockStore}>
+          <Router>
+            <Crossword/>
+          </Router>
+        </Provider>
+      );
+
+      await waitFor(() => {
+        let todaysPuzzle = screen.getByRole('heading', { level: 2 });
+        expect(todaysPuzzle).toHaveTextContent(/For Famous Flutist/);
+
+        const menu = document.querySelector('select');
+        fireEvent.click(menu);
+        const menuOptions = screen.getAllByRole('option');
+        fireEvent.change(menu, { target: { value: menuOptions[1].innerHTML } });
+        todaysPuzzle = screen.getByRole('heading', { level: 2 });
+
+        expect(todaysPuzzle).toHaveTextContent(/For Famous Flutist/);
+      });
     });
   });
   describe('GIVEN: The crossword grid is empty,', ()=>{
@@ -283,7 +343,7 @@ describe('Crossword.jsx', ()=> {
       it('THEN: does not trigger an animation.', async () => {
         jest.spyOn(utils, 'getData').mockReturnValueOnce(
           new Promise((resolve, reject) => {
-            resolve([anActualCrosswordFromTheDatabase]);
+            resolve(crosswordsFromDatabase);
           })
         );
         render(
@@ -307,7 +367,7 @@ describe('Crossword.jsx', ()=> {
       it('THEN: it triggers an animation.', async () => {
         jest.spyOn(utils, 'getData').mockReturnValueOnce(
           new Promise((resolve, reject) => {
-            resolve([anActualCrosswordFromTheDatabase]);
+            resolve(crosswordsFromDatabase);
           })
         );
         render(
@@ -344,7 +404,6 @@ describe('Crossword.jsx', ()=> {
 
           expect(errorMsgOnCube).toBeInTheDocument();
         });
-        jest.clearAllMocks();
       });
     });
   });

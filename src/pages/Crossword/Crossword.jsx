@@ -6,7 +6,14 @@ import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCommonGlobals } from '../../common/hooks';
 import { getData } from '../../common/utils';
-import { declareVictory, selectCurrentGrid, selectUserHasWon, updateGrid } from '../../features/crossword/crosswordSlice';
+import {
+  declareVictory,
+  resetVictoryState,
+  selectCurrentGrid,
+  selectUserHasWon,
+  updateGrid,
+  resetGrid,
+} from '../../features/crossword/crosswordSlice';
 
 import { routes } from '../../routes';
 import { styles } from './styles.js';
@@ -19,19 +26,22 @@ export default function Crossword(){
   const userHasWon = useSelector(selectUserHasWon);
   const [focused, setFocused] = useState(undefined);
   const [hasError, setHasError] = useState(false);
-  const [crosswordData, setCrosswordData] = useState(undefined);
+  const [todaysPuzzle, setTodaysPuzzle] = useState(null);
+  const [allPuzzles, setAllPuzzles] = useState(null);
   const dispatch = useDispatch();
 
   useEffect( () => {
-    getData(process.env.REACT_APP_GET_SINGLE_CROSSWORD)
+    getData(process.env.REACT_APP_GET_ALL_CROSSWORDS)
       .then(data => {
-        setCrosswordData(data[0]);
+        setAllPuzzles(data);
+        setTodaysPuzzle(data[0]);
       })
+      // TODO Add error card.
       .catch((e) => setHasError(true));
   }, []);
 
   useLayoutEffect(() => {
-    crosswordData && determineIfUserWon(grid);
+    todaysPuzzle && determineIfUserWon(grid);
   }, [grid]);
 
   const getStyleRuleName = (outerIndex, innerIndex) => {
@@ -78,7 +88,7 @@ export default function Crossword(){
     let solutionIndex = 0;
     outerLoop: for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid.length; j++) {
-        if (!(grid[i][j].value.toLowerCase() === crosswordData.solution[solutionIndex].toLowerCase())) {
+        if (!(grid[i][j].value.toLowerCase() === todaysPuzzle.solution[solutionIndex].toLowerCase())) {
           userHasWon = false;
           break outerLoop;
         } else {
@@ -115,13 +125,42 @@ export default function Crossword(){
     width: '3rem',
   };
 
+  const optionHandler = (event) => {
+    const { value } = event.target;
+    const selectedPuzzle = allPuzzles.find(puzzle => puzzle.title === value);
+    setTodaysPuzzle(selectedPuzzle);
+    dispatch(resetGrid());
+    return dispatch(resetVictoryState(false));
+  };
+
+  const DropdownMenu = () => (
+    <select
+      onChange={optionHandler}
+      name="all-puzzles"
+      id="all-puzzles-select"
+    >
+      <option value="">-- Previous Puzzles --</option>
+      {allPuzzles ? allPuzzles.map(puzzle => (
+        <option key={puzzle.solution} value={puzzle.title}>
+          {puzzle.title}
+        </option>
+      )) : null}
+    </select>
+  );
+
+  const BackButton = () => (
+    <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
+      <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
+    </div>
+  )
+
   return (
     <>
       <div id='room-container'>
-      {hasError
-        ? <div>{strings.errorCrosswordUnavailable[language]}</div>
-        : <CluesCube {...{language, crosswordData}} />
-      }
+        {todaysPuzzle && !hasError
+          ? <CluesCube language={language} todaysPuzzle={todaysPuzzle} />
+          : <div>{strings.errorCrosswordUnavailable[language]}</div>
+        }
       </div>
       <section id='interactive-section' >
         <ErrorBoundary>
@@ -151,9 +190,8 @@ export default function Crossword(){
             </div>
           ))}
         </ErrorBoundary>
-        <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
-          <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
-        </div>
+        <DropdownMenu />
+        <BackButton />
       </section>
     </>
   );

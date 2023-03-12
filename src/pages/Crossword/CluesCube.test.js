@@ -19,13 +19,30 @@ const mockData = {
 };
 
 
-describe('GIVEN: An object containing clue data,', () => {
+describe('GIVEN: An props that do not include clue data,', () => {
+  describe('WHEN: This component renders,', () => {
+    it('THEN: It displays loading spinners.', () => {
+      render(
+        <Provider store={mockStore}>
+          <Router>
+            <CluesCube language='english'/>
+          </Router>
+        </Provider>
+      );
+
+      const loadingSpinner = document.getElementById('loading-spinner');
+
+      expect(loadingSpinner).toBeInTheDocument();
+    });
+  });
+});
+describe('GIVEN: An props including clue data,', () => {
   describe('WHEN: This component renders,', () => {
     it('THEN: It displays the clues on the cube.', () => {
       render(
         <Provider store={mockStore}>
           <Router>
-            <CluesCube language='english' crosswordData={mockData}/>
+            <CluesCube language='english' todaysPuzzle={mockData}/>
           </Router>
         </Provider>
       );
@@ -43,7 +60,7 @@ describe('GIVEN: An object containing clue data,', () => {
       render(
         <Provider store={mockStore}>
           <Router>
-            <CluesCube language='english' crosswordData={mockData}/>
+            <CluesCube language='english' todaysPuzzle={mockData}/>
           </Router>
         </Provider>
       );
