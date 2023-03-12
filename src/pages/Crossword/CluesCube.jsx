@@ -3,12 +3,12 @@ import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
 
 export const CluesCube = memo(function ({ language, todaysPuzzle }) {
   const [frontFaceClicked, setFrontFaceClicked] = useState(false);
-  const clueDilimiter = '&&';
+  const clueDelimiter = '&&';
 
   const convertTimestamp = (date) => new Date(date).toLocaleDateString();
 
   const CluesAcross = ({todaysPuzzle}) => {
-    const cluesAcross = todaysPuzzle.cluesAcross.split(clueDilimiter);
+    const cluesAcross = todaysPuzzle.cluesAcross.split(clueDelimiter);
     return (
       <div className='clues-box'>
         <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Across:</h3>
@@ -18,7 +18,7 @@ export const CluesCube = memo(function ({ language, todaysPuzzle }) {
   };
 
   const CluesDown = ({todaysPuzzle}) => {
-    const cluesDown = todaysPuzzle.cluesDown.split(clueDilimiter);
+    const cluesDown = todaysPuzzle.cluesDown.split(clueDelimiter);
     return (
       <div className='clues-box'>
         <h3 className={frontFaceClicked ? 'clues-direction-clicked' : 'clues-direction'}>Down:</h3>
