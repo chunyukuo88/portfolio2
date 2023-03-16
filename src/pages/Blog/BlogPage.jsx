@@ -21,21 +21,23 @@ export function BlogPage(){
   }, []);
 
   return (
-    <main className='blog-page-content'>
-      <p className='back-to-home'>
+    <main role='main' className='blog-page-content'>
+      <nav className='back-to-home'>
         <Link style={LinkStyling} to={routes.index}>
           {strings.homePage[language]}
         </Link>
-      </p>
-      <section>
+      </nav>
+      <section role='region'>
         {blogData
           ? blogData.map((article, key) => (
-              <article className='article' key={key}>
+              <article className='article' key={key} role='article'>
                   <header className='blog-title'>{article.title}</header>
                   <img
                     className='blog-image'
                     src={article.imageUrl}
-                    alt={`For blog with key ${key}`}
+                    aria-label={`Image for blog with key ${key}`}
+                    alt={`Image for blog with key ${key}`}
+                    loading={key === 0 ? 'eager' : 'lazy'}
                   />
                   <p className='blog-body'>{article.theme}</p>
                   <div className='blog-views-and-likes'>
