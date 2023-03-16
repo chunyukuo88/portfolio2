@@ -36,6 +36,7 @@ export function BlogPage(){
                     className='blog-image'
                     src={article.imageUrl}
                     alt={`For blog with key ${key}`}
+                    loading={key === 0 ? 'eager' : 'lazy'}
                   />
                   <p className='blog-body'>{article.theme}</p>
                   <div className='blog-views-and-likes'>
