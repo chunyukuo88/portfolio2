@@ -5,11 +5,11 @@ import strings from '../../common/strings.js';
 
 export const ChangePassword = ({ changePassword }) => {
   const language = useSelector(selectCurrentLanguage);
-  const userRef = useRef();
   const [user, setUser] = useState('');
   const [oldPwd, setOldPwd] = useState('');
   const [newPwd, setNewPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
+  const userRef = useRef();
   useEffect(() => {
     userRef.current.focus();
   }, []);
@@ -30,9 +30,13 @@ export const ChangePassword = ({ changePassword }) => {
   const handleNewPwdInput = (event) => setNewPwd(event.target.value);
 
   return (
-    <section>
-      <p style={{ color: 'red'}} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
-      <h1>{strings.resetPassword[language]}</h1>
+    <fieldset>
+      <p
+        style={{ color: 'red'}}
+        className={errMsg ? 'errmsg' : 'offscreen'}
+        aria-live='assertive'
+      >{errMsg}</p>
+      <legend>{strings.resetPassword[language]}</legend>
       <form onSubmit={handleSubmit}>
         <label htmlFor='username'>{strings.username[language]}</label>
         <input
@@ -62,6 +66,6 @@ export const ChangePassword = ({ changePassword }) => {
         />
         <button id='reset-password-button'>{strings.resetPassword[language]}</button>
       </form>
-    </section>
+    </fieldset>
   );
 };
