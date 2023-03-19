@@ -32,19 +32,31 @@ export const LoginPage = () => {
     <>
       <h1>You are logged in.</h1>
       <ChangePassword changePassword={changePassword} />
-      <button onClick={logoutHandler}>Logout</button>
+      <button onClick={logoutHandler} aria-label='Logout'>
+        Logout
+      </button>
     </>
   );
 
   return (
-    <main id='login-page' style={{ color: 'white'}}>
-      { username ? <LoggedInContent /> : <LoggedOutContent signIn={signIn} />}
+    <main
+      id='login-page'
+      style={{ color: 'white'}}
+      title={strings.login[language]}
+    >
+      {username ? <LoggedInContent /> : <LoggedOutContent signIn={signIn} />}
       <p className='back-to-home'>
-        <Link style={LinkStyling} to='/'>{strings.homePage[language]}</Link>
+        <Link
+          style={LinkStyling}
+          to={routes.index}
+          aria-label={strings.homePage[language]}
+        >
+          {strings.homePage[language]}
+        </Link>
       </p>
-      <div className='cube-wrapper'>
+      <section className='cube-wrapper'>
         <Cube />
-      </div>
+      </section>
     </main>
   );
 };
