@@ -35,7 +35,7 @@ export function BlogPage(){
                   <img
                     className='blog-image'
                     src={article.imageUrl}
-                    aria-label={`Image for blog with key ${key}`}
+                    aria-label={`Image for blog titled ${article.title}`}
                     alt={`Image for blog with key ${key}`}
                     loading={key === 0 ? 'eager' : 'lazy'}
                   />
