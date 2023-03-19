@@ -47,14 +47,21 @@ export const LoggedOutContent = ({ signIn }) => {
   return (
     <section className='logged-out-section'>
       <h1 className='logged-out-section-heading'>{strings.login[language]}</h1>
-      <p style={{ color: 'red' }} className={errMsg ? 'display-error-message' : 'offscreen'}>
+      <p
+        style={{ color: 'red' }}
+        className={errMsg ? 'display-error-message' : 'offscreen'}
+        aria-describedby='form submission'
+        aria-live='assertive'
+        role='alert'
+      >
         {errMsg}
       </p>
       <form className='logout-out-form' onSubmit={handleSubmit}>
-        <div className='inputs-wrapper'>
+        <fieldset className='inputs-wrapper'>
           <div className='username-input'>
             <input
               type='text'
+              label='username input'
               data-testid='username-input'
               id='username'
               ref={userRef}
@@ -68,6 +75,7 @@ export const LoggedOutContent = ({ signIn }) => {
           <div className='password-input'>
             <input
               type='password'
+              label='password input'
               data-testid='password-input'
               id='password'
               onChange={handlePwdInput}
@@ -76,8 +84,8 @@ export const LoggedOutContent = ({ signIn }) => {
               required
             />
           </div>
-        </div>
-        <button className='login-button'>{strings.login[language]}</button>
+        </fieldset>
+        <button className='login-button' title='login button'>{strings.login[language]}</button>
       </form>
     </section>
   );

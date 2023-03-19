@@ -5,26 +5,50 @@ import YouTube from '../../common/icons/contact_YouTube.svg';
 import './ContactLinks.css';
 
 export const ContactLinks = () => (
-    <ul id='contact-icons-array'>
-      <li className='contact-coin'>
-        <a href='https://github.com/chunyukuo88/' target='_blank' rel="noreferrer" aria-hidden='true'>
-          <img className='contact-icons' src={GitHub} alt='GitHub icon'/>
-        </a>
-      </li>
-      <li className='contact-coin'>
-        <a href='https://www.npmjs.com/package/gochenour' target='_blank' rel="noreferrer" aria-hidden='true'>
-          <img className='contact-icons' src={NPM} alt='NPM icon'/>
-        </a>
-      </li>
-      <li className='contact-coin'>
-        <a href='https://www.linkedin.com/in/alex-gochenour/' target='_blank' rel="noreferrer" aria-hidden='true'>
-          <img className='contact-icons' src={LinkedIn} alt='LinkedIn icon'/>
-        </a>
-      </li>
-      <li className='contact-coin'>
-        <a href='https://www.youtube.com/channel/UCLt6xXf_MCMnd6neQMWb_5g' target='_blank' rel="noreferrer" aria-hidden='true'>
-          <img className='contact-icons' src={YouTube} alt='YouTube icon'/>
-        </a>
-      </li>
-    </ul>
-  );
+  <ul id='contact-icons-array'>
+    <li className='contact-coin'>
+      <a 
+        href='https://github.com/chunyukuo88/' 
+        target='_blank' 
+        rel='noreferrer' 
+        aria-hidden='true' 
+        title='Public repositories of Alex Gochenour'
+      >
+        <img className='contact-icons' src={GitHub} alt='GitHub icon link'/>
+      </a>
+    </li>
+    <li className='contact-coin'>
+      <a 
+        href='https://www.npmjs.com/package/gochenour' 
+        target='_blank' 
+        rel='noreferrer' 
+        aria-hidden='true' 
+        title='The free-to-use package I maintain on NPM'
+      >
+        <img className='contact-icons' src={NPM} alt='NPM icon link'/>
+      </a>
+    </li>
+    <li className='contact-coin'>
+      <a
+        href='https://www.linkedin.com/in/alex-gochenour/'
+        target='_blank'
+        rel='noreferrer'
+        aria-hidden='true'
+        title='My LinkedIn profile'
+      >
+        <img className='contact-icons' src={LinkedIn} alt='LinkedIn icon link'/>
+      </a>
+    </li>
+    <li className='contact-coin'>
+      <a
+        href='https://tinyurl.com/yckz8uwa'
+        target='_blank'
+        rel='noreferrer'
+        aria-hidden='true'
+        title='My old YouTube channel'
+      >
+        <img className='contact-icons' src={YouTube} alt='YouTube icon link'/>
+      </a>
+    </li>
+  </ul>
+);
