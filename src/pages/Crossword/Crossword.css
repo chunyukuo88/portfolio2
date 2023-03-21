@@ -163,7 +163,12 @@
 #all-puzzles-select {
     background-color: var(--backWall);
     cursor: pointer;
-    margin-top: 0.5rem;
+    margin-top: 1em;
     text-align: center;
+    width: 15rem;
+}
+
+.crossword-instructions {
+    margin-top: 1em;
     width: 15rem;
 }

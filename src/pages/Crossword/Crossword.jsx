@@ -152,7 +152,13 @@ export default function Crossword(){
     <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
       <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
     </div>
-  )
+  );
+
+  const Instructions = () => (
+    <div className='crossword-instructions'>
+      <p>Welcome to the crossword. I make these by hand. Click the title to toggle the clues.</p>
+    </div>
+  );
 
   return (
     <>
@@ -191,6 +197,7 @@ export default function Crossword(){
           ))}
         </ErrorBoundary>
         <DropdownMenu />
+        <Instructions />
         <BackButton />
       </section>
     </>

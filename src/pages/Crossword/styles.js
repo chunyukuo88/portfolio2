@@ -68,5 +68,6 @@ export const styles = {
   },
   squareWrapper: {
     position: 'relative',
+    cursor: 'pointer',
   },
 };
