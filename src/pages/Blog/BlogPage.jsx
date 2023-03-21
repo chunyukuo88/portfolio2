@@ -15,10 +15,21 @@ export function BlogPage(){
   useEffect(() => {
     getData(process.env.REACT_APP_GET_BLOG_ENTRIES)
       .then(data => {
-        setBlogData(data);
+        const sortedData = data.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
+        setBlogData(sortedData);
       }
     );
   }, []);
+
+  // TODO: Add this when API functionality is available.
+  const likesAndViews = (article) => (
+    <div className='blog-views-and-likes'>
+      <span>Views: {article.views}</span>
+      <span>Likes: {article.likes}</span>
+    </div>
+  );
+
+  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
 
   return (
     <main role='main' className='blog-page-content'>
@@ -32,18 +43,15 @@ export function BlogPage(){
           ? blogData.map((article, key) => (
               <article className='article' key={key} role='article'>
                   <header className='blog-title'>{article.title}</header>
+                  <h2 className='publication-date'>{asDateString(article)}</h2>
                   <img
                     className='blog-image'
                     src={article.imageUrl}
                     aria-label={`Image for blog titled ${article.title}`}
-                    alt={`Image for blog with key ${key}`}
+                    alt={`Image for blog titled ${article.title}`}
                     loading={key === 0 ? 'eager' : 'lazy'}
                   />
                   <p className='blog-body'>{article.theme}</p>
-                  <div className='blog-views-and-likes'>
-                    <span>Views: {article.views}</span>
-                    <span>Likes: {article.likes}</span>
-                  </div>
               </article>
             ))
           : <LoadingSpinner language={language} />
