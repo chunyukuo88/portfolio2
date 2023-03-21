@@ -8,8 +8,8 @@
 .back-to-home {
     font-size: 2em;
     position: fixed;
-    top: 2em;
-    left: 2em;
+    top: 0.25em;
+    left: 0.25em;
 }
 
 .article {
@@ -23,12 +23,17 @@
     box-shadow: 0.5em 0.5em 1em var(--SiteBackgroundShadow);
 }
 
-.blog-title {
+.blog-title,
+.publication-date {
     font-size: 4em;
     text-align: center;
     margin-bottom: 0.25em;
     color: var(--neumorphicFontColor);
     text-shadow: var(--neumorphicShadow);
+}
+
+.publication-date {
+    font-size: 2em;
 }
 
 .blog-image {
