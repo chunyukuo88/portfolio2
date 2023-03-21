@@ -20,6 +20,7 @@ describe('WHEN: The page loads,', () => {
       "title": "My first blog post",
       "theme": "test",
       "imageUrl": "test",
+      "creationTimeStamp": 1,
       "likes": 0,
       "views": 0
     },
@@ -28,6 +29,7 @@ describe('WHEN: The page loads,', () => {
       "title": "A second blog post",
       "theme": "test",
       "imageUrl": "test",
+      "creationTimeStamp": 2,
       "likes": 0,
       "views": 0
     },
