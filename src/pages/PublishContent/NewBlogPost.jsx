@@ -17,6 +17,7 @@ export function NewBlogPost({ token }) {
     event.preventDefault();
     const data = {
       title,
+      creationTimeStamp: Date.now(),
       theme: body,
       imageUrl,
       likes: 0,
@@ -29,7 +30,7 @@ export function NewBlogPost({ token }) {
       alert('Success!');
       return clearAllInputs();
     } catch (e) {
-      console.error('There was a problem publishing your rubbish content: ', e);
+      console.error('Unable to publish your rubbish content: ', e);
     }
   };
 
