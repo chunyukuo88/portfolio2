@@ -10,9 +10,9 @@ const strings = {
     russian: 'администратор',
   },
   blog: {
-    chinese: '博客',
-    english: 'Blog',
-    russian: 'блог',
+    chinese: '麵包博客',
+    english: 'Bread Blog',
+    russian: 'блог о хлебе',
   },
   CHINESE: 'chinese',
   contact: {

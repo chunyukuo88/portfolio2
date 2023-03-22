@@ -19,6 +19,7 @@ import { routes } from '../../routes';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
 import './Crossword.css';
+import {LinkStyling} from "../../common/globalStyles";
 
 export default function Crossword(){
   const [ language ] = useCommonGlobals(routes.puzzle);
@@ -148,11 +149,11 @@ export default function Crossword(){
     </select>
   );
 
-  const BackButton = () => (
-    <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
-      <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
-    </div>
-  )
+  const Instructions = () => (
+    <section className='crossword-instructions' aria-label='Crossword instructions'>
+      <h5 aria-level='5'>Welcome to the crossword. I make these by hand. Click the title on the front face of the cube to the right to toggle the clues.</h5>
+    </section>
+  );
 
   return (
     <>
@@ -191,8 +192,13 @@ export default function Crossword(){
           ))}
         </ErrorBoundary>
         <DropdownMenu />
-        <BackButton />
+        <Instructions />
       </section>
+      <nav className='back-to-home'>
+        <Link style={LinkStyling} to={routes.index}>
+          {strings.homePage[language]}
+        </Link>
+      </nav>
     </>
   );
 }
