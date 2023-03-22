@@ -151,7 +151,7 @@ export default function Crossword(){
 
   const Instructions = () => (
     <section className='crossword-instructions' aria-label='Crossword instructions'>
-      <h5 aria-level='5'>Welcome to the crossword. I make these by hand. Click the title to toggle the clues.</h5>
+      <h5 aria-level='5'>Welcome to the crossword. I make these by hand. Click the title on the front face of the cube to the right to toggle the clues.</h5>
     </section>
   );
 
