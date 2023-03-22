@@ -149,16 +149,10 @@ export default function Crossword(){
     </select>
   );
 
-  const BackButton = () => (
-    <div style={{ marginTop: '2rem', width: '3rem', zIndex: 10000}}>
-      <Link style={linkStyle} to={routes.index}>{strings.homePage[language]}</Link>
-    </div>
-  );
-
   const Instructions = () => (
-    <div className='crossword-instructions'>
-      <p>Welcome to the crossword. I make these by hand. Click the title to toggle the clues.</p>
-    </div>
+    <section className='crossword-instructions' aria-label='Crossword instructions'>
+      <h5 aria-level='5'>Welcome to the crossword. I make these by hand. Click the title to toggle the clues.</h5>
+    </section>
   );
 
   return (
