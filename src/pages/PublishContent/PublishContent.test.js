@@ -60,5 +60,6 @@ describe('GIVEN: the user is logged in,', () => {
 
       expect(mockFn).toBeCalledTimes(1);
     });
+    // TODO: Write a test that asserts that `postData` is invoked with collated clues.
   });
 });
