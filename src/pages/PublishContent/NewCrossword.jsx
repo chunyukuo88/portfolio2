@@ -17,7 +17,7 @@ export function NewCrossword({ token }){
   const [down5, setDownClues5] = useState('');
 
   const collateClues = (c1, c2, c3, c4, c5) => {
-    return `${c1}&&${c2}&&${c3}&&${c4}&&${c5}`;
+    return `1. ${c1}&&2. ${c2}&&3. ${c3}&&4. ${c4}&&5. ${c5}`;
   }
   
   const submissionHandler = async (event) => {
@@ -86,16 +86,7 @@ export function NewCrossword({ token }){
             onChange={handleTheme}
           />
         </label>
-        <label className='publish-panel-label'>
-          <span className='label-text'>Across 1: </span>
-          <input
-            className='publish-panel-input'
-            data-testid='crossword-panel-across'
-            type='text'
-            onChange={handleAcross1Clue}
-            placeholder='A comma-delineated string'
-          />
-        </label>
+        <p className='label-text'>No need to include the numbers; numbers are added automatically.</p>
         <label className='publish-panel-label'>
           <span className='label-text'>Across 1: </span>
           <input
