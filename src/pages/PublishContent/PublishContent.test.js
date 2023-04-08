@@ -9,6 +9,7 @@ import '../../common/utils';
 
 import PublishContent from './PublishContent';
 
+jest.spyOn(window, 'alert').mockImplementation(() => {});
 let mockFn = jest.fn();
 jest.mock('../../common/utils', () => {
   const originalModule = jest.requireActual('../../common/utils');

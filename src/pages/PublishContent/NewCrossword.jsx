@@ -58,6 +58,42 @@ export function NewCrossword({ token }){
     });
   };
 
+  const AcrossCluesInputs = () => (
+    <>
+      {[1, 2, 3, 4, 5].map((index) => (
+        <label className='publish-panel-label' key={index}>
+          <span className='label-text'>Across {index}: </span>
+          <input
+              className='publish-panel-input'
+              data-testid={`crossword-panel-across-${index}`}
+              type='text'
+              onChange={(event) => handleClueChange('across', index - 1, event.target.value)}
+              placeholder={`The clue for Across ${index}`}
+              value={clues.across[index - 1]}
+          />
+        </label>
+      ))}
+    </>
+  );
+
+  const DownCluesInputs = () => (
+    <>
+      {[1, 2, 3, 4, 5].map((index) => (
+        <label className='publish-panel-label' key={index}>
+          <span className='label-text'>Down {index}: </span>
+          <input
+              className='publish-panel-input'
+              data-testid={`crossword-panel-down-${index}`}
+              type='text'
+              onChange={(event) => handleClueChange('down', index - 1, event.target.value)}
+              placeholder={`The clue for Down ${index}`}
+              value={clues.down[index - 1]}
+          />
+        </label>
+      ))}
+    </>
+  );
+
   return (
     <section className='content-card'>
       <h1 className='publish-panel-title'>Create a New Crossword</h1>
@@ -95,32 +131,8 @@ export function NewCrossword({ token }){
           />
         </label>
         <p className='label-text'>No need to include the numbers; numbers are added automatically.</p>
-        {[1, 2, 3, 4, 5].map((index) => (
-          <label className='publish-panel-label' key={index}>
-            <span className='label-text'>Across {index}: </span>
-            <input
-              className='publish-panel-input'
-              data-testid={`crossword-panel-across-${index}`}
-              type='text'
-              onChange={(event) => handleClueChange('across', index - 1, event.target.value)}
-              placeholder={`The clue for Across ${index}`}
-              value={clues.across[index - 1]}
-            />
-          </label>
-        ))}
-        {[1, 2, 3, 4, 5].map((index) => (
-          <label className='publish-panel-label' key={index}>
-            <span className='label-text'>Down {index}: </span>
-            <input
-              className='publish-panel-input'
-              data-testid={`crossword-panel-down-${index}`}
-              type='text'
-              onChange={(event) => handleClueChange('down', index - 1, event.target.value)}
-              placeholder={`The clue for Down ${index}`}
-              value={clues.down[index - 1]}
-            />
-          </label>
-        ))}
+        <AcrossCluesInputs />
+        <DownCluesInputs />
         <div className='button-wrapper'>
           <button className='publish-panel-button'>Publish</button>
         </div>
