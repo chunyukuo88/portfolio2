@@ -11,7 +11,10 @@ export function NewCrossword({ token }){
   });
 
   const collateClues = (clues) => {
-    return clues.map((clue, index) => `${index + 1}. ${clue}`).join('&&');
+    const clueDelimiter = '&&';
+    return clues
+        .map((clue, index) => `${index + 1}. ${clue}`)
+        .join(clueDelimiter);
   };
 
   const clearForm = () => {
@@ -58,9 +61,11 @@ export function NewCrossword({ token }){
     });
   };
 
+  const clueNumbers = [1,2,3,4,5];
+
   const AcrossCluesInputs = () => (
     <>
-      {[1, 2, 3, 4, 5].map((index) => (
+      {clueNumbers.map((index) => (
         <label className='publish-panel-label' key={index}>
           <span className='label-text'>Across {index}: </span>
           <input
@@ -78,7 +83,7 @@ export function NewCrossword({ token }){
 
   const DownCluesInputs = () => (
     <>
-      {[1, 2, 3, 4, 5].map((index) => (
+      {clueNumbers.map((index) => (
         <label className='publish-panel-label' key={index}>
           <span className='label-text'>Down {index}: </span>
           <input
