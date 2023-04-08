@@ -47,15 +47,31 @@ describe('GIVEN: the user is logged in,', () => {
       const solution = screen.getByTestId('crossword-panel-solution');
       const title = screen.getByTestId('crossword-panel-title');
       const theme = screen.getByTestId('crossword-panel-theme');
-      const across = screen.getByTestId('crossword-panel-across');
-      const down = screen.getByTestId('crossword-panel-down');
+      const across1 = screen.getByTestId('crossword-panel-across-1');
+      const across2 = screen.getByTestId('crossword-panel-across-2');
+      const across3 = screen.getByTestId('crossword-panel-across-3');
+      const across4 = screen.getByTestId('crossword-panel-across-4');
+      const across5 = screen.getByTestId('crossword-panel-across-5');
+      const down1 = screen.getByTestId('crossword-panel-down-1');
+      const down2 = screen.getByTestId('crossword-panel-down-2');
+      const down3 = screen.getByTestId('crossword-panel-down-3');
+      const down4 = screen.getByTestId('crossword-panel-down-4');
+      const down5 = screen.getByTestId('crossword-panel-down-5');
       const button = screen.getAllByText('Publish')[1];
 
-      fireEvent.change(solution, { target: { value: 'solution' } });
+      fireEvent.change(solution, { target: { value: '1234512345123451234512345' } });
       fireEvent.change(title, { target: { value: 'title' } });
       fireEvent.change(theme, { target: { value: 'theme' } });
-      fireEvent.change(across, { target: { value: 'across' } });
-      fireEvent.change(down, { target: { value: 'down' } });
+      fireEvent.change(across1, { target: { value: 'The numbers 12345' } });
+      fireEvent.change(across2, { target: { value: 'The numbers 12345 a second time' } });
+      fireEvent.change(across3, { target: { value: 'The numbers 12345 yet again' } });
+      fireEvent.change(across4, { target: { value: 'The numbers 12345 a fourth time' } });
+      fireEvent.change(across5, { target: { value: 'The numbers 12345 one last time' } });
+      fireEvent.change(down1, { target: { value: 'the numbers 11111' } });
+      fireEvent.change(down2, { target: { value: 'the numbers 22222' } });
+      fireEvent.change(down3, { target: { value: 'the numbers 33333' } });
+      fireEvent.change(down4, { target: { value: 'the numbers 44444' } });
+      fireEvent.change(down5, { target: { value: 'the numbers 55555' } });
       fireEvent.click(button);
 
       expect(mockFn).toBeCalledTimes(1);
