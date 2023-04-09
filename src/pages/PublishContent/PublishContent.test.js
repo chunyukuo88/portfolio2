@@ -19,7 +19,89 @@ jest.mock('../../common/utils', () => {
     postData: () => mockFn(),
   };
 });
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 describe('PublishContent.jsx', () => {
+  describe('GIVEN: the user wishes to publish a blog post,', () => {
+    describe('AND: There is a problem with the server,', () => {
+      let title, body, imageUrl;
+      const error = 'there is a problem with the server.'
+      mockFn = () => {
+        throw new Error(error);
+      }
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation(jest.fn());
+      beforeEach(() => {
+        render(
+            <Provider store={mockStoreLoggedIn}>
+              <Router>
+                <PublishContent/>
+              </Router>
+            </Provider>
+        );
+
+        title = screen.getByTestId('blog-panel-title');
+        body = screen.getByTestId('blog-panel-body');
+        imageUrl = screen.getByTestId('blog-panel-img');
+
+        fireEvent.change(title, { target: { value: 'some title' } });
+        fireEvent.change(body, { target: { value: 'some body' } });
+        fireEvent.change(imageUrl, { target: { value: 'some imageUrl' } });
+
+        const submissionButton = screen.getByTestId('blog-submission-btn');
+
+        fireEvent.click(submissionButton);
+      });
+      afterEach(() => {
+        mockFn = jest.fn();
+      });
+
+      it('THEN: the error is logged to the console.', () => {
+        expect(errorSpy).toBeCalledWith('Unable to publish your rubbish content: ', new Error(error));
+      });
+    });
+    describe('AND: There are no problems with the server,', () => {
+      describe('WHEN: they submit the filled out form', () => {
+        let title, body, imageUrl;
+
+        beforeEach(() => {
+          render(
+              <Provider store={mockStoreLoggedIn}>
+                <Router>
+                  <PublishContent/>
+                </Router>
+              </Provider>
+          );
+
+          title = screen.getByTestId('blog-panel-title');
+          body = screen.getByTestId('blog-panel-body');
+          imageUrl = screen.getByTestId('blog-panel-img');
+
+          fireEvent.change(title, { target: { value: 'some title' } });
+          fireEvent.change(body, { target: { value: 'some body' } });
+          fireEvent.change(imageUrl, { target: { value: 'some imageUrl' } });
+
+          const submissionButton = screen.getByTestId('blog-submission-btn');
+
+          fireEvent.click(submissionButton);
+        });
+        it('THEN: that data is sent to the Lambda.', () => {
+          expect(mockFn).toBeCalledTimes(1);
+        });
+        it('THEN: a success message is alerted to the user.', () => {
+          expect(alertSpy).toBeCalledTimes(1);
+        });
+        it('THEN: the inputs are cleared.', () => {
+          title = screen.getByTestId('blog-panel-title');
+          body = screen.getByTestId('blog-panel-body');
+          imageUrl = screen.getByTestId('blog-panel-img');
+
+          expect(title).toHaveTextContent('');
+        });
+      });
+    });
+  });
   describe('GIVEN: the user wishes to publish a new crossword puzzle,', () => {
     describe('WHEN: The page loads,', () => {
       test('THEN: there is a panel allowing the user to publish new crosswords.', () => {
@@ -76,46 +158,6 @@ describe('PublishContent.jsx', () => {
         fireEvent.click(button);
 
         expect(mockFn).toBeCalledTimes(1);
-      });
-    });
-  });
-  describe('GIVEN: the user wishes to publish a blog post,', () => {
-    describe('WHEN: they submit the filled out form', () => {
-      let title, body, imageUrl;
-
-      beforeEach(() => {
-        render(
-            <Provider store={mockStoreLoggedIn}>
-              <Router>
-                <PublishContent/>
-              </Router>
-            </Provider>
-        );
-
-        title = screen.getByTestId('blog-panel-title');
-        body = screen.getByTestId('blog-panel-body');
-        imageUrl = screen.getByTestId('blog-panel-img');
-
-        fireEvent.change(title, { target: { value: 'some title' } });
-        fireEvent.change(body, { target: { value: 'some body' } });
-        fireEvent.change(imageUrl, { target: { value: 'some imageUrl' } });
-
-        const submissionButton = screen.getByTestId('blog-submission-btn');
-
-        fireEvent.click(submissionButton);
-      });
-      it('THEN: that data is sent to the Lambda.', () => {
-        expect(mockFn).toBeCalledTimes(1);
-      });
-      it('THEN: a success message is alerted to the user.', () => {
-        expect(alertSpy).toBeCalledTimes(1);
-      });
-      it('THEN: the inputs are cleared.', () => {
-        title = screen.getByTestId('blog-panel-title');
-        body = screen.getByTestId('blog-panel-body');
-        imageUrl = screen.getByTestId('blog-panel-img');
-
-        expect(title).toHaveTextContent('');
       });
     });
   });
