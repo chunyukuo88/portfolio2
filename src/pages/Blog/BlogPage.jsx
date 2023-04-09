@@ -21,14 +21,6 @@ export function BlogPage(){
     );
   }, []);
 
-  // TODO: Add this when API functionality is available.
-  const likesAndViews = (article) => (
-    <div className='blog-views-and-likes'>
-      <span>Views: {article.views}</span>
-      <span>Likes: {article.likes}</span>
-    </div>
-  );
-
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
 
   return (
