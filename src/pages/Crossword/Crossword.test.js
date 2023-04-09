@@ -93,6 +93,59 @@ function correctlyFillOutCrossword(cells) {
   fireEvent.keyDown(cells[24], { key: 's', keyCode: 83 });
 }
 
+function incorrectlyFillOutCrossword(cells) {
+  fireEvent.click( cells[0]);
+  fireEvent.keyDown(cells[0], { key: 'l', keyCode: 76 });
+  fireEvent.click( cells[1]);
+  fireEvent.keyDown(cells[1], { key: 'g', keyCode: 71 });
+  fireEvent.click( cells[2]);
+  fireEvent.keyDown(cells[2], { key: 't', keyCode: 84 });
+  fireEvent.click( cells[3]);
+  fireEvent.keyDown(cells[3], { key: 'o', keyCode: 79 });
+  fireEvent.click( cells[4]);
+  fireEvent.keyDown(cells[4], { key: 'o', keyCode: 79 });
+  fireEvent.click( cells[5]);
+  fireEvent.keyDown(cells[5], { key: 'a', keyCode: 65 });
+  fireEvent.click( cells[6]);
+  fireEvent.keyDown(cells[6], { key: 'r', keyCode: 82 });
+  fireEvent.click( cells[7]);
+  fireEvent.keyDown(cells[7], { key: 'e', keyCode: 69 });
+  fireEvent.click( cells[8]);
+  fireEvent.keyDown(cells[8], { key: 'p', keyCode: 80 });
+  fireEvent.click( cells[9]);
+  fireEvent.keyDown(cells[9], { key: 'a', keyCode: 65 });
+  fireEvent.click( cells[10]);
+  fireEvent.keyDown(cells[10], { key: 'g', keyCode: 71 });
+  fireEvent.click( cells[11]);
+  fireEvent.keyDown(cells[11], { key: 'o', keyCode: 79 });
+  fireEvent.click( cells[12]);
+  fireEvent.keyDown(cells[12], { key: 'n', keyCode: 78 });
+  fireEvent.click( cells[13]);
+  fireEvent.keyDown(cells[13], { key: 'e', keyCode: 69 });
+  fireEvent.click( cells[14]);
+  fireEvent.keyDown(cells[14], { key: 'r', keyCode: 82 });
+  fireEvent.click( cells[15]);
+  fireEvent.keyDown(cells[15], { key: 'o', keyCode: 79 });
+  fireEvent.click( cells[16]);
+  fireEvent.keyDown(cells[16], { key: 'v', keyCode: 86 });
+  fireEvent.click( cells[17]);
+  fireEvent.keyDown(cells[17], { key: 'e', keyCode: 69 });
+  fireEvent.click( cells[18]);
+  fireEvent.keyDown(cells[18], { key: 'r', keyCode: 82 });
+  fireEvent.click( cells[19]);
+  fireEvent.keyDown(cells[19], { key: 't', keyCode: 84 });
+  fireEvent.click( cells[20]);
+  fireEvent.keyDown(cells[20], { key: 's', keyCode: 83 });
+  fireEvent.click( cells[21]);
+  fireEvent.keyDown(cells[21], { key: 'e', keyCode: 69 });
+  fireEvent.click( cells[22]);
+  fireEvent.keyDown(cells[22], { key: 'r', keyCode: 82 });
+  fireEvent.click( cells[23]);
+  fireEvent.keyDown(cells[23], { key: 'a', keyCode: 65 });
+  fireEvent.click( cells[24]);
+  fireEvent.keyDown(cells[24], { key: 'a', keyCode: 65 });
+}
+
 describe('Crossword.jsx', ()=> {
   describe('GIVEN: there are no problems with the crossword API,', ()=>{
     describe('WHEN: the first page loads', () => {
@@ -363,6 +416,29 @@ describe('Crossword.jsx', ()=> {
         });
       });
     });
+    describe('WHEN: the user has NOT filled it in correctly,', () => {
+      it('THEN: it triggers an animation.', async () => {
+        jest.spyOn(utils, 'getData').mockReturnValueOnce(
+            new Promise((resolve, reject) => {
+              resolve(crosswordsFromDatabase);
+            })
+        );
+        render(
+            <Provider store={mockStore}>
+              <Router>
+                <Crossword />
+              </Router>
+            </Provider>
+        );
+
+        let cells = document.querySelectorAll('.crossword-square');
+        await waitFor(() => {
+          incorrectlyFillOutCrossword(cells);
+          cells = document.querySelectorAll('.crossword-square');
+          expect(cells[0]).not.toHaveStyle(styles.squareVictory);
+        });
+      });
+    });
     describe('WHEN: the user has filled it in correctly,', () => {
       it('THEN: it triggers an animation.', async () => {
         jest.spyOn(utils, 'getData').mockReturnValueOnce(
@@ -380,7 +456,7 @@ describe('Crossword.jsx', ()=> {
 
         let cells = document.querySelectorAll('.crossword-square');
         await waitFor(() => {
-          correctlyFillOutCrossword(cells)
+          correctlyFillOutCrossword(cells);
           cells = document.querySelectorAll('.crossword-square');
           expect(cells[0]).toHaveStyle(styles.squareVictory);
         });

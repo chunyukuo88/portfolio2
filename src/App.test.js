@@ -15,18 +15,17 @@ jest.mock('react-router-dom', () => {
   return {
     __esModule: true,
     ...originalModule,
-    useNavigate: () => mockNavFn, // shows up as gray in WebStorm but this is actually being used. Proof: Change the spelling and tests break.
+    useNavigate: () => mockNavFn, // shows up as gray in JetBrains IDEs, but this is indeed being used. Proof: Change its spelling and tests break.
   };
 });
 const { ENGLISH, CHINESE, RUSSIAN } = strings;
-
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
 describe('App.jsx', () => {
-  describe('GIVEN: The user has not logged in.', ()=>{
+  describe('GIVEN: The user has NOT logged in.', ()=>{
     describe('WHEN: The user clicks the language button thrice,', () => {
       test('THEN: The site cycles through the localization settings.', () => {
         render(

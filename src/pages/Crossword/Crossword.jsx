@@ -95,8 +95,8 @@ export default function Crossword(){
         } else {
           solutionIndex++;
         }
-      };
-    };
+      }
+    }
     if (userHasWon) return dispatch(declareVictory(userHasWon));
     return userHasWon;
   };
@@ -117,13 +117,6 @@ export default function Crossword(){
   const getClueNumber = (outerIndex, innerIndex) => {
     if (outerIndex === 0) return <>{innerIndex + 1}</>
     if (innerIndex === 0) return <>{outerIndex + 1}</>
-  };
-
-  const linkStyle = {
-    color: 'black',
-    textDecoration: 'none',
-    textTransform: 'uppercase',
-    width: '3rem',
   };
 
   const optionHandler = (event) => {

@@ -25,7 +25,6 @@ export function NewBlogPost({ token }) {
     };
     const mappedData = createHttpRequest('POST', token, data);
     try {
-      console.log(process.env.REACT_APP_POST_BLOG_ENTRY);
       await postData('https://50wd0yhu15.execute-api.us-east-1.amazonaws.com/blog/write', mappedData);
       alert('Success!');
       return clearAllInputs();
@@ -79,9 +78,14 @@ export function NewBlogPost({ token }) {
           />
         </label>
         <div className='button-wrapper'>
-          <button className='publish-panel-button'>Publish</button>
+          <button
+              className='publish-panel-button'
+              data-testid='blog-submission-btn'
+          >
+            Publish
+          </button>
         </div>
       </form>
     </section>
-  )
+  );
 }
