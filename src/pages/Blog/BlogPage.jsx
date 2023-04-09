@@ -30,17 +30,16 @@ export function BlogPage(){
           {strings.homePage[language]}
         </Link>
       </nav>
-      <section role='region'>
+      <section>
         {blogData
           ? blogData.map((article, key) => (
-              <article className='article' key={key} role='article'>
+              <article className='article' key={key}>
                   <header className='blog-title'>{article.title}</header>
                   <h2 className='publication-date'>{asDateString(article)}</h2>
                   <img
                     className='blog-image'
                     src={article.imageUrl}
                     aria-label={`Image for blog titled ${article.title}`}
-                    alt={`Image for blog titled ${article.title}`}
                     loading={key === 0 ? 'eager' : 'lazy'}
                   />
                   <p className='blog-body'>{article.theme}</p>
