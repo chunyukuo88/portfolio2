@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import ReactGA from 'react-ga4';
 import { selectCurrentLanguage } from '../features/language/languageSlice';
@@ -11,4 +11,21 @@ export function useCommonGlobals(page){
   const language = useSelector(selectCurrentLanguage);
   const username = useSelector(selectCurrentUser);
   return [language, username];
+}
+
+export function useMousePosition() {
+  const [mousePosition, setMousePosition] = useState({ x: null, y: null });
+
+  const updateMousePosition = (event) => {
+    setMousePosition({ x: event.clientX, y: event.clientY });
+  };
+
+  useEffect(() => {
+    window.addEventListener('mousemove', updateMousePosition);
+    return () => {
+      window.removeEventListener('mousemove', updateMousePosition);
+    }
+  }, []);
+
+  return mousePosition;
 }
