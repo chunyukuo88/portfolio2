@@ -1,7 +1,34 @@
 import './Cube.css';
+import { useEffect, useRef, useState } from 'react';
+import { useMousePosition } from '../../common/hooks';
 
 export function Cube() {
-    const multiple = 3;
+    const lidRef = useRef(null);
+    const [multiple, setMultiple] = useState(1);
+    const mousePosition = useMousePosition();
+
+    // const mouseMovementHandler = (event) => {
+    //     const lid = lidRef.current;
+    //     if (!lid) return;
+    //     const lidRectangle = lid.getBoundingClientRect();
+    //     const distanceToLid = Math.sqrt(
+    //         (Math.pow(event.clientX - lidRectangle.left - lidRectangle.width) / 2, 2) +
+    //         (Math.pow(event.clientY - lidRectangle.top - lidRectangle.height) / 2, 2)
+    //     );
+    //     if (distanceToLid < 50) {
+    //         console.log('< 50');
+    //         return setMultiple(1);
+    //     }
+    //     if (distanceToLid === 100) {
+    //         console.log('< 100');
+    //         return setMultiple(2);
+    //     }
+    //     if (distanceToLid === 150) {
+    //         console.log('< 150');
+    //         return setMultiple(3);
+    //     }
+    // };
+
     const styles = {
         cube: {
             position: 'relative',
@@ -42,15 +69,25 @@ export function Cube() {
         },
     };
 
+    // useEffect(() => {
+    //     window.addEventListener('mousemove', mouseMovementHandler);
+    //     return () => {
+    //         window.removeEventListener('mousemove', mouseMovementHandler);
+    //     }
+    // }, []);
+
     return (
-        <div className='cube' style={styles.cube} role='presentation' aria-hidden='true'>
-          <div className='cube-lid' style={styles.cubeLid} />
-          <div>
-            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild1}} />
-            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild2}} />
-            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild3}} />
-            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild4}} />
-          </div>
-        </div>
+        <>
+            <h1>{JSON.stringify(mousePosition)}</h1>
+            <div className='cube' style={styles.cube} role='presentation' aria-hidden='true'>
+              <div ref={lidRef} className='cube-lid' style={styles.cubeLid} />
+              <div>
+                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild1}} />
+                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild2}} />
+                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild3}} />
+                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild4}} />
+              </div>
+            </div>
+        </>
     );
 }
