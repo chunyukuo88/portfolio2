@@ -9,6 +9,7 @@ export function Cube() {
     const transitionInterval = '3s';
 
     const mouseMovementHandler = () => {
+        if (mousePosition.y < 50) return setMultiple(0.5);
         if (mousePosition.y < 100) return setMultiple(1);
         if (mousePosition.y < 150) return setMultiple(1.5);
         if (mousePosition.y < 200) return setMultiple(2);
