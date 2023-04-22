@@ -4,40 +4,40 @@ export function Cube() {
     const multiple = 3;
     const styles = {
         cube: {
-            position: "relative",
+            position: 'relative',
             width: `${multiple * 100}px`,
             height: `${multiple * 100}px`,
-            transformStyle: "preserve-3d",
-            transform: "rotateX(-30deg)",
-            animation: "animate 4s linear infinite",
+            transformStyle: 'preserve-3d',
+            transform: 'rotateX(-30deg)',
+            animation: 'animate 4s linear infinite',
         },
-        "cubeDivSpan": {
-            position: "absolute",
+        'cubeDivSpan': {
+            position: 'absolute',
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
-            background: "linear-gradient(#151515,#00ec00)",
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(#151515,#00ec00)',
         },
-        "cubeDivSpanNthChild1": {
+        'cubeDivSpanNthChild1': {
             transform: `rotateY(calc(${1 * 90}deg)) translateZ(${multiple * 50}px)`,
         },
-        "cubeDivSpanNthChild2": {
+        'cubeDivSpanNthChild2': {
             transform: `rotateY(calc(${2 * 90}deg)) translateZ(${multiple * 50}px)`,
         },
-        "cubeDivSpanNthChild3": {
+        'cubeDivSpanNthChild3': {
             transform: `rotateY(calc(${3 * 90}deg)) translateZ(${multiple * 50}px)`,
         },
-        "cubeDivSpanNthChild4": {
+        'cubeDivSpanNthChild4': {
             transform: `rotateY(calc(${4 * 90}deg)) translateZ(${multiple * 50}px)`,
         },
-        "cubeLid": {
-            position: "absolute",
+        'cubeLid': {
+            position: 'absolute',
             top: 0,
             left: 0,
             width: `${multiple * 100}px`,
             height: `${multiple * 100}px`,
-            background: "#222",
+            background: '#222',
             transform: `rotateX(90deg) translateZ(${multiple * 50}px)`,
         },
     };
