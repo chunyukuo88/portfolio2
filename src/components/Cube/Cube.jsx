@@ -6,31 +6,17 @@ export function Cube() {
     const lidRef = useRef(null);
     const [multiple, setMultiple] = useState(1);
     const mousePosition = useMousePosition();
+    const transitionInterval = '3s';
 
-    const mouseMovementHandler = (event) => {
-        // const lid = lidRef.current;
-        // if (!lid) return;
-        // const lidRectangle = lid.getBoundingClientRect();
-        // const distanceToLid = Math.sqrt(
-        //     (Math.pow(event.clientX - lidRectangle.left - lidRectangle.width) / 2, 2) +
-        //     (Math.pow(event.clientY - lidRectangle.top - lidRectangle.height) / 2, 2)
-        // );
+    const mouseMovementHandler = () => {
         if (mousePosition.y < 100) return setMultiple(1);
+        if (mousePosition.y < 150) return setMultiple(1.5);
         if (mousePosition.y < 200) return setMultiple(2);
+        if (mousePosition.y < 250) return setMultiple(2.5);
         if (mousePosition.y < 300) return setMultiple(3);
+        if (mousePosition.y < 350) return setMultiple(3.5);
         if (mousePosition.y < 400) return setMultiple(4);
-        // if (distanceToLid < 50) {
-        //     console.log('< 50: ', distanceToLid);
-        //     return setMultiple(1);
-        // }
-        // if (distanceToLid === 100) {
-        //     console.log('< 100');
-        //     return setMultiple(2);
-        // }
-        // if (distanceToLid === 150) {
-        //     console.log('< 150');
-        //     return setMultiple(3);
-        // }
+        if (mousePosition.y < 450) return setMultiple(4.5);
     };
 
     const styles = {
@@ -41,6 +27,7 @@ export function Cube() {
             transformStyle: 'preserve-3d',
             transform: 'rotateX(-30deg)',
             animation: 'animate 4s linear infinite',
+            transition: transitionInterval,
         },
         'cubeDivSpan': {
             position: 'absolute',
@@ -52,15 +39,19 @@ export function Cube() {
         },
         'cubeDivSpanNthChild1': {
             transform: `rotateY(calc(${1 * 90}deg)) translateZ(${multiple * 50}px)`,
+            transition: transitionInterval,
         },
         'cubeDivSpanNthChild2': {
             transform: `rotateY(calc(${2 * 90}deg)) translateZ(${multiple * 50}px)`,
+            transition: transitionInterval,
         },
         'cubeDivSpanNthChild3': {
             transform: `rotateY(calc(${3 * 90}deg)) translateZ(${multiple * 50}px)`,
+            transition: transitionInterval,
         },
         'cubeDivSpanNthChild4': {
             transform: `rotateY(calc(${4 * 90}deg)) translateZ(${multiple * 50}px)`,
+            transition: transitionInterval,
         },
         'cubeLid': {
             position: 'absolute',
@@ -70,6 +61,7 @@ export function Cube() {
             height: `${multiple * 100}px`,
             background: '#222',
             transform: `rotateX(90deg) translateZ(${multiple * 50}px)`,
+            transition: transitionInterval,
         },
     };
 
@@ -81,17 +73,14 @@ export function Cube() {
     }, [mousePosition]);
 
     return (
-        <>
-            <h1>{JSON.stringify(mousePosition)}</h1>
-            <div className='cube' style={styles.cube} role='presentation' aria-hidden='true'>
-              <div ref={lidRef} className='cube-lid' style={styles.cubeLid} />
-              <div>
-                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild1}} />
-                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild2}} />
-                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild3}} />
-                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild4}} />
-              </div>
-            </div>
-        </>
+        <div className='cube' style={styles.cube} role='presentation' aria-hidden='true'>
+          <div ref={lidRef} className='cube-lid' style={styles.cubeLid} />
+          <div>
+            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild1}} />
+            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild2}} />
+            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild3}} />
+            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild4}} />
+          </div>
+        </div>
     );
 }
