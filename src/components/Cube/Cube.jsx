@@ -7,27 +7,31 @@ export function Cube() {
     const [multiple, setMultiple] = useState(1);
     const mousePosition = useMousePosition();
 
-    // const mouseMovementHandler = (event) => {
-    //     const lid = lidRef.current;
-    //     if (!lid) return;
-    //     const lidRectangle = lid.getBoundingClientRect();
-    //     const distanceToLid = Math.sqrt(
-    //         (Math.pow(event.clientX - lidRectangle.left - lidRectangle.width) / 2, 2) +
-    //         (Math.pow(event.clientY - lidRectangle.top - lidRectangle.height) / 2, 2)
-    //     );
-    //     if (distanceToLid < 50) {
-    //         console.log('< 50');
-    //         return setMultiple(1);
-    //     }
-    //     if (distanceToLid === 100) {
-    //         console.log('< 100');
-    //         return setMultiple(2);
-    //     }
-    //     if (distanceToLid === 150) {
-    //         console.log('< 150');
-    //         return setMultiple(3);
-    //     }
-    // };
+    const mouseMovementHandler = (event) => {
+        // const lid = lidRef.current;
+        // if (!lid) return;
+        // const lidRectangle = lid.getBoundingClientRect();
+        // const distanceToLid = Math.sqrt(
+        //     (Math.pow(event.clientX - lidRectangle.left - lidRectangle.width) / 2, 2) +
+        //     (Math.pow(event.clientY - lidRectangle.top - lidRectangle.height) / 2, 2)
+        // );
+        if (mousePosition.y < 100) return setMultiple(1);
+        if (mousePosition.y < 200) return setMultiple(2);
+        if (mousePosition.y < 300) return setMultiple(3);
+        if (mousePosition.y < 400) return setMultiple(4);
+        // if (distanceToLid < 50) {
+        //     console.log('< 50: ', distanceToLid);
+        //     return setMultiple(1);
+        // }
+        // if (distanceToLid === 100) {
+        //     console.log('< 100');
+        //     return setMultiple(2);
+        // }
+        // if (distanceToLid === 150) {
+        //     console.log('< 150');
+        //     return setMultiple(3);
+        // }
+    };
 
     const styles = {
         cube: {
@@ -69,12 +73,12 @@ export function Cube() {
         },
     };
 
-    // useEffect(() => {
-    //     window.addEventListener('mousemove', mouseMovementHandler);
-    //     return () => {
-    //         window.removeEventListener('mousemove', mouseMovementHandler);
-    //     }
-    // }, []);
+    useEffect(() => {
+        window.addEventListener('mousemove', mouseMovementHandler);
+        return () => {
+            window.removeEventListener('mousemove', mouseMovementHandler);
+        }
+    }, [mousePosition]);
 
     return (
         <>
