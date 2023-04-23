@@ -7,6 +7,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --coverage --watchAll",
+    "deploy": "aws s3 sync build/ s3://www.alexgochenour.xyz",
     "eject": "react-scripts eject"
   },
   "jest": {
