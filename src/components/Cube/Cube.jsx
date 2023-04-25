@@ -5,19 +5,45 @@ import { useMousePosition } from '../../common/hooks';
 export function Cube() {
     const lidRef = useRef(null);
     const [multiple, setMultiple] = useState(1);
+    const [color, setColor] = useState('rgb(0, 236, 0))');
     const mousePosition = useMousePosition();
     const transitionInterval = '3s';
 
     const mouseMovementHandler = () => {
-        if (mousePosition.y < 50) return setMultiple(0.5);
-        if (mousePosition.y < 100) return setMultiple(1);
-        if (mousePosition.y < 150) return setMultiple(1.5);
-        if (mousePosition.y < 200) return setMultiple(2);
-        if (mousePosition.y < 250) return setMultiple(2.5);
-        if (mousePosition.y < 300) return setMultiple(3);
-        if (mousePosition.y < 350) return setMultiple(3.5);
-        if (mousePosition.y < 400) return setMultiple(4);
-        return setMultiple(4.5);
+        if (mousePosition.y < 50) {
+            setColor('rgb(26, 236, 0))');
+            return setMultiple(0.5);
+        }
+        if (mousePosition.y < 100) {
+            setColor('rgb(52, 236, 0))');
+            return setMultiple(1);
+        }
+        if (mousePosition.y < 150) {
+            setColor('rgb(78, 236, 0))');
+            return setMultiple(1.5);
+        }
+        if (mousePosition.y < 200) {
+            setColor('rgb(104, 236, 0))');
+            return setMultiple(2);
+        }
+        if (mousePosition.y < 250) {
+            setColor('rgb(130, 236, 0))');
+            return setMultiple(2.5);
+        }
+        if (mousePosition.y < 300) {
+            setColor('rgb(156, 236, 0))');
+            return setMultiple(3);
+        }
+        if (mousePosition.y < 350) {
+            setColor('rgb(182, 236, 0))');
+            return setMultiple(3.5);
+        }
+        if (mousePosition.y < 400) {
+            setColor('rgb(208, 236, 0))');
+            return setMultiple(4);
+        }
+        setColor('rgb(236, 220, 0))');
+        setMultiple(4.5);
     };
 
     const styles = {
@@ -36,7 +62,7 @@ export function Cube() {
             left: 0,
             width: '100%',
             height: '100%',
-            background: 'linear-gradient(#151515,#00ec00)',
+            background: `linear-gradient(#151515,${color}`,
         },
         'cubeDivSpanNthChild1': {
             transform: `rotateY(calc(${1 * 90}deg)) translateZ(${multiple * 50}px)`,
