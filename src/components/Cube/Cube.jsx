@@ -17,7 +17,7 @@ export function Cube() {
         if (mousePosition.y < 300) return setMultiple(3);
         if (mousePosition.y < 350) return setMultiple(3.5);
         if (mousePosition.y < 400) return setMultiple(4);
-        if (mousePosition.y < 450) return setMultiple(4.5);
+        return setMultiple(4.5);
     };
 
     const styles = {
@@ -75,13 +75,13 @@ export function Cube() {
 
     return (
         <div className='cube' style={styles.cube} role='presentation' aria-hidden='true'>
-          <div ref={lidRef} className='cube-lid' style={styles.cubeLid} />
-          <div>
-            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild1}} />
-            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild2}} />
-            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild3}} />
-            <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild4}} />
-          </div>
+            <div ref={lidRef} className='cube-lid' style={styles.cubeLid} />
+            <div>
+                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild1}} />
+                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild2}} />
+                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild3}} />
+                <span style={{...styles.cubeDivSpan, ...styles.cubeDivSpanNthChild4}} />
+            </div>
         </div>
     );
 }
