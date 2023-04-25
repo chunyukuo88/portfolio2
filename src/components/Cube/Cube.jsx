@@ -17,7 +17,7 @@ export function Cube() {
         if (mousePosition.y < 300) return setMultiple(3);
         if (mousePosition.y < 350) return setMultiple(3.5);
         if (mousePosition.y < 400) return setMultiple(4);
-        return setMultiple(4.5);
+        setMultiple(4.5);
     };
 
     const styles = {
@@ -36,7 +36,7 @@ export function Cube() {
             left: 0,
             width: '100%',
             height: '100%',
-            background: 'linear-gradient(#151515,#00ec00)',
+            background: `linear-gradient(#151515,rgb(${multiple * 26}, 236, 0))`,
         },
         'cubeDivSpanNthChild1': {
             transform: `rotateY(calc(${1 * 90}deg)) translateZ(${multiple * 50}px)`,
