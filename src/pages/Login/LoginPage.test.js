@@ -10,15 +10,17 @@ afterEach(() => {
 });
 
 describe('GIVEN: user is logged in', () => {
+  beforeEach(() => {
+    render(
+      <Provider store={mockStoreLoggedIn}>
+        <Router>
+          <LoginPage/>
+        </Router>
+      </Provider>
+    );
+  });
   describe('WHEN: the page loads', () => {
     it('THEN: it shows the logged-in content.', () => {
-      render(
-        <Provider store={mockStoreLoggedIn}>
-          <Router>
-            <LoginPage/>
-          </Router>
-        </Provider>
-      );
       const page = document.getElementById('login-page');
 
       expect(page).toBeInTheDocument();
@@ -26,13 +28,7 @@ describe('GIVEN: user is logged in', () => {
   });
   describe('WHEN: the user clicks the button to log out',() => {
     it('THEN: the app logs the user out.', async () => {
-      render(
-        <Provider store={mockStoreLoggedIn}>
-          <Router>
-            <LoginPage/>
-          </Router>
-        </Provider>
-      );
+      jest.spyOn(console, 'error').mockImplementationOnce(jest.fn());
       const button = screen.getByText('Logout');
       fireEvent.click(button);
 
@@ -42,23 +38,9 @@ describe('GIVEN: user is logged in', () => {
     });
   });
 });
+
 describe('GIVEN: user is NOT logged in', () => {
-  describe('WHEN: the page loads', () => {
-    it('THEN: it shows the logged-out content.', () => {
-      render(
-        <Provider store={mockStore}>
-          <Router>
-            <LoginPage/>
-          </Router>
-        </Provider>
-      );
-
-      const page = document.querySelector('.logged-out-section');
-
-      expect(page).toBeInTheDocument();
-    });
-  });
-  it('', async () => {
+  beforeEach(() => {
     render(
       <Provider store={mockStore}>
         <Router>
@@ -66,6 +48,15 @@ describe('GIVEN: user is NOT logged in', () => {
         </Router>
       </Provider>
     );
+  });
+  describe('WHEN: the page loads', () => {
+    it('THEN: it shows the logged-out content.', () => {
+      const page = document.querySelector('.logged-out-section');
+
+      expect(page).toBeInTheDocument();
+    });
+  });
+  it('', async () => {
     const baseStyleRules = {
       position: 'relative',
       transform: 'rotateX(-30deg)',
