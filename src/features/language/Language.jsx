@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateLanguage } from './languageSlice';
 import strings from '../../common/strings.js';

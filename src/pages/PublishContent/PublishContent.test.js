@@ -1,4 +1,3 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'react-dom';
@@ -6,8 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { mockStoreLoggedIn } from '../../testUtils';
 import '../../common/utils';
-
-import PublishContent from './PublishContent';
+import { PublishContentPage } from './PublishContentPage';
 
 const alertSpy = jest.spyOn(window, 'alert').mockImplementation(jest.fn());
 let mockFn = jest.fn();
@@ -23,7 +21,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe('PublishContent.jsx', () => {
+describe('PublishContentPage.jsx', () => {
   describe('GIVEN: the user wishes to publish a blog post,', () => {
     describe('AND: There is a problem with the server,', () => {
       let title, body, imageUrl;
@@ -36,7 +34,7 @@ describe('PublishContent.jsx', () => {
         render(
             <Provider store={mockStoreLoggedIn}>
               <Router>
-                <PublishContent/>
+                <PublishContentPage/>
               </Router>
             </Provider>
         );
@@ -69,7 +67,7 @@ describe('PublishContent.jsx', () => {
           render(
               <Provider store={mockStoreLoggedIn}>
                 <Router>
-                  <PublishContent/>
+                  <PublishContentPage/>
                 </Router>
               </Provider>
           );
@@ -108,7 +106,7 @@ describe('PublishContent.jsx', () => {
         render(
           <Provider store={mockStoreLoggedIn}>
             <Router>
-              <PublishContent/>
+              <PublishContentPage/>
             </Router>
           </Provider>
         );
@@ -122,7 +120,7 @@ describe('PublishContent.jsx', () => {
         render(
           <Provider store={mockStoreLoggedIn}>
             <Router>
-              <PublishContent/>
+              <PublishContentPage/>
             </Router>
           </Provider>
         );

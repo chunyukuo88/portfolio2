@@ -1,4 +1,3 @@
-import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'react-dom';
@@ -8,7 +7,7 @@ import * as utils from '../../common/utils';
 
 import { mockStore } from '../../testUtils';
 import ReactGA from 'react-ga4';
-import Crossword from './Crossword.jsx';
+import CrosswordPage from './CrosswordPage.jsx';
 import { styles } from './styles.js';
 import strings from '../../common/strings';
 
@@ -153,7 +152,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword />
+              <CrosswordPage />
             </Router>
           </Provider>
         );
@@ -173,7 +172,7 @@ describe('Crossword.jsx', ()=> {
       render(
         <Provider store={mockStore}>
           <Router>
-            <Crossword/>
+            <CrosswordPage/>
           </Router>
         </Provider>
       );
@@ -191,7 +190,7 @@ describe('Crossword.jsx', ()=> {
       render(
         <Provider store={mockStore}>
           <Router>
-            <Crossword/>
+            <CrosswordPage/>
           </Router>
         </Provider>
       );
@@ -222,7 +221,7 @@ describe('Crossword.jsx', ()=> {
       render(
         <Provider store={mockStore}>
           <Router>
-            <Crossword/>
+            <CrosswordPage/>
           </Router>
         </Provider>
       );
@@ -246,7 +245,7 @@ describe('Crossword.jsx', ()=> {
       render(
         <Provider store={mockStore}>
           <Router>
-            <Crossword/>
+            <CrosswordPage/>
           </Router>
         </Provider>
       );
@@ -271,7 +270,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword />
+              <CrosswordPage />
             </Router>
           </Provider>
         );
@@ -292,7 +291,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword />
+              <CrosswordPage />
             </Router>
           </Provider>
         );
@@ -318,7 +317,7 @@ describe('Crossword.jsx', ()=> {
           render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword />
+                <CrosswordPage />
               </Router>
             </Provider>
           );
@@ -346,7 +345,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword />
+              <CrosswordPage />
             </Router>
           </Provider>
         );
@@ -376,7 +375,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword />
+              <CrosswordPage />
             </Router>
           </Provider>
         );
@@ -402,7 +401,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword />
+              <CrosswordPage />
             </Router>
           </Provider>
         );
@@ -426,7 +425,7 @@ describe('Crossword.jsx', ()=> {
         render(
             <Provider store={mockStore}>
               <Router>
-                <Crossword />
+                <CrosswordPage />
               </Router>
             </Provider>
         );
@@ -449,7 +448,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword />
+              <CrosswordPage />
             </Router>
           </Provider>
         );
@@ -470,7 +469,7 @@ describe('Crossword.jsx', ()=> {
         render(
           <Provider store={mockStore}>
             <Router>
-              <Crossword />
+              <CrosswordPage />
             </Router>
           </Provider>
         );
