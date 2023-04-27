@@ -21,7 +21,7 @@ import strings from '../../common/strings';
 import './Crossword.css';
 import {LinkStyling} from "../../common/globalStyles";
 
-export default function Crossword(){
+export default function CrosswordPage(){
   const [ language ] = useCommonGlobals(routes.puzzle);
   const grid = useSelector(selectCurrentGrid);
   const userHasWon = useSelector(selectUserHasWon);

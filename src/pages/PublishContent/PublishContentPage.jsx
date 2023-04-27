@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { NewCrossword } from './NewCrossword';
@@ -8,9 +8,10 @@ import { selectCurrentLanguage } from '../../features/language/languageSlice';
 import { routes } from '../../routes';
 import strings from '../../common/strings';
 import { LinkStyling } from '../../common/globalStyles';
+import { RequireAuth } from '../../features/auth/RequireAuth';
 import './PublishContent.css';
 
-function PublishContent() {
+export function PublishContentPage() {
   const token = useSelector(selectCurrentToken);
   const language = useSelector(selectCurrentLanguage);
 
@@ -21,17 +22,18 @@ function PublishContent() {
   };
 
   return (
-    <>
-      <Link style={withCenter} to={routes.index}>
-        {strings.homePage[language]}
-      </Link>
-      <section className='publish-panel'>
-        <NewBlogPost  token={token}/>
-        <div />
-        <NewCrossword token={token}/>
-      </section>
-    </>
+    <Fragment>
+      <RequireAuth>
+        <Link style={withCenter} to={routes.index}>
+          {strings.homePage[language]}
+        </Link>
+        <section className='publish-panel'>
+          <NewBlogPost  token={token}/>
+          <div />
+          <NewCrossword token={token}/>
+        </section>
+      </RequireAuth>
+    </Fragment>
   );
 }
 
-export default PublishContent;
