@@ -1,6 +1,4 @@
 import { useMemo } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AboutBlock } from './components/AboutBlock/AboutBlock';
 import { PublishContentPage } from './pages/PublishContent/PublishContentPage';
 import { LoginPage } from './pages/Login/LoginPage.jsx';
@@ -13,6 +11,7 @@ import AlexBanner from './components/LightbulbBanners/AlexBanner';
 import GochenourBanner from './components/LightbulbBanners/GochenourBanner';
 import MainMenu from './components/MainMenu/MainMenu';
 import { SkillsPole } from './components/SkillsPole/SkillsPole';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
@@ -28,17 +27,13 @@ const App = () => {
 
   return (
     <>
-      <TransitionGroup>
-        <Router>
-          <CSSTransition classNames='fade' timeout={300}>
-            <Routes>
-              {allRoutes.map(({ path, Component, exact }) => (
-                <Route key={path} path={path} Component={Component} exact={exact} />
-              ))}
-            </Routes>
-          </CSSTransition>
-        </Router>
-      </TransitionGroup>
+      <Router>
+        <Routes>
+          {allRoutes.map(({ path, Component, exact }) => (
+            <Route key={path} path={path} Component={Component} exact={exact} />
+          ))}
+        </Routes>
+      </Router>
     </>
   );
 }
