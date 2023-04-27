@@ -36,7 +36,7 @@ export function Cube() {
             left: 0,
             width: '100%',
             height: '100%',
-            background: `linear-gradient(#151515,rgb(${multiple * 26}, 236, 0))`,
+            background: `linear-gradient(#151515,rgb(0, ${multiple * 26}, 0))`,
         },
         'cubeDivSpanNthChild1': {
             transform: `rotateY(calc(${1 * 90}deg)) translateZ(${multiple * 50}px)`,
