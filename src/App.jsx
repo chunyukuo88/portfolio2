@@ -30,7 +30,7 @@ const App = () => {
       <Router>
         <Routes>
           {allRoutes.map(({ path, Component, exact }) => (
-            <Route key={path} path={path} Component={Component} exact={exact} />
+            <Route key={path} path={`${path}*`} Component={Component} exact={exact} />
           ))}
         </Routes>
       </Router>
@@ -42,12 +42,12 @@ function HomePage(){
   return (
     <>
       <div className='banner-and-menu-wrapper'>
-        <div/>
+        <div />
         <div className='banners'>
           <AlexBanner />
           <GochenourBanner />
         </div>
-        <div/>
+        <div />
         <MainMenu />
         <SkillsPole />
         <AboutBlock />

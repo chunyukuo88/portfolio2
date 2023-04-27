@@ -1,7 +1,7 @@
 export const routes = {
-  blog: '/blog',
+  blog: '/blog/',
   index: '/',
-  login: '/login',
-  puzzle: '/puzzle',
-  publishCrossword: '/publishCrossword',
+  login: '/login/',
+  puzzle: '/puzzle/',
+  publishCrossword: '/publishCrossword/',
 };
