@@ -1,3 +1,4 @@
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import Root from './Root';
@@ -11,9 +12,9 @@ Auth.configure({
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <StrictMode>
     <Root store={store}>
       <App />
     </Root>
-  </React.StrictMode>,
+  </StrictMode>,
 );
