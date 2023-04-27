@@ -37,7 +37,6 @@ export default function CrosswordPage(){
         setAllPuzzles(data);
         setTodaysPuzzle(data[0]);
       })
-      // TODO Add error card.
       .catch((e) => setHasError(true));
   }, []);
 
@@ -166,7 +165,6 @@ export default function CrosswordPage(){
                   <div style={styles.squareWrapper} key={innerIndex}>
                     <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>
                     <div
-                      data-testid='crossword-square'
                       className='crossword-square'
                       id={`${outerIndex},${innerIndex}`}
                       autoComplete='off'

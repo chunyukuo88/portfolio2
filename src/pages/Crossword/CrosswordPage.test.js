@@ -275,7 +275,7 @@ describe('Crossword.jsx', ()=> {
           </Provider>
         );
 
-        const squares = screen.getAllByTestId('crossword-square');
+        const squares = document.querySelectorAll('.crossword-square');
 
         let neighboringSquareLeft = squares[1];
         expect(neighboringSquareLeft).toHaveStyle(styles.square);
@@ -296,7 +296,7 @@ describe('Crossword.jsx', ()=> {
           </Provider>
         );
 
-        const squares = screen.getAllByTestId('crossword-square');
+        const squares = document.querySelectorAll('.crossword-square');
 
         const upperLeft = squares[0];
         fireEvent.click(upperLeft);
@@ -322,7 +322,7 @@ describe('Crossword.jsx', ()=> {
             </Provider>
           );
 
-          const squares = screen.getAllByTestId('crossword-square');
+          const squares = document.querySelectorAll('.crossword-square');
 
           let centerSquare = squares[12];
           expect(centerSquare).toHaveStyle(styles.square);
@@ -350,7 +350,7 @@ describe('Crossword.jsx', ()=> {
           </Provider>
         );
 
-        const squares = screen.getAllByTestId('crossword-square');
+        const squares = document.querySelectorAll('.crossword-square');
 
         let upperLeftCorner = squares[0];
         expect(upperLeftCorner).toHaveStyle(styles.square);
