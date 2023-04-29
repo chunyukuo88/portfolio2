@@ -2,7 +2,7 @@
 
 I made myself a little portfolio in rather short order, so kindly forgive the lack of TDD.
 
-I figured it might fun to learn some new technologies, so I decided on Supabase for both authentication and PostgreSQL tables. 
+I figured it might fun to learn some new technologies, so I decided on Supabase for both authentication and PostgreSQL tables. The bread blog uses Redis as its primary database.
 
 Fun fact: I am a crossword addict and enjoy making 5x5 mini crosswords, so stick around for a while and play one of my original minis! You can navigate to it from the main menu.
 
@@ -10,6 +10,7 @@ Fun fact: I am a crossword addict and enjoy making 5x5 mini crosswords, so stick
 
 - Supabase
 - Redux Toolkit
+- Redis
 - `react-spring`
 - Jest
 - And a lot of timeless CSS!
