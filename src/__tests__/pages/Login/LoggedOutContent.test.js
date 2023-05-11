@@ -1,4 +1,4 @@
-import { mockStore } from '../../testUtils';
+import { mockStore } from '../../../testUtils';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';

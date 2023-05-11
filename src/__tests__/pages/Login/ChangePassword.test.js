@@ -1,4 +1,4 @@
-import { mockStoreLoggedIn } from '../../testUtils';
+import { mockStoreLoggedIn } from '../../../testUtils';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { render, fireEvent, screen } from '@testing-library/react';

@@ -5,7 +5,7 @@ import 'react-router-dom';
 import { routes } from '../routes';
 import Root from '../Root';
 import { store } from '../app/store';
-import { mockStoreLoggedIn } from './testUtils';
+import { mockStoreLoggedIn } from '../testUtils';
 import '@testing-library/jest-dom';
 import 'react-dom';
 

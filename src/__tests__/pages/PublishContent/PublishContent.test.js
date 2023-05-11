@@ -1,6 +1,6 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { mockStoreLoggedIn } from '../../testUtils';
+import { mockStoreLoggedIn } from '../../../testUtils';
 import '../../../common/utils';
 import { PublishContentPage } from '../../../pages/PublishContent/PublishContentPage';
 import { fireEvent, render, screen } from '@testing-library/react';

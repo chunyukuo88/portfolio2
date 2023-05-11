@@ -1,7 +1,7 @@
 import { getData } from '../../../common/utils';
 import { Provider } from 'react-redux';
 import { BlogPage } from '../../../pages/Blog/BlogPage';
-import { mockStore} from '../../testUtils';
+import { mockStore} from '../../../testUtils';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { routes } from '../../../routes';
 

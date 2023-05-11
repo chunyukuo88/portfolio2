@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { mockStoreLoggedIn } from '../../testUtils';
+import { mockStoreLoggedIn } from '../../../testUtils';
 import { BrowserRouter as Router} from 'react-router-dom';
 import { RequireAuth } from '../../../features/auth/RequireAuth';
 
