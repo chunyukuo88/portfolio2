@@ -1,4 +1,4 @@
-import { Cube } from './Cube';
+import { Cube } from 'src/components/Cube/Cube';
 import { render } from '@testing-library/react';
 
 it('Renders successfully', () => {

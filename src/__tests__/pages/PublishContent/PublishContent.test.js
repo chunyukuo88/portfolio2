@@ -1,16 +1,14 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { mockStoreLoggedIn } from '../../testUtils';
-import '../../common/utils';
-import { PublishContentPage } from './PublishContentPage';
+import { mockStoreLoggedIn } from 'src/testUtils';
+import 'src/common/utils';
+import { PublishContentPage } from 'src/pages/PublishContent/PublishContentPage';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 const alertSpy = jest.spyOn(window, 'alert').mockImplementation(jest.fn());
 let mockFn = jest.fn();
-jest.mock('../../common/utils', () => {
-  const originalModule = jest.requireActual('../../common/utils');
+jest.mock('src/common/utils', () => {
+  const originalModule = jest.requireActual('src/common/utils');
   return {
     __esModule: true,
     ...originalModule,

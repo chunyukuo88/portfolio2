@@ -1,9 +1,9 @@
-import { getData } from '../../common/utils';
+import { getData } from 'src/common/utils';
 import { Provider } from 'react-redux';
-import { BlogPage } from './BlogPage';
-import { mockStore } from '../../testUtils';
+import { BlogPage } from 'src/pages/Blog/BlogPage';
+import { mockStore} from 'src/testUtils';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { routes } from '../../routes';
+import { routes } from 'src/routes';
 
 import { render, screen, waitFor } from '@testing-library/react';
 import ReactGA from 'react-ga4';
@@ -11,7 +11,7 @@ import ReactGA from 'react-ga4';
 const spy = jest.spyOn(ReactGA, 'send');
 const payload = { hitType: 'pageview', page: routes.blog };
 
-jest.mock('../../common/utils');
+jest.mock('../../../common/utils');
 
 describe('WHEN: The page loads,', () => {
   const ordinaryBlogData = [

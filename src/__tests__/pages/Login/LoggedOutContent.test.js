@@ -1,9 +1,9 @@
-import { mockStore } from '../../testUtils';
+import { mockStore } from 'src/testUtils';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
-import { LoggedOutContent } from './LoggedOutContent';
-import { routes } from '../../routes';
+import { LoggedOutContent } from 'src/pages/Login/LoggedOutContent';
+import { routes } from 'src/routes';
 
 describe('LoggedOutContent', () => {
   describe('GIVEN: The there are no problems signing in', () => {

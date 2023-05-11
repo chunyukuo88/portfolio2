@@ -1,10 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../testUtils';
-import {CluesCube} from './CluesCube';
+import { mockStore } from 'src/testUtils';
+import { CluesCube } from 'src/pages/Crossword/CluesCube';
 
 const mockData = {
   id: 6,

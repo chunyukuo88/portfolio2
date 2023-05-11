@@ -1,9 +1,9 @@
-import { LoggedOutContent, LoginPage } from './LoginPage';
-import { mockStore, mockStoreLoggedIn } from '../../testUtils';
+import { LoggedOutContent, LoginPage } from 'src/pages/Login/LoginPage';
+import { mockStore, mockStoreLoggedIn } from 'src/testUtils';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { routes } from '../../routes';
+import { routes } from 'src/routes';
 
 afterEach(() => {
   jest.clearAllMocks();
