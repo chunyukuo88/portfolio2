@@ -2,7 +2,7 @@ import { mockStoreLoggedIn } from '../../testUtils';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { render, fireEvent, screen } from '@testing-library/react';
-import { ChangePassword } from './ChangePassword';
+import { ChangePassword } from '../../../pages/Login/ChangePassword';
 
 afterEach(() => {
   jest.clearAllMocks();

@@ -3,13 +3,13 @@ import '@testing-library/jest-dom';
 import 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import * as utils from '../../common/utils';
+import * as utils from '../../../common/utils';
 
 import { mockStore } from '../../testUtils';
 import ReactGA from 'react-ga4';
-import CrosswordPage from './CrosswordPage.jsx';
-import { styles } from './styles.js';
-import strings from '../../common/strings';
+import CrosswordPage from '../../../pages/Crossword/CrosswordPage.jsx';
+import { styles } from '../../../pages/Crossword/styles.js';
+import strings from '../../../common/strings';
 
 afterEach(() => {
   jest.clearAllMocks();

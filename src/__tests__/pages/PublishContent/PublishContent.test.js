@@ -4,8 +4,8 @@ import 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { mockStoreLoggedIn } from '../../testUtils';
-import '../../common/utils';
-import { PublishContentPage } from './PublishContentPage';
+import '../../../common/utils';
+import { PublishContentPage } from '../../../pages/PublishContent/PublishContentPage';
 
 const alertSpy = jest.spyOn(window, 'alert').mockImplementation(jest.fn());
 let mockFn = jest.fn();

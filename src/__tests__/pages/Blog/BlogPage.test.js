@@ -1,9 +1,9 @@
-import { getData } from '../../common/utils';
+import { getData } from '../../../common/utils';
 import { Provider } from 'react-redux';
-import { BlogPage } from './BlogPage';
+import { BlogPage } from '../../../pages/Blog/BlogPage';
 import { mockStore } from '../../testUtils';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { routes } from '../../routes';
+import { routes } from '../../../routes';
 
 import { render, screen, waitFor } from '@testing-library/react';
 import ReactGA from 'react-ga4';
