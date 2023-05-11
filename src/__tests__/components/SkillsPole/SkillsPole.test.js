@@ -1,4 +1,4 @@
-import { SkillsPole } from '../../../components/SkillsPole/SkillsPole';
+import { SkillsPole } from 'src/components/SkillsPole/SkillsPole';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 it('The component renders', () => {

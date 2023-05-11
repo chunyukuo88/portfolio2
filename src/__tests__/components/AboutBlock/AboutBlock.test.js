@@ -1,4 +1,4 @@
-import { AboutBlock } from '../../../components/AboutBlock/AboutBlock';
+import { AboutBlock } from 'src/components/AboutBlock/AboutBlock';
 import { render } from '@testing-library/react';
 
 describe('WHEN: AboutBlock', () => {

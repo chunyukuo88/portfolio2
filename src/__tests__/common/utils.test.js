@@ -1,4 +1,4 @@
-import { getData, postData } from '../../common/utils';
+import { getData, postData } from 'src/common/utils';
 
 afterEach(() => {
   jest.clearAllMocks();
