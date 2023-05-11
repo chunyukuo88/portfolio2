@@ -1,5 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import languageReducer from './features/language/languageSlice';
+import languageReducer from '../features/language/languageSlice';
 
 const mockAuthSlice = createSlice({
   name: 'auth',

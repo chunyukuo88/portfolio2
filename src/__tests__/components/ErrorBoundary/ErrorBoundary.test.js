@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '../../../components/ErrorBoundary/ErrorBoundary';
 import { fireEvent, render } from '@testing-library/react';
 
 function BuggyCounter() {

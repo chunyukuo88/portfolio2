@@ -1,6 +1,6 @@
-import { LoadingSpinner } from './LoadingSpinner';
+import { LoadingSpinner } from '../../../components/LoadingSpinner/LoadingSpinner';
 import { render, screen } from '@testing-library/react';
-import strings from '../../common/strings';
+import strings from '../../../common/strings';
 
 describe('WHEN: passed a language prop,', () => {
   it.each`

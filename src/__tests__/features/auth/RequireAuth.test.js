@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { mockStoreLoggedIn } from '../../testUtils';
 import { BrowserRouter as Router} from 'react-router-dom';
-import { RequireAuth } from './RequireAuth';
+import { RequireAuth } from '../../../features/auth/RequireAuth';
 
 describe('GIVEN: The user is logged in', () => {
   describe('WHEN: The page in this test renders', () => {
