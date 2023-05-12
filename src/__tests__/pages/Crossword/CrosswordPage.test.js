@@ -234,7 +234,7 @@ describe('Crossword.jsx', ()=> {
     });
   });
   describe('WHEN: The user clicks an option from the dropdown menu,', () => {
-    it('THEN: It sets today"s puzzle to be the option the user selected.', async () => {
+    beforeEach(() => {
       jest.spyOn(utils, 'getData').mockReturnValueOnce(
         new Promise((resolve, reject) => {
           resolve(crosswordsFromDatabase);
@@ -247,7 +247,8 @@ describe('Crossword.jsx', ()=> {
           </Router>
         </Provider>
       );
-
+    });
+    it('THEN: It sets today"s puzzle to be the option the user selected.', async () => {
       await waitFor(() => {
         let todaysPuzzle = screen.getByRole('heading', { level: 2 });
         expect(todaysPuzzle).toHaveTextContent(/For Famous Flutist/);
@@ -259,6 +260,21 @@ describe('Crossword.jsx', ()=> {
         todaysPuzzle = screen.getByRole('heading', { level: 2 });
 
         expect(todaysPuzzle).toHaveTextContent(/For Famous Flutist/);
+      });
+    });
+    it('THEN: today"s puzzle should not be among the list of puzzles that can be selected from the dropdown', async () =>{
+      await waitFor(() => {
+        let todaysPuzzle = screen.getByRole('heading', { level: 2 });
+        expect(todaysPuzzle).toHaveTextContent(/For Famous Flutist/);
+
+        const menu = document.querySelector('select');
+        fireEvent.click(menu);
+        let menuOptions = screen.getAllByRole('option');
+        fireEvent.change(menu, { target: { value: menuOptions[1].innerHTML } });
+        fireEvent.click(menu);
+        menuOptions = screen.getAllByRole('option');
+
+        expect(menuOptions[1]).not.toHaveTextContent(/For Famous Flutist/);
       });
     });
   });
