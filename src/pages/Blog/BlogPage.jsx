@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import strings from '../../common/strings';
-import { LinkStyling } from '../../common/globalStyles';
-import { routes } from '../../routes';
-import { useCommonGlobals } from '../../common/hooks';
-import { getData } from '../../common/utils';
-import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
+import strings from 'src/common/strings';
+import { LinkStyling } from 'src/common/globalStyles';
+import { routes } from 'src/routes';
+import { useCommonGlobals } from 'src/common/hooks';
+import { getData } from 'src/common/utils';
+import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import './BlogPage.css';
 
 export function BlogPage(){

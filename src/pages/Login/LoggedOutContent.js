@@ -1,9 +1,9 @@
-import { selectCurrentLanguage } from '../../features/language/languageSlice';
+import { selectCurrentLanguage } from 'src/features/language/languageSlice';
 import { useNavigate } from 'react-router-dom';
-import { setCredentials } from '../../features/auth/authSlice';
-import { routes } from '../../routes';
+import { setCredentials } from 'src/features/auth/authSlice';
+import { routes } from 'src/routes';
 import { useSelector, useDispatch } from 'react-redux';
-import strings from '../../common/strings';
+import strings from 'src/common/strings';
 import { useEffect, useRef, useState } from 'react';
 
 export const LoggedOutContent = ({ signIn }) => {

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { updateLanguage } from './languageSlice';
-import strings from '../../common/strings.js';
+import strings from 'src/common/strings.js';
 
 function Language() {
   const language = useSelector((state) => state.language.value);

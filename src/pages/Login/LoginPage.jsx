@@ -1,14 +1,14 @@
 import { Link, useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ChangePassword } from './ChangePassword';
-import { useAuth } from '../../features/auth/useAuth';
-import { Cube } from '../../components/Cube/Cube';
-import { setCredentials } from '../../features/auth/authSlice.js';
-import { LinkStyling } from '../../common/globalStyles';
-import { useCommonGlobals } from '../../common/hooks';
+import { useAuth } from 'src/features/auth/useAuth';
+import { Cube } from 'src/components/Cube/Cube';
+import { setCredentials } from 'src/features/auth/authSlice.js';
+import { LinkStyling } from 'src/common/globalStyles';
+import { useCommonGlobals } from 'src/common/hooks';
 import { LoggedOutContent } from './LoggedOutContent';
-import strings from '../../common/strings.js';
-import { routes } from '../../routes';
+import strings from 'src/common/strings.js';
+import { routes } from 'src/routes';
 import './LoginPage.css';
 
 export const LoginPage = () => {

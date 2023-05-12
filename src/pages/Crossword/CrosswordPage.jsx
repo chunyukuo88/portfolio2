@@ -1,11 +1,11 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CluesCube } from './CluesCube';
-import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from 'src/components/ErrorBoundary/ErrorBoundary';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useCommonGlobals } from '../../common/hooks';
-import { getData } from '../../common/utils';
+import { useCommonGlobals } from 'src/common/hooks';
+import { getData } from 'src/common/utils';
 import {
   declareVictory,
   resetVictoryState,
@@ -13,13 +13,13 @@ import {
   selectUserHasWon,
   updateGrid,
   resetGrid,
-} from '../../features/crossword/crosswordSlice';
+} from 'src/features/crossword/crosswordSlice';
 
-import { routes } from '../../routes';
+import { routes } from 'src/routes';
 import { styles } from './styles.js';
-import strings from '../../common/strings';
+import strings from 'src/common/strings';
 import './Crossword.css';
-import {LinkStyling} from "../../common/globalStyles";
+import {LinkStyling} from "src/common/globalStyles";
 
 export default function CrosswordPage(){
   const [ language ] = useCommonGlobals(routes.puzzle);

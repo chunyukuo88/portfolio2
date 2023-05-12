@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import ReduxIcon from '../../common/icons/tech_redux-icon.svg';
-import LambdaIcon from '../../common/icons/tech_lambda-icon.svg'
-import NodeIcon from '../../common/icons/tech_node-js-icon.svg';
-import SvelteIcon from '../../common/icons/tech_svelte-icon.svg';
-import DockerIcon from '../../common/icons/tech_docker.svg';
-import ServerlessIcon from '../../common/icons/tech_serverless-icon.svg';
+import ReduxIcon from 'src/common/icons/tech_redux-icon.svg';
+import LambdaIcon from 'src/common/icons/tech_lambda-icon.svg'
+import NodeIcon from 'src/common/icons/tech_node-js-icon.svg';
+import SvelteIcon from 'src/common/icons/tech_svelte-icon.svg';
+import DockerIcon from 'src/common/icons/tech_docker.svg';
+import ServerlessIcon from 'src/common/icons/tech_serverless-icon.svg';
 import './SkillsPole.css';
 
 export function SkillsPole(){

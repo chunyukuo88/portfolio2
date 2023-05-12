@@ -1,4 +1,4 @@
-import strings from '../../common/strings';
+import strings from 'src/common/strings';
 import './LoadingSpinner.css';
 
 export function LoadingSpinner({ language }){

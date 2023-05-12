@@ -1,6 +1,6 @@
 import './Cube.css';
 import { useEffect, useRef, useState } from 'react';
-import { useMousePosition } from '../../common/hooks';
+import { useMousePosition } from 'src/common/hooks';
 
 export function Cube() {
     const lidRef = useRef(null);

@@ -1,5 +1,5 @@
 import { memo, useState } from 'react';
-import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
+import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 
 export const CluesCube = memo(function ({ language, todaysPuzzle }) {
   const [frontFaceClicked, setFrontFaceClicked] = useState(false);

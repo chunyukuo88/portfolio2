@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectCurrentLanguage } from '../../features/language/languageSlice';
-import strings from '../../common/strings.js';
+import { selectCurrentLanguage } from 'src/features/language/languageSlice';
+import strings from 'src/common/strings.js';
 
 export const ChangePassword = ({ changePassword }) => {
   const language = useSelector(selectCurrentLanguage);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createHttpRequest, postData } from '../../common/utils';
+import { createHttpRequest, postData } from 'src/common/utils';
 
 export function NewCrossword({ token }){
   const [solution, setSolution] = useState('');
