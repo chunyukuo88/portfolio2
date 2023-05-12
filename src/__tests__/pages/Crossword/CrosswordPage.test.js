@@ -226,10 +226,9 @@ describe('Crossword.jsx', ()=> {
 
       await waitFor(() => {
         const menuOptions = screen.getAllByRole('option');
-        expect(menuOptions).toHaveLength(3);
+        expect(menuOptions).toHaveLength(2);
         expect(menuOptions[0]).toHaveTextContent('-- Previous Puzzles --');
-        expect(menuOptions[1]).toHaveTextContent('For Famous Flutist');
-        expect(menuOptions[2]).toHaveTextContent('Three Arabic Words');
+        expect(menuOptions[1]).toHaveTextContent('Three Arabic Words');
       });
     });
   });
@@ -259,22 +258,23 @@ describe('Crossword.jsx', ()=> {
         fireEvent.change(menu, { target: { value: menuOptions[1].innerHTML } });
         todaysPuzzle = screen.getByRole('heading', { level: 2 });
 
-        expect(todaysPuzzle).toHaveTextContent(/For Famous Flutist/);
+        expect(todaysPuzzle).toHaveTextContent(/Three Arabic Words/);
       });
     });
     it('THEN: today"s puzzle should not be among the list of puzzles that can be selected from the dropdown', async () =>{
+      const titleOfTodaysPuzzle = 'For Famous Flutist';
       await waitFor(() => {
         let todaysPuzzle = screen.getByRole('heading', { level: 2 });
-        expect(todaysPuzzle).toHaveTextContent(/For Famous Flutist/);
+        expect(todaysPuzzle).toHaveTextContent(titleOfTodaysPuzzle);
 
         const menu = document.querySelector('select');
         fireEvent.click(menu);
         let menuOptions = screen.getAllByRole('option');
         fireEvent.change(menu, { target: { value: menuOptions[1].innerHTML } });
         fireEvent.click(menu);
-        menuOptions = screen.getAllByRole('option');
+        todaysPuzzle = screen.getByRole('heading', { level: 2 });
 
-        expect(menuOptions[1]).not.toHaveTextContent(/For Famous Flutist/);
+        expect(todaysPuzzle).not.toHaveTextContent(titleOfTodaysPuzzle);
       });
     });
   });

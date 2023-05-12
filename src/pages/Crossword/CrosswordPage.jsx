@@ -126,21 +126,33 @@ export default function CrosswordPage(){
     return dispatch(resetVictoryState(false));
   };
 
-  const DropdownMenu = () => (
-    <select
-      onChange={optionHandler}
-      name="all-puzzles"
-      id="all-puzzles-select"
-    >
-      <option value="">-- Previous Puzzles --</option>
-      {allPuzzles ? allPuzzles.map(puzzle => (
-        <option key={puzzle.solution} value={puzzle.title}>
-          {puzzle.title}
-        </option>
-      )) : null}
-    </select>
-  );
+  const DropdownMenu = () => {
+   const AvailablePuzzles = () => {
+     return (
+       <>
+         {allPuzzles ? allPuzzles.map(puzzle => {
+           return (puzzle.title !== todaysPuzzle.title) ? (
+             <option key={puzzle.solution} value={puzzle.title}>
+              {puzzle.title}
+             </option>
+            ) : null;
+           }) : null
+         }
+       </>
+     );
+   };
 
+   return (
+        <select
+            onChange={optionHandler}
+            name="all-puzzles"
+            id="all-puzzles-select"
+        >
+          <option value="">-- Previous Puzzles --</option>
+          <AvailablePuzzles />
+        </select>
+    );
+  }
   const Instructions = () => (
     <section className='crossword-instructions' aria-label='Crossword instructions'>
       <h5 aria-level='5'>Welcome to the crossword. I make these by hand. Click the title on the front face of the cube to the right to toggle the clues.</h5>
