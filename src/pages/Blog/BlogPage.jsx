@@ -11,14 +11,20 @@ import './BlogPage.css';
 export function BlogPage(){
   const [ language ] = useCommonGlobals(routes.blog);
   const [ blogData, setBlogData ] = useState(null);
+  const [ visibleArticles, incrementArticles ] = useState(3);
+
+  const sortNewestToOldest = (data) => {
+      return data.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
+  }
+
+  const updateWithFetchedBlogs = (data) => {
+      const sortedData = sortNewestToOldest(data);
+      setBlogData(sortedData);
+  };
 
   useEffect(() => {
     getData(process.env.REACT_APP_GET_BLOG_ENTRIES)
-      .then(data => {
-        const sortedData = data.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
-        setBlogData(sortedData);
-      }
-    );
+      .then(updateWithFetchedBlogs);
   }, []);
 
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
