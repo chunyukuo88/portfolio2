@@ -10,16 +10,27 @@ import './BlogPage.css';
 
 export function BlogPage(){
   const [ language ] = useCommonGlobals(routes.blog);
-  const [ blogData, setBlogData ] = useState(null);
+  const [ blogData, setBlogData ] = useState([]);
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ isError, setIsError ] = useState(null);
   const [ visibleArticles, incrementArticles ] = useState(3);
+
 
   const sortNewestToOldest = (data) => {
       return data.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
   }
 
   const updateWithFetchedBlogs = (data) => {
-      const sortedData = sortNewestToOldest(data);
-      setBlogData(sortedData);
+      try {
+          const sortedData = sortNewestToOldest(data);
+          setBlogData(sortedData);
+          setIsLoading(true);
+          setIsError(null);
+      } catch (e) {
+          setIsError(e)
+      } finally {
+          setIsLoading(false);
+      }
   };
 
   useEffect(() => {

@@ -93,11 +93,11 @@ describe('WHEN: The page loads,', () => {
       const blogTitle1 = screen.getByText(ordinaryBlogData[0].title);
       const blogTitle2 = screen.getByText(ordinaryBlogData[1].title);
       const blogTitle3 = screen.getByText(ordinaryBlogData[2].title);
-      // const blogTitle4 = screen.queryByText(ordinaryBlogData[4].title);
+      const blogTitle4 = screen.queryByText(ordinaryBlogData[4].title);
       expect(blogTitle1).toBeInTheDocument();
       expect(blogTitle2).toBeInTheDocument();
       expect(blogTitle3).toBeInTheDocument();
-      // expect(blogTitle4).not.toBeInTheDocument();
+      expect(blogTitle4).not.toBeInTheDocument();
     })
   });
 });
