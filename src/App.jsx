@@ -12,7 +12,7 @@ import GochenourBanner from './components/LightbulbBanners/GochenourBanner';
 import MainMenu from './components/MainMenu/MainMenu';
 import { SkillsPole } from './components/SkillsPole/SkillsPole';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css';
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
