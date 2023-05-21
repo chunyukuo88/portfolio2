@@ -11,14 +11,25 @@ import { queryKeys } from 'src/common/strings';
 import { useQuery } from '@tanstack/react-query';
 
 export function BlogPage(){
-  const { isLoading, isError, data, error } = useQuery([queryKeys.BLOGS], getBlogs);
+  const queryResult = useQuery({
+    queryKey: [queryKeys.BLOGS],
+    queryFn: async () => {
+      const response = await fetch(process.env.REACT_APP_GET_BLOG_ENTRIES);
+      if (!response.ok) {
+        throw new Error('An error occurred while fetching the posts.');
+      }
+      const data = await response.json();
+      return data;
+    },
+  });
+
   const [ language ] = useCommonGlobals(routes.blog);
 
-  const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
-  const sorted = sortNewestToOldest(data);
+  // const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
+  // const sorted = sortNewestToOldest(queryResult.data);
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
   const ErrorMessage = () => {
-    console.error(error);
+    console.error(queryResult.error);
     return (
       <div>
         Blogs are undergoing maintenance at this time. Perhaps try the crossword while you wait.
@@ -26,12 +37,13 @@ export function BlogPage(){
     );
   };
 
-  if (isLoading) return <LoadingSpinner language={language} />;
-  if (isError) return <ErrorMessage />;
+  if (queryResult.isLoading) return <LoadingSpinner language={language} />;
+  if (queryResult.isError) return <ErrorMessage />;
 
   const BlogContent = () => (
     <>
-      {sorted.map((article, key) => (
+      {/*{sorted.map((article, key) => (*/}
+      {queryResult.data.map((article, key) => (
         <article className='article' key={key}>
           <header className='blog-title'>{article.title}</header>
           <h2 className='publication-date'>{asDateString(article)}</h2>
@@ -54,7 +66,7 @@ export function BlogPage(){
           {strings.homePage[language]}
         </Link>
       </nav>
-      <section>{isError ? <ErrorMessage /> : <BlogContent />}</section>
+      <section>{queryResult.isError ? <ErrorMessage /> : <BlogContent />}</section>
     </main>
   );
 }

@@ -10,7 +10,7 @@ export async function getBlogs(){
   if (!response.ok) {
     throw new Error('An error occurred while fetching the blogs.');
   }
-  return response;
+  return response.data;
 }
 
 export async function postData(url, data){
