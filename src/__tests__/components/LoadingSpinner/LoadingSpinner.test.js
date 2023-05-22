@@ -1,18 +1,10 @@
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
-import { render, screen } from '@testing-library/react';
-import strings from 'src/common/strings';
+import { render } from '@testing-library/react';
 
-describe('WHEN: passed a language prop,', () => {
-  it.each`
-    language
-    ${strings.ENGLISH}
-    ${strings.CHINESE}
-    ${strings.RUSSIAN}
-  `('THEN: loads without a problem', ({ language }) => {
-    render(<LoadingSpinner language={language}/>);
+it('loads without a problem.', () => {
+  render(<LoadingSpinner />);
 
-    const displayedText = screen.getByText(strings.loading[language]);
+  const spinner = document.querySelector('.lds-hourglass');
 
-    expect(displayedText).toBeInTheDocument();
-  });
+  expect(spinner).toBeInTheDocument();
 });

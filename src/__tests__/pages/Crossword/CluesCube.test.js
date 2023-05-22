@@ -27,7 +27,7 @@ describe('GIVEN: An props that do not include clue data,', () => {
         </Provider>
       );
 
-      const loadingSpinner = document.getElementById('loading-spinner');
+      const loadingSpinner = document.querySelector('.lds-hourglass');
 
       expect(loadingSpinner).toBeInTheDocument();
     });
