@@ -11,8 +11,7 @@ import AlexBanner from './components/LightbulbBanners/AlexBanner';
 import GochenourBanner from './components/LightbulbBanners/GochenourBanner';
 import MainMenu from './components/MainMenu/MainMenu';
 import { SkillsPole } from './components/SkillsPole/SkillsPole';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
@@ -25,8 +24,6 @@ const App = () => {
     { path: routes.blog, Component: BlogPage },
     { path: routes.publishCrossword, Component: PublishContentPage },
   ], []);
-
-  const queryClient = new QueryClient();
 
   return (
     <Routes>

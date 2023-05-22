@@ -1,7 +1,7 @@
-import Root from '../Root';
-import App from '../App';
-import strings from '../common/strings';
-import { routes } from '../routes';
+import Root from 'src/Root';
+import App from 'src/App';
+import strings from 'src/common/strings';
+import { routes } from 'src/routes';
 
 import { fireEvent, render } from '@testing-library/react';
 import { mockStoreLoggedIn } from '../testUtils';
