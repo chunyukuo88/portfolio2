@@ -1,9 +1,7 @@
 import { mockStoreLoggedIn } from 'src/testUtils';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { ChangePassword } from 'src/pages/Login/ChangePassword';
-
+import Root from 'src/Root';
 afterEach(() => {
   jest.clearAllMocks();
 });
@@ -13,11 +11,9 @@ describe('GIVEN: there are no problems with the auth provider', () => {
     it('THEN: the changePassword', () => {
       const changePassword = jest.fn();
       render(
-        <Provider store={mockStoreLoggedIn}>
-          <Router>
-            <ChangePassword changePassword={changePassword}/>
-          </Router>
-        </Provider>
+        <Root store={mockStoreLoggedIn}>
+          <ChangePassword changePassword={changePassword}/>
+        </Root>
       );
 
       const [username, oldPassword, newPassword] = ['username', 'oldPassword', 'newPassword'];
@@ -44,11 +40,9 @@ describe('GIVEN: there are no problems with the auth provider', () => {
         };
       });
       render(
-        <Provider store={mockStoreLoggedIn}>
-          <Router>
-            <ChangePassword changePassword={changePassword}/>
-          </Router>
-        </Provider>
+        <Root store={mockStoreLoggedIn}>
+          <ChangePassword changePassword={changePassword}/>
+        </Root>
       );
       const [username, oldPassword, newPassword] = ['username', 'oldPassword', 'newPassword'];
       const usernameInput = document.getElementById('username');
@@ -74,11 +68,9 @@ describe('GIVEN: the auth provider server has a problem', () => {
         return new Error('problem on the server');
       });
       render(
-        <Provider store={mockStoreLoggedIn}>
-          <Router>
-            <ChangePassword changePassword={changePassword}/>
-          </Router>
-        </Provider>
+        <Root store={mockStoreLoggedIn}>
+          <ChangePassword changePassword={changePassword}/>
+        </Root>
       );
 
       const [username, oldPassword, newPassword] = ['username', 'oldPassword', 'newPassword'];

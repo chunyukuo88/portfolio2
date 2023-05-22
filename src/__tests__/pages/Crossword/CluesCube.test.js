@@ -1,8 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { mockStore } from 'src/testUtils';
 import { CluesCube } from 'src/pages/Crossword/CluesCube';
+import Root from 'src/Root';
 
 const mockData = {
   id: 6,
@@ -15,65 +14,61 @@ const mockData = {
   cluesDown: '1. Nigerian financial hub&&2. A stand of trees&&3. Spanish word for has&&4. A cake or an art&&5. Origami or oil paint for example'
 };
 
-
-describe('GIVEN: An props that do not include clue data,', () => {
-  describe('WHEN: This component renders,', () => {
-    it('THEN: It displays loading spinners.', () => {
-      render(
-        <Provider store={mockStore}>
-          <Router>
-            <CluesCube language='english'/>
-          </Router>
-        </Provider>
-      );
-
-      const loadingSpinner = document.getElementById('loading-spinner');
-
-      expect(loadingSpinner).toBeInTheDocument();
-    });
-  });
-});
-describe('GIVEN: An props including clue data,', () => {
-  describe('WHEN: This component renders,', () => {
-    it('THEN: It displays the clues on the cube.', () => {
-      render(
-        <Provider store={mockStore}>
-          <Router>
+describe('CluesCube.jsx', () => {
+  describe('GIVEN: An props that do not include clue data,', () => {
+    describe('WHEN: This component renders,', () => {
+      it('THEN: It displays loading spinners.', () => {
+        const { debug } = render(
+          <Root store={mockStore}>
             <CluesCube language='english' todaysPuzzle={mockData}/>
-          </Router>
-        </Provider>
-      );
+          </Root>
+        );
+        return debug();
 
-      const clues = document.querySelectorAll('.clue');
+        const loadingSpinner = document.querySelector('.lds-hourglass');
 
-      expect(clues).toHaveLength(10);
-      clues.forEach(clue => {
-        expect(clue).toBeInTheDocument();
+        expect(loadingSpinner).toBeInTheDocument();
       });
     });
   });
-  describe('WHEN: The user clicks the front of the cube once,', () => {
-    it('THEN: The side and top faces change to face the user.', () => {
-      render(
-        <Provider store={mockStore}>
-          <Router>
+  describe('GIVEN: An props including clue data,', () => {
+    describe('WHEN: This component renders,', () => {
+      it('THEN: It displays the clues on the cube.', () => {
+        render(
+          <Root store={mockStore}>
             <CluesCube language='english' todaysPuzzle={mockData}/>
-          </Router>
-        </Provider>
-      );
-      const frontFace = screen.getByRole('button');
-      let westFace = screen.getByTestId('west-face');
-      let topFace = screen.getByTestId('top-face');
+          </Root>
+        );
 
-      expect(westFace).toHaveClass('west-face-not-clicked');
-      expect(topFace).toHaveClass('top-face-not-clicked');
+        const clues = document.querySelectorAll('.clue');
 
-      fireEvent.click(frontFace);
-      westFace = screen.getByTestId('west-face');
-      topFace = screen.getByTestId('top-face');
+        expect(clues).toHaveLength(10);
+        clues.forEach(clue => {
+          expect(clue).toBeInTheDocument();
+        });
+      });
+    });
+    describe('WHEN: The user clicks the front of the cube once,', () => {
+      it('THEN: The side and top faces change to face the user.', () => {
+        render(
+          <Root store={mockStore}>
+            <CluesCube language='english' todaysPuzzle={mockData}/>
+          </Root>
+        );
+        const frontFace = screen.getByRole('button');
+        let westFace = screen.getByTestId('west-face');
+        let topFace = screen.getByTestId('top-face');
 
-      expect(westFace).toHaveClass('west-face-clicked');
-      expect(topFace).toHaveClass('top-face-clicked');
+        expect(westFace).toHaveClass('west-face-not-clicked');
+        expect(topFace).toHaveClass('top-face-not-clicked');
+
+        fireEvent.click(frontFace);
+        westFace = screen.getByTestId('west-face');
+        topFace = screen.getByTestId('top-face');
+
+        expect(westFace).toHaveClass('west-face-clicked');
+        expect(topFace).toHaveClass('top-face-clicked');
+      });
     });
   });
 });

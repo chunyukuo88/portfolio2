@@ -70,11 +70,6 @@ const strings = {
     english: 'Language',
     russian: 'Язык',
   },
-  loading: {
-    chinese: '加載中',
-    english: 'Loading...',
-    russian: 'Загрузка',
-  },
   login: {
     chinese: '登錄',
     english: 'Log in',

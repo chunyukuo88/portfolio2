@@ -1,8 +1,7 @@
 import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
 import { mockStoreLoggedIn } from 'src/testUtils';
-import { BrowserRouter as Router} from 'react-router-dom';
 import { RequireAuth } from 'src/features/auth/RequireAuth';
+import Root from 'src/Root';
 
 describe('GIVEN: The user is logged in', () => {
   describe('WHEN: The page in this test renders', () => {
@@ -10,15 +9,13 @@ describe('GIVEN: The user is logged in', () => {
       const protectedContentString = 'Some protected content.';
 
       render(
-        <Provider store={mockStoreLoggedIn}>
-          <Router>
+        <Root store={mockStoreLoggedIn}>
             <RequireAuth>
               <div id='protected-content'>
                 {protectedContentString}
               </div>
             </RequireAuth>
-          </Router>
-        </Provider>
+        </Root>
       );
 
       const protectedContent = document.getElementById('protected-content');
