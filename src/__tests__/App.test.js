@@ -1,12 +1,15 @@
-import App from '../App';
-import { fireEvent, render } from '@testing-library/react';
-import strings from '../common/strings';
-import 'react-router-dom';
-import { routes } from '../routes';
 import Root from '../Root';
-import { store } from '../app/store';
+import App from '../App';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Provider } from 'react-redux';
+import strings from '../common/strings';
+import { routes } from '../routes';
+
+import { fireEvent, render } from '@testing-library/react';
 import { mockStoreLoggedIn } from '../testUtils';
+import { store } from '../app/store';
 import '@testing-library/jest-dom';
+import 'react-router-dom';
 import 'react-dom';
 
 const mockNavFn = jest.fn();
@@ -24,14 +27,18 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
+const queryClient = new QueryClient();
+
 describe('App.jsx', () => {
   describe('GIVEN: The user has NOT logged in.', ()=>{
     describe('WHEN: The user clicks the language button thrice,', () => {
       test('THEN: The site cycles through the localization settings.', () => {
         render(
-          <Root store={store}>
-            <App />
-          </Root>
+          <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
+              <App />
+            </Provider>
+          </QueryClientProvider>
         );
 
         let languageButton = document.querySelector('#language-button');
@@ -58,9 +65,11 @@ describe('App.jsx', () => {
         ${'login-button'}    |   ${routes.login}
     `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
         render(
-          <Root store={store}>
-            <App />
-          </Root>
+          <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
+              <App />
+            </Provider>
+          </QueryClientProvider>
         );
 
         const homeButton = document.getElementById(buttonId);
@@ -74,9 +83,11 @@ describe('App.jsx', () => {
     describe('WHEN: the user clicks the publish crossword puzzle menu ', () => {
       it('THEN: they get routed to the publish puzzle page.', () => {
         render(
-          <Root store={mockStoreLoggedIn}>
-            <App />
-          </Root>
+          <QueryClientProvider client={queryClient}>
+            <Provider store={mockStoreLoggedIn}>
+              <App />
+            </Provider>
+          </QueryClientProvider>
         );
         const publishPuzzleBlock = document.querySelectorAll('.menu-block')[2];
         fireEvent.click(publishPuzzleBlock);
