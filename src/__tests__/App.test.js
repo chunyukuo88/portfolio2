@@ -1,7 +1,5 @@
 import Root from '../Root';
 import App from '../App';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Provider } from 'react-redux';
 import strings from '../common/strings';
 import { routes } from '../routes';
 
@@ -27,18 +25,14 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-const queryClient = new QueryClient();
-
 describe('App.jsx', () => {
   describe('GIVEN: The user has NOT logged in.', ()=>{
     describe('WHEN: The user clicks the language button thrice,', () => {
       test('THEN: The site cycles through the localization settings.', () => {
         render(
-          <QueryClientProvider client={queryClient}>
-            <Provider store={store}>
-              <App />
-            </Provider>
-          </QueryClientProvider>
+          <Root store={store}>
+            <App />
+          </Root>
         );
 
         let languageButton = document.querySelector('#language-button');
@@ -65,11 +59,9 @@ describe('App.jsx', () => {
         ${'login-button'}    |   ${routes.login}
     `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
         render(
-          <QueryClientProvider client={queryClient}>
-            <Provider store={store}>
-              <App />
-            </Provider>
-          </QueryClientProvider>
+          <Root store={store}>
+            <App />
+          </Root>
         );
 
         const homeButton = document.getElementById(buttonId);
@@ -83,11 +75,9 @@ describe('App.jsx', () => {
     describe('WHEN: the user clicks the publish crossword puzzle menu ', () => {
       it('THEN: they get routed to the publish puzzle page.', () => {
         render(
-          <QueryClientProvider client={queryClient}>
-            <Provider store={mockStoreLoggedIn}>
-              <App />
-            </Provider>
-          </QueryClientProvider>
+          <Root store={mockStoreLoggedIn}>
+            <App />
+          </Root>
         );
         const publishPuzzleBlock = document.querySelectorAll('.menu-block')[2];
         fireEvent.click(publishPuzzleBlock);

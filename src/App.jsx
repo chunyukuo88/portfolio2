@@ -29,15 +29,11 @@ const App = () => {
   const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <Routes>
-          {allRoutes.map(({ path, Component, exact }) => (
-            <Route key={path} path={`${path}*`} Component={Component} exact={exact} />
-          ))}
-        </Routes>
-      </Router>
-    </QueryClientProvider>
+    <Routes>
+      {allRoutes.map(({ path, Component, exact }) => (
+        <Route key={path} path={`${path}*`} Component={Component} exact={exact} />
+      ))}
+    </Routes>
   );
 }
 
