@@ -6,11 +6,11 @@ export async function getData(url){
 
 export async function getBlogs(){
   const response = await fetch(process.env.REACT_APP_GET_BLOG_ENTRIES);
-  console.log('response: ', response);
   if (!response.ok) {
-    throw new Error('An error occurred while fetching the blogs.');
+    throw new Error('An error occurred while fetching the posts.');
   }
-  return response.data;
+  const data = await response.json();
+  return data;
 }
 
 export async function postData(url, data){

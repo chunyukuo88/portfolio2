@@ -13,25 +13,16 @@ import { useQuery } from '@tanstack/react-query';
 export function BlogPage(){
   const queryResult = useQuery({
     queryKey: [queryKeys.BLOGS],
-    queryFn: async () => {
-      const response = await fetch(process.env.REACT_APP_GET_BLOG_ENTRIES);
-      if (!response.ok) {
-        throw new Error('An error occurred while fetching the posts.');
-      }
-      const data = await response.json();
-      return data;
-    },
+    queryFn: getBlogs
   });
 
   const [ language ] = useCommonGlobals(routes.blog);
 
-  // const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
-  // const sorted = sortNewestToOldest(queryResult.data);
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
   const ErrorMessage = () => {
     console.error(queryResult.error);
     return (
-      <div>
+      <div id='error-fetching-blog-posts'>
         Blogs are undergoing maintenance at this time. Perhaps try the crossword while you wait.
       </div>
     );
@@ -40,10 +31,12 @@ export function BlogPage(){
   if (queryResult.isLoading) return <LoadingSpinner language={language} />;
   if (queryResult.isError) return <ErrorMessage />;
 
+  const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
+  const sorted = sortNewestToOldest(queryResult.data);
+
   const BlogContent = () => (
     <>
-      {/*{sorted.map((article, key) => (*/}
-      {queryResult.data.map((article, key) => (
+      {sorted.map((article, key) => (
         <article className='article' key={key}>
           <header className='blog-title'>{article.title}</header>
           <h2 className='publication-date'>{asDateString(article)}</h2>
