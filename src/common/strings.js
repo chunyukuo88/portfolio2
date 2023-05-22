@@ -1,3 +1,7 @@
+export const queryKeys = {
+  BLOGS: 'blogs',
+};
+
 const strings = {
   about: {
     chinese: '簡介',

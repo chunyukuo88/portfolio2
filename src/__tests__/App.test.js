@@ -1,12 +1,13 @@
-import App from '../App';
-import { fireEvent, render } from '@testing-library/react';
-import strings from '../common/strings';
-import 'react-router-dom';
-import { routes } from '../routes';
 import Root from '../Root';
-import { store } from '../app/store';
+import App from '../App';
+import strings from '../common/strings';
+import { routes } from '../routes';
+
+import { fireEvent, render } from '@testing-library/react';
 import { mockStoreLoggedIn } from '../testUtils';
+import { store } from '../app/store';
 import '@testing-library/jest-dom';
+import 'react-router-dom';
 import 'react-dom';
 
 const mockNavFn = jest.fn();
