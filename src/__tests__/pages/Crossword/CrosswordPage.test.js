@@ -1,6 +1,4 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import * as utils from 'src/common/utils';
 
 import { mockStore } from 'src/testUtils';
@@ -8,6 +6,7 @@ import ReactGA from 'react-ga4';
 import CrosswordPage from 'src/pages/Crossword/CrosswordPage.jsx';
 import { styles } from 'src/pages/Crossword/styles.js';
 import strings from 'src/common/strings';
+import Root from 'src/Root';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -148,11 +147,9 @@ describe('Crossword.jsx', ()=> {
     describe('WHEN: the first page loads', () => {
       it('THEN: displays the numbers corresponding to the clues', () => {
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <CrosswordPage />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
         );
 
         const numberOne = screen.getAllByText('1')[0];
@@ -168,11 +165,9 @@ describe('Crossword.jsx', ()=> {
     it('THEN: React-ga4 dispatches the event to Google Analytics.', () => {
       const spy = jest.spyOn(ReactGA, 'send');
       render(
-        <Provider store={mockStore}>
-          <Router>
-            <CrosswordPage/>
-          </Router>
-        </Provider>
+        <Root store={mockStore}>
+          <CrosswordPage />
+        </Root>
       );
 
       expect(spy).toBeCalledTimes(1);
@@ -186,11 +181,9 @@ describe('Crossword.jsx', ()=> {
         })
       );
       render(
-        <Provider store={mockStore}>
-          <Router>
-            <CrosswordPage/>
-          </Router>
-        </Provider>
+        <Root store={mockStore}>
+          <CrosswordPage />
+        </Root>
       );
 
       await waitFor(() => {
@@ -217,11 +210,9 @@ describe('Crossword.jsx', ()=> {
         })
       );
       render(
-        <Provider store={mockStore}>
-          <Router>
-            <CrosswordPage/>
-          </Router>
-        </Provider>
+        <Root store={mockStore}>
+          <CrosswordPage/>
+        </Root>
       );
 
       await waitFor(() => {
@@ -240,11 +231,9 @@ describe('Crossword.jsx', ()=> {
         })
       );
       render(
-        <Provider store={mockStore}>
-          <Router>
-            <CrosswordPage/>
-          </Router>
-        </Provider>
+        <Root store={mockStore}>
+          <CrosswordPage/>
+        </Root>
       );
     });
     it('THEN: It sets today"s puzzle to be the option the user selected.', async () => {
@@ -282,11 +271,9 @@ describe('Crossword.jsx', ()=> {
     describe('WHEN: the user clicks on a square,', ()=>{
       it('THEN: the square becomes highlighted.',()=>{
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <CrosswordPage />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
         );
 
         const squares = document.querySelectorAll('.crossword-square');
@@ -303,11 +290,9 @@ describe('Crossword.jsx', ()=> {
     describe('WHEN: the user clicks on a square and types a letter,', ()=>{
       it('THEN: the square displays the value of that letter.',()=>{
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <CrosswordPage />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
         );
 
         const squares = document.querySelectorAll('.crossword-square');
@@ -329,11 +314,9 @@ describe('Crossword.jsx', ()=> {
     `('THEN: the square first clicked becomes white again, and the new square becomes highlighted.',
         ({key, which, keyCode, resultIndex}) => {
           render(
-            <Provider store={mockStore}>
-              <Router>
-                <CrosswordPage />
-              </Router>
-            </Provider>
+            <Root store={mockStore}>
+              <CrosswordPage />
+            </Root>
           );
 
           const squares = document.querySelectorAll('.crossword-square');
@@ -357,11 +340,9 @@ describe('Crossword.jsx', ()=> {
     describe('WHEN: the user is at the left edge of the crossword and presses the left keyboard button,', () => {
       it('THEN: nothing happens.', () => {
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <CrosswordPage />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
         );
 
         const squares = document.querySelectorAll('.crossword-square');
@@ -387,11 +368,9 @@ describe('Crossword.jsx', ()=> {
         ${'Escape'}     | ${27}           | ${27}
       `('THEN: nothing happens.', ({ key, which, keyCode }) => {
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <CrosswordPage />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
         );
 
         let upperLeftCorner = document.getElementById('0,0');
@@ -413,11 +392,9 @@ describe('Crossword.jsx', ()=> {
           })
         );
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <CrosswordPage />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
         );
         let cells = document.querySelectorAll('.crossword-square');
         await waitFor(() => {
@@ -437,11 +414,9 @@ describe('Crossword.jsx', ()=> {
             })
         );
         render(
-            <Provider store={mockStore}>
-              <Router>
-                <CrosswordPage />
-              </Router>
-            </Provider>
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
         );
 
         let cells = document.querySelectorAll('.crossword-square');
@@ -460,11 +435,9 @@ describe('Crossword.jsx', ()=> {
           })
         );
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <CrosswordPage />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
         );
 
         let cells = document.querySelectorAll('.crossword-square');
@@ -481,11 +454,9 @@ describe('Crossword.jsx', ()=> {
       it('THEN: displays error messages on the cube.', async () => {
         jest.spyOn(utils, 'getData').mockRejectedValueOnce(new Error('API is down'));
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <CrosswordPage />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
         );
         const { ENGLISH, errorCrosswordUnavailable } = strings;
         await waitFor(() => {

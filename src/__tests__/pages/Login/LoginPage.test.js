@@ -1,9 +1,8 @@
 import { LoggedOutContent, LoginPage } from 'src/pages/Login/LoginPage';
 import { mockStore, mockStoreLoggedIn } from 'src/testUtils';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { routes } from 'src/routes';
+import Root from 'src/Root';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -12,11 +11,9 @@ afterEach(() => {
 describe('GIVEN: user is logged in', () => {
   beforeEach(() => {
     render(
-      <Provider store={mockStoreLoggedIn}>
-        <Router>
+        <Root store={mockStoreLoggedIn}>
           <LoginPage/>
-        </Router>
-      </Provider>
+        </Root>
     );
   });
   describe('WHEN: the page loads', () => {
@@ -42,11 +39,9 @@ describe('GIVEN: user is logged in', () => {
 describe('GIVEN: user is NOT logged in', () => {
   beforeEach(() => {
     render(
-      <Provider store={mockStore}>
-        <Router>
-          <LoginPage/>
-        </Router>
-      </Provider>
+      <Root store={mockStore}>
+        <LoginPage/>
+      </Root>
     );
   });
   describe('WHEN: the page loads', () => {

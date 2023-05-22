@@ -4,6 +4,7 @@ import { mockStoreLoggedIn } from 'src/testUtils';
 import 'src/common/utils';
 import { PublishContentPage } from 'src/pages/PublishContent/PublishContentPage';
 import { fireEvent, render, screen } from '@testing-library/react';
+import Root from 'src/Root';
 
 const alertSpy = jest.spyOn(window, 'alert').mockImplementation(jest.fn());
 let mockFn = jest.fn();
@@ -30,11 +31,9 @@ describe('PublishContentPage.jsx', () => {
       const errorSpy = jest.spyOn(console, 'error').mockImplementation(jest.fn());
       beforeEach(() => {
         render(
-            <Provider store={mockStoreLoggedIn}>
-              <Router>
-                <PublishContentPage/>
-              </Router>
-            </Provider>
+          <Root store={mockStoreLoggedIn}>
+            <PublishContentPage/>
+          </Root>
         );
 
         title = screen.getByTestId('blog-panel-title');
@@ -63,11 +62,9 @@ describe('PublishContentPage.jsx', () => {
 
         beforeEach(() => {
           render(
-              <Provider store={mockStoreLoggedIn}>
-                <Router>
-                  <PublishContentPage/>
-                </Router>
-              </Provider>
+            <Root store={mockStoreLoggedIn}>
+              <PublishContentPage/>
+            </Root>
           );
 
           title = screen.getByTestId('blog-panel-title');
@@ -102,11 +99,9 @@ describe('PublishContentPage.jsx', () => {
     describe('WHEN: The page loads,', () => {
       test('THEN: there is a panel allowing the user to publish new crosswords.', () => {
         render(
-          <Provider store={mockStoreLoggedIn}>
-            <Router>
-              <PublishContentPage/>
-            </Router>
-          </Provider>
+          <Root store={mockStoreLoggedIn}>
+            <PublishContentPage/>
+          </Root>
         );
         const publishPanel = screen.getByText('Create a New Crossword');
 
@@ -116,11 +111,9 @@ describe('PublishContentPage.jsx', () => {
     describe('WHEN: The has filled in all the crossword fields and submits,', () => {
       test('THEN: the data they entered is sent to the API.', () => {
         render(
-          <Provider store={mockStoreLoggedIn}>
-            <Router>
-              <PublishContentPage/>
-            </Router>
-          </Provider>
+          <Root store={mockStoreLoggedIn}>
+            <PublishContentPage/>
+          </Root>
         );
 
         const solution = screen.getByTestId('crossword-panel-solution');

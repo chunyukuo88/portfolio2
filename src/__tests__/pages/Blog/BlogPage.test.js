@@ -4,7 +4,7 @@ import { mockStore} from 'src/testUtils';
 import { routes } from 'src/routes';
 import { render, screen, waitFor } from '@testing-library/react';
 import ReactGA from 'react-ga4';
-import Root from "../../../Root";
+import Root from 'src/Root';
 
 const spy = jest.spyOn(ReactGA, 'send');
 const payload = { hitType: 'pageview', page: routes.blog };
