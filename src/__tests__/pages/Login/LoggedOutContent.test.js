@@ -1,9 +1,8 @@
 import { mockStore } from 'src/testUtils';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import { LoggedOutContent } from 'src/pages/Login/LoggedOutContent';
 import { routes } from 'src/routes';
+import Root from 'src/Root';
 
 describe('LoggedOutContent', () => {
   describe('GIVEN: The there are no problems signing in', () => {
@@ -11,11 +10,9 @@ describe('LoggedOutContent', () => {
       it('THEN: the signIn function is invoked with their username and password', async () => {
         const signIn = jest.fn();
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <LoggedOutContent signIn={signIn} />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <LoggedOutContent signIn={signIn} />
+          </Root>
         );
         const username = document.getElementById('username');
         const password = document.getElementById('password');
@@ -31,11 +28,9 @@ describe('LoggedOutContent', () => {
       it('THEN: the user gets routed to the index.', () => {
         const signIn = jest.fn();
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <LoggedOutContent signIn={signIn} />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <LoggedOutContent signIn={signIn} />
+          </Root>
         );
         const username = document.getElementById('username');
         const password = document.getElementById('password');
@@ -58,11 +53,9 @@ describe('LoggedOutContent', () => {
           return Promise.reject({ originalStatus: { status: 401 }});
         });
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <LoggedOutContent signIn={signIn} />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <LoggedOutContent signIn={signIn} />
+          </Root>
         );
         const username = screen.getByTestId('username-input');
         const password = screen.getByTestId('password-input');
@@ -86,11 +79,9 @@ describe('LoggedOutContent', () => {
           return Promise.reject({ originalStatus: { status: 402 }});
         });
         render(
-          <Provider store={mockStore}>
-            <Router>
-              <LoggedOutContent signIn={signIn} />
-            </Router>
-          </Provider>
+          <Root store={mockStore}>
+            <LoggedOutContent signIn={signIn} />
+          </Root>
         );
         const username = screen.getByTestId('username-input');
         const password = screen.getByTestId('password-input');

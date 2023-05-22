@@ -11,9 +11,9 @@ afterEach(() => {
 describe('GIVEN: user is logged in', () => {
   beforeEach(() => {
     render(
-        <Root store={mockStoreLoggedIn}>
-          <LoginPage/>
-        </Root>
+      <Root store={mockStoreLoggedIn}>
+        <LoginPage/>
+      </Root>
     );
   });
   describe('WHEN: the page loads', () => {
