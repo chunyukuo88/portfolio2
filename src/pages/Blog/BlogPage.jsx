@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
-import strings from 'src/common/strings';
+import strings, { queryKeys } from 'src/common/strings';
 import { LinkStyling } from 'src/common/globalStyles';
 import { routes } from 'src/routes';
 import { useCommonGlobals } from 'src/common/hooks';
 import { getBlogs } from 'src/common/utils';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
-import './BlogPage.css';
-
-import { queryKeys } from 'src/common/strings';
 import { useQuery } from '@tanstack/react-query';
+import './BlogPage.css';
 
 export function BlogPage(){
   const queryResult = useQuery({
@@ -20,7 +18,6 @@ export function BlogPage(){
 
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
   const ErrorMessage = () => {
-    console.error(queryResult.error);
     return (
       <div id='error-fetching-blog-posts'>
         Blogs are undergoing maintenance at this time. Perhaps try the crossword while you wait.

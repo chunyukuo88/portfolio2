@@ -4,6 +4,15 @@ export async function getData(url){
   return jsonified;
 }
 
+export async function getCrosswords(){
+  const response = await fetch(process.env.REACT_APP_GET_ALL_CROSSWORDS);
+  if (!response.ok) {
+    throw new Error('An error occurred while fetching the crossword puzzles.');
+  }
+  const data = await response.json();
+  return data;
+}
+
 export async function getBlogs(){
   const response = await fetch(process.env.REACT_APP_GET_BLOG_ENTRIES);
   if (!response.ok) {

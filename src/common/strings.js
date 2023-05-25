@@ -1,5 +1,6 @@
 export const queryKeys = {
   BLOGS: 'blogs',
+  CROSSWORD: 'crosswords_get',
 };
 
 const strings = {

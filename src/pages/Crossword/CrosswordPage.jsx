@@ -1,11 +1,12 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCommonGlobals } from 'src/common/hooks';
+import { useQuery } from '@tanstack/react-query';
+
+import { queryKeys } from 'src/common/strings';
 import { Link } from 'react-router-dom';
 import { CluesCube } from './CluesCube';
 import ErrorBoundary from 'src/components/ErrorBoundary/ErrorBoundary';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { useCommonGlobals } from 'src/common/hooks';
-import { getData } from 'src/common/utils';
 import {
   declareVictory,
   resetVictoryState,
@@ -15,30 +16,31 @@ import {
   resetGrid,
 } from 'src/features/crossword/crosswordSlice';
 
-import { routes } from 'src/routes';
-import { styles } from './styles.js';
+import { getCrosswords } from 'src/common/utils';
 import strings from 'src/common/strings';
+import { routes } from 'src/routes';
+import { LinkStyling } from 'src/common/globalStyles';
+import { styles } from './styles.js';
 import './Crossword.css';
-import {LinkStyling} from "src/common/globalStyles";
+import { LoadingSpinner} from 'src/components/LoadingSpinner/LoadingSpinner';
 
 export default function CrosswordPage(){
   const [ language ] = useCommonGlobals(routes.puzzle);
   const grid = useSelector(selectCurrentGrid);
   const userHasWon = useSelector(selectUserHasWon);
   const [focused, setFocused] = useState(undefined);
-  const [hasError, setHasError] = useState(false);
   const [todaysPuzzle, setTodaysPuzzle] = useState(null);
-  const [allPuzzles, setAllPuzzles] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect( () => {
-    getData(process.env.REACT_APP_GET_ALL_CROSSWORDS)
-      .then(data => {
-        setAllPuzzles(data);
-        setTodaysPuzzle(data[0]);
-      })
-      .catch((e) => setHasError(true));
-  }, []);
+  const queryResult = useQuery({
+    queryKey: [queryKeys.CROSSWORD],
+    queryFn: getCrosswords,
+  });
+  const allPuzzles = queryResult.data;
+
+  useEffect(() => {
+    setTodaysPuzzle(allPuzzles[0]);
+  }, [allPuzzles]);
 
   useLayoutEffect(() => {
     todaysPuzzle && determineIfUserWon(grid);
@@ -126,46 +128,34 @@ export default function CrosswordPage(){
     return dispatch(resetVictoryState(false));
   };
 
-  const DropdownMenu = () => {
-   const AvailablePuzzles = () => {
-     return (
-       <>
-         {allPuzzles ? allPuzzles.map(puzzle => {
-           return (puzzle.title !== todaysPuzzle.title) ? (
-             <option key={puzzle.solution} value={puzzle.title}>
-              {puzzle.title}
-             </option>
-            ) : null;
-           }) : null
-         }
-       </>
-     );
-   };
+  const DropdownMenu = () => (
+    <select
+      onChange={optionHandler}
+      name="all-puzzles"
+      id="all-puzzles-select"
+    >
+      <option value="">-- Previous Puzzles --</option>
+      {allPuzzles ? allPuzzles.map(puzzle => (
+        <option key={puzzle.solution} value={puzzle.title}>
+          {puzzle.title}
+        </option>
+      )) : null}
+    </select>
+  );
 
-   return (
-        <select
-            onChange={optionHandler}
-            name="all-puzzles"
-            id="all-puzzles-select"
-        >
-          <option value="">-- Previous Puzzles --</option>
-          <AvailablePuzzles />
-        </select>
-    );
-  }
   const Instructions = () => (
     <section className='crossword-instructions' aria-label='Crossword instructions'>
       <h5 aria-level='5'>Welcome to the crossword. I make these by hand. Click the title on the front face of the cube to the right to toggle the clues.</h5>
     </section>
   );
 
+  if (queryResult.isLoading) return <LoadingSpinner language={language} />;
+  if (queryResult.isError) return <div>{strings.errorCrosswordUnavailable[language]}</div>;
+
   return (
     <>
       <div id='room-container'>
-        {todaysPuzzle && !hasError
-          ? <CluesCube language={language} todaysPuzzle={todaysPuzzle} />
-          : <div>{strings.errorCrosswordUnavailable[language]}</div>
-        }
+        <CluesCube language={language} todaysPuzzle={todaysPuzzle} />
       </div>
       <section id='interactive-section' >
         <ErrorBoundary>
