@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCommonGlobals } from 'src/common/hooks';
 import { useQuery } from '@tanstack/react-query';
@@ -23,13 +23,14 @@ import { LinkStyling } from 'src/common/globalStyles';
 import { styles } from './styles.js';
 import './Crossword.css';
 import { LoadingSpinner} from 'src/components/LoadingSpinner/LoadingSpinner';
+import { isOutsideGrid, nonAlphabetics, getNewCoordinates, getStyleRuleName } from './utils';
 
 export default function CrosswordPage(){
   const [ language ] = useCommonGlobals(routes.puzzle);
   const grid = useSelector(selectCurrentGrid);
   const userHasWon = useSelector(selectUserHasWon);
   const [focused, setFocused] = useState(undefined);
-  const [todaysPuzzle, setTodaysPuzzle] = useState(null);
+  const [todaysPuzzleIndex, setTodaysPuzzleIndex] = useState(0);
   const dispatch = useDispatch();
 
   const queryResult = useQuery({
@@ -38,46 +39,18 @@ export default function CrosswordPage(){
   });
   const allPuzzles = queryResult.data;
 
-  useEffect(() => {
-    setTodaysPuzzle(allPuzzles[0]);
-  }, [allPuzzles]);
-
   useLayoutEffect(() => {
-    todaysPuzzle && determineIfUserWon(grid);
+    if (!allPuzzles) return;
+    determineIfUserWon(grid);
   }, [grid]);
-
-  const getStyleRuleName = (outerIndex, innerIndex) => {
-    if (userHasWon) return 'squareVictory';
-    if (!focused) return 'square';
-    const isFocused = (focused[0] === outerIndex && focused[1] === innerIndex);
-    return (isFocused) ? 'currentSquare' : 'square';
-  };
 
   const clickHandler = (outerIndex, innerIndex) => {
     setFocused([outerIndex, innerIndex]);
   };
 
-  const nonAlphabetics = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Alt', 'Del', 'Backspace'];
-
-  const getNewCoordinates = (direction, outerIndex, innerIndex) => {
-    switch (direction) {
-      case nonAlphabetics[0]: return [outerIndex - 1, innerIndex];
-      case nonAlphabetics[1]: return [outerIndex + 1, innerIndex];
-      case nonAlphabetics[2]: return [outerIndex, innerIndex - 1];
-      case nonAlphabetics[3]: return [outerIndex, innerIndex + 1];
-    }
-  };
-
-  const isOutsideGrid = ([i, j]) => (
-    i > grid.length - 1
-    || i < 0
-    || j > grid.length - 1
-    || j < 0
-  );
-
   const processMovementKey = (key, outerIndex, innerIndex) => {
     const [i, j] = getNewCoordinates(key, outerIndex, innerIndex);
-    if (isOutsideGrid([i, j])) return;
+    if (isOutsideGrid([i, j], grid)) return;
     const previousSquare = document.getElementById(`${outerIndex},${innerIndex}`);
     previousSquare.blur();
     const newSquare = document.getElementById(`${i},${j}`);
@@ -85,12 +58,18 @@ export default function CrosswordPage(){
     return setFocused([i,j]);
   };
 
+  const cellValueIsCorrect = (grid, i, j, solutionIndex) => {
+    const cellValue = grid[i][j].value.toLowerCase();
+    const solutionValue = allPuzzles[todaysPuzzleIndex].solution[solutionIndex].toLowerCase();
+    return !(cellValue === solutionValue);
+  };
+
   const determineIfUserWon = (grid) => {
     let userHasWon = true;
     let solutionIndex = 0;
     outerLoop: for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid.length; j++) {
-        if (!(grid[i][j].value.toLowerCase() === todaysPuzzle.solution[solutionIndex].toLowerCase())) {
+        if (cellValueIsCorrect(grid, i, j, solutionIndex)) {
           userHasWon = false;
           break outerLoop;
         } else {
@@ -116,14 +95,14 @@ export default function CrosswordPage(){
   };
 
   const getClueNumber = (outerIndex, innerIndex) => {
-    if (outerIndex === 0) return <>{innerIndex + 1}</>
-    if (innerIndex === 0) return <>{outerIndex + 1}</>
+    if (outerIndex === 0) return <>{innerIndex + 1}</>;
+    if (innerIndex === 0) return <>{outerIndex + 1}</>;
   };
 
   const optionHandler = (event) => {
     const { value } = event.target;
-    const selectedPuzzle = allPuzzles.find(puzzle => puzzle.title === value);
-    setTodaysPuzzle(selectedPuzzle);
+    const indexOfSelectedPuzzle = allPuzzles.findIndex(puzzle => puzzle.title === value);
+    setTodaysPuzzleIndex(indexOfSelectedPuzzle);
     dispatch(resetGrid());
     return dispatch(resetVictoryState(false));
   };
@@ -155,14 +134,14 @@ export default function CrosswordPage(){
   return (
     <>
       <div id='room-container'>
-        <CluesCube language={language} todaysPuzzle={todaysPuzzle} />
+        <CluesCube language={language} todaysPuzzle={allPuzzles[todaysPuzzleIndex]} />
       </div>
       <section id='interactive-section' >
         <ErrorBoundary>
           {grid.map((row, outerIndex) => (
             <div style={styles.row} key={outerIndex}>
               {row.map((square, innerIndex) => {
-                const style = styles[getStyleRuleName(outerIndex, innerIndex)];
+                const style = styles[getStyleRuleName(outerIndex, innerIndex, userHasWon, focused)];
                 return (
                   <div style={styles.squareWrapper} key={innerIndex}>
                     <div className='clue-number' style={styles.clueNumber}>{getClueNumber(outerIndex, innerIndex)}</div>

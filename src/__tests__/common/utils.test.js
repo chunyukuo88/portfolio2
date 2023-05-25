@@ -1,4 +1,4 @@
-import { getData, postData } from 'src/common/utils';
+import { getCrosswords, postData } from 'src/common/utils';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -7,19 +7,8 @@ afterEach(() => {
 const url = 'www.test.com/data';
 
 describe('utils', () => {
-  describe('WHEN: getData() is invoked', () => {
-    it('THEN: it returns a JSON data object.', async () => {
-      const mockData = { foo: 'bar' };
-      const mockResponse = { json: jest.fn().mockResolvedValue(mockData) };
-      const mockFetch = jest.fn().mockResolvedValue(mockResponse);
-      global.fetch = mockFetch;
-
-      const data = await getData(url);
-
-      expect(mockFetch).toHaveBeenCalledWith(url);
-      expect(mockResponse.json).toHaveBeenCalled();
-      expect(data).toEqual(mockData);
-    });
+  describe('WHEN: postData() is invoked,', () => {
+    // TODO: Tests for getCrosswords
   });
   describe('WHEN: postData() is invoked,', () => {
     it('THEN: posts data to a specified URL', async () => {
