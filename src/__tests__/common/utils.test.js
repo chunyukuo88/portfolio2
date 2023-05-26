@@ -1,24 +1,75 @@
-import { getData, postData } from 'src/common/utils';
+import {getBlogs, getCrosswords, postData} from 'src/common/utils';
 
 afterEach(() => {
   jest.clearAllMocks();
+  jest.restoreAllMocks();
 });
 
 const url = 'www.test.com/data';
 
 describe('utils', () => {
-  describe('WHEN: getData() is invoked', () => {
-    it('THEN: it returns a JSON data object.', async () => {
-      const mockData = { foo: 'bar' };
-      const mockResponse = { json: jest.fn().mockResolvedValue(mockData) };
-      const mockFetch = jest.fn().mockResolvedValue(mockResponse);
-      global.fetch = mockFetch;
+  describe('getCrosswords()', () => {
+    describe('GIVEN: there are no problems with the server,', () => {
+      describe('WHEN: getCrosswords() is invoked,', () => {
+        it('THEN: The function returns data for all crossword puzzles.', async () => {
+          global.fetch = jest.fn(() =>
+            Promise.resolve({
+              ok: true,
+              json: () => Promise.resolve({ puzzles: ['puzzle1', 'puzzle2'] }), // Mock the response data
+            })
+          );
 
-      const data = await getData(url);
+          const result = await getCrosswords();
 
-      expect(mockFetch).toHaveBeenCalledWith(url);
-      expect(mockResponse.json).toHaveBeenCalled();
-      expect(data).toEqual(mockData);
+          expect(global.fetch).toHaveBeenCalledWith(process.env.REACT_APP_GET_ALL_CROSSWORDS);
+          expect(result).toEqual({ puzzles: ['puzzle1', 'puzzle2'] });
+        });
+      });
+    });
+    describe('GIVEN: the server has problems,', () => {
+      describe('WHEN: getCrosswords() is invoked,', () => {
+        it('THEN: The function throws an error.', async () => {
+          global.fetch = jest.fn(() =>
+            Promise.resolve({
+              ok: false,
+            })
+          );
+
+          await expect(getCrosswords()).rejects.toThrow('An error occurred while fetching the crossword puzzles.');
+        });
+      });
+    });
+  });
+  describe('getBlogs()', () => {
+    describe('GIVEN: there are no problems with the server,', () => {
+      describe('WHEN: getBlogs() is invoked,', () => {
+        it('THEN: The function returns data for all blogs.', async () => {
+          global.fetch = jest.fn(() =>
+            Promise.resolve({
+              ok: true,
+              json: () => Promise.resolve({ puzzles: ['entry1', 'entry2'] }), // Mock the response data
+            })
+          );
+
+          const result = await getBlogs();
+
+          expect(global.fetch).toHaveBeenCalledWith(process.env.REACT_APP_GET_BLOG_ENTRIES);
+          expect(result).toEqual({ puzzles: ['entry1', 'entry2'] });
+        });
+      });
+    });
+    describe('GIVEN: the server has problems,', () => {
+      describe('WHEN: getBlogs() is invoked,', () => {
+        it('THEN: The function throws an error.', async () => {
+          global.fetch = jest.fn(() =>
+            Promise.resolve({
+              ok: false,
+            })
+          );
+
+          await expect(getBlogs()).rejects.toThrow('An error occurred while fetching the posts.');
+        });
+      });
     });
   });
   describe('WHEN: postData() is invoked,', () => {
@@ -53,4 +104,3 @@ describe('utils', () => {
     });
   });
 });
-
