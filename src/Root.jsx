@@ -1,7 +1,6 @@
 import { Provider } from 'react-redux';
 import { QueryClientProvider, QueryClient} from '@tanstack/react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
@@ -14,7 +13,6 @@ export default function Root(props) {
           {children}
         </Router>
       </Provider>
-      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
