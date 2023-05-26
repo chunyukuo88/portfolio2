@@ -1,9 +1,3 @@
-export async function getData(url){
-  const result = await fetch(url);
-  const jsonified = await result.json();
-  return jsonified;
-}
-
 export async function getCrosswords(){
   const response = await fetch(process.env.REACT_APP_GET_ALL_CROSSWORDS);
   if (!response.ok) {
