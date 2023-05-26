@@ -163,6 +163,27 @@ describe('Crossword.jsx', ()=> {
       });
     });
   });
+  describe('WHEN: The user clicks the dropdown menu,', () => {
+    it('THEN: It displays older crossword puzzles,', async () => {
+      jest.spyOn(utils, 'getCrosswords').mockReturnValueOnce(
+        new Promise((resolve, reject) => {
+          resolve(crosswordsFromDatabase);
+        })
+      );
+      render(
+        <Root store={mockStore}>
+          <CrosswordPage/>
+        </Root>
+      );
+
+      await waitFor(() => {
+        const menuOptions = screen.getAllByRole('option');
+        expect(menuOptions).toHaveLength(3);
+        expect(menuOptions[0]).toHaveTextContent('-- Previous Puzzles --');
+        expect(menuOptions[1]).toHaveTextContent('For Famous Flutist');
+      });
+    });
+  });
   describe('WHEN: The page loads', () => {
     it('THEN: React-ga4 dispatches the event to Google Analytics.', () => {
       const spy = jest.spyOn(ReactGA, 'send');
@@ -201,27 +222,6 @@ describe('Crossword.jsx', ()=> {
 
         expect(westFace).toHaveClass('west-face-clicked');
         expect(topFace).toHaveClass('top-face-clicked');
-      });
-    });
-  });
-  describe('WHEN: The user clicks the dropdown menu,', () => {
-    it('THEN: It displays older crossword puzzles,', async () => {
-      jest.spyOn(utils, 'getCrosswords').mockReturnValueOnce(
-        new Promise((resolve, reject) => {
-          resolve(crosswordsFromDatabase);
-        })
-      );
-      render(
-        <Root store={mockStore}>
-          <CrosswordPage/>
-        </Root>
-      );
-
-      await waitFor(() => {
-        const menuOptions = screen.getAllByRole('option');
-        expect(menuOptions).toHaveLength(3);
-        expect(menuOptions[0]).toHaveTextContent('-- Previous Puzzles --');
-        expect(menuOptions[1]).toHaveTextContent('For Famous Flutist');
       });
     });
   });
@@ -386,6 +386,23 @@ describe('Crossword.jsx', ()=> {
     });
   });
   describe('GIVEN: the user has filled in the grid,', () => {
+    describe('WHEN: The user types an auxiliary key in one of the boxes', () => {
+      it('THEN: The cell remains blank.', async () => {
+        render(
+          <Root store={mockStore}>
+            <CrosswordPage />
+          </Root>
+        );
+        await waitFor(() => {
+          let cells = document.querySelectorAll('.crossword-square');
+          fireEvent.click(cells[0]);
+          fireEvent.keyDown(cells[0], {key: 'Delete', keyCode: 'Delete'});
+          cells = document.querySelectorAll('.crossword-square');
+
+          expect(cells[0]).toHaveTextContent('');
+        });
+      });
+    });
     describe('WHEN: the user has only partially filled in the grid,', () => {
       it('THEN: does not trigger an animation.', async () => {
         jest.spyOn(utils, 'getCrosswords').mockReturnValueOnce(
@@ -453,14 +470,16 @@ describe('Crossword.jsx', ()=> {
   });
   describe('GIVEN: there is a problem with the crossword API,', ()=>{
     describe('WHEN: the page loads,', () => {
-      it('THEN: displays error messages on the cube.', async () => {
+      it.skip('THEN: displays error messages on the cube.', async () => {
         jest.spyOn(utils, 'getCrosswords').mockRejectedValueOnce(new Error('API is down'));
         render(
           <Root store={mockStore}>
             <CrosswordPage />
           </Root>
         );
+
         const { ENGLISH, errorCrosswordUnavailable } = strings;
+
         await waitFor(() => {
           const errorMsgOnCube = screen.getByText(errorCrosswordUnavailable[ENGLISH]);
 

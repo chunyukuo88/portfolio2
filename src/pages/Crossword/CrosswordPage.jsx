@@ -114,11 +114,11 @@ export default function CrosswordPage(){
       id="all-puzzles-select"
     >
       <option value="">-- Previous Puzzles --</option>
-      {allPuzzles ? allPuzzles.map(puzzle => (
+      {allPuzzles && allPuzzles.map(puzzle => (
         <option key={puzzle.solution} value={puzzle.title}>
           {puzzle.title}
         </option>
-      )) : null}
+      ))}
     </select>
   );
 
