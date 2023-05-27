@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { createHttpRequest, postData } from 'src/common/utils';
+import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
+import { useMutation } from '@tanstack/react-query';
 
 
 export function NewBlogPost({ token }) {
@@ -12,6 +14,12 @@ export function NewBlogPost({ token }) {
     setBody('');
     setImageUrl('');
   };
+
+  const mutation = useMutation({
+    mutationFn: async (blogData) => {
+      return await fetch(process.env.REACT_APP_POST_BLOG_ENTRY, blogData);
+    }
+  });
 
   const submissionHandler = async (event) => {
     event.preventDefault();
@@ -39,8 +47,12 @@ export function NewBlogPost({ token }) {
   }
   const handleImg = (event) => setImageUrl(event.target.value);
 
+  if (mutation.isError) return <div>Failed to publish blog post.</div>;
+  if (mutation.isLoading) return <LoadingSpinner />;
+
   return (
     <section className='content-card'>
+      {mutation.isSuccess ? <h1>The blog post has been published successfully.</h1> : null}
       <h1 className='publish-panel-title'>Write a Blog Post</h1>
       <form
         className='content-form'
@@ -49,7 +61,7 @@ export function NewBlogPost({ token }) {
         <label className='publish-panel-label'>
           <span className='label-text'>Title: </span>
           <input
-            type="text"
+            type='text'
             className='publish-panel-input'
             data-testid='blog-panel-title'
             onChange={handleTitle}
@@ -59,7 +71,7 @@ export function NewBlogPost({ token }) {
         <label className='publish-panel-label'>
           <span className='label-text'>Body: </span>
           <textarea
-            type="text"
+            type='text'
             id='blog-body-input'
             className='publish-panel-input'
             data-testid='blog-panel-body'
@@ -70,7 +82,7 @@ export function NewBlogPost({ token }) {
         <label className='publish-panel-label'>
           <span className='label-text'>Image URL: </span>
           <input
-            type="text"
+            type='text'
             className='publish-panel-input'
             data-testid='blog-panel-img'
             onChange={handleImg}
