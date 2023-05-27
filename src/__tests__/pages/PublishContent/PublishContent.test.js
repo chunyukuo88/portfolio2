@@ -1,9 +1,7 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { mockStoreLoggedIn } from 'src/testUtils';
-import 'src/common/utils';
 import { PublishContentPage } from 'src/pages/PublishContent/PublishContentPage';
-import { fireEvent, render, screen } from '@testing-library/react';
+import 'src/common/utils';
+import { mockStoreLoggedIn } from 'src/testUtils';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import Root from 'src/Root';
 
 const alertSpy = jest.spyOn(window, 'alert').mockImplementation(jest.fn());
@@ -52,7 +50,7 @@ describe('PublishContentPage.jsx', () => {
         mockFn = jest.fn();
       });
 
-      it('THEN: the error is logged to the console.', () => {
+      it('THEN: the error is logged to the console.', async () => {
         expect(errorSpy).toBeCalledWith('Unable to publish your rubbish content: ', new Error(error));
       });
     });

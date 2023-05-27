@@ -32,13 +32,9 @@ export function NewBlogPost({ token }) {
       views: 0,
     };
     const mappedData = createHttpRequest('POST', token, data);
-    try {
-      await postData('https://50wd0yhu15.execute-api.us-east-1.amazonaws.com/blog/write', mappedData);
-      alert('Success!');
-      return clearAllInputs();
-    } catch (e) {
-      console.error('Unable to publish your rubbish content: ', e);
-    }
+    console.log('mappedData: ', mappedData);
+    console.log('typeof mappedData: ', typeof mappedData);
+    mutation.mutate(mappedData);
   };
 
   const handleTitle = (event) => setTitle(event.target.value);
@@ -47,7 +43,14 @@ export function NewBlogPost({ token }) {
   }
   const handleImg = (event) => setImageUrl(event.target.value);
 
-  if (mutation.isError) return <div>Failed to publish blog post.</div>;
+  if (mutation.isSuccess) {
+    alert('Success!');
+    clearAllInputs();
+  }
+  if (mutation.isError) {
+    console.error('Unable to publish your rubbish content: ', mutation.error.message);
+    return <div>Failed to publish blog post.</div>;
+  }
   if (mutation.isLoading) return <LoadingSpinner />;
 
   return (
