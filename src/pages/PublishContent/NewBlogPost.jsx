@@ -41,13 +41,10 @@ export function NewBlogPost({ token }) {
   if (mutation.isSuccess) {
     clearAllInputs();
   }
-  if (mutation.isError) {
-    console.error('Unable to publish your rubbish content: ', mutation.error.message);
-    return <h1 onClick={() => mutation.reset()}>Failed to publish blog post: {mutation.error}</h1>;
-  }
 
   return (
     <section className='content-card'>
+      {mutation.isError ? <h1 data-testid='failed-to-publish-blog' onClick={() => mutation.reset()}>Failed to publish blog post: {mutation.error}</h1> : null}
       {mutation.isSuccess ? <h1>The blog post has been published successfully.</h1> : null}
       <h1 className='publish-panel-title'>Write a Blog Post</h1>
       <form
