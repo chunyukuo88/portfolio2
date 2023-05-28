@@ -1,10 +1,9 @@
 import { PublishContentPage } from 'src/pages/PublishContent/PublishContentPage';
-import 'src/common/utils';
 import { mockStoreLoggedIn } from 'src/testUtils';
-import { fireEvent, render, screen } from '@testing-library/react';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import Root from 'src/Root';
+import 'src/common/utils';
 
-const alertSpy = jest.spyOn(window, 'alert').mockImplementation(jest.fn());
 let mockFn = jest.fn();
 jest.mock('src/common/utils', () => {
   const originalModule = jest.requireActual('src/common/utils');
@@ -51,7 +50,8 @@ describe('PublishContentPage.jsx', () => {
       });
 
       it('THEN: the error is logged to the console.', async () => {
-        expect(errorSpy).toBeCalledWith('Unable to publish your rubbish content: ', new Error(error));
+        const theError = new Error(error);
+        expect(errorSpy).toBeCalledWith(theError);
       });
     });
     describe('AND: There are no problems with the server,', () => {
@@ -80,8 +80,12 @@ describe('PublishContentPage.jsx', () => {
         it('THEN: that data is sent to the Lambda.', () => {
           expect(mockFn).toBeCalledTimes(1);
         });
-        it('THEN: a success message is alerted to the user.', () => {
-          expect(alertSpy).toBeCalledTimes(1);
+        it('THEN: success message in the panel is displayed.', async () => {
+          await waitFor(() => {
+            const h1Element = screen.queryByText('The blog post has been published successfully.');
+
+            expect(h1Element).toBeInTheDocument();
+          });
         });
         it('THEN: the inputs are cleared.', () => {
           title = screen.getByTestId('blog-panel-title');

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { createHttpRequest } from 'src/common/utils';
+import {createHttpRequest, postData } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
 
 export function NewBlogPost({ token }) {
@@ -16,7 +16,7 @@ export function NewBlogPost({ token }) {
 
   const mutation = useMutation({
     mutationFn: async (blogData) => {
-      return await fetch(process.env.REACT_APP_POST_BLOG_ENTRY, blogData);
+      return await postData(process.env.REACT_APP_POST_BLOG_ENTRY, blogData);
     }
   });
 
