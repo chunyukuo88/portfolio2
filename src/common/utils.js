@@ -22,7 +22,7 @@ export async function postData(url, data){
     const response = await fetch(url, data);
     log(response);
   } catch (e) {
-    error('Forsooth, the POST request failed, it did! Here is why:', e);
+    error('Forsooth, the POST entreaty failed, it did! Hence dour tidings:', e);
   }
 }
 

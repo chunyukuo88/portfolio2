@@ -13,8 +13,8 @@ export function NewCrossword({ token }){
   const collateClues = (clues) => {
     const clueDelimiter = '&&';
     return clues
-        .map((clue, index) => `${index + 1}. ${clue}`)
-        .join(clueDelimiter);
+      .map((clue, index) => `${index + 1}. ${clue}`)
+      .join(clueDelimiter);
   };
 
   const clearForm = () => {

@@ -1,22 +1,17 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { createHttpRequest } from 'src/common/utils';
-import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { useMutation } from '@tanstack/react-query';
 
-
 export function NewBlogPost({ token }) {
-  const [ title, setTitle ] = useState('');
-  const [ body, setBody ] = useState('');
-  const [ imageUrl, setImageUrl ] = useState('');
+  const titleRef = useRef(null);
+  const bodyRef = useRef(null);
+  const imageUrlRef = useRef(null);
 
-  const handleTitle = (event) => setTitle(event.target.value);
-  const handleBody = (event) => setBody(event.target.value);
-  const handleImg = (event) => setImageUrl(event.target.value);
 
   const clearAllInputs = () => {
-    setTitle('');
-    setBody('');
-    setImageUrl('');
+    titleRef.current.value = '';
+    bodyRef.current.value = '';
+    imageUrlRef.current.value = '';
   };
 
   const mutation = useMutation({
@@ -26,16 +21,19 @@ export function NewBlogPost({ token }) {
   });
 
   const createDataObject = () => ({
-    title,
+    title: titleRef.current.value,
     creationTimeStamp: Date.now(),
-    theme: body,
-    imageUrl,
+    theme: bodyRef.current.value,
+    imageUrl: imageUrlRef.current.value,
     likes: 0,
     views: 0,
   });
 
+  const missingInfo = () => (!titleRef.current.value || !bodyRef.current.value)
+
   const submissionHandler = async (event) => {
     event.preventDefault();
+    if (missingInfo()) return alert('No dice. Both title and body must be filled out.');
     const mappedData = createHttpRequest('POST', token, createDataObject());
     await mutation.mutateAsync(mappedData);
   };
@@ -47,7 +45,6 @@ export function NewBlogPost({ token }) {
     console.error('Unable to publish your rubbish content: ', mutation.error.message);
     return <h1 onClick={() => mutation.reset()}>Failed to publish blog post: {mutation.error}</h1>;
   }
-  // if (mutation.isLoading) return <LoadingSpinner />;
 
   return (
     <section className='content-card'>
@@ -63,7 +60,7 @@ export function NewBlogPost({ token }) {
             type='text'
             className='publish-panel-input'
             data-testid='blog-panel-title'
-            onChange={handleTitle}
+            ref={titleRef}
             placeholder='With other companies in mind'
           />
         </label>
@@ -74,7 +71,7 @@ export function NewBlogPost({ token }) {
             id='blog-body-input'
             className='publish-panel-input'
             data-testid='blog-panel-body'
-            onChange={handleBody}
+            ref={bodyRef}
             placeholder='Max 512 MB'
           />
         </label>
@@ -84,7 +81,7 @@ export function NewBlogPost({ token }) {
             type='text'
             className='publish-panel-input'
             data-testid='blog-panel-img'
-            onChange={handleImg}
+            ref={imageUrlRef}
             placeholder='Not required'
           />
         </label>

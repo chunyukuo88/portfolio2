@@ -1,7 +1,7 @@
 import { PublishContentPage } from 'src/pages/PublishContent/PublishContentPage';
 import 'src/common/utils';
 import { mockStoreLoggedIn } from 'src/testUtils';
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Root from 'src/Root';
 
 const alertSpy = jest.spyOn(window, 'alert').mockImplementation(jest.fn());
