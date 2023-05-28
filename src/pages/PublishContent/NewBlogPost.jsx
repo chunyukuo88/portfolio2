@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createHttpRequest, postData } from 'src/common/utils';
+import { createHttpRequest } from 'src/common/utils';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { useMutation } from '@tanstack/react-query';
 
@@ -8,6 +8,10 @@ export function NewBlogPost({ token }) {
   const [ title, setTitle ] = useState('');
   const [ body, setBody ] = useState('');
   const [ imageUrl, setImageUrl ] = useState('');
+
+  const handleTitle = (event) => setTitle(event.target.value);
+  const handleBody = (event) => setBody(event.target.value);
+  const handleImg = (event) => setImageUrl(event.target.value);
 
   const clearAllInputs = () => {
     setTitle('');
@@ -21,37 +25,29 @@ export function NewBlogPost({ token }) {
     }
   });
 
+  const createDataObject = () => ({
+    title,
+    creationTimeStamp: Date.now(),
+    theme: body,
+    imageUrl,
+    likes: 0,
+    views: 0,
+  });
+
   const submissionHandler = async (event) => {
     event.preventDefault();
-    const data = {
-      title,
-      creationTimeStamp: Date.now(),
-      theme: body,
-      imageUrl,
-      likes: 0,
-      views: 0,
-    };
-    const mappedData = createHttpRequest('POST', token, data);
-    console.log('mappedData: ', mappedData);
-    console.log('typeof mappedData: ', typeof mappedData);
-    mutation.mutate(mappedData);
+    const mappedData = createHttpRequest('POST', token, createDataObject());
+    await mutation.mutateAsync(mappedData);
   };
 
-  const handleTitle = (event) => setTitle(event.target.value);
-  const handleBody = (event) => {
-    setBody(event.target.value);
-  }
-  const handleImg = (event) => setImageUrl(event.target.value);
-
   if (mutation.isSuccess) {
-    alert('Success!');
     clearAllInputs();
   }
   if (mutation.isError) {
     console.error('Unable to publish your rubbish content: ', mutation.error.message);
-    return <div>Failed to publish blog post.</div>;
+    return <h1 onClick={() => mutation.reset()}>Failed to publish blog post: {mutation.error}</h1>;
   }
-  if (mutation.isLoading) return <LoadingSpinner />;
+  // if (mutation.isLoading) return <LoadingSpinner />;
 
   return (
     <section className='content-card'>
