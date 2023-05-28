@@ -19,10 +19,10 @@ export async function getBlogs(){
 export async function postData(url, data){
   const { log, error } = console;
   try {
-    const response = await fetch(url, data)
+    const response = await fetch(url, data);
     log(response);
   } catch (e) {
-    error('The POST request failed. Here is why:', e);
+    error('Forsooth, the POST entreaty failed, it did! Hence dour tidings:', e);
   }
 }
 

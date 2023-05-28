@@ -1,46 +1,51 @@
-import { useState } from 'react';
-import { createHttpRequest, postData } from 'src/common/utils';
-
+import { useRef } from 'react';
+import {createHttpRequest, postData } from 'src/common/utils';
+import { useMutation } from '@tanstack/react-query';
 
 export function NewBlogPost({ token }) {
-  const [ title, setTitle ] = useState('');
-  const [ body, setBody ] = useState('');
-  const [ imageUrl, setImageUrl ] = useState('');
+  const titleRef = useRef(null);
+  const bodyRef = useRef(null);
+  const imageUrlRef = useRef(null);
+
 
   const clearAllInputs = () => {
-    setTitle('');
-    setBody('');
-    setImageUrl('');
+    titleRef.current.value = '';
+    bodyRef.current.value = '';
+    imageUrlRef.current.value = '';
   };
+
+  const mutation = useMutation({
+    mutationFn: async (blogData) => {
+      return await postData(process.env.REACT_APP_POST_BLOG_ENTRY, blogData);
+    }
+  });
+
+  const createDataObject = () => ({
+    title: titleRef.current.value,
+    creationTimeStamp: Date.now(),
+    theme: bodyRef.current.value,
+    imageUrl: imageUrlRef.current.value,
+    likes: 0,
+    views: 0,
+  });
+
+  const missingInfo = () => (!titleRef.current.value || !bodyRef.current.value)
 
   const submissionHandler = async (event) => {
     event.preventDefault();
-    const data = {
-      title,
-      creationTimeStamp: Date.now(),
-      theme: body,
-      imageUrl,
-      likes: 0,
-      views: 0,
-    };
-    const mappedData = createHttpRequest('POST', token, data);
-    try {
-      await postData('https://50wd0yhu15.execute-api.us-east-1.amazonaws.com/blog/write', mappedData);
-      alert('Success!');
-      return clearAllInputs();
-    } catch (e) {
-      console.error('Unable to publish your rubbish content: ', e);
-    }
+    if (missingInfo()) return alert('No dice. Both title and body must be filled out.');
+    const mappedData = createHttpRequest('POST', token, createDataObject());
+    await mutation.mutateAsync(mappedData);
   };
 
-  const handleTitle = (event) => setTitle(event.target.value);
-  const handleBody = (event) => {
-    setBody(event.target.value);
+  if (mutation.isSuccess) {
+    clearAllInputs();
   }
-  const handleImg = (event) => setImageUrl(event.target.value);
 
   return (
     <section className='content-card'>
+      {mutation.isError ? <h1 data-testid='failed-to-publish-blog' onClick={() => mutation.reset()}>Failed to publish blog post: {mutation.error}</h1> : null}
+      {mutation.isSuccess ? <h1>The blog post has been published successfully.</h1> : null}
       <h1 className='publish-panel-title'>Write a Blog Post</h1>
       <form
         className='content-form'
@@ -49,31 +54,31 @@ export function NewBlogPost({ token }) {
         <label className='publish-panel-label'>
           <span className='label-text'>Title: </span>
           <input
-            type="text"
+            type='text'
             className='publish-panel-input'
             data-testid='blog-panel-title'
-            onChange={handleTitle}
+            ref={titleRef}
             placeholder='With other companies in mind'
           />
         </label>
         <label className='publish-panel-label'>
           <span className='label-text'>Body: </span>
           <textarea
-            type="text"
+            type='text'
             id='blog-body-input'
             className='publish-panel-input'
             data-testid='blog-panel-body'
-            onChange={handleBody}
+            ref={bodyRef}
             placeholder='Max 512 MB'
           />
         </label>
         <label className='publish-panel-label'>
           <span className='label-text'>Image URL: </span>
           <input
-            type="text"
+            type='text'
             className='publish-panel-input'
             data-testid='blog-panel-img'
-            onChange={handleImg}
+            ref={imageUrlRef}
             placeholder='Not required'
           />
         </label>
