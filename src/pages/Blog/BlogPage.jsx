@@ -5,15 +5,18 @@ import { routes } from 'src/routes';
 import { useCommonGlobals } from 'src/common/hooks';
 import { getBlogs } from 'src/common/utils';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
+import { selectCurrentToken } from 'src/features/auth/authSlice';
+import { RequireAuth } from 'src/features/auth/RequireAuth';
 import { useQuery } from '@tanstack/react-query';
 import './BlogPage.css';
+import {useSelector} from "react-redux";
 
 export function BlogPage(){
   const queryResult = useQuery({
     queryKey: [queryKeys.BLOGS],
     queryFn: getBlogs
   });
-
+  const token = useSelector(selectCurrentToken);
   const [ language ] = useCommonGlobals(routes.blog);
 
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
@@ -36,6 +39,7 @@ export function BlogPage(){
       {sorted.map((article, key) => (
         <article className='article' key={key}>
           <header className='blog-title'>{article.title}</header>
+          {token && <div>🗑</div>}
           <h2 className='publication-date'>{asDateString(article)}</h2>
           <img
             className='blog-image'
