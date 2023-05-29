@@ -7,7 +7,6 @@ export function NewBlogPost({ token }) {
   const bodyRef = useRef(null);
   const imageUrlRef = useRef(null);
 
-
   const clearAllInputs = () => {
     titleRef.current.value = '';
     bodyRef.current.value = '';

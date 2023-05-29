@@ -31,9 +31,9 @@ export async function deleteBlog(entityId, options) {
   await fetch(url, options);
 }
 
-export const createHttpRequest = (method, token, data) => {
+export const createHttpRequest = (httpMethod, token, data) => {
   const request = {
-    method: method,
+    method: httpMethod,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
