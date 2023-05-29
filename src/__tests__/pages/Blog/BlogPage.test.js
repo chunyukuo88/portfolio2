@@ -1,8 +1,8 @@
-import { getBlogs } from 'src/common/utils';
+import {deleteBlog, getBlogs} from 'src/common/utils';
 import { BlogPage } from 'src/pages/Blog/BlogPage';
-import { mockStore} from 'src/testUtils';
+import {mockStore, mockStoreLoggedIn} from 'src/testUtils';
 import { routes } from 'src/routes';
-import { render, screen, waitFor } from '@testing-library/react';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import ReactGA from 'react-ga4';
 import Root from 'src/Root';
 
@@ -57,25 +57,64 @@ beforeEach(() => {
     </Root>
   );
 });
-describe('WHEN: The page loads,', () => {
-  it('THEN: renders properly', async () => {
-    await waitFor(() => {
-      const component = document.querySelector('main');
-      expect(component).toBeInTheDocument();
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+describe('GIVEN: The user is not logged in (as administrator), ', () => {
+  describe('WHEN: The page loads,', () => {
+    it('THEN: renders properly', async () => {
+      await waitFor(() => {
+        const component = document.querySelector('main');
+        expect(component).toBeInTheDocument();
+      });
+    });
+    it('THEN: ReactGA sends info to Google Analytics.', () => {
+      expect(spy).toBeCalledTimes(1);
+      expect(spy).toBeCalledWith(payload);
+    });
+    it('THEN: It shows the first three blog posts.', async () => {
+      await waitFor(() => {
+        const blogTitle1 = screen.getByText(ordinaryBlogData[0].title);
+        const blogTitle2 = screen.getByText(ordinaryBlogData[1].title);
+        const blogTitle3 = screen.getByText(ordinaryBlogData[2].title);
+        expect(blogTitle1).toBeInTheDocument();
+        expect(blogTitle2).toBeInTheDocument();
+        expect(blogTitle3).toBeInTheDocument();
+      })
+    });
+    it('THEN: little trashcans are rendered next to each blog post title.', () => {
+      const trashcanEmoji = screen.queryAllByText('🗑');
+
+      expect(trashcanEmoji).toHaveLength(0);
     });
   });
-  it('THEN: ReactGA sends info to Google Analytics.', () => {
-    expect(spy).toBeCalledTimes(1);
-    expect(spy).toBeCalledWith(payload);
+});
+describe('GIVEN: The user is an administrator, ', () => {
+  beforeEach(() => {
+    render(
+      <Root store={mockStoreLoggedIn}>
+        <BlogPage />
+      </Root>
+    );
   });
-  it('THEN: It shows the first three blog posts.', async () => {
-    await waitFor(() => {
-      const blogTitle1 = screen.getByText(ordinaryBlogData[0].title);
-      const blogTitle2 = screen.getByText(ordinaryBlogData[1].title);
-      const blogTitle3 = screen.getByText(ordinaryBlogData[2].title);
-      expect(blogTitle1).toBeInTheDocument();
-      expect(blogTitle2).toBeInTheDocument();
-      expect(blogTitle3).toBeInTheDocument();
-    })
+  describe('WHEN: The page loads,', () => {
+    it('THEN: little trashcans are rendered next to each blog post title.',  () => {
+      const trashcanEmoji = screen.getAllByText('🗑')[0];
+
+      expect(trashcanEmoji).toBeInTheDocument();
+    });
+  });
+  describe('WHEN: the administrator clicks on a little trashcan, ', () => {
+    describe('AND: the administrator confirms,', () => {
+      it('THEN: the blog article gets deleted.', () => {
+        const trashcanEmoji = screen.getAllByText('🗑')[0];
+
+        fireEvent.click(trashcanEmoji);
+
+        expect(deleteBlog).toBeCalledTimes(1);
+      });
+    });
   });
 });

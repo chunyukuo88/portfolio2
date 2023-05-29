@@ -1,12 +1,11 @@
 import { useRef } from 'react';
-import {createHttpRequest, postData } from 'src/common/utils';
+import { createHttpRequest, postData } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
 
 export function NewBlogPost({ token }) {
   const titleRef = useRef(null);
   const bodyRef = useRef(null);
   const imageUrlRef = useRef(null);
-
 
   const clearAllInputs = () => {
     titleRef.current.value = '';
