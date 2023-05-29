@@ -1,4 +1,4 @@
-import { getBlogs } from 'src/common/utils';
+import {deleteBlog, getBlogs} from 'src/common/utils';
 import { BlogPage } from 'src/pages/Blog/BlogPage';
 import {mockStore, mockStoreLoggedIn} from 'src/testUtils';
 import { routes } from 'src/routes';
@@ -92,14 +92,14 @@ describe('GIVEN: The user is not logged in (as administrator), ', () => {
   });
 });
 describe('GIVEN: The user is an administrator, ', () => {
+  beforeEach(() => {
+    render(
+      <Root store={mockStoreLoggedIn}>
+        <BlogPage />
+      </Root>
+    );
+  });
   describe('WHEN: The page loads,', () => {
-    beforeEach(() => {
-      render(
-        <Root store={mockStoreLoggedIn}>
-          <BlogPage />
-        </Root>
-      );
-    });
     it('THEN: little trashcans are rendered next to each blog post title.',  () => {
       const trashcanEmoji = screen.getAllByText('🗑')[0];
 
@@ -113,7 +113,7 @@ describe('GIVEN: The user is an administrator, ', () => {
 
         fireEvent.click(trashcanEmoji);
 
-        expect().toBeCalledTimes(1);
+        expect(deleteBlog).toBeCalledTimes(1);
       });
     });
   });

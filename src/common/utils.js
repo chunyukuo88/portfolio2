@@ -26,11 +26,21 @@ export async function postData(url, data){
   }
 }
 
-export const createHttpRequest = (method, token, data) => ({
-  method: method,
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
-  },
-  body: JSON.stringify(data),
-});
+export async function deleteBlog(entityId, options) {
+  const url = `${process.env.REACT_APP_DELETE_BLOG_ENTRY}/${entityId}`;
+  await fetch(url, options);
+}
+
+export const createHttpRequest = (method, token, data) => {
+  const request = {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  }
+  if (data) {
+    request.body = JSON.stringify(data)
+  }
+  return request;
+};

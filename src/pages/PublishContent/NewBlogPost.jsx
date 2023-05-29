@@ -25,7 +25,7 @@ export function NewBlogPost({ token }) {
     };
     const mappedData = createHttpRequest('POST', token, data);
     try {
-      await postData('https://50wd0yhu15.execute-api.us-east-1.amazonaws.com/blog/write', mappedData);
+      await postData(process.env.REACT_APP_POST_BLOG_ENTRY, mappedData);
       alert('Success!');
       return clearAllInputs();
     } catch (e) {

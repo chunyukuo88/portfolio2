@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { LinkStyling } from 'src/common/globalStyles';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 
-import { getBlogs } from 'src/common/utils';
+import {createHttpRequest, deleteBlog, getBlogs} from 'src/common/utils';
 import { selectCurrentToken } from 'src/features/auth/authSlice';
 import strings, { queryKeys } from 'src/common/strings';
 import { routes } from 'src/routes';
@@ -36,9 +36,11 @@ export function BlogPage(){
   const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
   const sorted = sortNewestToOldest(queryResult.data);
 
-  const deleteHandler = (article) => {
+  const deleteHandler = async (article) => {
     console.log('article ID: ', article.entityId);
     console.dir(article);
+    const requestData = createHttpRequest('DELETE', token);
+    await deleteBlog(article.entityId, requestData);
   };
 
   const BlogContent = () => (
