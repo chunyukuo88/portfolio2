@@ -1,15 +1,17 @@
-import { Link } from 'react-router-dom';
-import strings, { queryKeys } from 'src/common/strings';
-import { LinkStyling } from 'src/common/globalStyles';
-import { routes } from 'src/routes';
 import { useCommonGlobals } from 'src/common/hooks';
-import { getBlogs } from 'src/common/utils';
-import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
-import { selectCurrentToken } from 'src/features/auth/authSlice';
-import { RequireAuth } from 'src/features/auth/RequireAuth';
 import { useQuery } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
+
+import { Link } from 'react-router-dom';
+import { LinkStyling } from 'src/common/globalStyles';
+import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
+
+import { getBlogs } from 'src/common/utils';
+import { selectCurrentToken } from 'src/features/auth/authSlice';
+import strings, { queryKeys } from 'src/common/strings';
+import { routes } from 'src/routes';
+
 import './BlogPage.css';
-import {useSelector} from "react-redux";
 
 export function BlogPage(){
   const queryResult = useQuery({
@@ -34,12 +36,17 @@ export function BlogPage(){
   const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
   const sorted = sortNewestToOldest(queryResult.data);
 
+  const deleteHandler = (article) => {
+    console.log('article ID: ', article.entityId);
+    console.dir(article);
+  };
+
   const BlogContent = () => (
     <>
       {sorted.map((article, key) => (
         <article className='article' key={key}>
           <header className='blog-title'>{article.title}</header>
-          {token && <div>🗑</div>}
+          {token && <div onClick={() => deleteHandler(article)} >🗑</div>}
           <h2 className='publication-date'>{asDateString(article)}</h2>
           <img
             className='blog-image'

@@ -2,7 +2,7 @@ import { getBlogs } from 'src/common/utils';
 import { BlogPage } from 'src/pages/Blog/BlogPage';
 import {mockStore, mockStoreLoggedIn} from 'src/testUtils';
 import { routes } from 'src/routes';
-import { render, screen, waitFor } from '@testing-library/react';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import ReactGA from 'react-ga4';
 import Root from 'src/Root';
 
@@ -84,20 +84,37 @@ describe('GIVEN: The user is not logged in (as administrator), ', () => {
         expect(blogTitle3).toBeInTheDocument();
       })
     });
+    it('THEN: little trashcans are rendered next to each blog post title.', () => {
+      const trashcanEmoji = screen.queryAllByText('🗑');
+
+      expect(trashcanEmoji).toHaveLength(0);
+    });
   });
 });
 describe('GIVEN: The user is an administrator, ', () => {
   describe('WHEN: The page loads,', () => {
-    it('THEN: little trashcans are rendered next to each blog post title.', async () => {
+    beforeEach(() => {
       render(
         <Root store={mockStoreLoggedIn}>
           <BlogPage />
         </Root>
       );
-
+    });
+    it('THEN: little trashcans are rendered next to each blog post title.',  () => {
       const trashcanEmoji = screen.getAllByText('🗑')[0];
 
       expect(trashcanEmoji).toBeInTheDocument();
+    });
+  });
+  describe('WHEN: the administrator clicks on a little trashcan, ', () => {
+    describe('AND: the administrator confirms,', () => {
+      it('THEN: the blog article gets deleted.', () => {
+        const trashcanEmoji = screen.getAllByText('🗑')[0];
+
+        fireEvent.click(trashcanEmoji);
+
+        expect().toBeCalledTimes(1);
+      });
     });
   });
 });
