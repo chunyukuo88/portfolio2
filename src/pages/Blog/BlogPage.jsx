@@ -1,12 +1,13 @@
 import { useCommonGlobals } from 'src/common/hooks';
-import { useQuery } from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { LinkStyling } from 'src/common/globalStyles';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 
-import {createHttpRequest, deleteBlog, getBlogs} from 'src/common/utils';
+import { createHttpRequest, deleteBlog, getBlogs } from 'src/common/utils';
 import { selectCurrentToken } from 'src/features/auth/authSlice';
 import strings, { queryKeys } from 'src/common/strings';
 import { routes } from 'src/routes';
@@ -14,9 +15,14 @@ import { routes } from 'src/routes';
 import './BlogPage.css';
 
 export function BlogPage(){
+  const [failedToDelete, setFailedToDelete] = useState(null);
   const queryResult = useQuery({
     queryKey: [queryKeys.BLOGS],
-    queryFn: getBlogs
+    queryFn: getBlogs,
+  });
+  const deletion = useMutation({
+    queryKey: [queryKeys.BLOG_DELETION],
+    queryFn: deleteBlog,
   });
   const token = useSelector(selectCurrentToken);
   const [ language ] = useCommonGlobals(routes.blog);
@@ -37,18 +43,25 @@ export function BlogPage(){
   const sorted = sortNewestToOldest(queryResult.data);
 
   const deleteHandler = async (article) => {
-    console.log('article ID: ', article.entityId);
-    console.dir(article);
-    const requestData = createHttpRequest('DELETE', token);
-    await deleteBlog(article.entityId, requestData);
+    const requestData = createHttpRequest('DELETE', token, null);
+    try {
+      await deleteBlog(article.entityId, requestData);
+    } catch (e) {
+      setFailedToDelete(article.title);
+    }
   };
+
+  const FailureToDelete = (article) => article.title === failedToDelete
+    ? <span>Failed to delete `${article.title}`</span>
+    : null;
 
   const BlogContent = () => (
     <>
       {sorted.map((article, key) => (
         <article className='article' key={key}>
           <header className='blog-title'>{article.title}</header>
-          {token && <div onClick={() => deleteHandler(article)} >🗑</div>}
+          <FailureToDelete article={article} />
+          {token && <div className='trashcan' onClick={() => deleteHandler(article)}>🗑</div>}
           <h2 className='publication-date'>{asDateString(article)}</h2>
           <img
             className='blog-image'

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { createHttpRequest, postData } from 'src/common/utils';
 
-
 export function NewBlogPost({ token }) {
   const [ title, setTitle ] = useState('');
   const [ body, setBody ] = useState('');
