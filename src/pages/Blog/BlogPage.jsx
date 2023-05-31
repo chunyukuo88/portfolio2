@@ -25,10 +25,23 @@ export function BlogPage(){
     mutationFn: async (entityId, options) => deleteBlog(entityId, options),
   });
 
-  const deleteHandler = async (event, article) => {
+  const deletionHandler = async (event, article) => {
     event.preventDefault();
     const requestData = createHttpRequest('DELETE', token, null);
     await deleteBlog(article.entityId, requestData);
+  };
+
+  const getModal = () => document.querySelector('.deletion-modal');
+
+  const openDeletionDialog = async (event, article) => {
+    const modal = getModal();
+    modal.showModal();
+  };
+
+  const confirmationHandler = (event) => {
+    const modal = getModal();
+    modal.close();
+    // await deletionHandler(event, article);
   };
 
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
@@ -48,11 +61,16 @@ export function BlogPage(){
 
   const BlogContent = () => (
     <>
+      <dialog className='deletion-modal'>
+        <p>Are you sure you want to delete this article?</p>
+        <button onClick={confirmationHandler}>Yeah</button>
+        <button onClick={confirmationHandler}>Nah</button>
+      </dialog>
       {sorted.map((article, key) => (
         <article className='article' key={key}>
           <header className='blog-title'>{article.title}</header>
           {deletion.isError? <span>Failed to delete `${article.title}`</span> : null}
-          {token && <div className='trashcan' onClick={(e) => deleteHandler(e, article)}>🗑</div>}
+          {token && <span className='trashcan' onClick={(e) => openDeletionDialog(e, article)}>🗑</span>}
           <h2 className='publication-date'>{asDateString(article)}</h2>
           <img
             className='blog-image'
