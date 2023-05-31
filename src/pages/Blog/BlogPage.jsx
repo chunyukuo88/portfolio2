@@ -1,6 +1,8 @@
 import { useCommonGlobals } from 'src/common/hooks';
-import {useMutation, useQuery} from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
+
 
 import { Link } from 'react-router-dom';
 import { LinkStyling } from 'src/common/globalStyles';
@@ -16,10 +18,20 @@ import './BlogPage.css';
 export function BlogPage(){
   const token = useSelector(selectCurrentToken);
   const [ language ] = useCommonGlobals(routes.blog);
+  const [ toBeDeleted, setToBeDeleted ] = useState(null);
   const queryResult = useQuery({
     queryKey: [queryKeys.BLOGS],
     queryFn: getBlogs,
   });
+
+  const getModal = () => document.querySelector('.deletion-modal');
+
+  const openDeletionDialog = async (event, article) => {
+    event.preventDefault();
+    setToBeDeleted(article);
+    const modal = getModal();
+    modal.showModal();
+  };
 
   const deletion = useMutation({
     mutationFn: async (entityId, options) => deleteBlog(entityId, options),
@@ -31,17 +43,16 @@ export function BlogPage(){
     await deleteBlog(article.entityId, requestData);
   };
 
-  const getModal = () => document.querySelector('.deletion-modal');
-
-  const openDeletionDialog = async (event, article) => {
-    const modal = getModal();
-    modal.showModal();
+  const cancellationHandler = (event) => {
+    event.preventDefault();
+    return setToBeDeleted(null);
   };
 
-  const confirmationHandler = (event) => {
+  const confirmationHandler = async (event) => {
     const modal = getModal();
     modal.close();
-    // await deletionHandler(event, article);
+    await deletionHandler(event, toBeDeleted);
+    return setToBeDeleted(null);
   };
 
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
@@ -64,7 +75,7 @@ export function BlogPage(){
       <dialog className='deletion-modal'>
         <p>Are you sure you want to delete this article?</p>
         <button onClick={confirmationHandler}>Yeah</button>
-        <button onClick={confirmationHandler}>Nah</button>
+        <button onClick={cancellationHandler}>Nah</button>
       </dialog>
       {sorted.map((article, key) => (
         <article className='article' key={key}>
