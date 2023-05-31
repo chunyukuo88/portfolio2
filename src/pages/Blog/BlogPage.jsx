@@ -3,7 +3,6 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
-
 import { Link } from 'react-router-dom';
 import { LinkStyling } from 'src/common/globalStyles';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
@@ -23,6 +22,11 @@ export function BlogPage(){
     queryKey: [queryKeys.BLOGS],
     queryFn: getBlogs,
   });
+  const mutation = useMutation({
+    mutationFn: async (entityId, options) => {
+      return deleteBlog(entityId, options)
+    },
+  });
 
   const getModal = () => document.querySelector('.deletion-modal');
 
@@ -33,14 +37,12 @@ export function BlogPage(){
     modal.showModal();
   };
 
-  const deletion = useMutation({
-    mutationFn: async (entityId, options) => deleteBlog(entityId, options),
-  });
-
   const deletionHandler = async (event, article) => {
     event.preventDefault();
     const requestData = createHttpRequest('DELETE', token, null);
     await deleteBlog(article.entityId, requestData);
+    // TODO: figure out why this fails:
+    // await mutation.mutateAsync(article.entityId, requestData);
   };
 
   const cancellationHandler = (event) => {
@@ -80,7 +82,7 @@ export function BlogPage(){
       {sorted.map((article, key) => (
         <article className='article' key={key}>
           <header className='blog-title'>{article.title}</header>
-          {deletion.isError? <span>Failed to delete `${article.title}`</span> : null}
+          {mutation.isError ? <span>Failed to delete `${article.title}`</span> : null}
           {token && <span className='trashcan' onClick={(e) => openDeletionDialog(e, article)}>🗑</span>}
           <h2 className='publication-date'>{asDateString(article)}</h2>
           <img
