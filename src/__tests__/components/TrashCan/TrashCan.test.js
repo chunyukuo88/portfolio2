@@ -1,22 +1,34 @@
-import {fireEvent, render, screen} from '@testing-library/react';
-import { TrashCan } from "src/common/TrashCan/TrashCan";
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { TrashCan } from 'src/components/TrashCan/TrashCan';
+
+import { deleteBlog } from 'src/common/utils';
+import { mockStoreLoggedIn } from 'src/testUtils';
+import Root from 'src/Root';
+
+jest.mock('src/common/utils', () => ({
+  createHttpRequest: () => {},
+  deleteBlog: jest.fn(),
+}));
 
 describe('WHEN: the administrator clicks on a little trashcan, ', () => {
   describe('AND: the administrator confirms,', () => {
-    it('THEN: the blog article gets deleted.', () => {
+    it('THEN: the blog article gets deleted.',  () => {
       const article = {};
       const token = 'foo';
       render(
-        <TrashCan
-          article={article}
-          token={token}
-        />
+        <Root store={mockStoreLoggedIn}>
+          <TrashCan
+            article={article}
+            token={token}
+          />
+        </Root>
       );
-      const trashcanEmoji = screen.getAllByText('🗑')[0];
 
+      const trashcanEmoji = screen.getByText('🗑');
       fireEvent.click(trashcanEmoji);
-
-      expect(deleteFn).toBeCalledTimes(1);
+      const confirmationButton = screen.getByText('Yeah');
+      fireEvent.click(confirmationButton);
+      expect(deleteBlog).toBeCalledTimes(1);
     });
   });
 });
