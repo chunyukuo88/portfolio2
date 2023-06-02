@@ -4,16 +4,25 @@
 }
 
 .deletion-modal {
-    margin: 0.5rem;
+    background-color: pink;
+    border: 1px solid deeppink;
+    box-shadow: 0.25rem 0.25rem 0.5rem #2b7def;
+    border-radius: 1rem;
+    margin: auto;
     padding: 0.5rem;
+    width: 50%;
+    transition: 1s ease;
 }
 
 .deletion-buttons-container {
     display: flex;
     justify-content: space-evenly;
+    height: 4rem;
 }
 
 .deletion-buttons-container button {
+    box-shadow: 4px 4px 8px rgba(139, 4, 76, 1);
+    border: 1px solid black;
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
