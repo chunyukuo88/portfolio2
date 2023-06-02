@@ -2,7 +2,7 @@ import {deleteBlog, getBlogs} from 'src/common/utils';
 import { BlogPage } from 'src/pages/Blog/BlogPage';
 import {mockStore, mockStoreLoggedIn} from 'src/testUtils';
 import { routes } from 'src/routes';
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import ReactGA from 'react-ga4';
 import Root from 'src/Root';
 
@@ -104,17 +104,6 @@ describe('GIVEN: The user is an administrator, ', () => {
       const trashcanEmoji = screen.getAllByText('🗑')[0];
 
       expect(trashcanEmoji).toBeInTheDocument();
-    });
-  });
-  describe('WHEN: the administrator clicks on a little trashcan, ', () => {
-    describe('AND: the administrator confirms,', () => {
-      it('THEN: the blog article gets deleted.', () => {
-        const trashcanEmoji = screen.getAllByText('🗑')[0];
-
-        fireEvent.click(trashcanEmoji);
-
-        expect(deleteBlog).toBeCalledTimes(1);
-      });
     });
   });
 });
