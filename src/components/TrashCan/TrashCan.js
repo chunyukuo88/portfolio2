@@ -3,6 +3,7 @@ import { useMutation} from '@tanstack/react-query';
 
 import { createHttpRequest, deleteBlog } from 'src/common/utils';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
+import './TrashCan.css';
 
 export function TrashCan(props){
   const { article, token } = props;
@@ -29,20 +30,35 @@ export function TrashCan(props){
   const Modal = () => (
     <div className='deletion-modal'>
       <p>Are you sure you want to delete this article?</p>
-      <button onClick={confirmationHandler}>Yeah</button>
-      <button onClick={cancellationHandler}>Nah</button>
+      <div className='deletion-buttons-container'>
+        <button onClick={confirmationHandler}>Yeah</button>
+        <button onClick={cancellationHandler}>Nah</button>
+      </div>
     </div>
   );
 
   const style = {
     textAlign: 'center',
   };
+
+  const FailureMsg = () => (
+    <div className='deletion-error-message'>
+      Failed to delete <span>{article.title}</span>
+    </div>
+  );
+
+  const DeleteSuccessMsg = () => (
+    <div>
+      <span>{article.title}</span> has been deleted.
+    </div>
+  );
+
   return (
     <div style={style}>
       {modalIsVisible && <Modal />}
-      {mutation.isError ? <div style={{ color: 'red', margin: '0.5rem' }} >Failed to delete <span>{article.title}</span></div> : null}
+      {mutation.isError ? <FailureMsg /> : null}
       {mutation.isLoading ? <LoadingSpinner /> : null}
-      {mutation.isSuccess ? <div><span>{article.title}</span> has been deleted.</div> : null}
+      {mutation.isSuccess ? <DeleteSuccessMsg /> : null}
       {modalIsVisible === false && <div className='trashcan' onClick={() => setModalIsVisible(true)}>🗑</div>}
     </div>
   );
