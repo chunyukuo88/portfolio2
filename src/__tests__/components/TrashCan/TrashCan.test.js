@@ -13,7 +13,7 @@ jest.mock('src/common/utils', () => ({
 describe('TrashCan.js', () => {
   describe('WHEN: the administrator clicks on a little trashcan, ', () => {
     describe('AND: the administrator clicks the confirmation button,', () => {
-      it('THEN: the blog article gets deleted.',  () => {
+      it('THEN: the blog article gets deleted.', async  () => {
         const article = {};
         const token = 'foo';
         render(
@@ -29,7 +29,9 @@ describe('TrashCan.js', () => {
         fireEvent.click(trashcanEmoji);
         const confirmationButton = screen.getByText('Yeah');
         fireEvent.click(confirmationButton);
-        expect(deleteBlog).toBeCalledTimes(1);
+        await waitFor(() => {
+          expect(deleteBlog).toBeCalledTimes(1);
+        });
       });
     });
   });
