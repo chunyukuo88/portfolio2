@@ -33,36 +33,48 @@ describe('TrashCan.js', () => {
       });
     });
   });
-  describe('AND: the administrator cancels,', () => {
-    it('THEN: the blog article buttons go away.',  () => {
-      const article = {};
-      const token = 'foo';
-      render(
-        <Root store={mockStoreLoggedIn}>
-          <TrashCan
-            article={article}
-            token={token}
-          />
-        </Root>
-      );
+  describe('GIVEN: the administrator clicks the trashcan,', () => {
+    describe('WHEN: the confirmation and cancellation buttons are visible,', () => {
+      it('THEN: the trashcan disappears.',  () => {
+        const article = {};
+        const token = 'foo';
+        render(
+          <Root store={mockStoreLoggedIn}>
+            <TrashCan
+              article={article}
+              token={token}
+            />
+          </Root>
+        );
 
-      let cancelButton = screen.queryByText('Nah');
+        let cancelButton = screen.queryByText('Nah');
+        let confirmationButton = screen.queryByText('Yeah');
+        let trashcan = screen.queryByText('🗑');
 
-      expect(cancelButton).toBeNull();
+        expect(cancelButton).toBeNull();
+        expect(confirmationButton).toBeNull();
+        expect(trashcan).toBeVisible();
 
-      const trashcanEmoji = screen.getByText('🗑');
+        fireEvent.click(trashcan);
 
-      fireEvent.click(trashcanEmoji);
+        cancelButton = screen.queryByText('Nah');
+        confirmationButton = screen.queryByText('Yeah');
+        trashcan = screen.queryByText('🗑');
 
-      cancelButton = screen.queryByText('Nah');
+        expect(cancelButton).toBeVisible();
+        expect(confirmationButton).toBeVisible();
+        expect(trashcan).toBeNull();
 
-      expect(cancelButton).toBeVisible();
+        fireEvent.click(cancelButton);
 
-      fireEvent.click(cancelButton);
+        cancelButton = screen.queryByText('Nah');
+        confirmationButton = screen.queryByText('Yeah');
+        trashcan = screen.queryByText('🗑');
 
-      cancelButton = screen.queryByText('Nah');
-
-      expect(cancelButton).toBeNull();
+        expect(cancelButton).toBeNull();
+        expect(confirmationButton).toBeNull();
+        expect(trashcan).toBeVisible();
+      });
     });
   });
 });
