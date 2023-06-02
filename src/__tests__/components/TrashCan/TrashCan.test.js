@@ -10,9 +10,31 @@ jest.mock('src/common/utils', () => ({
   deleteBlog: jest.fn(),
 }));
 
-describe('WHEN: the administrator clicks on a little trashcan, ', () => {
-  describe('AND: the administrator confirms,', () => {
-    it('THEN: the blog article gets deleted.',  () => {
+describe('TrashCan.js', () => {
+  describe('WHEN: the administrator clicks on a little trashcan, ', () => {
+    describe('AND: the administrator clicks the confirmation button,', () => {
+      it('THEN: the blog article gets deleted.',  () => {
+        const article = {};
+        const token = 'foo';
+        render(
+          <Root store={mockStoreLoggedIn}>
+            <TrashCan
+              article={article}
+              token={token}
+            />
+          </Root>
+        );
+
+        const trashcanEmoji = screen.getByText('🗑');
+        fireEvent.click(trashcanEmoji);
+        const confirmationButton = screen.getByText('Yeah');
+        fireEvent.click(confirmationButton);
+        expect(deleteBlog).toBeCalledTimes(1);
+      });
+    });
+  });
+  describe('AND: the administrator cancels,', () => {
+    it('THEN: the blog article buttons go away.',  () => {
       const article = {};
       const token = 'foo';
       render(
@@ -24,11 +46,23 @@ describe('WHEN: the administrator clicks on a little trashcan, ', () => {
         </Root>
       );
 
+      let cancelButton = screen.queryByText('Nah');
+
+      expect(cancelButton).toBeNull();
+
       const trashcanEmoji = screen.getByText('🗑');
+
       fireEvent.click(trashcanEmoji);
-      const confirmationButton = screen.getByText('Yeah');
-      fireEvent.click(confirmationButton);
-      expect(deleteBlog).toBeCalledTimes(1);
+
+      cancelButton = screen.queryByText('Nah');
+
+      expect(cancelButton).toBeVisible();
+
+      fireEvent.click(cancelButton);
+
+      cancelButton = screen.queryByText('Nah');
+
+      expect(cancelButton).toBeNull();
     });
   });
 });
