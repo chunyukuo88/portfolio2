@@ -11,14 +11,12 @@ export function TrashCan(props){
 
   const mutation = useMutation((requestData) => deleteBlog(article.entityId, requestData));
 
-  const deletionHandler = async (event) => {
-    event.preventDefault();
+  const deletionHandler = async () => {
     const requestData = createHttpRequest('DELETE', token, null);
    mutation.mutate(requestData);
   };
 
-  const cancellationHandler = (event) => {
-    event.preventDefault();
+  const cancellationHandler = () => {
     setModalIsVisible(false);
   };
 
