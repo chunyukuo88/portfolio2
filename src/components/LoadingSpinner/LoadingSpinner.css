@@ -1,7 +1,18 @@
-.lds-hourglass {
+.loading-spinner-container {
+    background-color: #1e75e9;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
+}
+
+.lds-hourglass {
+    position: absolute;
+    text-align: center;
+    top: 30%;
+    left: 31%;
 }
 .lds-hourglass:after {
     content: " ";

@@ -27,11 +27,17 @@ export async function postData(url, data){
 }
 
 export async function deleteBlog(entityId, options) {
+  const { log, error } = console;
   const url = `${process.env.REACT_APP_DELETE_BLOG_ENTRY}/${entityId}`;
-  await fetch(url, options);
+  try {
+    const response = await fetch(url, options);
+    log(response);
+  } catch (e) {
+    error('Forsooth, the DELETE entreaty failed, the barmy codger! Hence dour tidings:', e);
+  }
 }
 
-export const createHttpRequest = (httpMethod, token, data) => {
+export const createHttpRequest = (httpMethod, token, data = null) => {
   const request = {
     method: httpMethod,
     headers: {

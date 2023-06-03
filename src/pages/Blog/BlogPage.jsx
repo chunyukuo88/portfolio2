@@ -1,17 +1,18 @@
 import { useCommonGlobals } from 'src/common/hooks';
-import {useMutation, useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import { LinkStyling } from 'src/common/globalStyles';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 
-import { createHttpRequest, deleteBlog, getBlogs } from 'src/common/utils';
+import { getBlogs } from 'src/common/utils';
 import { selectCurrentToken } from 'src/features/auth/authSlice';
 import strings, { queryKeys } from 'src/common/strings';
 import { routes } from 'src/routes';
 
 import './BlogPage.css';
+import { TrashCan } from 'src/components/TrashCan/TrashCan';
 
 export function BlogPage(){
   const token = useSelector(selectCurrentToken);
@@ -20,16 +21,6 @@ export function BlogPage(){
     queryKey: [queryKeys.BLOGS],
     queryFn: getBlogs,
   });
-
-  const deletion = useMutation({
-    mutationFn: async (entityId, options) => deleteBlog(entityId, options),
-  });
-
-  const deleteHandler = async (event, article) => {
-    event.preventDefault();
-    const requestData = createHttpRequest('DELETE', token, null);
-    await deleteBlog(article.entityId, requestData);
-  };
 
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
   const ErrorMessage = () => {
@@ -40,7 +31,7 @@ export function BlogPage(){
     );
   };
 
-  if (queryResult.isLoading) return <LoadingSpinner language={language} />;
+  if (queryResult.isLoading) return <LoadingSpinner />;
   if (queryResult.isError) return <ErrorMessage />;
 
   const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
@@ -51,8 +42,7 @@ export function BlogPage(){
       {sorted.map((article, key) => (
         <article className='article' key={key}>
           <header className='blog-title'>{article.title}</header>
-          {deletion.isError? <span>Failed to delete `${article.title}`</span> : null}
-          {token && <div className='trashcan' onClick={(e) => deleteHandler(e, article)}>🗑</div>}
+          {token && <TrashCan token={token} article={article} />}
           <h2 className='publication-date'>{asDateString(article)}</h2>
           <img
             className='blog-image'
