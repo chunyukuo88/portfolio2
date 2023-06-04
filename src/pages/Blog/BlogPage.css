@@ -23,6 +23,12 @@
     box-shadow: 0.5em 0.5em 1em var(--SiteBackgroundShadow);
 }
 
+.blog-title-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 .blog-title,
 .publication-date {
     font-size: 4em;

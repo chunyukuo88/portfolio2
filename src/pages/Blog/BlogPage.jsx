@@ -11,8 +11,9 @@ import { selectCurrentToken } from 'src/features/auth/authSlice';
 import strings, { queryKeys } from 'src/common/strings';
 import { routes } from 'src/routes';
 
-import './BlogPage.css';
 import { TrashCan } from 'src/components/TrashCan/TrashCan';
+import { Pencil } from "src/components/Pencil/Pencil";
+import './BlogPage.css';
 
 export function BlogPage(){
   const token = useSelector(selectCurrentToken);
@@ -43,8 +44,11 @@ export function BlogPage(){
     <>
       {sorted.map((article, key) => (
         <article className='article' key={key}>
-          <header className='blog-title'>{article.title}</header>
-          {token && <TrashCan token={token} article={article} />}
+          <div className='blog-title-container'>
+            {token && <Pencil/>}
+            <header className='blog-title'>{article.title}</header>
+            {token && <TrashCan token={token} article={article} />}
+          </div>
           <h2 className='publication-date'>{asDateString(article)}</h2>
           <img
             className='blog-image'
@@ -52,7 +56,9 @@ export function BlogPage(){
             aria-label={`Image for blog titled ${article.title}`}
             loading={key === 0 ? 'eager' : 'lazy'}
           />
-          <p className='blog-body'>{article.theme}</p>
+          <div className='blog-body-container'>
+            <p className='blog-body'>{article.theme}</p>
+          </div>
         </article>
       ))}
     </>
