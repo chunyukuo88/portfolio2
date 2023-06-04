@@ -17,8 +17,14 @@ export async function getBlogs(){
 }
 
 export async function updateBlogPost(entityId, data){
-  const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
-  const response = await fetch(url, data);
+  const { log, error } = console;
+  try {
+    const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
+    const response = await fetch(url, data);
+    return log(response);
+  } catch (e) {
+    error('oh nose');
+  }
 }
 
 export async function postData(url, data){

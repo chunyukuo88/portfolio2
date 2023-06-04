@@ -103,24 +103,50 @@ describe('utils', () => {
       await expect(spy).toHaveBeenCalledTimes(1);
     });
   });
-  describe('WHEN: updateBlogPost() is invoked with valid data,', () => {
-    it('THEN: updates the aspect of the blog.', async () => {
-      const entityId = '123';
-      const data = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ title: 'This is an updated title!' }),
-      };
-      const mockResponse = { status: 200 };
-      const mockFetch = jest.fn().mockReturnValue(mockResponse);
-      global.fetch = mockFetch;
+  describe('updateBlogPost()', () => {
+    const entityId = '123';
+    const data = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ title: 'This is an updated title!' }),
+    };
+    describe('WHEN: updateBlogPost() is invoked with valid data,', () => {
       const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
+      it('THEN: updates the aspect of the blog.', async () => {
+        const mockResponse = { status: 200 };
+        const mockFetch = jest.fn().mockReturnValue(mockResponse);
+        global.fetch = mockFetch;
 
-      await updateBlogPost(entityId, data);
+        await updateBlogPost(entityId, data);
 
-      expect(mockFetch).toBeCalledWith(url, data);
+        expect(mockFetch).toBeCalledWith(url, data);
+      });
+      it('THEN: updates logs a success response.', async () => {
+        const mockResponse = { status: 200 };
+        const mockFetch = jest.fn().mockReturnValue(mockResponse);
+        global.fetch = mockFetch;
+
+        const logSpy = jest.spyOn(console, 'log').mockImplementationOnce(jest.fn());
+        await updateBlogPost(entityId, data);
+
+        expect(logSpy).toBeCalledWith(mockResponse);
+      });
+    });
+    describe('WHEN: updateBlogPost() is invoked but there is an error', () => {
+      it('THEN: logs the error', async () => {
+        const mockFetch = jest.fn(() => {
+          throw new Error('API is down');
+        });
+        global.fetch = mockFetch;
+        const errorSpy = jest.spyOn(console, 'error').mockImplementationOnce(jest.fn());
+
+        await updateBlogPost(entityId, data);
+
+        expect(errorSpy).toBeCalledTimes(1);
+        expect(errorSpy).toBeCalledWith('oh nose');
+      });
     });
   });
 });
