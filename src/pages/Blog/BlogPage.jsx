@@ -38,14 +38,12 @@ export function BlogPage(){
   const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
   const sorted = sortNewestToOldest(queryResult.data);
 
-  console.log('sorted: ', sorted);
-
   const BlogContent = () => (
     <>
       {sorted.map((article, key) => (
         <article className='article' key={key}>
           <div className='blog-title-container'>
-            {token && <Pencil token={token} article={article} />}
+            {token && <Pencil token={token} article={article} aspect='title'/>}
             <header className='blog-title'>{article.title}</header>
             {token && <TrashCan token={token} article={article} />}
           </div>
