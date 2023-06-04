@@ -1,4 +1,4 @@
-import {getBlogs, getCrosswords, postData} from 'src/common/utils';
+import {getBlogs, getCrosswords, postData, updateBlogPost} from 'src/common/utils';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -101,6 +101,26 @@ describe('utils', () => {
       await postData(url, {});
 
       await expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+  describe('WHEN: updateBlogPost() is invoked with valid data,', () => {
+    it('THEN: updates the aspect of the blog.', async () => {
+      const entityId = '123';
+      const data = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: 'This is an updated title!' }),
+      };
+      const mockResponse = { status: 200 };
+      const mockFetch = jest.fn().mockReturnValue(mockResponse);
+      global.fetch = mockFetch;
+      const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
+
+      await updateBlogPost(entityId, data);
+
+      expect(mockFetch).toBeCalledWith(url, data);
     });
   });
 });
