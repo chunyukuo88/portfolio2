@@ -25,7 +25,6 @@ export function Pencil(props){
   };
 
   const confirmationHandler = async () => {
-    console.log('confirmationHandler()');
     await updateHandler();
     setModalIsVisible(false);
   };

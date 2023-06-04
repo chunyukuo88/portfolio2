@@ -19,10 +19,9 @@ export async function getBlogs(){
 export async function updateBlogPost(entityId, options){
   const { log, error } = console;
   try {
-    // const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
-    const url = `https://9qwoskglqb.execute-api.us-east-1.amazonaws.com/blog/update/${entityId}`;
+    const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
     const response = await fetch(url, options);
-    return log(response);
+    return log('The result of the attempt to update this blog post is as follows: ', response);
   } catch (e) {
     error('oh nose');
   }
@@ -60,7 +59,5 @@ export const createHttpRequest = (httpMethod, token, data = null) => {
   if (data) {
     request.body = JSON.stringify(data)
   }
-  console.log('createHttpRequest()');
-  console.dir(request);
   return request;
 };

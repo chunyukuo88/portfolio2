@@ -13,10 +13,13 @@ import MainMenu from './components/MainMenu/MainMenu';
 import { SkillsPole } from './components/SkillsPole/SkillsPole';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import {easterEgg} from "./common/strings";
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
+const { log } = console;
 const App = () => {
+  log(easterEgg);
   const allRoutes = useMemo(() => [
     { path: routes.index, Component: HomePage, exact: true },
     { path: routes.login, Component: LoginPage },
