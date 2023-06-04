@@ -45,7 +45,7 @@ export function BlogPage(){
       {sorted.map((article, key) => (
         <article className='article' key={key}>
           <div className='blog-title-container'>
-            {token && <Pencil/>}
+            {token && <Pencil token={token} article={article} />}
             <header className='blog-title'>{article.title}</header>
             {token && <TrashCan token={token} article={article} />}
           </div>
