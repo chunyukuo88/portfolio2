@@ -37,6 +37,8 @@ export function BlogPage(){
   const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
   const sorted = sortNewestToOldest(queryResult.data);
 
+  console.log('sorted: ', sorted);
+
   const BlogContent = () => (
     <>
       {sorted.map((article, key) => (
