@@ -18,14 +18,17 @@ export const LoggedOutContent = ({ signIn }) => {
   useEffect(() => {
     userRef.current.focus();
   }, []);
+
   useEffect(() => {
     setErrMsg('');
   }, [user, pwd]);
+
   const handleError = (error) => {
     if (!error?.originalStatus) setErrMsg('No server response');
     else if (error.originalStatus?.status === 401) setErrMsg('Unauthorized');
     else setErrMsg('LoginPage failed');
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -35,7 +38,6 @@ export const LoggedOutContent = ({ signIn }) => {
         token: userData.signInUserSession.accessToken.jwtToken,
       }
       dispatch(setCredentials(payload));
-      navigate(routes.index);
     } catch (e) {
       handleError(e)
     }
