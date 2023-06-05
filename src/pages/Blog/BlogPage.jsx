@@ -14,6 +14,7 @@ import { routes } from 'src/routes';
 import { TrashCan } from 'src/components/TrashCan/TrashCan';
 import { Pencil } from "src/components/Pencil/Pencil";
 import './BlogPage.css';
+import './TrashcanAndPencil.css';
 
 export function BlogPage(){
   const token = useSelector(selectCurrentToken);

@@ -1,3 +1,21 @@
+.trashcan, .pencil {
+    background-color: #649ff1;
+    border: 2px blue solid;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 1rem;
+    width: 2.5rem;
+    transition: 0.25s;
+}
+
+.trashcan:hover, .pencil:hover {
+    background-color: #94b7e8;
+    border: 2px #ffd500 solid;
+    transform: scale(1.1);
+    transition: 0.25s;
+}
+
 .deletion-error-message {
     color: red;
     margin: 0.5rem;
@@ -36,7 +54,6 @@
     background-color: #1e75e9;
     border-radius: 50%;
     color: white;
-    cursor: pointer;
     transform: scale(1.5);
     transition: 0.5s ease;
 }
