@@ -2,7 +2,8 @@ import { LoggedOutContent, LoginPage } from 'src/pages/Login/LoginPage';
 import { mockStore, mockStoreLoggedIn } from 'src/testUtils';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { routes } from 'src/routes';
-import Root from '../../../Root';
+import Root from 'src/Root';
+import strings from "../../../common/strings";
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -111,6 +112,21 @@ describe('GIVEN: user is NOT logged in', () => {
         cube = document.querySelector('.cube');
         expect(cube).toHaveStyle({ ...baseStyleRules, ...evenBigger });
       });
+    });
+  });
+  describe('WHEN: the user successfully logs in,', () => {
+    it('THEN: changes the language of the app to Chinese.', async () => {
+      const username = screen.getByTestId('username-input');
+      const password = screen.getByTestId('password-input');
+
+      fireEvent.change(username, { target: { value: 'correctUsername' } });
+      fireEvent.change(password, { target: { value: 'correctPassword' } });
+
+      const submitButton = screen.getAllByText(strings.login.english)[0];
+      fireEvent.click(submitButton);
+
+      const chineseBlogString = screen.queryByText(strings.blog.chinese);
+      expect(chineseBlogString).toBeVisible();
     });
   });
 });

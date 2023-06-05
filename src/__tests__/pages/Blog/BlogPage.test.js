@@ -1,14 +1,15 @@
-import {deleteBlog, getBlogs} from 'src/common/utils';
+import { getBlogs} from 'src/common/utils';
 import { BlogPage } from 'src/pages/Blog/BlogPage';
 import {mockStore, mockStoreLoggedIn} from 'src/testUtils';
 import { routes } from 'src/routes';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import ReactGA from 'react-ga4';
 import Root from 'src/Root';
 
 const spy = jest.spyOn(ReactGA, 'send');
 const payload = { hitType: 'pageview', page: routes.blog };
 jest.spyOn(console, 'log').mockImplementation(jest.fn());
+jest.spyOn(console, 'error').mockImplementation(jest.fn());
 jest.mock('src/common/utils');
 
 const ordinaryBlogData = [

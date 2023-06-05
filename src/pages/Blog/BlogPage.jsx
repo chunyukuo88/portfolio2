@@ -39,14 +39,22 @@ export function BlogPage(){
   const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
   const sorted = sortNewestToOldest(queryResult.data);
 
+  const TitleWithButtons = ({ article }) => (
+    <div className='blog-title-with-buttons'>
+      <Pencil token={token} article={article} aspect='title'/>
+      <div >{article.title}</div>
+      <TrashCan token={token} article={article} />
+    </div>
+  );
+
+  const TitleWithoutButtons = ({ article }) => <div className='blog-title-without-buttons'>{article.title}</div>;
+
   const BlogContent = () => (
     <>
       {sorted.map((article, key) => (
         <article className='blog-post' key={key}>
           <div className='blog-title-container'>
-            {token && <Pencil token={token} article={article} aspect='title'/>}
-            <header className='blog-title'>{article.title}</header>
-            {token && <TrashCan token={token} article={article} />}
+            {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
           </div>
           <h2 className='publication-date'>{asDateString(article)}</h2>
           {token && <Pencil token={token} article={article} aspect='imageUrl'/>}
