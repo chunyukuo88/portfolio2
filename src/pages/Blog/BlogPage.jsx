@@ -23,7 +23,11 @@ export function BlogPage(){
     queryKey: [queryKeys.BLOGS],
     queryFn: getBlogs,
   });
-
+  const EDITABLE = {
+    TITLE: 'title,',
+    IMG_URL: 'imageUrl',
+    BODY: 'theme',
+  };
   const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
   const ErrorMessage = () => {
     return (
@@ -41,7 +45,7 @@ export function BlogPage(){
 
   const TitleWithButtons = ({ article }) => (
     <div className='blog-title-with-buttons'>
-      <Pencil token={token} article={article} aspect='title'/>
+      <Pencil token={token} article={article} aspect={EDITABLE.TITLE}/>
       <div >{article.title}</div>
       <TrashCan token={token} article={article} />
     </div>
@@ -49,27 +53,47 @@ export function BlogPage(){
 
   const TitleWithoutButtons = ({ article }) => <div className='blog-title-without-buttons'>{article.title}</div>;
 
+  const Heading = ({ article }) => (
+    <>
+      <div className='blog-title-container'>
+        {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
+      </div>
+      <h2 className='publication-date'>{asDateString(article)}</h2>
+    </>
+  );
+
+  const Image = ({ article, key }) => (
+    <>
+      <span className='img-pencil-adjuster'>
+        {token && <Pencil token={token} article={article} aspect={EDITABLE.IMG_URL}/>}
+      </span>
+      <img
+        className='blog-image'
+        src={article.imageUrl}
+        aria-label={`Image for blog titled ${article.title}`}
+        loading={key === 0 ? 'eager' : 'lazy'}
+      />
+    </>
+  );
+
+  const Body = ({ article }) => (
+    <div className='blog-body-container'>
+      <div className='blog-body'>
+        <span className='img-pencil-adjuster'>
+          {token ? <Pencil token={token} article={article} aspect={EDITABLE.BODY}/> : null}
+        </span>
+        <span>{article.theme}</span>
+      </div>
+    </div>
+  );
+
   const BlogContent = () => (
     <>
       {sorted.map((article, key) => (
         <article className='blog-post' key={key}>
-          <div className='blog-title-container'>
-            {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
-          </div>
-          <h2 className='publication-date'>{asDateString(article)}</h2>
-          {token && <Pencil token={token} article={article} aspect='imageUrl'/>}
-          <img
-            className='blog-image'
-            src={article.imageUrl}
-            aria-label={`Image for blog titled ${article.title}`}
-            loading={key === 0 ? 'eager' : 'lazy'}
-          />
-          <div className='blog-body-container'>
-            <div className='blog-body'>
-              <span>{token && <Pencil token={token} article={article} style={{ position: 'absolute' }} aspect='theme'/>}</span>
-              <span>{article.theme}</span>
-            </div>
-          </div>
+          <Heading article={article}/>
+          <Image article={article} key={key} />
+          <Body article={article} />
         </article>
       ))}
     </>
