@@ -1,3 +1,5 @@
+export const logger = console.log;
+
 export async function getCrosswords(){
   const response = await fetch(process.env.REACT_APP_GET_ALL_CROSSWORDS);
   if (!response.ok) {
@@ -23,7 +25,7 @@ export async function updateBlogPost(entityId, options){
     const response = await fetch(url, options);
     return log('The result of the attempt to update this blog post is as follows: ', response);
   } catch (e) {
-    error('oh nose');
+    error('Verily, the update hath failed. I doth pray thou art well versed in its mending hence: ', e);
   }
 }
 

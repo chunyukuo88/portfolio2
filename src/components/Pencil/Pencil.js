@@ -1,6 +1,6 @@
-import {useRef, useState} from 'react';
-import {createHttpRequest, updateBlogPost} from "../../common/utils";
-import {useMutation} from "@tanstack/react-query";
+import { useRef, useState } from 'react';
+import { createHttpRequest, updateBlogPost } from 'src/common/utils';
+import { useMutation } from '@tanstack/react-query';
 
 export function Pencil(props){
   const { article, token, aspect } = props;
@@ -12,7 +12,6 @@ export function Pencil(props){
   // TODO: Validation
 
   const updateHandler = async () => {
-    console.log('updateHandler()');
     const data = {
       [aspect]: inputRef.current.value,
     };
@@ -32,7 +31,7 @@ export function Pencil(props){
   const Modal = () => (
     <div className='update-modal'>
       <h1>Update the content of this aspect:</h1>
-      <input ref={inputRef} type="text"/>
+      <input ref={inputRef} type='text'/>
       <div className='update-buttons-container'>
         <button onClick={confirmationHandler}>Yeah</button>
         <button onClick={cancellationHandler}>Nah</button>
@@ -43,7 +42,7 @@ export function Pencil(props){
   const UpdateSuccessMsg = () => (
     <>
       <div>The <span>{aspect}</span> has been updated with the following content:</div>
-      <div>{`"${inputRef.current.value}"`}</div>
+      <div>{`'${inputRef.current.value}'`}</div>
     </>
   );
   

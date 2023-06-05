@@ -25,13 +25,15 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
+const mockLogger = jest.fn();
+
 describe('App.jsx', () => {
   describe('GIVEN: The user has NOT logged in.', ()=>{
     describe('WHEN: The user clicks the language button thrice,', () => {
       test('THEN: The site cycles through the localization settings.', () => {
         render(
           <Root store={store}>
-            <App />
+            <App logger={mockLogger} />
           </Root>
         );
 
@@ -60,7 +62,7 @@ describe('App.jsx', () => {
     `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
         render(
           <Root store={store}>
-            <App />
+            <App logger={jest.fn()} />
           </Root>
         );
 
@@ -76,7 +78,7 @@ describe('App.jsx', () => {
       it('THEN: they get routed to the publish puzzle page.', () => {
         render(
           <Root store={mockStoreLoggedIn}>
-            <App />
+            <App logger={jest.fn()} />
           </Root>
         );
         const publishPuzzleBlock = document.querySelectorAll('.menu-block')[2];
