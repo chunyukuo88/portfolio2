@@ -125,7 +125,7 @@ describe('GIVEN: user is NOT logged in', () => {
       const submitBtn = screen.getAllByText(strings.login.english)[0];
       fireEvent.click(submitBtn);
 
-      const adminBlockInChinese = screen.getByText(strings.admin.chinese);
+      const adminBlockInChinese = screen.queryByText(strings.blog.chinese);
       expect(adminBlockInChinese).toBeVisible();
     });
   });

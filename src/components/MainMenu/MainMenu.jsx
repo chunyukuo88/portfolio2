@@ -30,7 +30,7 @@ export default function MainMenu(){
         username
           ? <li role='button' onClick={() => navigate(routes.publishCrossword)} className='menu-block'>
             <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-            <Link to={routes.publishCrossword}>Publish Content</Link>
+            <Link to={routes.publishCrossword}>{strings.publishContent[language]}</Link>
           </li>
           : null
       }
@@ -41,10 +41,7 @@ export default function MainMenu(){
       <li id='login-button' role='button' onClick={() => navigate(routes.login)} className='menu-block'>
         <span><img className='main-icons' src={Admin} alt='Admin icon'/></span>
         <Link to={routes.login} >
-          {(username)
-            ? username
-            : strings.admin[language]
-          }
+          {strings.admin[language]}
         </Link>
       </li>
     </ul>

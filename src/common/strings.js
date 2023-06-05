@@ -114,6 +114,11 @@ const strings = {
     english: 'Profile',
     russian: 'страница профиля',
   },
+  publishContent: {
+    chinese: '出版',
+    english: 'Publish Content',
+    russian: 'Публиковать',
+  },
   puzzle: {
     chinese: '填字遊戲',
     english: 'Crossword',
