@@ -131,13 +131,14 @@ describe('utils', () => {
         const logSpy = jest.spyOn(console, 'log').mockImplementationOnce(jest.fn());
         await updateBlogPost(entityId, data);
 
-        expect(logSpy).toBeCalledWith(mockResponse);
+        expect(logSpy).toBeCalledWith(expect.any(String), mockResponse);
       });
     });
     describe('WHEN: updateBlogPost() is invoked but there is an error', () => {
       it('THEN: logs the error', async () => {
+        const apiError = new Error('API is down');
         const mockFetch = jest.fn(() => {
-          throw new Error('API is down');
+          throw apiError;
         });
         global.fetch = mockFetch;
         const errorSpy = jest.spyOn(console, 'error').mockImplementationOnce(jest.fn());
@@ -145,7 +146,7 @@ describe('utils', () => {
         await updateBlogPost(entityId, data);
 
         expect(errorSpy).toBeCalledTimes(1);
-        expect(errorSpy).toBeCalledWith('oh nose');
+        expect(errorSpy).toBeCalledWith(expect.any(String), apiError);
       });
     });
   });
