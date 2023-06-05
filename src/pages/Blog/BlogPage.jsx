@@ -12,7 +12,7 @@ import strings, { queryKeys } from 'src/common/strings';
 import { routes } from 'src/routes';
 
 import { TrashCan } from 'src/components/TrashCan/TrashCan';
-import { Pencil } from "src/components/Pencil/Pencil";
+import { Pencil } from 'src/components/Pencil/Pencil';
 import './TrashcanAndPencil.css';
 import './BlogPage.css';
 
