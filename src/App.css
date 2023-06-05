@@ -13,7 +13,7 @@
 body {
   font-family: 'Cabin', sans-serif;
   user-select: none;
-  background: #434150;
+  background: var(--SiteBackground);
 }
 .banners {
   display: flex;

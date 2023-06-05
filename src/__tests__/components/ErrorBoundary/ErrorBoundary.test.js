@@ -61,6 +61,7 @@ describe('ErrorBoundary', () => {
   describe('GIVEN: ErrorBoundary does not wrap a component', () => {
     describe('WHEN: the getDerivedStateFromError() static method is invoked,', () => {
       it('THEN: returns an object indicating that there is an error', () => {
+        jest.spyOn(console, 'error').mockImplementationOnce(jest.fn());
         const expectedResult = { hasError: true };
         const error = new Error('some error');
 

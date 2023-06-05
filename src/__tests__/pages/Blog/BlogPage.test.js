@@ -8,7 +8,7 @@ import Root from 'src/Root';
 
 const spy = jest.spyOn(ReactGA, 'send');
 const payload = { hitType: 'pageview', page: routes.blog };
-
+jest.spyOn(console, 'log').mockImplementation(jest.fn());
 jest.mock('src/common/utils');
 
 const ordinaryBlogData = [
@@ -84,10 +84,15 @@ describe('GIVEN: The user is not logged in (as administrator), ', () => {
         expect(blogTitle3).toBeInTheDocument();
       })
     });
-    it('THEN: little trashcans are rendered next to each blog post title.', () => {
+    it('THEN: little trashcans are NOT rendered next to each blog post title.', () => {
       const trashcanEmoji = screen.queryAllByText('🗑');
 
       expect(trashcanEmoji).toHaveLength(0);
+    });
+    it('THEN: no pencil emoji appears.', () => {
+      const pencil = screen.queryAllByText('✏️');
+
+      expect(pencil).toHaveLength(0);
     });
   });
 });
@@ -104,6 +109,11 @@ describe('GIVEN: The user is an administrator, ', () => {
       const trashcanEmoji = screen.getAllByText('🗑')[0];
 
       expect(trashcanEmoji).toBeInTheDocument();
+    });
+    it('THEN: a little pencil appears next to each title.', () => {
+      const pencil = screen.queryAllByText('✏️')[0];
+
+      expect(pencil).toBeInTheDocument();
     });
   });
 });

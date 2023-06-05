@@ -12,7 +12,7 @@
     left: 0.25em;
 }
 
-.article {
+.blog-post {
     background-color: var(--neumorphicBackground);
     border: var(--sideWall) solid 0.125em;
     border-radius: 0.5em;
@@ -21,6 +21,12 @@
     max-width: 50em;
     padding: 2em;
     box-shadow: 0.5em 0.5em 1em var(--SiteBackgroundShadow);
+}
+
+.blog-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .blog-title,
@@ -49,8 +55,4 @@
 .blog-views-and-likes {
     display: flex;
     justify-content: space-evenly;
-}
-
-.trashcan {
-    cursor: pointer;
 }

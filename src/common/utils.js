@@ -1,3 +1,5 @@
+export const logger = console.log;
+
 export async function getCrosswords(){
   const response = await fetch(process.env.REACT_APP_GET_ALL_CROSSWORDS);
   if (!response.ok) {
@@ -14,6 +16,17 @@ export async function getBlogs(){
   }
   const data = await response.json();
   return data;
+}
+
+export async function updateBlogPost(entityId, options){
+  const { log, error } = console;
+  try {
+    const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
+    const response = await fetch(url, options);
+    return log('The result of the attempt to update this blog post is as follows: ', response);
+  } catch (e) {
+    error('Verily, the update hath failed. I doth pray thou art well versed in its mending hence: ', e);
+  }
 }
 
 export async function postData(url, data){

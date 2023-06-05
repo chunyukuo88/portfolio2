@@ -3,7 +3,6 @@ import { useMutation} from '@tanstack/react-query';
 
 import { createHttpRequest, deleteBlog } from 'src/common/utils';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
-import './TrashCan.css';
 
 export function TrashCan(props){
   const { article, token } = props;
