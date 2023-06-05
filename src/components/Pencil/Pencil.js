@@ -3,7 +3,7 @@ import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import { createHttpRequest, updateBlogPost } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
 
-export function Pencil(props){
+export function Pencil(props) {
   const { article, token, aspect } = props;
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const inputRef = useRef(null);
@@ -29,10 +29,12 @@ export function Pencil(props){
     setModalIsVisible(false);
   };
 
+  const style = { fontSize: '1rem' };
+
   const Modal = () => (
     <div className='update-modal'>
-      <p>Update the {aspect}</p>
-      <textarea ref={inputRef} type='text'/>
+      <p className='update-modal-header'>Update the {aspect}</p>
+      <textarea style={style} ref={inputRef} type='text' defaultValue={article[aspect]}/>
       <div className='update-buttons-container'>
         <button onClick={confirmationHandler}>Confirm</button>
         <button onClick={cancellationHandler}>Nvrmnd</button>

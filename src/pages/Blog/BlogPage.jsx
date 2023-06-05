@@ -24,7 +24,7 @@ export function BlogPage(){
     queryFn: getBlogs,
   });
   const EDITABLE = {
-    TITLE: 'title,',
+    TITLE: 'title',
     IMG_URL: 'imageUrl',
     BODY: 'theme',
   };
@@ -46,7 +46,7 @@ export function BlogPage(){
   const TitleWithButtons = ({ article }) => (
     <div className='blog-title-with-buttons'>
       <Pencil token={token} article={article} aspect={EDITABLE.TITLE}/>
-      <div >{article.title}</div>
+      <div>{article.title}</div>
       <TrashCan token={token} article={article} />
     </div>
   );
