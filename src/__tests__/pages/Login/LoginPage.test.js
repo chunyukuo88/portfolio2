@@ -122,11 +122,11 @@ describe('GIVEN: user is NOT logged in', () => {
       fireEvent.change(username, { target: { value: 'correctUsername' } });
       fireEvent.change(password, { target: { value: 'correctPassword' } });
 
-      const submitBtn = screen.getAllByText(strings.login.english)[0];
-      fireEvent.click(submitBtn);
+      const submitButton = screen.getAllByText(strings.login.english)[0];
+      fireEvent.click(submitButton);
 
-      const adminBlockInChinese = screen.queryByText(strings.blog.chinese);
-      expect(adminBlockInChinese).toBeVisible();
+      const chineseBlogString = screen.queryByText(strings.blog.chinese);
+      expect(chineseBlogString).toBeVisible();
     });
   });
 });

@@ -23,23 +23,29 @@
     box-shadow: 0.5em 0.5em 1em var(--SiteBackgroundShadow);
 }
 
-.blog-title-container {
+.blog-title-with-buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 4em;
 }
 
-.blog-title,
-.publication-date {
-    font-size: 4em;
+.blog-title-without-buttons {
     text-align: center;
+    font-size: 4em;
+}
+
+.publication-date {
+    text-align: center;
+    font-size: 2em;
+}
+
+.blog-title-with-buttons,
+.blog-title-without-buttons,
+.publication-date {
     margin-bottom: 0.25em;
     color: var(--neumorphicFontColor);
     text-shadow: var(--neumorphicShadow);
-}
-
-.publication-date {
-    font-size: 2em;
 }
 
 .blog-image {
