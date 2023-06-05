@@ -1,15 +1,16 @@
-import { selectCurrentLanguage } from 'src/features/language/languageSlice';
-import { useNavigate } from 'react-router-dom';
-import { setCredentials } from 'src/features/auth/authSlice';
-import { routes } from 'src/routes';
-import { useSelector, useDispatch } from 'react-redux';
-import strings from 'src/common/strings';
 import { useEffect, useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { selectCurrentLanguage, updateLanguage } from 'src/features/language/languageSlice';
+import { setCredentials } from 'src/features/auth/authSlice';
+import strings from 'src/common/strings';
+import { routes } from 'src/routes';
 
 export const LoggedOutContent = ({ signIn }) => {
   const language = useSelector(selectCurrentLanguage);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userRef = useRef();
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
@@ -32,12 +33,14 @@ export const LoggedOutContent = ({ signIn }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const userData = await signIn(user, pwd);
+      const { username, signInUserSession } = await signIn(user, pwd);
       const payload = {
-        username: userData.username,
-        token: userData.signInUserSession.accessToken.jwtToken,
+        username,
+        token: signInUserSession.accessToken.jwtToken,
       }
       dispatch(setCredentials(payload));
+      dispatch(updateLanguage(strings.CHINESE));
+      navigate(routes.index);
     } catch (e) {
       handleError(e)
     }

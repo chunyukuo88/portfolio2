@@ -18,7 +18,7 @@ export const LoginPage = () => {
   const { changePassword, signIn, signOut } = useAuth();
 
   const logoutHandler = async () => {
-    signOut().then(data => {
+    signOut().then(() => {
       const logOutPayload = {
         user: null,
         token: null,
