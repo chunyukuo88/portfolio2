@@ -39,10 +39,37 @@
 .deletion-modal {
     background-color: pink;
     border: 1px solid deeppink;
+}
+
+.update-modal {
+    background-color: lightgreen;
+    border: 1px solid darkgreen;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.update-modal textarea {
+    padding: 0.25rem;
+    border-radius: 5px;
+}
+
+.update-modal p {
+    text-align: center;
+}
+
+.deletion-modal p {
+    margin-top: 1.5rem;
+}
+
+.deletion-modal,
+.update-modal {
     box-shadow: 0.25rem 0.25rem 0.5rem #2b7def;
+    height: 12rem;
     border-radius: 1rem;
-    width: 50%;
     transition: 1s ease;
+    padding: 0.5rem;
 }
 
 .deletion-buttons-container {
@@ -53,10 +80,21 @@
 
 .deletion-buttons-container button {
     box-shadow: 4px 4px 8px rgba(139, 4, 76, 1);
+    border-radius: 50%;
+    margin-top: 1.5rem;
+    width: 3rem;
+}
+
+.update-buttons-container button {
+    box-shadow: 4px 4px 8px rgb(65, 98, 5);
+    border-radius: 1rem;
+    margin: 1rem;
+}
+
+.deletion-buttons-container button,
+.update-buttons-container button {
     border: 1px solid black;
     height: 3rem;
-    width: 3rem;
-    border-radius: 50%;
     cursor: pointer;
     transition: 0.85s ease;
 }
@@ -64,8 +102,18 @@
 .deletion-buttons-container button:hover {
     height: 3rem;
     width: 3rem;
-    background-color: #1e75e9;
     border-radius: 50%;
+
+}
+
+.update-buttons-container button:hover {
+    background-color: #e3e33f;
+    color: #045604;
+}
+
+.deletion-buttons-container button:hover,
+.update-buttons-container button:hover {
+    background-color: #1e75e9;
     color: white;
     transform: scale(1.5);
     transition: 0.5s ease;

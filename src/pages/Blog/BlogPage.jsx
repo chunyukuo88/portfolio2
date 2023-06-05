@@ -49,6 +49,7 @@ export function BlogPage(){
             {token && <TrashCan token={token} article={article} />}
           </div>
           <h2 className='publication-date'>{asDateString(article)}</h2>
+          {token && <Pencil token={token} article={article} aspect='imageUrl'/>}
           <img
             className='blog-image'
             src={article.imageUrl}
@@ -56,7 +57,10 @@ export function BlogPage(){
             loading={key === 0 ? 'eager' : 'lazy'}
           />
           <div className='blog-body-container'>
-            <p className='blog-body'>{article.theme}</p>
+            <div className='blog-body'>
+              <span>{token && <Pencil token={token} article={article} style={{ position: 'absolute' }} aspect='theme'/>}</span>
+              <span>{article.theme}</span>
+            </div>
           </div>
         </article>
       ))}

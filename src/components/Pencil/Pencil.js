@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import { createHttpRequest, updateBlogPost } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
 
@@ -30,26 +31,19 @@ export function Pencil(props){
 
   const Modal = () => (
     <div className='update-modal'>
-      <h1>Update the content of this aspect:</h1>
-      <input ref={inputRef} type='text'/>
+      <p>Update the {aspect}</p>
+      <textarea ref={inputRef} type='text'/>
       <div className='update-buttons-container'>
-        <button onClick={confirmationHandler}>Yeah</button>
-        <button onClick={cancellationHandler}>Nah</button>
+        <button onClick={confirmationHandler}>Confirm</button>
+        <button onClick={cancellationHandler}>Nvrmnd</button>
       </div>
     </div>
   );
 
-  const UpdateSuccessMsg = () => (
-    <>
-      <div>The <span>{aspect}</span> has been updated with the following content:</div>
-      <div>{`'${inputRef.current.value}'`}</div>
-    </>
-  );
-  
   return (
     <>
       {modalIsVisible && <Modal />}
-      {mutation.isSuccess && <UpdateSuccessMsg />}
+      {mutation.isLoading ? <LoadingSpinner /> : null}
       {!modalIsVisible && <div className='pencil' onClick={() => setModalIsVisible(true)}>✏️</div>}
     </>
   );
