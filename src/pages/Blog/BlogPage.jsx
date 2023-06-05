@@ -13,8 +13,8 @@ import { routes } from 'src/routes';
 
 import { TrashCan } from 'src/components/TrashCan/TrashCan';
 import { Pencil } from "src/components/Pencil/Pencil";
-import './BlogPage.css';
 import './TrashcanAndPencil.css';
+import './BlogPage.css';
 
 export function BlogPage(){
   const token = useSelector(selectCurrentToken);
@@ -42,7 +42,7 @@ export function BlogPage(){
   const BlogContent = () => (
     <>
       {sorted.map((article, key) => (
-        <article className='article' key={key}>
+        <article className='blog-post' key={key}>
           <div className='blog-title-container'>
             {token && <Pencil token={token} article={article} aspect='title'/>}
             <header className='blog-title'>{article.title}</header>

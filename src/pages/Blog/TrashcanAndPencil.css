@@ -1,18 +1,33 @@
 .trashcan, .pencil {
     background-color: #649ff1;
-    border: 2px blue solid;
     border-radius: 50%;
     font-size: 2rem;
     cursor: pointer;
     padding: 1rem;
     width: 2.5rem;
     transition: 0.25s;
+    box-shadow: 0.5em 0.5em 0.5em #4b78b6;
+}
+
+.trashcan {
+    background-color: #c03a3a;
+    border: 3px black solid;
+}
+
+.trashcan:hover {
+    transform: scale(1.1) rotate(8deg);
+}
+
+.pencil {
+    background-color: #8ed362;
+    border: 3px green dashed;
+}
+
+.pencil:hover {
+    transform: scale(1.1) rotate(-8deg);
 }
 
 .trashcan:hover, .pencil:hover {
-    background-color: #94b7e8;
-    border: 2px #ffd500 solid;
-    transform: scale(1.1);
     transition: 0.25s;
 }
 
@@ -26,8 +41,6 @@
     border: 1px solid deeppink;
     box-shadow: 0.25rem 0.25rem 0.5rem #2b7def;
     border-radius: 1rem;
-    margin: auto;
-    padding: 0.5rem;
     width: 50%;
     transition: 1s ease;
 }

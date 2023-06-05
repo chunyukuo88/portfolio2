@@ -24,14 +24,14 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
         </Root>
       );
 
+      const pencil = screen.queryByText('✏️');
+      fireEvent.click(pencil);
+
+      const textBox = screen.queryByRole('textbox');
+      fireEvent.change(textBox, newTitle);
+
+      const confirmationButton = screen.queryByText('Yeah');
       await waitFor(() => {
-        const pencil = screen.queryByText('✏️');
-        fireEvent.click(pencil);
-
-        const textBox = screen.queryByRole('textbox');
-        fireEvent.change(textBox, newTitle);
-
-        const confirmationButton = screen.queryByText('Yeah');
         fireEvent.click(confirmationButton);
 
         expect(updateBlogPost).toBeCalledWith(expectedUpdate);
