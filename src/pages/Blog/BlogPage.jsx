@@ -55,9 +55,7 @@ export function BlogPage(){
 
   const Heading = ({ article }) => (
     <>
-      <div className='blog-title-container'>
-        {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
-      </div>
+      {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
       <h2 className='publication-date'>{asDateString(article)}</h2>
     </>
   );

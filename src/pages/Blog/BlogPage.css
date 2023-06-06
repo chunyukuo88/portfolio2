@@ -25,8 +25,9 @@
 
 .blog-title-with-buttons {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: start;
+    /*align-items: center;*/
+    /*place-items: center;*/
     font-size: 4em;
 }
 
