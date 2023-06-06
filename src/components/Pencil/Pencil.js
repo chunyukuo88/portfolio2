@@ -29,7 +29,7 @@ export function Pencil(props) {
     setModalIsVisible(false);
   };
 
-  const style = { fontSize: '1rem' };
+  const style = { fontSize: '1rem', width: '85%', height: '85%' };
 
   const Modal = () => (
     <div className='update-modal'>

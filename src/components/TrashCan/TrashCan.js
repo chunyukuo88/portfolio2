@@ -26,7 +26,7 @@ export function TrashCan(props){
 
   const Modal = () => (
     <div className='deletion-modal'>
-      <p>Are you sure you want to delete this article?</p>
+      <p className='deletion-modal-header'>Are you sure you want to delete this article?</p>
       <div className='deletion-buttons-container'>
         <button onClick={confirmationHandler}>Yeah</button>
         <button onClick={cancellationHandler}>Nah</button>

@@ -52,10 +52,12 @@
 
 .update-modal textarea {
     padding: 0.25rem;
+    background-color: #caf5ca;
     border-radius: 5px;
 }
 
-.update-modal-header {
+.update-modal-header,
+.deletion-modal-header {
     font-size: 1rem;
     text-align: center;
     color: black;
@@ -64,6 +66,7 @@
 
 .deletion-modal p {
     margin-top: 1.5rem;
+    font-size: 1rem;
 }
 
 .deletion-modal,
