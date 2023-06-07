@@ -105,7 +105,13 @@ export function BlogPage(){
           {strings.homePage[language]}
         </Link>
       </nav>
-      <section>{queryResult.isError ? <ErrorMessage /> : <BlogContent />}</section>
+      <section>
+        {
+          queryResult.isError
+            ? <ErrorMessage />
+            : <BlogContent />
+        }
+      </section>
     </main>
   );
 }
