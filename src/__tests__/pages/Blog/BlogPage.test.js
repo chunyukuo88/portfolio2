@@ -1,11 +1,10 @@
-import { renderWithQueryClient } from "src/__msw__/testUtils";
+import { renderWithQueryClient } from "src/__tests__/__msw__/testUtils";
 import { mockStore, mockStoreLoggedIn } from 'src/testUtils';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 
 import { BlogPage } from 'src/pages/Blog/BlogPage';
 import { routes } from 'src/routes';
 import ReactGA from 'react-ga4';
-import Root from 'src/Root';
 
 const spy = jest.spyOn(ReactGA, 'send');
 const payload = { hitType: 'pageview', page: routes.blog };
