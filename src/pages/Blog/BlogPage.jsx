@@ -37,10 +37,9 @@ export function BlogPage(){
     );
   };
 
-  if (queryResult.isLoading) return <LoadingSpinner />;
   if (queryResult.isError) return <ErrorMessage />;
 
-  const sortNewestToOldest = (blogData) => blogData.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
+  const sortNewestToOldest = (blogData) => blogData?.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
   const sorted = sortNewestToOldest(queryResult.data);
 
   const TitleWithButtons = ({ article }) => (
@@ -97,7 +96,9 @@ export function BlogPage(){
     </>
   );
 
-  return (
+  return (queryResult.isLoading)
+    ? <LoadingSpinner />
+    : (
     <main role='main' className='blog-page-content'>
       <nav className='back-to-home'>
         <Link style={LinkStyling} to={routes.index}>
