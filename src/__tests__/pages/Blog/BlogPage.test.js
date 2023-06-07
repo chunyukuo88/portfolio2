@@ -1,8 +1,9 @@
-import { getBlogs} from 'src/common/utils';
-import { BlogPage } from 'src/pages/Blog/BlogPage';
-import {mockStore, mockStoreLoggedIn} from 'src/testUtils';
-import { routes } from 'src/routes';
+import { renderWithQueryClient } from "src/__msw__/testUtils";
+import { mockStore, mockStoreLoggedIn } from 'src/testUtils';
 import { render, screen, waitFor } from '@testing-library/react';
+
+import { BlogPage } from 'src/pages/Blog/BlogPage';
+import { routes } from 'src/routes';
 import ReactGA from 'react-ga4';
 import Root from 'src/Root';
 
@@ -10,7 +11,6 @@ const spy = jest.spyOn(ReactGA, 'send');
 const payload = { hitType: 'pageview', page: routes.blog };
 jest.spyOn(console, 'log').mockImplementation(jest.fn());
 jest.spyOn(console, 'error').mockImplementation(jest.fn());
-jest.mock('src/common/utils');
 
 const ordinaryBlogData = [
   {
@@ -50,20 +50,16 @@ const ordinaryBlogData = [
     "views": 0
   },
 ];
-beforeEach(() => {
-  getBlogs.mockResolvedValueOnce(ordinaryBlogData);
-  render(
-    <Root store={mockStore}>
-      <BlogPage />
-    </Root>
-  );
-});
+
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
 describe('GIVEN: The user is not logged in (as administrator), ', () => {
+  beforeEach(() => {
+    renderWithQueryClient(<BlogPage />, mockStore);
+  });
   describe('WHEN: The page loads,', () => {
     it('THEN: renders properly', async () => {
       await waitFor(() => {
@@ -99,22 +95,22 @@ describe('GIVEN: The user is not logged in (as administrator), ', () => {
 });
 describe('GIVEN: The user is an administrator, ', () => {
   beforeEach(() => {
-    render(
-      <Root store={mockStoreLoggedIn}>
-        <BlogPage />
-      </Root>
-    );
+    renderWithQueryClient(<BlogPage />, mockStoreLoggedIn);
   });
   describe('WHEN: The page loads,', () => {
-    it('THEN: little trashcans are rendered next to each blog post title.',  () => {
-      const trashcanEmoji = screen.getAllByText('🗑')[0];
+    it('THEN: little trashcans are rendered next to each blog post title.', async  () => {
+      await waitFor(() => {
+        const trashcanEmoji = screen.getAllByText('🗑')[0];
 
-      expect(trashcanEmoji).toBeInTheDocument();
+        expect(trashcanEmoji).toBeInTheDocument();
+      });
     });
-    it('THEN: a little pencil appears next to each title.', () => {
-      const pencil = screen.queryAllByText('✏️')[0];
+    it('THEN: a little pencil appears next to each title.', async () => {
+      await waitFor(() => {
+        const pencil = screen.queryAllByText('✏️')[0];
 
-      expect(pencil).toBeInTheDocument();
+        expect(pencil).toBeInTheDocument();
+      })
     });
   });
 });
