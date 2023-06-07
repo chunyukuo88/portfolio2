@@ -113,7 +113,7 @@ describe('BlogPage.jsx', () => {
         renderWithQueryClient(<BlogPage />, mockStore, client);
 
         await waitFor(() => {
-          const errorMessage = document.getElementById('error-fetching-blog-posts');
+          const errorMessage = screen.getByText('Blogs are undergoing maintenance at this time. Perhaps try the crossword while you wait.');
 
           expect(errorMessage).toBeVisible();
         });

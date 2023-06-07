@@ -23,24 +23,19 @@ export function BlogPage(){
     queryKey: [queryKeys.BLOGS],
     queryFn: getBlogs,
   });
-  const EDITABLE = {
-    TITLE: 'title',
-    IMG_URL: 'imageUrl',
-    BODY: 'theme',
-  };
-  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
-  const ErrorMessage = () => {
-    return (
-      <div id='error-fetching-blog-posts'>
-        Blogs are undergoing maintenance at this time. Perhaps try the crossword while you wait.
-      </div>
-    );
-  };
+
+  const ErrorMessage = () => <div id='error-fetching-blog-posts'>{strings.blogDownForMaintenance[language]}</div>;
 
   if (queryResult.isError) return <ErrorMessage />;
 
   const sortNewestToOldest = (blogData) => blogData?.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
   const sorted = sortNewestToOldest(queryResult.data);
+
+  const EDITABLE = {
+    TITLE: 'title',
+    IMG_URL: 'imageUrl',
+    BODY: 'theme',
+  };
 
   const TitleWithButtons = ({ article }) => (
     <div className='blog-title-with-buttons'>
@@ -52,6 +47,8 @@ export function BlogPage(){
 
   const TitleWithoutButtons = ({ article }) => <div className='blog-title-without-buttons'>{article.title}</div>;
 
+  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
+
   const Heading = ({ article }) => (
     <>
       {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
@@ -59,7 +56,7 @@ export function BlogPage(){
     </>
   );
 
-  const Image = ({ article, key }) => (
+  const Image = ({ article }) => (
     <>
       <span className='img-pencil-adjuster'>
         {token && <Pencil token={token} article={article} aspect={EDITABLE.IMG_URL}/>}
@@ -68,7 +65,6 @@ export function BlogPage(){
         className='blog-image'
         src={article.imageUrl}
         aria-label={`Image for blog titled ${article.title}`}
-        loading={key === 0 ? 'eager' : 'lazy'}
       />
     </>
   );

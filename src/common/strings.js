@@ -32,6 +32,11 @@ const strings = {
     english: 'Bread Blog',
     russian: 'блог о хлебе',
   },
+  blogDownForMaintenance: {
+    chinese: '博客功能目前正在進行週期維修，請見諒。或許可以考慮試試填字遊戲吧？',
+    english: 'Blogs are undergoing maintenance at this time. Perhaps try the crossword while you wait.',
+    russian: 'Сегодня никаких блогов. Вернуться завтра.',
+  },
   CHINESE: 'chinese',
   contact: {
     chinese: '聯絡',
