@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
-import { QueryClientProvider, QueryClient} from '@tanstack/react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { QueryClientProvider, QueryClient} from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
