@@ -1,4 +1,11 @@
-import {getBlogs, getCrosswords, postData, updateBlogPost} from 'src/common/utils';
+import {
+  createHttpRequest,
+  deleteBlog,
+  getBlogs,
+  getCrosswords,
+  postData,
+  updateBlogPost,
+} from 'src/common/utils';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -8,6 +15,46 @@ afterEach(() => {
 const url = 'www.test.com/data';
 
 describe('utils', () => {
+  describe('createHttpRequest()', () => {
+    describe('WHEN: The user passes an http method, a token, and NO data', () => {
+      test('THEN: it creates a request that does not contain a "data" field.', () => {
+        const httpMethod = 'GET';
+        const token = 'abc';
+        const expectedResult = {
+          "headers": {
+            "Authorization": "Bearer abc",
+            "Content-Type": "application/json"
+          },
+          "method": "GET"
+        };
+
+        const result = createHttpRequest(httpMethod, token);
+
+        expect(result).toEqual(expectedResult);
+      });
+    });
+    describe('WHEN: The user passes an http method, a token, and some data', () => {
+      test('THEN: it creates a request that contains a "data" field.', () => {
+        const httpMethod = 'POST';
+        const token = 'abc';
+        const data = {
+          foo: 'bar',
+        };
+        const expectedResult = {
+          'headers': {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          'method': `${httpMethod}`,
+          'body': "{\"foo\":\"bar\"}",
+        };
+
+        const result = createHttpRequest(httpMethod, token, data);
+
+        expect(result).toEqual(expectedResult);
+      });
+    });
+  });
   describe('getCrosswords()', () => {
     describe('GIVEN: there are no problems with the server,', () => {
       describe('WHEN: getCrosswords() is invoked,', () => {
@@ -40,6 +87,44 @@ describe('utils', () => {
       });
     });
   });
+  describe('deleteBlog()', () => {
+    describe('GIVEN: the server has problems,', () => {
+      describe('WHEN: deleteBlog() is invoked,', () => {
+        it('THEN: The function logs an error.', async () => {
+          const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+          global.fetch = jest.fn().mockRejectedValue(new Error('Request failed'));
+
+          const entityId = '123';
+          const options = {};
+
+          await deleteBlog(entityId, options);
+
+          expect(consoleErrorSpy).toBeCalledTimes(1);
+          consoleErrorSpy.mockClear();
+        });
+      });
+    });
+  });
+    describe('GIVEN: there are no problems with the server,', () => {
+      describe('WHEN: deleteBlog() is invoked,', () => {
+        it('THEN: The fetch is invoked with the options to delete the blog.', async () => {
+          global.fetch = jest.fn(() =>
+            Promise.resolve({
+              ok: true,
+              json: () => Promise.resolve({ res: 'some response' }),
+            })
+          );
+          jest.spyOn(console, 'log').mockImplementationOnce(jest.fn());
+          const entityId = '123';
+          const options = {};
+          const concatenatedUrl = `${process.env.REACT_APP_DELETE_BLOG_ENTRY}/${entityId}`
+
+          await deleteBlog(entityId, options);
+
+          expect(global.fetch).toHaveBeenCalledWith(concatenatedUrl, options);
+        });
+      });
+    });
   describe('getBlogs()', () => {
     describe('GIVEN: there are no problems with the server,', () => {
       describe('WHEN: getBlogs() is invoked,', () => {
