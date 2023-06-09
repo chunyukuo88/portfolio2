@@ -155,6 +155,11 @@ const strings = {
     english: 'Username',
     russian: 'Имя пользователя',
   },
+  workouts: {
+    chinese: '鍛鍊',
+    english: 'Workouts',
+    russian: 'тренировки',
+  }
 };
 
 export default strings;
