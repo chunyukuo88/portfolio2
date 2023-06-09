@@ -36,7 +36,7 @@ export function ExerciseHub(){
         </li>
         <li id='workouts-button' role='button' onClick={() => navigate(routes.workouts)}>
           <Link to={routes.workouts}>
-            {username ? `My ${strings.workouts[language]}` : strings.workouts[language]}
+            {username ? strings.myWorkouts[language] : strings.workouts[language]}
           </Link>
         </li>
       </ul>

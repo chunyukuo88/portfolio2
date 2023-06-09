@@ -3,6 +3,7 @@ import BlogIcon from 'src/common/icons/blog.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import strings from 'src/common/strings';
 import Puzzle from 'src/common/icons/puzzle.svg';
+import Exercise from 'src/common/icons/exercise.svg';
 import LanguageIcon from 'src/common/icons/language.svg';
 import Language from 'src/features/language/Language';
 import Admin from 'src/common/icons/admin.svg';
@@ -35,7 +36,7 @@ export default function MainMenu(){
             </li>
       }
       <li id='exercise-button' role='button' className='menu-block' onClick={() => navigate(routes.exercise)}>
-        <span><img src='main-icons' src={null} alt="Exercise icon"/></span>
+        <span><img className='main-icons' src={Exercise} alt="Exercise icon"/></span>
         <Link to={routes.exercise}>{strings.exercise[language]}</Link>
       </li>
       <li role='button' className='menu-block'>
