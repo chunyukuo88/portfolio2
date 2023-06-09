@@ -22,6 +22,13 @@ jest.mock('react-router-dom', () => {
 const { ENGLISH, CHINESE, RUSSIAN } = strings;
 
 describe('ExerciseHub.jsx', () => {
+  describe('WHEN: the page loads', () => {
+    test.each`
+    
+    `('THEN: it shows a back button.', () => {
+
+    });
+  });
   describe('GIVEN: the user is not logged in,', () => {
     describe('WHEN: the user clicks the login button,', () => {
       test.each`
