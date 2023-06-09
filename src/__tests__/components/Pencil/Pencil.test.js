@@ -16,14 +16,14 @@ jest.mock('src/common/utils', () => {
 jest.spyOn(console, 'log').mockImplementation(jest.fn());
 
 describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', () => {
+  const article = {
+    entityId: 123,
+    title: 'some title',
+  };
+  const aspect = 'title';
+  const entityId = '123';
   describe('WHEN: the user clicks the pencil then confirms the updated aspect,', () => {
     test('THEN: the change is sent to the back end.', async() => {
-      const article = {
-        entityId: 123,
-        title: 'some title',
-      };
-      const aspect = 'title';
-      const entityId = '123';
       const newTitle = 'a new title!';
       const expectedUpdate = { title: newTitle };
       const requestContainingExpectedUpdate = {
@@ -57,4 +57,31 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
       });
     });
   });
+  describe('WHEN: the user clicks the pencil but then clicks on the button to cancel,', () => {
+    test('THEN: the edit modal appears and disappears, respectively.', async () => {
+      renderWithQueryClient(
+        <Pencil
+          aspect={aspect}
+          entityId={entityId}
+          article={article}
+        />, mockStoreLoggedIn
+      );
+
+      let textBox = document.querySelector('textarea');
+      expect(textBox).toBeNull();
+
+      const pencil = screen.queryByText('✏️');
+      fireEvent.click(pencil);
+
+      textBox = screen.queryByRole('textbox');
+      expect(textBox).toBeVisible();
+
+      const cancellationButton = screen.queryByText('Nvrmnd');
+      fireEvent.click(cancellationButton);
+
+      textBox = screen.queryByRole('textbox');
+      expect(textBox).toBeNull();
+    });
+  });
 });
+
