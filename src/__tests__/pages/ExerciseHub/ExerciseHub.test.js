@@ -8,6 +8,7 @@ import 'react-dom';
 import { ExerciseHub } from 'src/pages/ExerciseHub/ExerciseHub';
 import strings from 'src/common/strings';
 import {routes} from "../../../routes";
+import language from "../../../features/language/Language";
 
 const mockNavFn = jest.fn();
 jest.mock('react-router-dom', () => {
@@ -22,16 +23,48 @@ const { ENGLISH, CHINESE, RUSSIAN } = strings;
 
 describe('ExerciseHub.jsx', () => {
   describe('GIVEN: the user is not logged in,', () => {
-    describe('WHEN: they click the option to see workouts,', () => {
-      test('THEN: they are taken to the page for workouts', () => {
+    describe('WHEN: the user clicks the login button,', () => {
+      test.each`
+          language
+          ${ENGLISH}
+          ${RUSSIAN}
+          ${CHINESE}
+      `('THEN: they get routed to the login page appears', ({ language }) => {
         renderWithQueryClient(<ExerciseHub/>, mockStore);
 
-        const workoutsButton = screen.getByText(strings.workouts.english);
+        const loginButton = screen.getByText(strings.login[language]);
+
+        fireEvent.click(loginButton);
+
+        expect(mockNavFn).toBeCalledTimes(1);
+        expect(mockNavFn).toBeCalledWith(routes.login);
+      });
+    });
+    describe('WHEN: they click the option to see workouts in any language,', () => {
+      test.each`
+          language
+          ${ENGLISH}
+          ${CHINESE}
+          ${RUSSIAN}
+        `('THEN: they are taken to the page for workouts', ({ language }) => {
+        renderWithQueryClient(<ExerciseHub/>, mockStore);
+
+        const workoutsButton = screen.getByText(strings.workouts[language]);
 
         fireEvent.click(workoutsButton);
 
         expect(mockNavFn).toBeCalledTimes(1);
         expect(mockNavFn).toBeCalledWith(routes.workouts);
+      });
+    });
+  });
+  describe('GIVEN: the user has logged in,', () => {
+    describe('WHEN: the page loads,', () => {
+      test('THEN: it shows a welcome message with their name', () => {
+        //
+      });
+      test('THEN: it a button saying "my workouts" rather than "workouts"', () => {
+        //
       });
     });
   });

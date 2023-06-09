@@ -4,6 +4,7 @@ import { PublishContentPage } from './pages/PublishContent/PublishContentPage';
 import { LoginPage } from './pages/Login/LoginPage.jsx';
 import { BlogPage } from './pages/Blog/BlogPage';
 import CrosswordPage from './pages/Crossword/CrosswordPage';
+import { ExerciseHub } from './pages/ExerciseHub/ExerciseHub';
 import { routes } from './routes.js';
 
 import ReactGA from 'react-ga4';
@@ -24,6 +25,7 @@ const App = ({ logger }) => {
     { path: routes.login, Component: LoginPage },
     { path: routes.puzzle, Component: CrosswordPage },
     { path: routes.blog, Component: BlogPage },
+    { path: routes.exercise, Component: ExerciseHub },
     { path: routes.publishCrossword, Component: PublishContentPage },
   ], []);
 

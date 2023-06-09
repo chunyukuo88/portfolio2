@@ -59,7 +59,8 @@ describe('App.jsx', () => {
         ${'puzzle-button'}   |   ${routes.puzzle}
         ${'blog-button'}     |   ${routes.blog}
         ${'login-button'}    |   ${routes.login}
-    `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
+        ${'exercise-button'} |   ${routes.exercise}
+    `('THEN: the navigation method that takes them to $route is invoked.', ({ buttonId, route }) => {
         render(
           <Root store={store}>
             <App logger={jest.fn()} />

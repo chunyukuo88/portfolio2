@@ -34,6 +34,10 @@ export default function MainMenu(){
               <Link to={routes.publishCrossword}>{strings.publishContent[language]}</Link>
             </li>
       }
+      <li id='exercise-button' role='button' className='menu-block' onClick={() => navigate(routes.exercise)}>
+        <span><img src='main-icons' src={null} alt="Exercise icon"/></span>
+        <Link to={routes.exercise}>{strings.exercise[language]}</Link>
+      </li>
       <li role='button' className='menu-block'>
         <span><img className='main-icons' src={LanguageIcon} alt='Language icon'/></span>
         <div><Language/></div>
