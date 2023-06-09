@@ -6,8 +6,8 @@ import Puzzle from 'src/common/icons/puzzle.svg';
 import LanguageIcon from 'src/common/icons/language.svg';
 import Language from 'src/features/language/Language';
 import Admin from 'src/common/icons/admin.svg';
-import {selectCurrentLanguage} from 'src/features/language/languageSlice';
-import {selectCurrentUser} from 'src/features/auth/authSlice';
+import { selectCurrentLanguage } from 'src/features/language/languageSlice';
+import { selectCurrentUser } from 'src/features/auth/authSlice';
 import { useSelector } from 'react-redux';
 import './MainMenu.css';
 

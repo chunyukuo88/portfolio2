@@ -5,4 +5,5 @@ export const routes = {
   login: '/login/',
   puzzle: '/puzzle/',
   publishCrossword: '/publishCrossword/',
+  workouts: '/exercise/workouts/'
 };
