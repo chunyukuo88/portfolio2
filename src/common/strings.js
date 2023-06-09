@@ -58,7 +58,7 @@ const strings = {
   exercise: {
     chinese: '鍛鍊',
     english: 'Calisthenics',
-    german: 'Упражнение',
+    german: 'Kallisthenie',
   },
   homeGreeting: {
     chinese: '咦？又來了',
