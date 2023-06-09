@@ -19,7 +19,7 @@ jest.mock('react-router-dom', () => {
     useNavigate: () => mockNavFn, // shows up as gray in JetBrains IDEs, but this is indeed being used. Proof: Change its spelling and tests break.
   };
 });
-const { ENGLISH, CHINESE, RUSSIAN } = strings;
+const { ENGLISH, CHINESE, GERMAN } = strings;
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -46,7 +46,7 @@ describe('App.jsx', () => {
 
         fireEvent.click(languageButton);
         languageButton = document.querySelector('#language-button');
-        expect(languageButton).toHaveTextContent(strings.language[RUSSIAN]);
+        expect(languageButton).toHaveTextContent(strings.language[GERMAN]);
 
         fireEvent.click(languageButton);
         languageButton = document.querySelector('#language-button');

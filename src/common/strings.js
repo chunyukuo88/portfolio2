@@ -17,148 +17,133 @@ export const easterEgg = `
 `;
 
 const strings = {
+  ENGLISH: 'english',
+  CHINESE: 'chinese',
+  GERMAN: 'german',
   about: {
     chinese: '簡介',
     english: 'About',
-    russian: 'пожаловать',
+    german: 'Über uns',
   },
   admin: {
     chinese: '内部管理',
     english: 'Admin',
-    russian: 'администратор',
+    german: 'Admin',
   },
   blog: {
     chinese: '麵包博客',
     english: 'Bread Blog',
-    russian: 'блог о хлебе',
+    german: 'Brot-Ausstellung',
   },
   blogDownForMaintenance: {
     chinese: '博客功能目前正在進行週期維修，請見諒。或許可以考慮試試填字遊戲吧？',
     english: 'Blogs are undergoing maintenance at this time. Perhaps try the crossword while you wait.',
-    russian: 'Сегодня никаких блогов. Вернуться завтра.',
+    german: 'Die Blogs werden derzeit gewartet. Vielleicht versuchen Sie in der Zwischenzeit das Kreuzworträtsel.',
   },
-  CHINESE: 'chinese',
   contact: {
     chinese: '聯絡',
     english: 'Contact',
-    russian: 'контакт',
-  },
-  decrement: {
-    chinese: '遞減',
-    english: 'decrement',
-    russian: 'уменьшение',
+    german: 'Kontakt',
   },
   email: {
     chinese: '郵箱地址',
     english: 'Email',
-    russian: 'е-мейл',
+    german: 'E-Mail-Adresse',
   },
-  ENGLISH: 'english',
   errorCrosswordUnavailable: {
     chinese: '填字遊戲後端暫時無法訪問，請明天再來！',
     english: 'The Crossword API is down for routine maintenance. Please try again tomorrow.',
-    russian: 'API для кроссворда недоступно из-за планового обслуживания. Пожалуйста, попробуйте снова завтра.',
+    german: 'Die Crossword-API ist aufgrund routinemäßiger Wartungsarbeiten nicht verfügbar. Bitte versuchen Sie es morgen erneut.',
   },
   exercise: {
     chinese: '鍛鍊',
     english: 'Calisthenics',
-    russian: 'Упражнение',
-  },
-  goToCounter: {
-    chinese: '計數機',
-    english: 'Counter',
-    russian: 'счетная машина',
+    german: 'Упражнение',
   },
   homeGreeting: {
     chinese: '咦？又來了',
     english: 'Welcome to my portfolio',
-    russian: 'это веб-сайт',
+    german: 'Willkommen auf meiner Portfolio-Website',
   },
-  homePage: {
+  backButton: {
     chinese: '返回',
     english: 'Back',
-    russian: 'Возвращаться',
-  },
-  increment: {
-    chinese: '增量',
-    english: 'increment',
-    russian: 'приращение',
-  },
-  incrementByAmount: {
-    chinese: '定量增加',
-    english: 'increment by amount',
-    russian: 'увеличение на сумму',
+    german: 'Zurück',
   },
   language: {
     chinese: '換語言',
     english: 'Language',
-    russian: 'Язык',
+    german: 'Sprache',
   },
   login: {
     chinese: '登錄',
     english: 'Log in',
-    russian: 'авторизоваться',
+    german: 'Anmelden',
   },
   logout: {
     chinese: '登出',
     english: 'Log out',
-    russian: 'выйти',
+    german: 'Abmelden',
+  },
+  myWorkouts: {
+    chinese: '我的鍛鍊',
+    english: 'My Workouts',
+    german: 'Meine Workouts',
   },
   password: {
     chinese: '密碼',
     english: 'Password',
-    russian: 'пароль',
+    german: 'Passwort',
   },
   passwordOld: {
     chinese: '舊密碼',
     english: 'Old Password',
-    russian: 'Старый пароль',
+    german: 'Altes Passwort',
   },
   passwordNew: {
     chinese: '新密碼',
     english: 'New Password',
-    russian: 'Новый пароль',
+    german: 'Neues Passwort',
   },
   profile: {
     chinese: '個人設置',
     english: 'Profile',
-    russian: 'страница профиля',
+    german: 'Profil',
   },
   publishContent: {
     chinese: '出版',
     english: 'Publish Content',
-    russian: 'Публиковать',
+    german: 'Inhalt veröffentlichen',
   },
   puzzle: {
     chinese: '填字遊戲',
     english: 'Crossword',
-    russian: 'кроссворд',
+    german: 'Kreuzworträtsel',
   },
   resetPassword: {
     chinese: '重設密碼',
     english: 'Reset Password',
-    russian: 'Сброс пароля',
+    german: 'Passwort zurücksetzen',
   },
-  RUSSIAN: 'russian',
   sendCodeToEmail: {
     chinese: '將一次性代碼傳至郵箱地址',
     english: 'Send code to email',
-    russian: 'Отправить код на почту',
+    german: 'Code an E-Mail senden',
   },
   switch: {
     chinese: '切換',
     english: 'Switch',
-    russian: 'переключать',
+    german: 'Umschalten',
   },
   username: {
     chinese: '用户名',
     english: 'Username',
-    russian: 'Имя пользователя',
+    german: 'Benutzername',
   },
   workouts: {
     chinese: '鍛鍊',
     english: 'Workouts',
-    russian: 'тренировки',
+    german: 'Workouts',
   }
 };
 

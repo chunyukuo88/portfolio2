@@ -49,9 +49,9 @@ export const LoginPage = () => {
         <Link
           style={LinkStyling}
           to={routes.index}
-          aria-label={strings.homePage[language]}
+          aria-label={strings.backButton[language]}
         >
-          {strings.homePage[language]}
+          {strings.backButton[language]}
         </Link>
       </p>
       <section className='cube-wrapper'>

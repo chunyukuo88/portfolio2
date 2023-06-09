@@ -8,10 +8,14 @@ import { routes } from 'src/routes';
 import { LinkStyling } from 'src/common/globalStyles';
 import './ExerciseHub.css';
 
-export function ExerciseHub({ signIn }){
+export function ExerciseHub(){
   const [ language, username ] = useCommonGlobals(routes.blog);
   const token = useSelector(selectCurrentToken);
   const navigate = useNavigate();
+
+  const WorkoutString = username
+    ? `My ${strings.workouts[language]}`
+    : strings.workouts[language];
 
   return (
     <>
@@ -19,9 +23,9 @@ export function ExerciseHub({ signIn }){
         <Link
           style={LinkStyling}
           to={routes.index}
-          aria-label={strings.homePage[language]}
+          aria-label={strings.backButton[language]}
         >
-          {strings.homePage[language]}
+          {strings.backButton[language]}
         </Link>
       </p>
       <ul id='exercise-menu'>
@@ -32,7 +36,7 @@ export function ExerciseHub({ signIn }){
         </li>
         <li id='workouts-button' role='button' onClick={() => navigate(routes.workouts)}>
           <Link to={routes.workouts}>
-            {strings.workouts[language]}
+            {username ? `My ${strings.workouts[language]}` : strings.workouts[language]}
           </Link>
         </li>
       </ul>

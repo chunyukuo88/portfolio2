@@ -1,14 +1,13 @@
 import { renderWithQueryClient } from 'src/__msw__/testUtils';
-import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { mockStore } from 'src/testUtils';
+import { fireEvent, screen } from '@testing-library/react';
+import {mockStore, mockStoreLoggedIn} from 'src/testUtils';
 import '@testing-library/jest-dom';
 import 'react-router-dom';
 import 'react-dom';
 
 import { ExerciseHub } from 'src/pages/ExerciseHub/ExerciseHub';
 import strings from 'src/common/strings';
-import {routes} from "../../../routes";
-import language from "../../../features/language/Language";
+import { routes } from 'src/routes';
 
 const mockNavFn = jest.fn();
 jest.mock('react-router-dom', () => {
@@ -19,27 +18,24 @@ jest.mock('react-router-dom', () => {
     useNavigate: () => mockNavFn, // shows up as gray in JetBrains IDEs, but this is indeed being used. Proof: Change its spelling and tests break.
   };
 });
-const { ENGLISH, CHINESE, RUSSIAN } = strings;
+const { ENGLISH } = strings;
 
 describe('ExerciseHub.jsx', () => {
   describe('WHEN: the page loads', () => {
-    test.each`
-    
-    `('THEN: it shows a back button.', () => {
+    test('THEN: it shows a back button.', () => {
+      renderWithQueryClient(<ExerciseHub/>, mockStore);
 
+      const backButton = screen.getByText(strings.backButton[ENGLISH]);
+
+      expect(backButton).toBeVisible();
     });
   });
   describe('GIVEN: the user is not logged in,', () => {
     describe('WHEN: the user clicks the login button,', () => {
-      test.each`
-          language
-          ${ENGLISH}
-          ${RUSSIAN}
-          ${CHINESE}
-      `('THEN: they get routed to the login page appears', ({ language }) => {
+      test('THEN: they get routed to the login page appears', () => {
         renderWithQueryClient(<ExerciseHub/>, mockStore);
 
-        const loginButton = screen.getByText(strings.login[language]);
+        const loginButton = screen.getByText(strings.login[ENGLISH]);
 
         fireEvent.click(loginButton);
 
@@ -47,16 +43,11 @@ describe('ExerciseHub.jsx', () => {
         expect(mockNavFn).toBeCalledWith(routes.login);
       });
     });
-    describe('WHEN: they click the option to see workouts in any language,', () => {
-      test.each`
-          language
-          ${ENGLISH}
-          ${CHINESE}
-          ${RUSSIAN}
-        `('THEN: they are taken to the page for workouts', ({ language }) => {
+    describe('WHEN: they click the option to see workouts,', () => {
+      test('THEN: they are taken to the page for workouts', () => {
         renderWithQueryClient(<ExerciseHub/>, mockStore);
 
-        const workoutsButton = screen.getByText(strings.workouts[language]);
+        const workoutsButton = screen.getByText(strings.workouts[ENGLISH]);
 
         fireEvent.click(workoutsButton);
 
@@ -67,11 +58,13 @@ describe('ExerciseHub.jsx', () => {
   });
   describe('GIVEN: the user has logged in,', () => {
     describe('WHEN: the page loads,', () => {
-      test('THEN: it shows a welcome message with their name', () => {
-        //
-      });
       test('THEN: it a button saying "my workouts" rather than "workouts"', () => {
-        //
+        renderWithQueryClient(<ExerciseHub/>, mockStoreLoggedIn);
+        const myWorkouts = 'My ' + strings.workouts[ENGLISH];
+
+        const workoutsButton = screen.getByText(myWorkouts);
+
+        expect(workoutsButton).toBeVisible();
       });
     });
   });
