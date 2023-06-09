@@ -34,7 +34,7 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
         },
         method: 'PUT',
       };
-      renderWithQueryClient(
+      const { debug } = renderWithQueryClient(
         <Pencil
           aspect={aspect}
           entityId={entityId}
@@ -84,4 +84,3 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
     });
   });
 });
-
