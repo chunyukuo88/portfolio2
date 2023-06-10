@@ -30,9 +30,9 @@ export default function MainMenu(){
       {
         !username
           ? null
-          : <li role='button' onClick={() => navigate(routes.publishCrossword)} className='menu-block'>
+          : <li role='button' onClick={() => navigate(routes.publishContent)} className='menu-block'>
               <span><img className='main-icons' src={Puzzle} alt='Puzzle icon'/></span>
-              <Link to={routes.publishCrossword}>{strings.publishContent[language]}</Link>
+              <Link to={routes.publishContent}>{strings.publishContent[language]}</Link>
             </li>
       }
       <li id='exercise-button' role='button' className='menu-block' onClick={() => navigate(routes.exercise)}>

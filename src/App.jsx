@@ -5,6 +5,7 @@ import { LoginPage } from './pages/Login/LoginPage.jsx';
 import { BlogPage } from './pages/Blog/BlogPage';
 import CrosswordPage from './pages/Crossword/CrosswordPage';
 import { ExerciseHub } from './pages/ExerciseHub/ExerciseHub';
+import { Workouts } from './pages/Workouts/Workouts';
 import { routes } from './routes.js';
 
 import ReactGA from 'react-ga4';
@@ -13,20 +14,21 @@ import GochenourBanner from './components/LightbulbBanners/GochenourBanner';
 import MainMenu from './components/MainMenu/MainMenu';
 import { SkillsPole } from './components/SkillsPole/SkillsPole';
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
 import { easterEgg } from './common/strings';
+import './App.css';
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
 const App = ({ logger }) => {
-  logger(easterEgg);
+  logger(`%c ${easterEgg}`, 'background: #222; color: #bada55');
   const allRoutes = useMemo(() => [
     { path: routes.index, Component: HomePage, exact: true },
     { path: routes.login, Component: LoginPage },
     { path: routes.puzzle, Component: CrosswordPage },
     { path: routes.blog, Component: BlogPage },
     { path: routes.exercise, Component: ExerciseHub },
-    { path: routes.publishCrossword, Component: PublishContentPage },
+    { path: routes.workouts, Component: Workouts },
+    { path: routes.publishContent, Component: PublishContentPage },
   ], []);
 
   return (

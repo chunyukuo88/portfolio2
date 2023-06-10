@@ -85,7 +85,7 @@ describe('App.jsx', () => {
         const publishPuzzleBlock = document.querySelectorAll('.menu-block')[2];
         fireEvent.click(publishPuzzleBlock);
 
-        expect(mockNavFn).toBeCalledWith(routes.publishCrossword);
+        expect(mockNavFn).toBeCalledWith(routes.publishContent);
       });
     });
   });
