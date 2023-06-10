@@ -98,7 +98,7 @@ export function BlogPage(){
     <main role='main' className='blog-page-content'>
       <nav className='back-to-home'>
         <Link style={LinkStyling} to={routes.index}>
-          {strings.homePage[language]}
+          {strings.backButton[language]}
         </Link>
       </nav>
       <section>

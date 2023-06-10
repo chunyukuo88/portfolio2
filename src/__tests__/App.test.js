@@ -19,7 +19,7 @@ jest.mock('react-router-dom', () => {
     useNavigate: () => mockNavFn, // shows up as gray in JetBrains IDEs, but this is indeed being used. Proof: Change its spelling and tests break.
   };
 });
-const { ENGLISH, CHINESE, RUSSIAN } = strings;
+const { ENGLISH, CHINESE, GERMAN } = strings;
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -46,7 +46,7 @@ describe('App.jsx', () => {
 
         fireEvent.click(languageButton);
         languageButton = document.querySelector('#language-button');
-        expect(languageButton).toHaveTextContent(strings.language[RUSSIAN]);
+        expect(languageButton).toHaveTextContent(strings.language[GERMAN]);
 
         fireEvent.click(languageButton);
         languageButton = document.querySelector('#language-button');
@@ -59,7 +59,8 @@ describe('App.jsx', () => {
         ${'puzzle-button'}   |   ${routes.puzzle}
         ${'blog-button'}     |   ${routes.blog}
         ${'login-button'}    |   ${routes.login}
-    `('THEN: the navigation method that takes them to $route is invoked.', ({buttonId, route}) => {
+        ${'exercise-button'} |   ${routes.exercise}
+    `('THEN: the navigation method that takes them to $route is invoked.', ({ buttonId, route }) => {
         render(
           <Root store={store}>
             <App logger={jest.fn()} />
@@ -84,7 +85,7 @@ describe('App.jsx', () => {
         const publishPuzzleBlock = document.querySelectorAll('.menu-block')[2];
         fireEvent.click(publishPuzzleBlock);
 
-        expect(mockNavFn).toBeCalledWith(routes.publishCrossword);
+        expect(mockNavFn).toBeCalledWith(routes.publishContent);
       });
     });
   });

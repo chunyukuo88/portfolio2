@@ -25,7 +25,7 @@ export function PublishContentPage() {
     <Fragment>
       <RequireAuth>
         <Link style={withCenter} to={routes.index}>
-          {strings.homePage[language]}
+          {strings.backButton[language]}
         </Link>
         <section className='publish-panel'>
           <NewBlogPost  token={token}/>

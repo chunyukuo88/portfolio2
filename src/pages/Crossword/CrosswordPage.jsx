@@ -168,7 +168,7 @@ export default function CrosswordPage(){
       </section>
       <nav className='back-to-home'>
         <Link style={LinkStyling} to={routes.index}>
-          {strings.homePage[language]}
+          {strings.backButton[language]}
         </Link>
       </nav>
     </>

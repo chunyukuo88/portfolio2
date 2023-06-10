@@ -9,7 +9,7 @@ import { rest } from 'msw';
 import { BlogPage } from 'src/pages/Blog/BlogPage';
 import { routes } from 'src/routes';
 import ReactGA from 'react-ga4';
-import {QueryClient} from "@tanstack/react-query";
+import { QueryClient } from '@tanstack/react-query';
 
 const spy = jest.spyOn(ReactGA, 'send');
 const payload = { hitType: 'pageview', page: routes.blog };
