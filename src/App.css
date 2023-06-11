@@ -10,6 +10,7 @@
 body {
   background-color: black;
   color: var(--primaryColor);
+  font-family: 'Raleway', sans-serif;
 }
 
 main {
@@ -36,56 +37,4 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#nav-button__as-X {
-  position: relative;
-  margin: auto auto;
-  transition: 1s ease-in-out;
-}
-
-#nav-button__as-hamburger {
-  position: relative;
-  margin: auto auto;
-  transition: 1s ease-in-out;
-}
-
-#nav-button__as-X span {
-  background: var(--primaryColor);
-}
-
-#nav-button__as-hamburger span {
-  display: block;
-  position: relative;
-  height: 1px;
-  width: 1em;
-  background: var(--primaryColor);
-  text-align: center;
-  transform: rotate(0deg);
-  transition: 1s ease-in-out;
-}
-
-#nav-button__as-hamburger span:nth-child(1) {
-  top: .33em;
-}
-#nav-button__as-hamburger span:nth-child(2) {
-  top: .66em;
-}
-#nav-button__as-hamburger span:nth-child(3) {
-  top: .99em;
-}
-
-#nav-button__as-X span:nth-child(1) {
-  top: 18px;
-  transform: rotate(135deg);
-}
-
-#nav-button__as-X span:nth-child(2) {
-  opacity: 0;
-  left: -60px;
-}
-
-#nav-button__as-X span:nth-child(3) {
-  top: 18px;
-  transform: rotate(-135deg);
 }

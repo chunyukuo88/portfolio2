@@ -25,8 +25,10 @@ function App(){
         </div>
       </header>
       <section>
-
       </section>
+      <footer>
+
+      </footer>
     </main>
   );
 }
