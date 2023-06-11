@@ -1,7 +1,31 @@
-.frame {
+:root {
+  --largePadding: 0.5rem;
+  --smallPadding: 0.25rem;
+}
+
+main {
   border: black solid 1px;
   position: absolute;
   height: 97%;
   width: 95%;
   background-color: red;
+}
+
+header {
+  border-bottom: black solid 1px;
+  background-color: green;
+  padding: var(--largePadding);
+  display: grid;
+  grid-template-columns: 80% 20%;
+  height: 4rem;
+}
+
+#name-and-title {
+  background-color: lightgray;
+  padding: var(--smallPadding);
+}
+
+#main-menu {
+  background-color: #b4a5a5;
+  padding: var(--smallPadding);
 }

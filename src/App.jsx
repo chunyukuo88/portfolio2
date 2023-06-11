@@ -2,14 +2,20 @@ import './App.css';
 
 function App(){
   return (
-    <div className='frame'>
-      <div>
-        Alex Gochenour
-      </div>
-      <div>
-        Software Engineer
-      </div>
-    </div>
+    <main>
+      <header>
+        <div id='name-and-title'>
+          <div>Alex Gochenour</div>
+          <div>Software Engineer</div>
+        </div>
+        <nav id='main-menu'>
+          Yay
+        </nav>
+      </header>
+      <section>
+
+      </section>
+    </main>
   );
 }
 
