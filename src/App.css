@@ -2,7 +2,7 @@
   --largePadding: 0.5rem;
   --smallPadding: 0.25rem;
   --primaryColor: #c2bcbc;
-  --border: var(--primaryColor) solid 2px;
+  --border: var(--primaryColor) solid 1px;
   --shortTransition: 5s;
   --longTransition: 5s;
 }
@@ -33,8 +33,9 @@ header {
 
 #main-menu-button-container {
   border-left: var(--border);
-  padding-left: 40%;
-  padding-top: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #nav-button__as-X {

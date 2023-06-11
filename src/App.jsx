@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cross as Hamburger } from 'hamburger-react'
+import { Divide as Hamburger } from 'hamburger-react'
 import './App.css';
 
 function App(){
@@ -15,7 +15,13 @@ function App(){
           <div>JavaScript Engineer</div>
         </div>
         <div onClick={menuButtonHandler} id='main-menu-button-container'>
-          <Hamburger toggled={menuIsOpen} toggle={setMenuIsOpen} />
+          <Hamburger
+            hideOutline={false}
+            label='show menu'
+            size={16}
+            toggle={setMenuIsOpen}
+            toggled={menuIsOpen}
+          />
         </div>
       </header>
       <section>
