@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { Divide as Hamburger } from 'hamburger-react'
 import './App.css';
+import Mail from 'src/common/icons/contact.svg';
+import GitHub from 'src/common/icons/contact_GH.svg';
+import NPM from 'src/common/icons/contact_NPM.svg'
+import LinkedIn from 'src/common/icons/contact_LinkedIn.svg';
 
 function App(){
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
@@ -24,10 +28,14 @@ function App(){
           />
         </div>
       </header>
-      <section>
-      </section>
-      <footer>
 
+      <section></section>
+
+      <footer>
+        <span><img className='main-icons' src={Mail} alt="Exercise icon"/></span>
+        <span><img className='main-icons' src={GitHub} alt="Exercise icon"/></span>
+        <span><img className='main-icons' src={NPM} alt="Exercise icon"/></span>
+        <span><img className='main-icons' src={LinkedIn} alt="Exercise icon"/></span>
       </footer>
     </main>
   );

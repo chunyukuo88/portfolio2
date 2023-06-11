@@ -18,6 +18,8 @@ main {
   width: 96vw;
   height: 98vh;
   margin: auto;
+  display: grid;
+  grid-template-rows: 4em auto 3em;
 }
 
 header {
@@ -25,7 +27,27 @@ header {
   padding: 0 var(--largePadding);
   display: grid;
   grid-template-columns: 86% 14%;
-  height: 4rem;
+  /*height: 4em;*/
+}
+
+section {
+  /*  */
+}
+
+footer {
+  border-top: var(--border);
+  height: 3em;
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+}
+
+footer span {
+  align-self: center;
+  justify-self: center;
+}
+
+.main-icons {
+  height: 2em;
 }
 
 #name-and-title {
