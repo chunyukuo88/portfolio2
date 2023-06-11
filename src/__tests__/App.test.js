@@ -60,7 +60,7 @@ describe('App.jsx', () => {
         ${'blog-button'}     |   ${routes.blog}
         ${'login-button'}    |   ${routes.login}
         ${'exercise-button'} |   ${routes.exercise}
-    `('THEN: the navigation method that takes them to $route is invoked.', ({ buttonId, route }) => {
+    `('THEN: the navigation method that takes them to its route is invoked.', ({ buttonId, route }) => {
         render(
           <Root store={store}>
             <App logger={jest.fn()} />
@@ -75,8 +75,8 @@ describe('App.jsx', () => {
     });
   });
   describe('GIVEN: the user has logged in', () => {
-    describe('WHEN: the user clicks the publish crossword puzzle menu ', () => {
-      it('THEN: they get routed to the publish puzzle page.', () => {
+    describe('WHEN: the user clicks the publish content menu ', () => {
+      it('THEN: they get routed to the publish content page.', () => {
         render(
           <Root store={mockStoreLoggedIn}>
             <App logger={jest.fn()} />

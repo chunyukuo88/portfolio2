@@ -4,7 +4,7 @@ export const queryKeys = {
   CROSSWORD: 'crosswords_get',
 };
 
-export const easterEgg = `                                                                                   
+export const easterEgg = `                                                                                    
                                                                                     
                                                                                     
                                                                                     
@@ -20,6 +20,9 @@ export const easterEgg = `
                                                                                     
                                                                                     
   You found the easter egg!                                                         
+  You know what's even better than easter eggs? Amazing unit tests, 100% coverage,  
+  and TDD! I'm passionate about writing readable, maintainable code that is easy    
+  to work with. Here's the code for this site:                                      
                                                                                     
 `;
 
