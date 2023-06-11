@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import { Divide as Hamburger } from 'hamburger-react'
 import './App.css';
-import Mail from 'src/common/icons/contact.svg';
 import GitHub from 'src/common/icons/contact_GH.svg';
 import NPM from 'src/common/icons/contact_NPM.svg'
 import LinkedIn from 'src/common/icons/contact_LinkedIn.svg';
 
+
+import Mail from 'src/common/icons/contact.svg';
+import DarkModeToggler from 'src/common/icons/darkModeToggler.png';
+import { easterEgg } from './common/strings';
+
 function App(){
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
+  console.log(`%c${easterEgg}`, 'color: yellow; background: black');
+  console.log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 
   const menuButtonHandler = () => setMenuIsOpen(!menuIsOpen);
 
@@ -29,7 +35,11 @@ function App(){
         </div>
       </header>
 
-      <section></section>
+      <section>
+        <div id='dark-mode-toggler'>
+          <img src={DarkModeToggler} alt="Exercise icon"/>
+        </div>
+      </section>
 
       <footer>
         <span><img className='main-icons' src={Mail} alt="Exercise icon"/></span>
