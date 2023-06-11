@@ -1,48 +1,7 @@
-:root {
-  --AboutBlock: #ff9500;
-  --ContactBlock: #ffa200;
-  --BlogBlock: #ffaa00;
-  --PuzzleBlock: #ffb700;
-  --LanguageBlock: #ffd000;
-  --AdminBlock: #ffc300;
-  --MenuBlockText: #ffffff;
-  --SiteBackground: #434150;
-  --SiteBackgroundShadow: #2d2c3a;
-}
-
-body {
-  font-family: 'Cabin', sans-serif;
-  user-select: none;
-  background: var(--SiteBackground);
-}
-.banners {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-}
-.banner-and-menu-wrapper {
-  height: 80vh;
-  display: grid;
-  grid-template-rows: 50% 50%;
-  grid-template-columns: 40% 20% 40%;
-  justify-content: center;
-}
-
-.fade-enter {
-  opacity: 0;
-}
-
-.fade-enter-active {
-  opacity: 1;
-  transition: opacity 300ms ease-in-out;
-}
-
-.fade-exit {
-  opacity: 1;
-}
-
-.fade-exit-active {
-  opacity: 0;
-  transition: opacity 300ms ease-in-out;
+.frame {
+  border: black solid 1px;
+  position: absolute;
+  height: 97%;
+  width: 95%;
+  background-color: red;
 }
