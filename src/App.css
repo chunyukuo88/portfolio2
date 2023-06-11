@@ -1,26 +1,29 @@
 :root {
   --largePadding: 0.5rem;
   --smallPadding: 0.25rem;
+  --primaryColor: #c2bcbc;
+  --border: var(--primaryColor) solid 2px;
+  --shortTransition: 5s;
+  --longTransition: 5s;
 }
 
 body {
   background-color: black;
+  color: var(--primaryColor);
 }
 
 main {
-  border: #c2bcbc solid 1px;
+  border: var(--border);
   width: 96vw;
   height: 98vh;
   margin: auto;
-  background-color: red;
 }
 
 header {
-  border-bottom: black solid 1px;
-  background-color: green;
-  padding: var(--largePadding);
+  border-bottom: var(--border);;
+  padding: 0 var(--largePadding);
   display: grid;
-  grid-template-columns: 80% 20%;
+  grid-template-columns: 86% 14%;
   height: 4rem;
 }
 
@@ -28,7 +31,60 @@ header {
   margin: auto 0;
 }
 
-#main-menu {
-  background-color: #b4a5a5;
-  padding: var(--smallPadding);
+#main-menu-button-container {
+  border-left: var(--border);
+  padding-left: 40%;
+  padding-top: 30%;
+}
+
+#nav-button__as-X {
+  position: relative;
+  margin: auto auto;
+  transition: 1s ease-in-out;
+}
+
+#nav-button__as-hamburger {
+  position: relative;
+  margin: auto auto;
+  transition: 1s ease-in-out;
+}
+
+#nav-button__as-X span {
+  background: var(--primaryColor);
+}
+
+#nav-button__as-hamburger span {
+  display: block;
+  position: relative;
+  height: 1px;
+  width: 1em;
+  background: var(--primaryColor);
+  text-align: center;
+  transform: rotate(0deg);
+  transition: 1s ease-in-out;
+}
+
+#nav-button__as-hamburger span:nth-child(1) {
+  top: .33em;
+}
+#nav-button__as-hamburger span:nth-child(2) {
+  top: .66em;
+}
+#nav-button__as-hamburger span:nth-child(3) {
+  top: .99em;
+}
+
+#nav-button__as-X span:nth-child(1) {
+  top: 18px;
+  transform: rotate(135deg);
+}
+
+#nav-button__as-X span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+#nav-button__as-X span:nth-child(3) {
+  top: 18px;
+  transform: rotate(-135deg);
 }
