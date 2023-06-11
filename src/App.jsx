@@ -6,7 +6,7 @@ function App(){
       <header>
         <div id='name-and-title'>
           <div>Alex Gochenour</div>
-          <div>Software Engineer</div>
+          <div>JavaScript Engineer</div>
         </div>
         <nav id='main-menu'>
           Yay

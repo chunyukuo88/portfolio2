@@ -3,11 +3,15 @@
   --smallPadding: 0.25rem;
 }
 
+body {
+  background-color: black;
+}
+
 main {
-  border: black solid 1px;
-  position: absolute;
-  height: 97%;
-  width: 95%;
+  border: #c2bcbc solid 1px;
+  width: 96vw;
+  height: 98vh;
+  margin: auto;
   background-color: red;
 }
 
@@ -21,8 +25,7 @@ header {
 }
 
 #name-and-title {
-  background-color: lightgray;
-  padding: var(--smallPadding);
+  margin: auto 0;
 }
 
 #main-menu {
