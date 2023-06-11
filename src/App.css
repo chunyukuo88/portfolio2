@@ -16,7 +16,7 @@ body {
 main {
   border: var(--border);
   width: 96vw;
-  height: 98vh;
+  height: 96vh;
   margin: auto;
   display: grid;
   grid-template-rows: 4em auto 3em;
@@ -27,17 +27,11 @@ header {
   padding: 0 var(--largePadding);
   display: grid;
   grid-template-columns: 86% 14%;
-  /*height: 4em;*/
 }
 
-section img {
-  /*  */
-}
-
-#dark-mode-toggler {
-  height: 2.5em;
-  width: 2.5em;
-  background-color: red;
+section {
+  display: grid;
+  grid-template-rows: 80% 10%;
 }
 
 footer {

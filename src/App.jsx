@@ -7,7 +7,6 @@ import LinkedIn from 'src/common/icons/contact_LinkedIn.svg';
 
 
 import Mail from 'src/common/icons/contact.svg';
-import DarkModeToggler from 'src/common/icons/darkModeToggler.png';
 import { easterEgg } from './common/strings';
 
 function App(){
@@ -35,11 +34,7 @@ function App(){
         </div>
       </header>
 
-      <section>
-        <div id='dark-mode-toggler'>
-          <img src={DarkModeToggler} alt="Exercise icon"/>
-        </div>
-      </section>
+      <section></section>
 
       <footer>
         <span><img className='main-icons' src={Mail} alt="Exercise icon"/></span>
