@@ -46,8 +46,8 @@ function App(){
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} />
         <ul id='tech-skills-abridged'>
-          <li>Test-driven Development, always</li>
           <li>The Serverless Framework</li>
+          <li>{strings.techSkillsTDD[language]}</li>
           <li>Lambdas (Node.js)</li>
           <li>Web Components</li>
           <li>Docker Compose</li>

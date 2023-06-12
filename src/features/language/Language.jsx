@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { updateLanguage } from './languageSlice';
+
+import LanguageIcon from 'src/common/icons/language.svg';
 import strings from 'src/common/strings.js';
 
 function Language() {
@@ -20,14 +22,13 @@ function Language() {
   };
 
   return (
-    <div
+    <img
       role='button'
       id='language-button'
       onClick={clickHandler}
-      style={{ cursor: 'pointer' }}
-    >
-      {strings.languageButtonLabel[language]}
-    </div>
+      style={{ cursor: 'pointer', height: '1rem' }}
+      src={LanguageIcon}
+    />
   );
 }
 

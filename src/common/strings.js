@@ -170,6 +170,11 @@ const strings = {
     english: 'Switch',
     german: 'Umschalten',
   },
+  techSkillsTDD: {
+    chinese: '測試驅動開發',
+    english: 'Test-driven Development',
+    german: 'Testgetriebene Entwicklung',
+  },
   username: {
     chinese: '用户名',
     english: 'Username',
