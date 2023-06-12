@@ -26,7 +26,7 @@ header {
   border-bottom: var(--border);;
   padding: 0 var(--largePadding);
   display: grid;
-  grid-template-columns: 86% 14%;
+  grid-template-columns: 72% 14% 14%;
 }
 
 section {
@@ -53,6 +53,14 @@ footer span {
 
 #name-and-title {
   margin: auto 0;
+  padding-left: 1.5rem;
+}
+
+#language-button-container {
+  border-left: var(--border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #main-menu-button-container {
@@ -60,4 +68,17 @@ footer span {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#primary-content {
+  display: flex;
+  justify-content: space-between;
+}
+#tech-skills-abridged {
+  text-align: end;
+  padding-right: 1.5rem;
+}
+
+#tech-skills-abridged li:nth-child(2){
+  color: green;
 }

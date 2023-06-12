@@ -30,15 +30,25 @@ const strings = {
   ENGLISH: 'english',
   CHINESE: 'chinese',
   GERMAN: 'german',
-  about: {
-    chinese: '簡介',
-    english: 'About',
-    german: 'Über uns',
+  aboutMe: {
+    chinese: '自我介紹',
+    english: 'About Me',
+    german: 'Über mich',
+  },
+  aboutSite: {
+    chinese: '網站信息',
+    english: 'Site Info',
+    german: 'Seiteninformation',
   },
   admin: {
     chinese: '内部管理',
     english: 'Admin',
     german: 'Admin',
+  },
+  backButton: {
+    chinese: '返回',
+    english: 'Back',
+    german: 'Zurück',
   },
   blog: {
     chinese: '麵包博客',
@@ -70,17 +80,17 @@ const strings = {
     english: 'Calisthenics',
     german: 'Kallisthenie',
   },
+  funStuff: {
+    chinese: '好玩的',
+    english: 'Fun Stuff',
+    german: 'Spaß',
+  },
   homeGreeting: {
     chinese: '咦？又來了',
     english: 'Welcome to my portfolio',
     german: 'Willkommen auf meiner Portfolio-Website',
   },
-  backButton: {
-    chinese: '返回',
-    english: 'Back',
-    german: 'Zurück',
-  },
-  language: {
+  languageButtonLabel: {
     chinese: '換語言',
     english: 'Language',
     german: 'Sprache',
@@ -94,6 +104,16 @@ const strings = {
     chinese: '登出',
     english: 'Log out',
     german: 'Abmelden',
+  },
+  myName: {
+    chinese: '郭磊',
+    english: 'Alex Gochenour',
+    german: 'Alex Gochenour',
+  },
+  myTitle: {
+    chinese: '軟件工程師',
+    english: 'JavaScript Engineer',
+    german: 'Softwareentwickler',
   },
   myWorkouts: {
     chinese: '我的鍛鍊',
@@ -135,6 +155,11 @@ const strings = {
     english: 'Reset Password',
     german: 'Passwort zurücksetzen',
   },
+  resume: {
+    chinese: '簡歷',
+    english: 'Résumé',
+    german: 'Lebenslauf',
+  },
   sendCodeToEmail: {
     chinese: '將一次性代碼傳至郵箱地址',
     english: 'Send code to email',
@@ -144,6 +169,11 @@ const strings = {
     chinese: '切換',
     english: 'Switch',
     german: 'Umschalten',
+  },
+  techSkillsTDD: {
+    chinese: '測試驅動開發',
+    english: 'Test-driven Development',
+    german: 'Testgetriebene Entwicklung',
   },
   username: {
     chinese: '用户名',

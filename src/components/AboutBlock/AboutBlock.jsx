@@ -11,7 +11,7 @@ export function AboutBlock(){
             <header>
               <h4 id='about-heading'>Hi! I'm Alex Gochenour.</h4>
             </header>
-            <h5>I'm a full-stack JavaScript developer deploying to Amazon Web Services (AWS) using the Serverless Framework and sometimes EC2. I'm passionate about best practices: TDD, pair programming, and Scrum are where it's at.</h5>
+            <h5>I'm a full-stack JavaScript developer deploying to Amazon Web Services (AWS) using the Serverless Framework and sometimes EC2. I'm passionate aboutMe best practices: TDD, pair programming, and Scrum are where it's at.</h5>
           </section>
         </article>
       </div>

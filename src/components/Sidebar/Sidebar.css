@@ -1,0 +1,49 @@
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar-open {
+    border-right: var(--border);
+    min-width: 2rem;
+    padding: 1rem;
+    width: 40%;
+    height: 95.5%;
+    color: var(--primaryColor);
+    transition: 0.4s ease-in;
+}
+
+.sidebar-closed {
+    width: 0%;
+    transition: 0.4s ease-in;
+}
+
+.sidebar__listItem {
+    margin: 2rem .75rem;
+    display: flex;
+    height: 1.5rem;
+    cursor: pointer;
+    border-bottom: var(--border);
+}
+
+.sidebar__listItem span {
+    white-space: nowrap;
+}
+
+/* FADE ANIMATIONS */
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 400ms;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 400ms;
+}

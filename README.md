@@ -1,5 +1,7 @@
 ### Alex Gochenour's Portfolio Site
 
+NOTE: This is an older version of my site.
+
 I made myself a little portfolio in rather short order, so kindly forgive the lack of TDD.
 
 I figured it might fun to learn some new technologies, so I decided on Supabase for both authentication and PostgreSQL tables. But Amazon Cognito's authentication is way better so I went back to that but then added Supabase for blog image storage. The bread blog uses Redis as its primary database, and I'm getting deeper into using Tanstack Query to make interacting with the Node.js API all the more sophisticated. A lot fewer `useEffects` and `useState` hooks that way, too!
