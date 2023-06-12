@@ -20,8 +20,13 @@ function Language() {
   };
 
   return (
-    <div role='button' id='language-button' onClick={clickHandler}>
-      {strings.language[language]}
+    <div
+      role='button'
+      id='language-button'
+      onClick={clickHandler}
+      style={{ cursor: 'pointer' }}
+    >
+      {strings.languageButtonLabel[language]}
     </div>
   );
 }
