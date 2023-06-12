@@ -12,6 +12,7 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
+import {SettingsMenu} from "./components/SettingsMenu/SettingsMenu";
 
 
 function App(){
@@ -58,6 +59,7 @@ function App(){
           <li>React</li>
           <li>Redis</li>
           <li>css</li>
+          <li>{<SettingsMenu />}</li>
         </ul>
       </section>
 
