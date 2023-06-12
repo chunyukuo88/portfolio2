@@ -11,6 +11,7 @@ export function Sidebar({ isOpen }){
     { title: strings.aboutSite[language] },
     { title: strings.resume[language] },
     { title: strings.funStuff[language] },
+    { title: strings.settings[language] },
   ];
 
   return (

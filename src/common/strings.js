@@ -165,6 +165,11 @@ const strings = {
     english: 'Send code to email',
     german: 'Code an E-Mail senden',
   },
+  settings: {
+    chinese: '設置',
+    english: 'Settings',
+    german: 'Aufstellen',
+  },
   switch: {
     chinese: '切換',
     english: 'Switch',
