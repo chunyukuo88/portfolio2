@@ -13,7 +13,6 @@ ul {
 }
 
 .sidebar-closed {
-    background-color: gray;
     width: 0%;
     transition: 0.4s ease-in;
 }
@@ -22,6 +21,8 @@ ul {
     margin: 2rem .75rem;
     display: flex;
     height: 1.5rem;
+    cursor: pointer;
+    border-bottom: var(--border);
 }
 
 .sidebar__listItem span {
