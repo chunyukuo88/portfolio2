@@ -6,15 +6,14 @@ import strings from 'src/common/strings';
 
 const { ENGLISH } = strings;
 
-export function SettingsMenu(){
+export function SettingsMenu({ isOpen }){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
 
-  return settingsAreVisible ? <p>hello!</p> : null;
-  // return (
-  //   <div className={isVisible ? 'settings-open' : 'settings-closed'}>
-  //     <ul>
-  //       <li onClick={toggleTheme}>{strings.darkMode[ENGLISH]}</li>
-  //     </ul>
-  //   </div>
-  // );
+  return isOpen ? (
+    <div className={settingsAreVisible ? 'settings-open' : 'settings-closed'}>
+      <ul>
+        <li onClick={toggleTheme}>{strings.darkMode[ENGLISH]}</li>
+      </ul>
+    </div>
+  ) : null;
 }

@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { useCommonGlobals } from 'src/common/hooks';
 import { SettingsToggler } from 'src/features/settingsMenu/SettingsToggler';
 import { CSSTransition } from 'react-transition-group';
@@ -10,18 +9,11 @@ import './Sidebar.css';
 export function Sidebar({ isOpen }){
   const [ language ] = useCommonGlobals(routes.index);
 
-  const Toggler = ({ key }) => (
-    <div key={key} className='sidebar__listItem'>
-      <SettingsToggler />
-    </div>
-  );
-
   const menuItems = [
     { title: strings.aboutMe[language] },
     { title: strings.aboutSite[language] },
     { title: strings.resume[language] },
     { title: strings.funStuff[language] },
-    { component: <Toggler /> }
   ];
 
   return (
@@ -43,6 +35,11 @@ export function Sidebar({ isOpen }){
             </li>
           ))
         }
+        <li key={'SettingsToggler'}>
+          <div className='sidebar__listItem'>
+            <SettingsToggler />
+          </div>
+        </li>
       </ul>
     </div>
   );

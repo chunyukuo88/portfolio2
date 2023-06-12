@@ -13,11 +13,14 @@ import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
 import {SettingsMenu} from "./components/SettingsMenu/SettingsMenu";
+import {useSelector} from "react-redux";
+import {selectSettingsMenuVisibility} from "./features/settingsMenu/settingsMenuSlice";
 
 
 function App(){
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ language ] = useCommonGlobals(routes.blog);
+  const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   console.log(`%c${easterEgg}`, 'color: yellow; background: black');
   console.log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 
@@ -59,7 +62,7 @@ function App(){
           <li>React</li>
           <li>Redis</li>
           <li>css</li>
-          <li>{<SettingsMenu />}</li>
+          <SettingsMenu isOpen={settingsAreVisible}/>
         </ul>
       </section>
 

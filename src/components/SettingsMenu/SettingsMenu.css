@@ -1,6 +1,6 @@
 .settings-open {
-
+    visibility: visible;
 }
 .settings-closed {
-
+    visibility: hidden;
 }

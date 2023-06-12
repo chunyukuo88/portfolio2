@@ -12,9 +12,8 @@ export function SettingsToggler() {
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    alert('hhh')
-    // return dispatch(updateSettingsVisibility(!settingsAreVisible));
-    return dispatch(updateSettingsVisibility(false));
+    const newValue = !settingsAreVisible;
+    return dispatch(updateSettingsVisibility(newValue));
   };
 
   return <div onClick={clickHandler}>{strings.settings[language]}</div>;
