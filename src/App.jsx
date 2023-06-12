@@ -52,9 +52,11 @@ function App(){
           <li>Web Components</li>
           <li>Docker Compose</li>
           <li>Testing Library</li>
+          <li>Supabase</li>
           <li>SvelteKit</li>
           <li>Scrum</li>
           <li>React</li>
+          <li>Redis</li>
           <li>css</li>
         </ul>
       </section>
