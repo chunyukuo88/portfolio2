@@ -3,14 +3,19 @@ ul {
     padding: 0;
 }
 .sidebar-open {
-    min-width: 5rem;
+    border-right: var(--border);
+    min-width: 2rem;
     padding: 1rem;
-    color: white;
+    width: 40%;
+    height: 100%;
+    color: var(--primaryColor);
     transition: 0.4s ease-in;
 }
 
 .sidebar-closed {
-    min-width: 2.5rem;
+    background-color: gray;
+    width: 0%;
+    transition: 0.4s ease-in;
 }
 
 .sidebar__listItem {
