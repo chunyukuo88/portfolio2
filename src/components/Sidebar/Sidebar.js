@@ -37,7 +37,14 @@ export function Sidebar({ isOpen }){
         }
         <li key={'SettingsToggler'}>
           <div className='sidebar__listItem'>
+            <CSSTransition
+              in={isOpen}
+              timeout={200}
+              classNames={'fade'}
+              unmountOnExit
+            >
             <SettingsToggler />
+            </CSSTransition>
           </div>
         </li>
       </ul>

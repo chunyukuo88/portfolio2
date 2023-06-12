@@ -1,19 +1,29 @@
 import { selectSettingsMenuVisibility } from 'src/features/settingsMenu/settingsMenuSlice';
+import { CSSTransition } from 'react-transition-group';
 import { useSelector } from 'react-redux';
 
-import { toggleTheme } from './utils';
 import strings from 'src/common/strings';
+import './SettingsMenu.css';
 
 const { ENGLISH } = strings;
 
-export function SettingsMenu({ isOpen }){
+export function SettingsMenu(){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
 
-  return isOpen ? (
+  return (
     <div className={settingsAreVisible ? 'settings-open' : 'settings-closed'}>
-      <ul>
-        <li onClick={toggleTheme}>{strings.darkMode[ENGLISH]}</li>
-      </ul>
+      <CSSTransition
+        in={settingsAreVisible}
+        timeout={200}
+        classNames={'fade'}
+        unmountOnExit
+      >
+        <ul>
+          <li>{strings.darkMode[ENGLISH]}</li>
+          <li>Setting 2</li>
+          <li>Setting 3</li>
+        </ul>
+      </CSSTransition>
     </div>
-  ) : null;
+  );
 }

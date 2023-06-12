@@ -7,20 +7,17 @@ import NPM from 'src/common/icons/contact_NPM.svg'
 import LinkedIn from 'src/common/icons/contact_LinkedIn.svg';
 import Mail from 'src/common/icons/contact.svg';
 import Language from './features/language/Language';
+import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
 
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
-import {SettingsMenu} from "./components/SettingsMenu/SettingsMenu";
-import {useSelector} from "react-redux";
-import {selectSettingsMenuVisibility} from "./features/settingsMenu/settingsMenuSlice";
 
 
 function App(){
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ language ] = useCommonGlobals(routes.blog);
-  const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   console.log(`%c${easterEgg}`, 'color: yellow; background: black');
   console.log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 
@@ -49,21 +46,23 @@ function App(){
 
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} />
-        <ul id='tech-skills-abridged'>
-          <li>The Serverless Framework</li>
-          <li>{strings.techSkillsTDD[language]}</li>
-          <li>Lambdas (Node.js)</li>
-          <li>Web Components</li>
-          <li>Docker Compose</li>
-          <li>Testing Library</li>
-          <li>Supabase</li>
-          <li>SvelteKit</li>
-          <li>Scrum</li>
-          <li>React</li>
-          <li>Redis</li>
-          <li>css</li>
-          <SettingsMenu isOpen={settingsAreVisible}/>
-        </ul>
+        <div id='tech-skills-and-settings-container'>
+          <ul id='tech-skills-abridged'>
+            <li>The Serverless Framework</li>
+            <li>{strings.techSkillsTDD[language]}</li>
+            <li>Lambdas (Node.js)</li>
+            <li>Web Components</li>
+            <li>Docker Compose</li>
+            <li>Testing Library</li>
+            <li>Supabase</li>
+            <li>SvelteKit</li>
+            <li>Scrum</li>
+            <li>React</li>
+            <li>Redis</li>
+            <li>css</li>
+          </ul>
+          <SettingsMenu />
+        </div>
       </section>
 
       <footer>
