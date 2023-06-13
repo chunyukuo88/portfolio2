@@ -42,8 +42,7 @@ export const ContactLinks = () => (
     <li className='contact-coin'>
       <a
         href='https://tinyurl.com/yckz8uwa'
-        target='_blank'
-        rel='noreferrer'
+        target='_blank' rel='noreferrer'
         aria-hidden='true'
         title='My old YouTube channel'
       >

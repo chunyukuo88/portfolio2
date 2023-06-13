@@ -43,6 +43,7 @@ footer {
 }
 
 footer span {
+  cursor: pointer;
   align-self: center;
   justify-self: center;
 }
