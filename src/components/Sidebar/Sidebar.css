@@ -2,6 +2,7 @@ ul {
     list-style-type: none;
     padding: 0;
 }
+
 .sidebar-open {
     border-right: var(--border);
     min-width: 2rem;
@@ -46,4 +47,10 @@ ul {
 .fade-exit-active {
     opacity: 0;
     transition: opacity 400ms;
+}
+
+@media (max-width: 400px) {
+    .sidebar-open {
+        width: 27%;
+    }
 }
