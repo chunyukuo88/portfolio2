@@ -41,7 +41,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: black;
+    background: black; /* Not redundant; this is required to make the cube opaque. */
     border: var(--border);
 }
 
@@ -55,6 +55,7 @@
     transition: var(--transitionInterval);
 }
 
+/* TODO: Figure out why there is a vertical seam */
 .cube div span:nth-child(3) {
     transform: rotateY(270deg) translateZ(50px);
     transition: var(--transitionInterval);
