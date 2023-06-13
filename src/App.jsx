@@ -2,13 +2,11 @@ import { useState } from 'react';
 import { useCommonGlobals } from './common/hooks';
 
 import { Divide as Hamburger } from 'hamburger-react'
-import GitHub from 'src/common/icons/contact_GH.svg';
-import NPM from 'src/common/icons/contact_NPM.svg'
-import LinkedIn from 'src/common/icons/contact_LinkedIn.svg';
-import Mail from 'src/common/icons/contact.svg';
 import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
+import { Footer } from './components/Footer/Footer';
+import { Cube } from './components/Cube/Cube';
 
 import {
   selectSettingsMenuVisibility,
@@ -80,30 +78,12 @@ function App(){
             <li>React</li>
             <li>css</li>
           </ul>
+          <Cube />
           <SettingsMenu />
         </div>
       </section>
 
-      <footer>
-        <span>
-          <img className='main-icons' src={Mail} alt='Mail icon'/>
-        </span>
-        <span>
-          <a href='https://github.com/chunyukuo88/' target='_blank' rel='noreferrer'>
-            <img className='main-icons' src={GitHub} alt='Github icon'/>
-          </a>
-        </span>
-        <span>
-          <a href='https://www.npmjs.com/package/gochenour' target='_blank' rel='noreferrer'>
-            <img className='main-icons' src={NPM} alt='NPM icon'/>
-          </a>
-        </span>
-        <span>
-          <a href='https://www.linkedin.com/in/alex-gochenour/' target='_blank' rel='noreferrer'>
-            <img className='main-icons' src={LinkedIn} alt='LinkedIn icon'/>
-          </a>
-        </span>
-      </footer>
+      <Footer />
     </main>
   );
 }
