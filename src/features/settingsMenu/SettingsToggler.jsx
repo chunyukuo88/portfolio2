@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentLanguage } from 'src/features/language/languageSlice';
 import { selectSettingsMenuVisibility } from './settingsMenuSlice';

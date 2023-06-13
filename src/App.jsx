@@ -10,11 +10,11 @@ import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
 
+import { updateSettingsVisibility } from './features/settingsMenu/settingsMenuSlice';
+import { useDispatch } from 'react-redux';
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
-import {useDispatch} from "react-redux";
-import {updateSettingsVisibility} from "./features/settingsMenu/settingsMenuSlice";
 
 
 function App(){
@@ -26,6 +26,11 @@ function App(){
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
+    return dispatch(updateSettingsVisibility(false));
+  }
+
+  const skillClickHandler = () => {
+    setMenuIsOpen(false);
     return dispatch(updateSettingsVisibility(false));
   }
 
@@ -53,7 +58,7 @@ function App(){
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} />
         <div id='tech-skills-and-settings-container'>
-          <ul id='tech-skills-abridged'>
+          <ul id='tech-skills-abridged' onClick={skillClickHandler}>
             <li>The Serverless Framework</li>
             <li>{strings.techSkillsTDD[language]}</li>
             <li>Lambdas (Node.js)</li>

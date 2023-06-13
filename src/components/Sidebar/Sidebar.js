@@ -43,7 +43,7 @@ export function Sidebar({ isOpen }){
               classNames={'fade'}
               unmountOnExit
             >
-            <SettingsToggler />
+              <SettingsToggler />
             </CSSTransition>
           </div>
         </li>

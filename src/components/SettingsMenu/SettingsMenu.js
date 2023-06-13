@@ -19,9 +19,9 @@ export function SettingsMenu(){
         unmountOnExit
       >
         <ul>
-          <li>{strings.darkMode[language]}</li>
-          <li>Setting 2</li>
-          <li>Setting 3</li>
+          <li className='sidebar__listItem'>{strings.darkMode[language]}</li>
+          <li className='sidebar__listItem'>Setting 2</li>
+          <li className='sidebar__listItem'>Setting 3</li>
         </ul>
       </CSSTransition>
     </div>

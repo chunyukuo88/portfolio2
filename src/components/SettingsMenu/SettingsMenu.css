@@ -1,8 +1,16 @@
+.settings-open,
+.settings-closed {
+    width: 100%;
+}
+
 .settings-open {
+    border-left: var(--border);
     border-top: var(--border);
+    border-bottom: var(--border);
     margin-top: 3.9rem;
     transition: .4s ease-in;
 }
+
 .settings-closed {
     margin-bottom: 0rem;
     transition: 1s ease-in;
