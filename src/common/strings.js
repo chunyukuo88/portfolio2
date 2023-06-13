@@ -65,6 +65,11 @@ const strings = {
     english: 'Contact',
     german: 'Kontakt',
   },
+  darkMode: {
+    chinese: '暗黑模式',
+    english: 'Dark Mode',
+    german: 'Dunkler Modus',
+  },
   email: {
     chinese: '郵箱地址',
     english: 'Email',
@@ -164,6 +169,11 @@ const strings = {
     chinese: '將一次性代碼傳至郵箱地址',
     english: 'Send code to email',
     german: 'Code an E-Mail senden',
+  },
+  settings: {
+    chinese: '設置',
+    english: 'Settings',
+    german: 'Aufstellen',
   },
   switch: {
     chinese: '切換',

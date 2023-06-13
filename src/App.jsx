@@ -7,8 +7,11 @@ import NPM from 'src/common/icons/contact_NPM.svg'
 import LinkedIn from 'src/common/icons/contact_LinkedIn.svg';
 import Mail from 'src/common/icons/contact.svg';
 import Language from './features/language/Language';
+import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
 
+import { updateSettingsVisibility } from './features/settingsMenu/settingsMenuSlice';
+import { useDispatch } from 'react-redux';
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
@@ -17,10 +20,19 @@ import './App.css';
 function App(){
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ language ] = useCommonGlobals(routes.blog);
+  const dispatch = useDispatch();
   console.log(`%c${easterEgg}`, 'color: yellow; background: black');
   console.log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 
-  const menuButtonHandler = () => setMenuIsOpen(!menuIsOpen);
+  const menuButtonHandler = () => {
+    setMenuIsOpen(!menuIsOpen);
+    return dispatch(updateSettingsVisibility(false));
+  }
+
+  const skillClickHandler = () => {
+    setMenuIsOpen(false);
+    return dispatch(updateSettingsVisibility(false));
+  }
 
   return (
     <main>
@@ -45,20 +57,23 @@ function App(){
 
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} />
-        <ul id='tech-skills-abridged'>
-          <li>The Serverless Framework</li>
-          <li>{strings.techSkillsTDD[language]}</li>
-          <li>Lambdas (Node.js)</li>
-          <li>Web Components</li>
-          <li>Docker Compose</li>
-          <li>Testing Library</li>
-          <li>Supabase</li>
-          <li>SvelteKit</li>
-          <li>Scrum</li>
-          <li>React</li>
-          <li>Redis</li>
-          <li>css</li>
-        </ul>
+        <div id='tech-skills-and-settings-container'>
+          <ul id='tech-skills-abridged' onClick={skillClickHandler}>
+            <li>The Serverless Framework</li>
+            <li>{strings.techSkillsTDD[language]}</li>
+            <li>Lambdas (Node.js)</li>
+            <li>Web Components</li>
+            <li>Docker Compose</li>
+            <li>Testing Library</li>
+            <li>Supabase</li>
+            <li>SvelteKit</li>
+            <li>Scrum</li>
+            <li>React</li>
+            <li>Redis</li>
+            <li>css</li>
+          </ul>
+          <SettingsMenu />
+        </div>
       </section>
 
       <footer>

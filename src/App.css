@@ -1,7 +1,7 @@
 :root {
   --largePadding: 0.5rem;
   --smallPadding: 0.25rem;
-  --primaryColor: #c2bcbc;
+  --primaryColor: #93a48c;
   --border: var(--primaryColor) solid 1px;
   --shortTransition: 5s;
   --longTransition: 5s;
@@ -56,13 +56,7 @@ footer span {
   padding-left: 1.5rem;
 }
 
-#language-button-container {
-  border-left: var(--border);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+#language-button-container,
 #main-menu-button-container {
   border-left: var(--border);
   display: flex;
@@ -74,9 +68,11 @@ footer span {
   display: flex;
   justify-content: space-between;
 }
+
 #tech-skills-abridged {
-  text-align: end;
   padding-right: 1.5rem;
+  text-align: end;
+  user-select: none;
 }
 
 #tech-skills-abridged li:nth-child(2){
