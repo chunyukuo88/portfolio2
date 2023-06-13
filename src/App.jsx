@@ -13,15 +13,21 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
+import {useDispatch} from "react-redux";
+import {updateSettingsVisibility} from "./features/settingsMenu/settingsMenuSlice";
 
 
 function App(){
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ language ] = useCommonGlobals(routes.blog);
+  const dispatch = useDispatch();
   console.log(`%c${easterEgg}`, 'color: yellow; background: black');
   console.log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 
-  const menuButtonHandler = () => setMenuIsOpen(!menuIsOpen);
+  const menuButtonHandler = () => {
+    setMenuIsOpen(!menuIsOpen);
+    return dispatch(updateSettingsVisibility(false));
+  }
 
   return (
     <main>

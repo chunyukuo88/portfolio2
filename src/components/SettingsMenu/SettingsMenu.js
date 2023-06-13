@@ -1,14 +1,14 @@
 import { selectSettingsMenuVisibility } from 'src/features/settingsMenu/settingsMenuSlice';
+import { selectCurrentLanguage } from 'src/features/language/languageSlice';
 import { CSSTransition } from 'react-transition-group';
 import { useSelector } from 'react-redux';
 
 import strings from 'src/common/strings';
 import './SettingsMenu.css';
 
-const { ENGLISH } = strings;
-
 export function SettingsMenu(){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
+  const language = useSelector(selectCurrentLanguage);
 
   return (
     <div className={settingsAreVisible ? 'settings-open' : 'settings-closed'}>
@@ -19,7 +19,7 @@ export function SettingsMenu(){
         unmountOnExit
       >
         <ul>
-          <li>{strings.darkMode[ENGLISH]}</li>
+          <li>{strings.darkMode[language]}</li>
           <li>Setting 2</li>
           <li>Setting 3</li>
         </ul>

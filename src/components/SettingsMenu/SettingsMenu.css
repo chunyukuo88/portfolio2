@@ -1,11 +1,28 @@
-.settings-closed,
-.settings-open {
-    transition: 0.4s ease-in;
-}
-
 .settings-open {
     border-top: var(--border);
+    margin-top: 3.9rem;
+    transition: .4s ease-in;
 }
 .settings-closed {
-    height: 0%;
+    margin-bottom: 0rem;
+    transition: 1s ease-in;
+    opacity: 0.25;
+}
+
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
 }
