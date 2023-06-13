@@ -5,6 +5,7 @@
     --border: 2px solid black; /* Example value, replace with your desired border */
     --transitionInterval: 0.3s; /* Example value, replace with your desired transition duration */
     --translateValue: 50px;
+    --translateValueSmall: 25px;
 }
 
 @keyframes animate {
@@ -101,19 +102,19 @@
     }
 
     .cube div span:nth-child(1) {
-        transform: rotateY(90deg) translateZ(calc(var(--translateValue) / 2));
+        transform: rotateY(90deg) translateZ(var(--translateValueSmall));
     }
 
     .cube div span:nth-child(2) {
-        transform: rotateY(180deg) translateZ(calc(var(--translateValue) / 2));
+        transform: rotateY(180deg) translateZ(var(--translateValueSmall));
     }
 
     .cube div span:nth-child(3) {
-        transform: rotateY(270deg) translateZ(calc(var(--translateValue) / 2));
+        transform: rotateY(270deg) translateZ(var(--translateValueSmall));
     }
 
     .cube div span:nth-child(4) {
-        transform: rotateY(360deg) translateZ(calc(var(--translateValue) / 2));
+        transform: rotateY(360deg) translateZ(var(--translateValueSmall));
     }
 
     .cubeLid {
