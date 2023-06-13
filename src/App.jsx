@@ -69,15 +69,15 @@ function App(){
           <ul id={getId()} onClick={skillClickHandler}>
             <li>The Serverless Framework</li>
             <li>{strings.techSkillsTDD[language]}</li>
-            <li>Lambdas (Node.js)</li>
+            <li>Lambdas with Node.js</li>
             <li>Web Components</li>
             <li>Docker Compose</li>
             <li>Testing Library</li>
+            <li>Redis Cloud</li>
             <li>Supabase</li>
             <li>SvelteKit</li>
             <li>Scrum</li>
             <li>React</li>
-            <li>Redis</li>
             <li>css</li>
           </ul>
           <SettingsMenu />

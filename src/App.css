@@ -70,19 +70,21 @@ footer span {
   justify-content: space-between;
 }
 
-#tech-skills-abridged {
-  padding-right: 1.5rem;
-  text-align: end;
-  user-select: none;
-  transition: 1s;
-}
-
+#tech-skills-abridged,
 #tech-skills-abridged__blurry {
   padding-right: 1.5rem;
   text-align: end;
+}
+
+#tech-skills-abridged {
+  user-select: none;
+  transition: 0.7s ease-in-out;
+}
+
+#tech-skills-abridged__blurry {
   color: transparent;
   text-shadow: 0 0 .25rem var(--primaryColor);
-  transition: 1s;
+  transition: 0.7s ease-in-out;
 }
 
 #tech-skills-abridged li:nth-child(2){
