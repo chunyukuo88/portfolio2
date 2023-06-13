@@ -10,14 +10,18 @@ import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
 
-import { updateSettingsVisibility } from './features/settingsMenu/settingsMenuSlice';
-import { useDispatch } from 'react-redux';
+import {
+  selectSettingsMenuVisibility,
+  updateSettingsVisibility
+} from './features/settingsMenu/settingsMenuSlice';
+import {useDispatch, useSelector} from 'react-redux';
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
 
 
 function App(){
+  const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ language ] = useCommonGlobals(routes.blog);
   const dispatch = useDispatch();
@@ -27,12 +31,16 @@ function App(){
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
     return dispatch(updateSettingsVisibility(false));
-  }
+  };
 
   const skillClickHandler = () => {
     setMenuIsOpen(false);
     return dispatch(updateSettingsVisibility(false));
-  }
+  };
+
+  const getId = () => settingsAreVisible
+    ? 'tech-skills-abridged__blurry'
+    : 'tech-skills-abridged';
 
   return (
     <main>
@@ -58,7 +66,7 @@ function App(){
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} />
         <div id='tech-skills-and-settings-container'>
-          <ul id='tech-skills-abridged' onClick={skillClickHandler}>
+          <ul id={getId()} onClick={skillClickHandler}>
             <li>The Serverless Framework</li>
             <li>{strings.techSkillsTDD[language]}</li>
             <li>Lambdas (Node.js)</li>
