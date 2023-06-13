@@ -81,7 +81,7 @@
 
 @media (max-width: 400px) {
     .cube {
-        top: 75%;
+        top: 77%;
         width: var(--cubeSideLengthSmall);
         height: var(--cubeSideLengthSmall);
     }
