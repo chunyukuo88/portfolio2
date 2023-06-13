@@ -34,3 +34,14 @@
     opacity: 0;
     transition: opacity 300ms;
 }
+
+
+@media (max-width: 400px) {
+    .settings-open {
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+        margin-top: 1rem;
+        transition: .4s ease-in;
+    }
+}
