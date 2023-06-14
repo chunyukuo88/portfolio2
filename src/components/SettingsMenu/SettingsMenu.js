@@ -1,15 +1,18 @@
 import { selectSettingsMenuVisibility } from 'src/features/settingsMenu/settingsMenuSlice';
+import {selectCurrentDarkTheme, setDarkMode, setLightMode} from 'src/features/darkMode/darkModeSlice';
 import { selectCurrentLanguage } from 'src/features/language/languageSlice';
 import { CSSTransition } from 'react-transition-group';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import strings from 'src/common/strings';
-import './Toggle.css';
 import './SettingsMenu.css';
+import './Toggle.css';
 
 export function SettingsMenu(){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
+  const isDarkMode = useSelector(selectCurrentDarkTheme);
   const language = useSelector(selectCurrentLanguage);
+  const dispatch = useDispatch();
 
   const ToggleSwitch = () => (
     <label className="switch">
@@ -19,7 +22,9 @@ export function SettingsMenu(){
   );
 
   const darkModeToggler = () => {
-
+    return (isDarkMode)
+      ? dispatch(setLightMode())
+      : dispatch(setDarkMode());
   };
 
   return (

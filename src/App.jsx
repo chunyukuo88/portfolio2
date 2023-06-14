@@ -16,10 +16,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
+import {selectCurrentDarkTheme} from "./features/darkMode/darkModeSlice";
 
 
 function App(){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
+  const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ language ] = useCommonGlobals(routes.blog);
   const dispatch = useDispatch();
@@ -41,7 +43,7 @@ function App(){
     : 'tech-skills-abridged';
 
   return (
-    <main>
+    <main className={isDarkMode ? undefined : 'light-mode'}>
       <header>
         <div id='name-and-title'>
           <div>{strings.myName[language]}</div>

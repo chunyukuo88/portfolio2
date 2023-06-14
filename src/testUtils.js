@@ -1,6 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import languageReducer from './features/language/languageSlice';
 import {settingsMenuSlice} from "./features/settingsMenu/settingsMenuSlice";
+import {darkModeSlice} from "./features/darkMode/darkModeSlice";
 
 const mockAuthSlice = createSlice({
   name: 'auth',
@@ -42,6 +43,7 @@ export const mockStore = configureStore({
     crossword: mockCrosswordSlice.reducer,
     language: languageReducer,
     settingsAreVisible: settingsMenuSlice.reducer,
+    darkMode: darkModeSlice.reducer,
   },
 });
 
@@ -62,5 +64,7 @@ export const mockStoreLoggedIn = configureStore({
     auth: mockAuthSliceLoggedIn.reducer,
     crossword: mockCrosswordSlice.reducer,
     language: languageReducer,
+    settingsAreVisible: settingsMenuSlice.reducer,
+    isDarkMode: darkModeSlice.reducer,
   },
 });
