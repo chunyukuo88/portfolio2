@@ -17,6 +17,11 @@
     opacity: 0.25;
 }
 
+.settings-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
 .fade-enter {
     opacity: 0;
 }
@@ -34,7 +39,6 @@
     opacity: 0;
     transition: opacity 300ms;
 }
-
 
 @media (max-width: 400px) {
     .settings-open {
