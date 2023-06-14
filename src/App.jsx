@@ -12,7 +12,7 @@ import {
   selectSettingsMenuVisibility,
   updateSettingsVisibility
 } from './features/settingsMenu/settingsMenuSlice';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
