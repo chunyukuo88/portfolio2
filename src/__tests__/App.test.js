@@ -23,9 +23,15 @@ describe('GIVEN: ', () => {
 
       const darkModeToggle = document.querySelectorAll('.switch-container')[0];
 
-      // Assert that a certain element has dark mode styling.
+      let app = document.querySelector('main');
+
+      expect(app).not.toHaveClass('light-mode');
+
       fireEvent.click(darkModeToggle);
-      // Assert that a certain element has light mode styling.
+
+      app = document.querySelector('main');
+
+      expect(app).toHaveClass('light-mode');
     });
   });
 });

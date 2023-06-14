@@ -18,6 +18,10 @@ export function SettingsMenu(){
     </label>
   );
 
+  const darkModeToggler = () => {
+
+  };
+
   return (
     <div className={settingsAreVisible ? 'settings-open' : 'settings-closed'}>
       <CSSTransition
@@ -27,7 +31,7 @@ export function SettingsMenu(){
         unmountOnExit
       >
         <ul>
-          <li className='sidebar__listItem settings-flex'>{strings.darkMode[language]} <span className='switch-container'><ToggleSwitch /></span></li>
+          <li className='sidebar__listItem settings-flex'>{strings.darkMode[language]} <span onClick={darkModeToggler} className='switch-container'><ToggleSwitch /></span></li>
           <li className='sidebar__listItem settings-flex'>{strings.spin[language]} <span className='switch-container'><ToggleSwitch /></span></li>
           <li className='sidebar__listItem'></li>
         </ul>

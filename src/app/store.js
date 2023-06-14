@@ -10,6 +10,7 @@ export const store = configureStore({
     crossword: crosswordReducer,
     language: languageReducer,
     settingsAreVisible: settingsReducer,
+    isDarkMode: true,
   },
   devTools: true, // TODO Change this for production
 });
