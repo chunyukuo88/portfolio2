@@ -8,6 +8,7 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
+import { selectCurrentDarkTheme } from './features/darkMode/darkModeSlice';
 import {
   selectSettingsMenuVisibility,
   updateSettingsVisibility
@@ -16,17 +17,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
-import {selectCurrentDarkTheme} from "./features/darkMode/darkModeSlice";
 
+const { log } = console;
 
 function App(){
+  const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
-  const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ language ] = useCommonGlobals(routes.blog);
   const dispatch = useDispatch();
-  console.log(`%c${easterEgg}`, 'color: yellow; background: black');
-  console.log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
+  log(`%c${easterEgg}`, 'color: yellow; background: black');
+  log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
