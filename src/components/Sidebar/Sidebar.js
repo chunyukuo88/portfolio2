@@ -1,6 +1,8 @@
-import { useCommonGlobals } from 'src/common/hooks';
+import { selectCurrentDarkTheme } from 'src/features/darkMode/darkModeSlice';
 import { SettingsToggler } from 'src/features/settingsMenu/SettingsToggler';
 import { CSSTransition } from 'react-transition-group';
+import { useCommonGlobals } from 'src/common/hooks';
+import { useSelector } from 'react-redux';
 
 import strings from 'src/common/strings';
 import { routes } from 'src/routes';
@@ -8,6 +10,7 @@ import './Sidebar.css';
 
 export function Sidebar({ isOpen }){
   const [ language ] = useCommonGlobals(routes.index);
+  const isDarkMode = useSelector(selectCurrentDarkTheme);
 
   const menuItems = [
     { title: strings.aboutMe[language] },
@@ -16,8 +19,17 @@ export function Sidebar({ isOpen }){
     { title: strings.funStuff[language] },
   ];
 
+  const classNameBasedOnWhetherOpen = (isOpen)
+    ? 'sidebar-open'
+    : 'sidebar-closed';
+
+  const classNameBasedOnDarkMode = () => {
+    const base = classNameBasedOnWhetherOpen;
+    return isDarkMode ? base : base + '__light-mode';
+  };
+
   return (
-    <div className={isOpen ? 'sidebar-open' : 'sidebar-closed'}>
+    <div className={classNameBasedOnDarkMode()}>
       <ul>
         {
           menuItems.map((item) => (

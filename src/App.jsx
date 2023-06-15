@@ -8,23 +8,26 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
+import { selectCurrentDarkTheme } from './features/darkMode/darkModeSlice';
 import {
   selectSettingsMenuVisibility,
   updateSettingsVisibility
 } from './features/settingsMenu/settingsMenuSlice';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
 
+const { log } = console;
 
 function App(){
-  const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
+  const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
+  const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals(routes.blog);
   const dispatch = useDispatch();
-  console.log(`%c${easterEgg}`, 'color: yellow; background: black');
-  console.log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
+  log(`%c${easterEgg}`, 'color: yellow; background: black');
+  log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -41,7 +44,7 @@ function App(){
     : 'tech-skills-abridged';
 
   return (
-    <main>
+    <main className={isDarkMode ? undefined : 'light-mode'}>
       <header>
         <div id='name-and-title'>
           <div>{strings.myName[language]}</div>
@@ -76,6 +79,7 @@ function App(){
             <li>SvelteKit</li>
             <li>Scrum</li>
             <li>React</li>
+            <li>msw</li>
             <li>css</li>
           </ul>
           <Cube />

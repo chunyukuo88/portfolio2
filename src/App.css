@@ -2,9 +2,11 @@
   --largePadding: 0.5rem;
   --smallPadding: 0.25rem;
   --primaryColor: #93a48c;
+  --primaryColorLightMode: #2e6e15;
   --border: var(--primaryColor) solid 1px;
   --shortTransition: 5s;
   --longTransition: 5s;
+  --toggleSwitchTransition: .4s;
 }
 
 body {
@@ -89,4 +91,9 @@ footer span {
 
 #tech-skills-abridged li:nth-child(2){
   color: green;
+}
+
+.light-mode {
+  background-color: white;
+  color: var(--primaryColorLightMode);
 }

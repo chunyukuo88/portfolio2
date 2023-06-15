@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const blankGrid = [
-  [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
-  [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
-  [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
-  [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
-  [{value: ''}, {value: ''}, {value: ''}, {value: ''}, {value: ''}],
+  [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+  [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+  [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+  [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+  [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
 ];
 
 export const crosswordSlice = createSlice({

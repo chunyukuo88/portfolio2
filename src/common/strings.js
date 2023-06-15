@@ -175,6 +175,11 @@ const strings = {
     english: 'Settings',
     german: 'Aufstellen',
   },
+  spin: {
+    chinese: '旋轉',
+    english: 'Spin',
+    german: 'Dreh',
+  },
   switch: {
     chinese: '切換',
     english: 'Switch',
