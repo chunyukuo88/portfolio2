@@ -18,16 +18,14 @@ import strings, { easterEgg } from './common/strings';
 import { routes } from './routes';
 import './App.css';
 
-const { log } = console;
-
-function App(){
+function App({ logger }){
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals(routes.blog);
   const dispatch = useDispatch();
-  log(`%c${easterEgg}`, 'color: yellow; background: black');
-  log('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
+  logger(`%c${easterEgg}`, 'color: yellow; background: black');
+  logger('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
