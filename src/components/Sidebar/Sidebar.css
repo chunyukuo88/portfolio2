@@ -3,7 +3,8 @@ ul {
     padding: 0;
 }
 
-.sidebar-open {
+.sidebar-open,
+.sidebar-open__light-mode {
     border-right: var(--border);
     min-width: 2rem;
     padding: 1rem;
@@ -11,6 +12,10 @@ ul {
     height: 85%;
     color: var(--primaryColor);
     transition: 0.4s ease-in;
+}
+
+.sidebar-open__light-mode {
+    color: var(--primaryColorLightMode);
 }
 
 .sidebar-closed {
@@ -50,7 +55,8 @@ ul {
 }
 
 @media (max-width: 400px) {
-    .sidebar-open {
+    .sidebar-open,
+    .sidebar-open__light-mode {
         width: 27%;
     }
 }

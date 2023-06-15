@@ -8,6 +8,8 @@ import strings from 'src/common/strings';
 
 const { ENGLISH } = strings;
 
+jest.spyOn(console, 'log').mockImplementation(jest.fn());
+
 describe('GIVEN: ', () => {
   describe('WHEN: ', () => {
     test('THEN: ', () => {

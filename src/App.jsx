@@ -79,6 +79,7 @@ function App(){
             <li>SvelteKit</li>
             <li>Scrum</li>
             <li>React</li>
+            <li>msw</li>
             <li>css</li>
           </ul>
           <Cube />
