@@ -4,7 +4,6 @@
   --primaryColor: #93a48c;
   --primaryColorLightMode: #2e6e15;
   --border: var(--primaryColor) solid 1px;
-  --shortTransition: 5s;
   --longTransition: 5s;
   --toggleSwitchTransition: .4s;
 }
