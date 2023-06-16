@@ -16,13 +16,6 @@ export function SettingsMenu(){
   const language = useSelector(selectCurrentLanguage);
   const dispatch = useDispatch();
 
-  const ToggleSwitch = () => (
-    <label className="switch">
-      <input type="checkbox" />
-      <div className="slider"></div>
-    </label>
-  );
-
   const darkModeToggler = () => (isDarkMode)
     ? dispatch(setLightMode())
     : dispatch(setDarkMode());
@@ -40,8 +33,23 @@ export function SettingsMenu(){
         unmountOnExit
       >
         <ul>
-          <li className='sidebar__listItem settings-flex'>{strings.darkMode[language]} <span onClick={darkModeToggler} className='switch-container'><ToggleSwitch /></span></li>
-          <li className='sidebar__listItem settings-flex'>{strings.spin[language]} <span onClick={spinToggler} className='switch-container'><ToggleSwitch /></span></li>
+          <li className='sidebar__listItem settings-flex'>{strings.darkMode[language]}
+            <span onClick={darkModeToggler} className='switch-container'>
+              <label className="switch">
+                <input type="checkbox" />
+                <div className="slider"></div>
+              </label>
+            </span>
+          </li>
+          <li className='sidebar__listItem settings-flex'>
+            {strings.spin[language]}
+            <span onClick={spinToggler} className='switch-container'>
+              <label className="switch">
+                <input type="checkbox" />
+                <div className="slider"></div>
+              </label>
+            </span>
+          </li>
           <li className='sidebar__listItem'></li>
         </ul>
       </CSSTransition>
