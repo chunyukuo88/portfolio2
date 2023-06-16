@@ -34,18 +34,18 @@ export function SettingsMenu(){
       >
         <ul>
           <li className='sidebar__listItem settings-flex'>{strings.darkMode[language]}
-            <span onClick={darkModeToggler} className='switch-container'>
+            <span className='switch-container'>
               <label className="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onClick={darkModeToggler} />
                 <div className="slider"></div>
               </label>
             </span>
           </li>
           <li className='sidebar__listItem settings-flex'>
             {strings.spin[language]}
-            <span onClick={spinToggler} className='switch-container'>
+            <span className='switch-container'>
               <label className="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onClick={spinToggler}/>
                 <div className="slider"></div>
               </label>
             </span>
