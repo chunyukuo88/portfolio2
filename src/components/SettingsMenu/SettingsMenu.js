@@ -1,5 +1,6 @@
 import { selectSettingsMenuVisibility } from 'src/features/settingsMenu/settingsMenuSlice';
-import {selectCurrentDarkTheme, setDarkMode, setLightMode} from 'src/features/darkMode/darkModeSlice';
+import { selectCurrentDarkTheme, setDarkMode, setLightMode } from 'src/features/darkMode/darkModeSlice';
+import { selectCubeSpinSpeed, toggleToSpinQuickly, toggleToSpinSlowly } from 'src/features/cubeSpin/cubeSpinSlice';
 import { selectCurrentLanguage } from 'src/features/language/languageSlice';
 import { CSSTransition } from 'react-transition-group';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,22 +11,18 @@ import './Toggle.css';
 
 export function SettingsMenu(){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
+  const shouldSpinSlowly = useSelector(selectCubeSpinSpeed);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const language = useSelector(selectCurrentLanguage);
   const dispatch = useDispatch();
 
-  const ToggleSwitch = () => (
-    <label className="switch">
-      <input type="checkbox" />
-      <span className="slider"></span>
-    </label>
-  );
+  const darkModeToggler = () => (isDarkMode)
+    ? dispatch(setLightMode())
+    : dispatch(setDarkMode());
 
-  const darkModeToggler = () => {
-    return (isDarkMode)
-      ? dispatch(setLightMode())
-      : dispatch(setDarkMode());
-  };
+  const spinToggler = () => (shouldSpinSlowly)
+    ? dispatch(toggleToSpinQuickly())
+    : dispatch(toggleToSpinSlowly());
 
   return (
     <div className={settingsAreVisible ? 'settings-open' : 'settings-closed'}>
@@ -36,8 +33,23 @@ export function SettingsMenu(){
         unmountOnExit
       >
         <ul>
-          <li className='sidebar__listItem settings-flex'>{strings.darkMode[language]} <span onClick={darkModeToggler} className='switch-container'><ToggleSwitch /></span></li>
-          <li className='sidebar__listItem settings-flex'>{strings.spin[language]} <span className='switch-container'><ToggleSwitch /></span></li>
+          <li className='sidebar__listItem settings-flex'>{strings.darkMode[language]}
+            <span className='switch-container'>
+              <label className="switch">
+                <input type="checkbox" onClick={darkModeToggler} />
+                <div className="slider"></div>
+              </label>
+            </span>
+          </li>
+          <li className='sidebar__listItem settings-flex'>
+            {strings.spin[language]}
+            <span className='switch-container'>
+              <label className="switch">
+                <input type="checkbox" onClick={spinToggler}/>
+                <div className="slider"></div>
+              </label>
+            </span>
+          </li>
           <li className='sidebar__listItem'></li>
         </ul>
       </CSSTransition>

@@ -1,14 +1,8 @@
-
-
-.switch-container {
-    margin-left: 1rem;
-}
-
 .switch {
-    position: relative;
     display: inline-block;
-    width: 3rem;
     height: 1.25rem;
+    position: relative;
+    width: 3rem;
 }
 
 .switch input {

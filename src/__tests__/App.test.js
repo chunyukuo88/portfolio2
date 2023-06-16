@@ -10,30 +10,68 @@ const { ENGLISH } = strings;
 
 jest.spyOn(console, 'log').mockImplementation(jest.fn());
 
-describe('GIVEN: ', () => {
-  describe('WHEN: ', () => {
-    test('THEN: ', () => {
-      renderWithQueryClient(<App />, mockStore);
+describe('App.jsx integration tests.', () => {
+  describe('GIVEN: The page has loaded', () => {
+    describe('WHEN: the user clicks the dark mode toggle', () => {
+      test('THEN: it toggles to light mode.', () => {
+        renderWithQueryClient(<App />, mockStore);
 
-      const hamburger = document.getElementById('main-menu-button-container');
+        const hamburger = document.getElementById('main-menu-button-container');
 
-      fireEvent.click(hamburger);
+        fireEvent.click(hamburger);
 
-      const settingsMenuOption = screen.getByText(strings.settings[ENGLISH]);
+        const settingsMenuOption = screen.getByText(strings.settings[ENGLISH]);
 
-      fireEvent.click(settingsMenuOption);
+        fireEvent.click(settingsMenuOption);
 
-      const darkModeToggle = document.querySelectorAll('.switch-container')[0];
+        const darkModeToggle = document.querySelectorAll('.switch-container')[0];
 
-      let app = document.querySelector('main');
+        let app = document.querySelector('main');
 
-      expect(app).not.toHaveClass('light-mode');
+        expect(app).not.toHaveClass('light-mode');
 
-      fireEvent.click(darkModeToggle);
+        fireEvent.click(darkModeToggle);
 
-      app = document.querySelector('main');
+        app = document.querySelector('main');
 
-      expect(app).toHaveClass('light-mode');
+        expect(app).toHaveClass('light-mode');
+      });
+    });
+  });
+  describe('GIVEN: The page has loaded', () => {
+    describe('WHEN: the user clicks the (cube) Spin toggle', () => {
+      test('THEN: the cube spins more quickly.', () => {
+        const fastSpinningCube = {
+          animation: 'animate 1s linear infinite'
+        };
+        const slowSpinningCube = {
+          animation: 'animate 4s linear infinite'
+        };
+
+        renderWithQueryClient(<App />, mockStore);
+
+        const hamburger = document.getElementById('main-menu-button-container');
+
+        fireEvent.click(hamburger);
+
+        const settingsMenuOption = screen.getByText(strings.settings[ENGLISH]);
+
+        fireEvent.click(settingsMenuOption);
+
+        let cube = screen.getByTestId('primary-cube');
+
+        expect(cube).toHaveStyle(slowSpinningCube);
+        expect(cube).not.toHaveStyle(fastSpinningCube);
+
+        const cubeSpinToggle = document.querySelectorAll('.switch-container')[1];
+
+        fireEvent.click(cubeSpinToggle);
+
+        cube = screen.getByTestId('primary-cube');
+
+        expect(cube).toHaveStyle(fastSpinningCube);
+        expect(cube).not.toHaveStyle(slowSpinningCube);
+      });
     });
   });
 });
