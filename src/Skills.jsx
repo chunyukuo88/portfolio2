@@ -16,8 +16,10 @@ export function Skills(props) {
       <li>Docker Compose</li>
       <li>Testing Library</li>
       <li>Redis Cloud</li>
+      <li>React Query</li>
       <li>Supabase</li>
       <li>SvelteKit</li>
+      <li>GraphQL</li>
       <li>Scrum</li>
       <li>React</li>
       <li>msw</li>
