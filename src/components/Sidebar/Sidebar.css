@@ -4,12 +4,22 @@ ul {
 }
 
 .sidebar-open,
+.sidebar-open__light-mode,
+.sidebar-closed {
+    position: absolute;
+    z-index: 4000;
+    background-color: black;
+    opacity: 1;
+}
+
+.sidebar-open,
 .sidebar-open__light-mode {
     border-right: var(--border);
+    border-bottom: var(--border);
     min-width: 2rem;
-    padding: 1rem;
+    padding: 0 1rem 2rem 1rem;
     width: 40%;
-    height: 85%;
+    height: 52%;
     color: var(--primaryColor);
     transition: 0.4s ease-in;
 }
