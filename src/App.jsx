@@ -60,7 +60,6 @@ function App({ logger }){
     </header>
   );
 
-
   return (
     <main className={isDarkMode ? undefined : 'light-mode'}>
       <Header />

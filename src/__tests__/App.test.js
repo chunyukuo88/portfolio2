@@ -25,7 +25,7 @@ describe('App.jsx integration tests.', () => {
 
         fireEvent.click(settingsMenuOption);
 
-        const darkModeToggle = document.querySelectorAll('.switch-container')[0];
+        const darkModeToggle = document.querySelectorAll('input')[0];
 
         let app = document.querySelector('main');
 
@@ -64,7 +64,7 @@ describe('App.jsx integration tests.', () => {
         expect(cube).toHaveStyle(slowSpinningCube);
         expect(cube).not.toHaveStyle(fastSpinningCube);
 
-        const cubeSpinToggle = document.querySelectorAll('.switch-container')[1];
+        const cubeSpinToggle = document.querySelectorAll('input')[1];
 
         fireEvent.click(cubeSpinToggle);
 

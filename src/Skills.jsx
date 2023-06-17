@@ -1,4 +1,5 @@
-import strings from "./common/strings";
+import strings from './common/strings';
+import './Skills.css';
 
 export function Skills(props) {
   const { skillClickHandler, language, settingsAreVisible } = props;
@@ -15,11 +16,11 @@ export function Skills(props) {
       <li>Web Components</li>
       <li>Docker Compose</li>
       <li>Testing Library</li>
-      <li>Redis Cloud</li>
       <li>React Query</li>
+      <li>Redis Cloud</li>
       <li>Supabase</li>
-      <li>SvelteKit</li>
       <li>GraphQL</li>
+      <li>SvelteKit</li>
       <li>Scrum</li>
       <li>React</li>
       <li>msw</li>
