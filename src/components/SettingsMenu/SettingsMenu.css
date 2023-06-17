@@ -1,6 +1,6 @@
 .settings-open,
 .settings-closed {
-    width: 100%;
+    width: 50%; /* TODO looks lame on widescreen. Media query to get this to 30% */
 }
 
 .settings-open {

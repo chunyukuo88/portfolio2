@@ -71,7 +71,9 @@ function App({ logger }){
         <div id='tech-skills-and-settings-container'>
           <AboutMe />
           <Cube />
-          <SettingsMenu />
+          <div id='settings-menu-container'>
+            <SettingsMenu />
+          </div>
         </div>
       </section>
 

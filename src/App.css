@@ -71,6 +71,11 @@ footer span {
   justify-content: space-between;
 }
 
+#settings-menu-container {
+  display: flex;
+  justify-content: end;
+}
+
 #tech-skills-abridged,
 #tech-skills-abridged__blurry {
   padding-right: 1.5rem;
