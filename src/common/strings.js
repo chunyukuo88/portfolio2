@@ -38,7 +38,7 @@ const strings = {
   aboutSite: {
     chinese: '網站信息',
     english: 'Site Info',
-    german: 'Seiteninformation',
+    german: 'Seite',
   },
   admin: {
     chinese: '内部管理',
