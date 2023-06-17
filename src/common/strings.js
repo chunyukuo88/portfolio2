@@ -86,8 +86,8 @@ const strings = {
     german: 'Kallisthenie',
   },
   funStuff: {
-    chinese: '好玩的',
-    english: 'Fun Stuff',
+    chinese: '趣事',
+    english: 'Fun',
     german: 'Spaß',
   },
   homeGreeting: {

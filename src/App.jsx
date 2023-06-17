@@ -26,15 +26,15 @@ function App({ logger }){
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals(routes.blog);
   const dispatch = useDispatch();
-  logger(`%c${easterEgg}`, 'color: yellow; background: black');
-  logger('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
+  // logger(`%c${easterEgg}`, 'color: yellow; background: black');
+  // logger('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
     return dispatch(updateSettingsVisibility(false));
   };
 
-  const skillClickHandler = () => {
+  const primaryContentClickHandler = () => {
     setMenuIsOpen(false);
     return dispatch(updateSettingsVisibility(false));
   };
@@ -69,7 +69,9 @@ function App({ logger }){
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} />
         <div id='tech-skills-and-settings-container'>
-          <AboutMe />
+          <div onClick={primaryContentClickHandler}>
+            <AboutMe />
+          </div>
           <Cube />
           <div id='settings-menu-container'>
             <SettingsMenu />
