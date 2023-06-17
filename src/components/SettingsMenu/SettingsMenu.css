@@ -2,14 +2,18 @@
 .settings-closed {
     z-index: 4000;
     background-color: black;
-    width: 23%;
+    width: 33%;
     transition: .4s ease-in-out;
+    border-right: 1px solid var(--primaryColor);
+    border-bottom: 1px solid var(--primaryColor);
 }
 
 .settings-open__light-mode,
 .settings-closed__light-mode {
     background-color: white;
-    width: 45%;
+    border-right: 1px solid var(--primaryColor);
+    border-bottom: 1px solid var(--primaryColor);
+    width: 33%;
 }
 
 .settings-open {

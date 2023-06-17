@@ -95,7 +95,6 @@ footer span {
 #primary-content {
   display: flex;
   justify-content: space-between;
-  background-color: gray;
   height: 50%;
 }
 
