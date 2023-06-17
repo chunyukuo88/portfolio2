@@ -5,6 +5,7 @@ import { Divide as Hamburger } from 'hamburger-react'
 import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
+import { Skills } from './Skills';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
@@ -37,49 +38,37 @@ function App({ logger }){
     return dispatch(updateSettingsVisibility(false));
   };
 
-  const getId = () => settingsAreVisible
-    ? 'tech-skills-abridged__blurry'
-    : 'tech-skills-abridged';
+  const Header = () => (
+    <header>
+      <div id='name-and-title'>
+        <div>{strings.myName[language]}</div>
+        <div>{strings.myTitle[language]}</div>
+      </div>
+      <div id='language-button-container'>
+        <Language />
+      </div>
+      <div onClick={menuButtonHandler} id='main-menu-button-container'>
+        <Hamburger
+          hideOutline={false}
+          label='show menu'
+          size={16}
+          toggle={setMenuIsOpen}
+          toggled={menuIsOpen}
+        />
+      </div>
+    </header>
+  );
+
+
 
   return (
     <main className={isDarkMode ? undefined : 'light-mode'}>
-      <header>
-        <div id='name-and-title'>
-          <div>{strings.myName[language]}</div>
-          <div>{strings.myTitle[language]}</div>
-        </div>
-        <div id='language-button-container'>
-          <Language />
-        </div>
-        <div onClick={menuButtonHandler} id='main-menu-button-container'>
-          <Hamburger
-            hideOutline={false}
-            label='show menu'
-            size={16}
-            toggle={setMenuIsOpen}
-            toggled={menuIsOpen}
-          />
-        </div>
-      </header>
+      <Header />
 
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} />
         <div id='tech-skills-and-settings-container'>
-          <ul id={getId()} onClick={skillClickHandler}>
-            <li>The Serverless Framework</li>
-            <li>{strings.techSkillsTDD[language]}</li>
-            <li>Lambdas with Node.js</li>
-            <li>Web Components</li>
-            <li>Docker Compose</li>
-            <li>Testing Library</li>
-            <li>Redis Cloud</li>
-            <li>Supabase</li>
-            <li>SvelteKit</li>
-            <li>Scrum</li>
-            <li>React</li>
-            <li>msw</li>
-            <li>css</li>
-          </ul>
+          <Skills />
           <Cube />
           <SettingsMenu />
         </div>
