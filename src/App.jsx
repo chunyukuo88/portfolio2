@@ -6,6 +6,7 @@ import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { Skills } from './Skills';
+import { AboutMe } from './AboutMe';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
@@ -68,7 +69,7 @@ function App({ logger }){
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} />
         <div id='tech-skills-and-settings-container'>
-          <Skills />
+          <AboutMe />
           <Cube />
           <SettingsMenu />
         </div>
