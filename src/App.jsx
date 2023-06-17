@@ -61,24 +61,27 @@ function App({ logger }){
   );
 
 
-
   return (
     <main className={isDarkMode ? undefined : 'light-mode'}>
       <Header />
 
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} />
-        <div id='tech-skills-and-settings-container'>
-          <div onClick={primaryContentClickHandler}>
-            <AboutMe />
-          </div>
-          <Cube />
-          <div id='settings-menu-container'>
-            <SettingsMenu />
+        <div id='primary-content-and-settings-container' onClick={primaryContentClickHandler}>
+          <div id='primary-content' >
+            <AboutMe
+              language={language}
+              settingsAreVisible={settingsAreVisible}
+            />
           </div>
         </div>
       </section>
 
+
+      <div id='settings-menu-container'>
+        <SettingsMenu />
+      </div>
+        <Cube />
       <Footer />
     </main>
   );

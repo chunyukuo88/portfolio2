@@ -1,9 +1,8 @@
 :root {
     --cubeSideLength: 100px;
     --cubeSideLengthSmall: 50px;
-    --primaryColor: red; /* Example value, replace with your desired color */
-    --border: 2px solid black; /* Example value, replace with your desired border */
-    --transitionInterval: 0.3s; /* Example value, replace with your desired transition duration */
+    --border: 2px solid black;
+    --transitionInterval: 0.3s;
     --translateValue: 50px;
     --translateValueSmall: 25px;
 }

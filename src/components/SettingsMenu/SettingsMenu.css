@@ -3,8 +3,10 @@
     position: absolute;
     z-index: 4000;
     background-color: black;
-    width: 55%; /* TODO looks lame on widescreen. Media query to get this to 30% */
+    width: 35%; /* TODO looks lame on widescreen. Media query to get this to 30% */
     transition: .4s ease-in-out;
+    margin-right: 1rem;
+    border: var(--primaryColor);
 }
 
 .settings-open__light-mode,
@@ -14,7 +16,6 @@
 
 .settings-open {
     border-left: var(--border);
-    border-top: var(--border);
     border-bottom: var(--border);
     transition: .4s ease-in-out;
 }

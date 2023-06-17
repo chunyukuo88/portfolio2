@@ -1,11 +1,19 @@
+import './AboutMe.css';
+
 const style = {
   margin: '1rem',
   textAlign: 'justify',
 };
 
-export function AboutMe() {
+export function AboutMe(props) {
+  const { language, settingsAreVisible } = props;
+
+  const getId = () => settingsAreVisible
+    ? 'about-me__blurry'
+    : 'about-me__clear';
+
   return (
-    <article style={style}>
+    <article id={getId()} style={style}>
       <div>I love sustainable development practices and test-driven code. I find that
         pairing spreads knowledge quickly and results in shorter feedback loops, code of higher quality and readability,
         and shorter code reviews, which are also best done in pairs or mobs. All of this saves $$$ and makes for more

@@ -31,8 +31,8 @@ const strings = {
   CHINESE: 'chinese',
   GERMAN: 'german',
   aboutMe: {
-    chinese: '自我介紹',
-    english: 'About Me',
+    chinese: '簡介',
+    english: 'Hello',
     german: 'Über mich',
   },
   aboutSite: {

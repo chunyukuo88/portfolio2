@@ -24,7 +24,7 @@ main {
 }
 
 header {
-  border-bottom: var(--border);;
+  border-bottom: var(--border);
   padding: 0 var(--largePadding);
   display: grid;
   grid-template-columns: 72% 14% 14%;
@@ -66,16 +66,6 @@ footer span {
   align-items: center;
 }
 
-#primary-content {
-  display: flex;
-  justify-content: space-between;
-}
-
-#settings-menu-container {
-  display: flex;
-  justify-content: end;
-}
-
 #tech-skills-abridged,
 #tech-skills-abridged__blurry {
   padding-right: 1.5rem;
@@ -100,4 +90,20 @@ footer span {
 .light-mode {
   background-color: white;
   color: var(--primaryColorLightMode);
+}
+
+#primary-content {
+  display: flex;
+  justify-content: space-between;
+  background-color: gray;
+  height: 50%;
+}
+
+#settings-menu-container {
+  margin-top: 4rem;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: start;
 }
