@@ -1,7 +1,8 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import languageReducer from './features/language/languageSlice';
-import {settingsMenuSlice} from "./features/settingsMenu/settingsMenuSlice";
-import {darkModeSlice} from "./features/darkMode/darkModeSlice";
+import settingsMenuReducer from './features/settingsMenu/settingsMenuSlice';
+import darkModeReducer from './features/darkMode/darkModeSlice';
+import cubeSpinReducer from './features/cubeSpin/cubeSpinSlice';
 
 const mockAuthSlice = createSlice({
   name: 'auth',
@@ -35,15 +36,16 @@ const mockCrosswordSlice = createSlice({
       state.userWon = true;
     }
   }
-})
+});
 
 export const mockStore = configureStore({
   reducer: {
     auth: mockAuthSlice.reducer,
     crossword: mockCrosswordSlice.reducer,
+    settingsAreVisible: settingsMenuReducer,
+    cubeSpinsSlowly: cubeSpinReducer,
+    darkMode: darkModeReducer,
     language: languageReducer,
-    settingsAreVisible: settingsMenuSlice.reducer,
-    darkMode: darkModeSlice.reducer,
   },
 });
 

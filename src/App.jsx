@@ -6,7 +6,7 @@ import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { Skills } from './Skills';
-import { AboutMe } from './AboutMe';
+import { AboutMe } from './components/AboutMe/AboutMe';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
