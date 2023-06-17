@@ -5,7 +5,8 @@ ul {
 
 .sidebar-open,
 .sidebar-open__light-mode,
-.sidebar-closed {
+.sidebar-closed,
+.sidebar-closed__light-mode {
     position: absolute;
     z-index: 4000;
     background-color: black;
@@ -25,10 +26,12 @@ ul {
 }
 
 .sidebar-open__light-mode {
+    background-color: white;
     color: var(--primaryColorLightMode);
 }
 
-.sidebar-closed {
+.sidebar-closed,
+.sidebar-closed__light-mode {
     width: 0%;
     transition: 0.4s ease-in;
 }
