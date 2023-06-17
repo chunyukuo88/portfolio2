@@ -67,8 +67,8 @@ const strings = {
   },
   darkMode: {
     chinese: '暗黑模式',
-    english: 'Dark Mode',
-    german: 'Dunkler Modus',
+    english: 'Dark',
+    german: 'Dunkler',
   },
   email: {
     chinese: '郵箱地址',
