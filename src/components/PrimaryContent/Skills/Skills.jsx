@@ -1,4 +1,4 @@
-import strings from '../../common/strings';
+import strings from 'src/common/strings';
 import './Skills.css';
 
 export function Skills(props) {
@@ -11,6 +11,7 @@ export function Skills(props) {
   return (
     <ul id={getId()} onClick={skillClickHandler}>
       <li>The Serverless Framework</li>
+      <li>Test-driven Development</li>
       <li>{strings.techSkillsTDD[language]}</li>
       <li>Lambdas with Node.js</li>
       <li>Web Components</li>
