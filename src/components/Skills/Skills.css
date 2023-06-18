@@ -2,10 +2,10 @@
 #tech-skills-abridged__blurry {
     padding-right: 1.5rem;
     text-align: end;
+    width: 100%;
 }
 
 #tech-skills-abridged {
-    user-select: none;
     transition: 0.7s ease-in-out;
 }
 

@@ -73,6 +73,7 @@ function App(){
   return (
     <main className={isDarkMode ? undefined : 'light-mode'}>
       <Header />
+
       <section id='primary-content'>
         <Sidebar isOpen={menuIsOpen} setPrimaryContentKey={setPrimaryContentKey} />
         <div id='primary-content-and-settings-container' onClick={primaryContentClickHandler}>
@@ -82,11 +83,12 @@ function App(){
         </div>
       </section>
 
-
       <div id='settings-menu-container'>
         <SettingsMenu />
       </div>
-        <Cube />
+
+      <Cube />
+
       <Footer />
     </main>
   );

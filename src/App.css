@@ -6,6 +6,7 @@
   --border: var(--primaryColor) solid 1px;
   --longTransition: 5s;
   --toggleSwitchTransition: .4s;
+  user-select: none;
 }
 
 body {
