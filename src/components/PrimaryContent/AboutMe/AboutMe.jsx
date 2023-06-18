@@ -6,14 +6,10 @@ const style = {
 };
 
 export function AboutMe(props) {
-  const { language, settingsAreVisible } = props;
-
-  const getId = () => settingsAreVisible
-    ? 'about-me__blurry'
-    : 'about-me__clear';
+  const { menuIsOpen } = props;
 
   return (
-    <article id={getId()} style={style}>
+    <article id='about-me' className={menuIsOpen ? 'blurry' : null } style={style}>
       <div>I love sustainable development practices and test-driven code. I find that
         pairing spreads knowledge quickly and results in shorter feedback loops, code of higher quality and readability,
         and shorter code reviews, which are also best done in pairs or mobs. All of this saves $$$ and makes for more

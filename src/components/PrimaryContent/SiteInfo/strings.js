@@ -6,8 +6,8 @@ export const strings = {
   },
   abridgedVersionBody: {
     chinese: '',
-    english: 'This is a test-driven website made with a host of interesting technologies: Supabase, Redis Cloud, Lambda\n' +
-      'functions, the Serverless Framework, React, Redux, and tested with msw (Mock Service Worker). All the CSS,\n' +
+    english: 'This is a test-driven website made with: Supabase, Redis Cloud, AWS Lambdas\n' +
+      'the Serverless Framework, React, Tanstack Query, Redux, and msw (Mock Service Worker). All the CSS,\n' +
       'including the animations and transitions are scratch-made with the exception of CSSTransitions.',
     german: '',
   },
