@@ -1,4 +1,5 @@
 import { strings } from './strings';
+import './SiteInfo.css';
 
 export function SiteInfo(props) {
   const { skillClickHandler, language, settingsAreVisible } = props;
@@ -8,7 +9,7 @@ export function SiteInfo(props) {
     : 'site-info';
 
   return (
-    <article id={getId()} onClick={skillClickHandler}>
+    <article id='site-info' className={settingsAreVisible ? 'blurry' : null} onClick={skillClickHandler}>
       <h3>{strings.abridgedVersionTitle[language]}</h3>
       <p>{strings.abridgedVersionBody[language]}</p>
       <h3>{strings.unabridgedVersionTitle[language]}</h3>
