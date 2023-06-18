@@ -9,6 +9,12 @@
   user-select: none;
 }
 
+.blurry {
+  color: transparent;
+  text-shadow: 0 0 .25rem var(--primaryColor);
+  transition: 0.7s ease-in-out;
+}
+
 body {
   background-color: black;
   color: var(--primaryColor);
@@ -55,6 +61,7 @@ footer span {
 }
 
 #name-and-title {
+  cursor: pointer;
   margin: auto 0;
   padding-left: 1.5rem;
 }
@@ -96,7 +103,7 @@ footer span {
 #primary-content {
   display: flex;
   justify-content: space-between;
-  height: 50%;
+  height: 100%;
 }
 
 #settings-menu-container {
@@ -113,5 +120,11 @@ footer span {
   #settings-menu-container {
     margin-left: 10rem;
     width: 25rem;
+  }
+
+  #primary-content {
+    display: flex;
+    justify-content: space-between;
+    height: 50%;
   }
 }

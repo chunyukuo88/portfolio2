@@ -16,7 +16,7 @@ export function Sidebar({ isOpen, setPrimaryContentKey }){
     { title: strings.aboutMe[language], key: 'aboutMe' },
     { title: strings.siteInfo[language], key: 'siteInfo' },
     { title: strings.resume[language], key: 'resume' },
-    { title: strings.funStuff[language], key: 'funStuff' },
+    // { title: strings.funStuff[language], key: 'funStuff' },
   ];
 
   const classNameBasedOnWhetherOpen = (isOpen)
