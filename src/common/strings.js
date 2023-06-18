@@ -35,7 +35,7 @@ const strings = {
     english: 'Hello',
     german: 'Über mich',
   },
-  aboutSite: {
+  siteInfo: {
     chinese: '網站信息',
     english: 'Site Info',
     german: 'Seite',

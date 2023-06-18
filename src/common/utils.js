@@ -1,4 +1,11 @@
+import { easterEgg } from './strings';
+
 export const logger = console.log;
+
+export function logEasterEgg() {
+  logger(`%c${easterEgg}`, 'color: yellow; background: black');
+  logger('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
+};
 
 export async function getCrosswords(){
   const response = await fetch(process.env.REACT_APP_GET_ALL_CROSSWORDS);

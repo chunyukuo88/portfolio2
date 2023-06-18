@@ -5,7 +5,7 @@ import { Divide as Hamburger } from 'hamburger-react'
 import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
-import { Skills } from './Skills';
+import { Skills } from './components/Skills/Skills';
 import { AboutMe } from './components/AboutMe/AboutMe';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
@@ -16,18 +16,20 @@ import {
   updateSettingsVisibility
 } from './features/settingsMenu/settingsMenuSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import strings, { easterEgg } from './common/strings';
+import { logEasterEgg } from './common/utils';
+import strings from './common/strings';
 import { routes } from './routes';
 import './App.css';
 
-function App({ logger }){
-  const [ menuIsOpen, setMenuIsOpen ] = useState(false);
+function App(){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals(routes.blog);
+  const [ menuIsOpen, setMenuIsOpen ] = useState(false);
+  const [ primaryContentKey, setPrimaryContentKey ] = useState('skills');
   const dispatch = useDispatch();
-  // logger(`%c${easterEgg}`, 'color: yellow; background: black');
-  // logger('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
+
+  logEasterEgg();
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -37,6 +39,14 @@ function App({ logger }){
   const primaryContentClickHandler = () => {
     setMenuIsOpen(false);
     return dispatch(updateSettingsVisibility(false));
+  };
+
+  const primaryContentMap = {
+    skills: <Skills/>,
+    aboutMe: <AboutMe language={language} settingsAreVisible={settingsAreVisible}/>,
+    siteInfo: <div>Coming Soon</div>,
+    resume: <div>Coming Soon</div>,
+    funStuff: <div>Coming Soon</div>,
   };
 
   const Header = () => (
@@ -63,15 +73,11 @@ function App({ logger }){
   return (
     <main className={isDarkMode ? undefined : 'light-mode'}>
       <Header />
-
       <section id='primary-content'>
-        <Sidebar isOpen={menuIsOpen} />
+        <Sidebar isOpen={menuIsOpen} setPrimaryContentKey={setPrimaryContentKey} />
         <div id='primary-content-and-settings-container' onClick={primaryContentClickHandler}>
           <div id='primary-content' >
-            <AboutMe
-              language={language}
-              settingsAreVisible={settingsAreVisible}
-            />
+            {primaryContentMap[primaryContentKey]}
           </div>
         </div>
       </section>

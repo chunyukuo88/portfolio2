@@ -8,14 +8,11 @@ import strings from 'src/common/strings';
 
 const { ENGLISH } = strings;
 
-const logger = jest.fn();
-
-
 describe('App.jsx integration tests.', () => {
   describe('GIVEN: The page has loaded', () => {
     describe('WHEN: the user clicks the dark mode toggle', () => {
       test('THEN: it toggles to light mode.', () => {
-        renderWithQueryClient(<App logger={logger()} />, mockStore);
+        renderWithQueryClient(<App />, mockStore);
 
         const hamburger = document.getElementById('main-menu-button-container');
 
@@ -49,7 +46,7 @@ describe('App.jsx integration tests.', () => {
           animation: 'animate 4s linear infinite'
         };
 
-        renderWithQueryClient(<App logger={logger()} />, mockStore);
+        renderWithQueryClient(<App />, mockStore);
 
         const hamburger = document.getElementById('main-menu-button-container');
 

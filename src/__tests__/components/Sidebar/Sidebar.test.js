@@ -23,7 +23,7 @@ describe('Sidebar.jsx', () => {
       test.each`
         menuItemLabel
         ${strings.aboutMe[ENGLISH]}
-        ${strings.aboutSite[ENGLISH]}
+        ${strings.siteInfo[ENGLISH]}
         ${strings.resume[ENGLISH]}
         ${strings.funStuff[ENGLISH]}
         ${strings.settings[ENGLISH]}
@@ -60,7 +60,7 @@ describe('Sidebar.jsx', () => {
       test.each`
         menuItemLabel
         ${strings.aboutMe[ENGLISH]}
-        ${strings.aboutSite[ENGLISH]}
+        ${strings.siteInfo[ENGLISH]}
         ${strings.resume[ENGLISH]}
       `('THEN: the menu items are NOT visible', ({ menuItemLabel }) => {
         const menuItem = screen.queryByText(menuItemLabel);

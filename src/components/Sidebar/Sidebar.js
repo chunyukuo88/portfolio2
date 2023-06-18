@@ -8,15 +8,15 @@ import strings from 'src/common/strings';
 import { routes } from 'src/routes';
 import './Sidebar.css';
 
-export function Sidebar({ isOpen }){
+export function Sidebar({ isOpen, setPrimaryContentKey }){
   const [ language ] = useCommonGlobals(routes.index);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
 
   const menuItems = [
-    { title: strings.aboutMe[language] },
-    { title: strings.aboutSite[language] },
-    { title: strings.resume[language] },
-    { title: strings.funStuff[language] },
+    { title: strings.aboutMe[language], key: 'aboutMe' },
+    { title: strings.siteInfo[language], key: 'siteInfo' },
+    { title: strings.resume[language], key: 'resume' },
+    { title: strings.funStuff[language], key: 'funStuff' },
   ];
 
   const classNameBasedOnWhetherOpen = (isOpen)
@@ -41,7 +41,7 @@ export function Sidebar({ isOpen }){
                   classNames={'fade'}
                   unmountOnExit
                 >
-                  <div>{item.title || item.component}</div>
+                  <div onClick={() => setPrimaryContentKey(item.key)}>{item.title || item.component}</div>
                 </CSSTransition>
               </div>
             </li>

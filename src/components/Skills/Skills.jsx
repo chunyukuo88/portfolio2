@@ -1,4 +1,4 @@
-import strings from './common/strings';
+import strings from '../../common/strings';
 import './Skills.css';
 
 export function Skills(props) {
