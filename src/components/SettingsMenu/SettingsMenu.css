@@ -1,19 +1,32 @@
 .settings-open,
 .settings-closed {
-    width: 100%;
+    z-index: 4000;
+    background-color: black;
+    width: 33%;
+    transition: .4s ease-in-out;
+    border-right: 1px solid var(--primaryColor);
+    border-bottom: 1px solid var(--primaryColor);
+}
+
+.settings-open__light-mode,
+.settings-closed__light-mode {
+    background-color: white;
+    border-right: 1px solid var(--primaryColor);
+    border-bottom: 1px solid var(--primaryColor);
+    width: 33%;
 }
 
 .settings-open {
+    margin-right: 11rem;
     border-left: var(--border);
-    border-top: var(--border);
     border-bottom: var(--border);
-    margin-top: 3.9rem;
-    transition: .4s ease-in;
+    transition: .4s ease-in-out;
 }
 
-.settings-closed {
+.settings-closed,
+.settings-closed__light-mode {
     margin-bottom: 0rem;
-    transition: 1s ease-in;
+    transition: 1s ease-in-out;
     opacity: 0.25;
 }
 
@@ -41,11 +54,10 @@
 }
 
 @media (max-width: 400px) {
-    .settings-open {
-        border-left: none;
-        border-top: none;
-        border-bottom: none;
-        margin-top: 1rem;
+    .settings-open,
+    .settings-open__light-mode {
+        margin-right: 1rem;
+        width: 40%;
         transition: .4s ease-in;
     }
 }

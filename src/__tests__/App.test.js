@@ -8,8 +8,6 @@ import strings from 'src/common/strings';
 
 const { ENGLISH } = strings;
 
-jest.spyOn(console, 'log').mockImplementation(jest.fn());
-
 describe('App.jsx integration tests.', () => {
   describe('GIVEN: The page has loaded', () => {
     describe('WHEN: the user clicks the dark mode toggle', () => {
@@ -24,7 +22,7 @@ describe('App.jsx integration tests.', () => {
 
         fireEvent.click(settingsMenuOption);
 
-        const darkModeToggle = document.querySelectorAll('.switch-container')[0];
+        const darkModeToggle = document.querySelectorAll('input')[0];
 
         let app = document.querySelector('main');
 
@@ -63,7 +61,7 @@ describe('App.jsx integration tests.', () => {
         expect(cube).toHaveStyle(slowSpinningCube);
         expect(cube).not.toHaveStyle(fastSpinningCube);
 
-        const cubeSpinToggle = document.querySelectorAll('.switch-container')[1];
+        const cubeSpinToggle = document.querySelectorAll('input')[1];
 
         fireEvent.click(cubeSpinToggle);
 

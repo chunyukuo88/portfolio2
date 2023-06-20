@@ -5,6 +5,8 @@ import { Divide as Hamburger } from 'hamburger-react'
 import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { Sidebar } from './components/Sidebar/Sidebar';
+import { Skills } from './components/PrimaryContent/Skills/Skills';
+import { AboutMe } from './components/PrimaryContent/AboutMe/AboutMe';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
@@ -14,76 +16,78 @@ import {
   updateSettingsVisibility
 } from './features/settingsMenu/settingsMenuSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import strings, { easterEgg } from './common/strings';
+import { logEasterEgg } from './common/utils';
+import strings from './common/strings';
 import { routes } from './routes';
 import './App.css';
+import {SiteInfo} from "./components/PrimaryContent/SiteInfo/SiteInfo";
 
-function App({ logger }){
-  const [ menuIsOpen, setMenuIsOpen ] = useState(false);
+function App(){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals(routes.blog);
+  const [ menuIsOpen, setMenuIsOpen ] = useState(false);
+  const [ primaryContentKey, setPrimaryContentKey ] = useState('skills');
   const dispatch = useDispatch();
-  logger(`%c${easterEgg}`, 'color: yellow; background: black');
-  logger('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
+
+  // logEasterEgg();
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
     return dispatch(updateSettingsVisibility(false));
   };
 
-  const skillClickHandler = () => {
+  const primaryContentClickHandler = () => {
     setMenuIsOpen(false);
     return dispatch(updateSettingsVisibility(false));
   };
 
-  const getId = () => settingsAreVisible
-    ? 'tech-skills-abridged__blurry'
-    : 'tech-skills-abridged';
+  const primaryContentMap = {
+    skills: <Skills { ...{primaryContentClickHandler, language, settingsAreVisible}}/>,
+    aboutMe: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
+    siteInfo: <SiteInfo { ...{primaryContentClickHandler, language, settingsAreVisible}}/>,
+    // funStuff: <div>Coming Soon</div>,
+  };
+
+  const Header = () => (
+    <header>
+      <div id='name-and-title' onClick={() => setPrimaryContentKey('skills')}>
+        <div>{strings.myName[language]}</div>
+        <div>{strings.myTitle[language]}</div>
+      </div>
+      <div id='language-button-container'>
+        <Language />
+      </div>
+      <div onClick={menuButtonHandler} id='main-menu-button-container'>
+        <Hamburger
+          hideOutline={false}
+          label='show menu'
+          size={16}
+          toggle={setMenuIsOpen}
+          toggled={menuIsOpen}
+        />
+      </div>
+    </header>
+  );
 
   return (
     <main className={isDarkMode ? undefined : 'light-mode'}>
-      <header>
-        <div id='name-and-title'>
-          <div>{strings.myName[language]}</div>
-          <div>{strings.myTitle[language]}</div>
-        </div>
-        <div id='language-button-container'>
-          <Language />
-        </div>
-        <div onClick={menuButtonHandler} id='main-menu-button-container'>
-          <Hamburger
-            hideOutline={false}
-            label='show menu'
-            size={16}
-            toggle={setMenuIsOpen}
-            toggled={menuIsOpen}
-          />
-        </div>
-      </header>
+      <Header />
 
-      <section id='primary-content'>
-        <Sidebar isOpen={menuIsOpen} />
-        <div id='tech-skills-and-settings-container'>
-          <ul id={getId()} onClick={skillClickHandler}>
-            <li>The Serverless Framework</li>
-            <li>{strings.techSkillsTDD[language]}</li>
-            <li>Lambdas with Node.js</li>
-            <li>Web Components</li>
-            <li>Docker Compose</li>
-            <li>Testing Library</li>
-            <li>Redis Cloud</li>
-            <li>Supabase</li>
-            <li>SvelteKit</li>
-            <li>Scrum</li>
-            <li>React</li>
-            <li>msw</li>
-            <li>css</li>
-          </ul>
-          <Cube />
-          <SettingsMenu />
+      <section>
+        <Sidebar isOpen={menuIsOpen} setPrimaryContentKey={setPrimaryContentKey} />
+        <div id='primary-content-and-settings-container' >
+          <div id='primary-content' onClick={primaryContentClickHandler}>
+            {primaryContentMap[primaryContentKey]}
+          </div>
         </div>
       </section>
+
+      <div id='settings-menu-container'>
+        <SettingsMenu />
+      </div>
+
+      <Cube />
 
       <Footer />
     </main>

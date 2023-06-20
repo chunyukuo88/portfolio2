@@ -6,6 +6,13 @@
   --border: var(--primaryColor) solid 1px;
   --longTransition: 5s;
   --toggleSwitchTransition: .4s;
+  user-select: none;
+}
+
+.blurry {
+  color: transparent;
+  text-shadow: 0 0 .25rem var(--primaryColor);
+  transition: 0.7s ease-in-out;
 }
 
 body {
@@ -24,7 +31,7 @@ main {
 }
 
 header {
-  border-bottom: var(--border);;
+  border-bottom: var(--border);
   padding: 0 var(--largePadding);
   display: grid;
   grid-template-columns: 72% 14% 14%;
@@ -54,6 +61,7 @@ footer span {
 }
 
 #name-and-title {
+  cursor: pointer;
   margin: auto 0;
   padding-left: 1.5rem;
 }
@@ -64,11 +72,6 @@ footer span {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#primary-content {
-  display: flex;
-  justify-content: space-between;
 }
 
 #tech-skills-abridged,
@@ -88,6 +91,27 @@ footer span {
   transition: 0.7s ease-in-out;
 }
 
+#site-info {
+  padding: 1.5rem;
+  max-width: 85%;
+  max-height: 100rem;
+  text-align: justify;
+  transition: 1.3s ease-in-out;
+  overflow: auto;
+}
+
+#site-info__blurry {
+  padding: 1.5rem;
+  max-width: 85%;
+  max-height: 100rem;
+  text-align: justify;
+  transition: 1.3s ease-in-out;
+  overflow: auto;
+  color: transparent;
+  text-shadow: 0 0 .25rem var(--primaryColor);
+  transition: 0.7s ease-in-out;
+}
+
 #tech-skills-abridged li:nth-child(2){
   color: green;
 }
@@ -95,4 +119,33 @@ footer span {
 .light-mode {
   background-color: white;
   color: var(--primaryColorLightMode);
+}
+
+#primary-content {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#settings-menu-container {
+  position: absolute;
+  margin-top: 4rem;
+  margin-left: 20rem;
+  width: 30rem;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+}
+
+@media (max-width: 400px) {
+  #settings-menu-container {
+    margin-left: 10rem;
+    width: 25rem;
+  }
+
+  #primary-content {
+    display: flex;
+    justify-content: space-between;
+    height: 50%;
+  }
 }

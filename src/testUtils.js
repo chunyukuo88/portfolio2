@@ -1,7 +1,8 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import languageReducer from './features/language/languageSlice';
-import {settingsMenuSlice} from "./features/settingsMenu/settingsMenuSlice";
-import {darkModeSlice} from "./features/darkMode/darkModeSlice";
+import { settingsMenuSlice } from './features/settingsMenu/settingsMenuSlice';
+import { darkModeSlice } from './features/darkMode/darkModeSlice';
+import cubeSpinReducer from './features/cubeSpin/cubeSpinSlice';
 
 const mockAuthSlice = createSlice({
   name: 'auth',
@@ -35,17 +36,42 @@ const mockCrosswordSlice = createSlice({
       state.userWon = true;
     }
   }
-})
+});
 
 export const mockStore = configureStore({
   reducer: {
     auth: mockAuthSlice.reducer,
     crossword: mockCrosswordSlice.reducer,
-    language: languageReducer,
     settingsAreVisible: settingsMenuSlice.reducer,
+    cubeSpinsSlowly: cubeSpinReducer,
     darkMode: darkModeSlice.reducer,
+    language: languageReducer,
   },
 });
+
+export const mockSettingsSlice = createSlice({
+  name: 'settingsAreVisible',
+  initialState: {
+    value: true
+  },
+  reducers: {
+    updateSettingsVisibility: (state, action) => {
+      state.value = action.payload;
+    },
+  },
+});
+
+export const mockStoreSettingsOpen = configureStore({
+  reducer: {
+    auth: mockAuthSlice.reducer,
+    crossword: mockCrosswordSlice.reducer,
+    settingsAreVisible: mockSettingsSlice.reducer,
+    cubeSpinsSlowly: cubeSpinReducer,
+    darkMode: darkModeSlice.reducer,
+    language: languageReducer,
+  },
+});
+
 
 const mockAuthSliceLoggedIn = createSlice({
   name: 'auth',

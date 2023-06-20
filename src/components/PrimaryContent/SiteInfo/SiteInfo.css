@@ -1,0 +1,8 @@
+
+
+@media (max-height: 1330px) {
+    #site-info {
+        max-height: 55%;
+        overflow: auto;
+    }
+}

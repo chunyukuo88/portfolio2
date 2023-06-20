@@ -24,8 +24,16 @@ export function SettingsMenu(){
     ? dispatch(toggleToSpinQuickly())
     : dispatch(toggleToSpinSlowly());
 
+  const settingsClassName = () => {
+    const openOrClosed = settingsAreVisible ? 'settings-open' : 'settings-closed';
+    const darkOrLight = isDarkMode
+      ? openOrClosed
+      : `${openOrClosed}__light-mode`;
+    return darkOrLight;
+  };
+
   return (
-    <div className={settingsAreVisible ? 'settings-open' : 'settings-closed'}>
+    <div className={settingsClassName()}>
       <CSSTransition
         in={settingsAreVisible}
         timeout={200}
@@ -50,7 +58,6 @@ export function SettingsMenu(){
               </label>
             </span>
           </li>
-          <li className='sidebar__listItem'></li>
         </ul>
       </CSSTransition>
     </div>

@@ -31,11 +31,11 @@ const strings = {
   CHINESE: 'chinese',
   GERMAN: 'german',
   aboutMe: {
-    chinese: '自我介紹',
-    english: 'About Me',
+    chinese: '簡介',
+    english: 'Hello',
     german: 'Über mich',
   },
-  aboutSite: {
+  siteInfo: {
     chinese: '網站信息',
     english: 'Site Info',
     german: 'Seite',
@@ -67,8 +67,8 @@ const strings = {
   },
   darkMode: {
     chinese: '暗黑模式',
-    english: 'Dark Mode',
-    german: 'Dunkler Modus',
+    english: 'Dark',
+    german: 'Dunkler',
   },
   email: {
     chinese: '郵箱地址',
@@ -86,8 +86,8 @@ const strings = {
     german: 'Kallisthenie',
   },
   funStuff: {
-    chinese: '好玩的',
-    english: 'Fun Stuff',
+    chinese: '趣事',
+    english: 'Fun',
     german: 'Spaß',
   },
   homeGreeting: {

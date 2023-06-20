@@ -1,8 +1,9 @@
+import { renderWithQueryClient } from 'src/__msw__/testUtils';
+import { mockStore } from 'src/testUtils';
 import { Cube } from 'src/components/Cube/Cube';
-import { render } from '@testing-library/react';
 
 it('Renders successfully', () => {
-  render(<Cube/>);
+  renderWithQueryClient(<Cube />, mockStore);
   const outermostDiv = document.querySelector('.cube');
 
   expect(outermostDiv).toBeInTheDocument();
