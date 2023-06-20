@@ -49,6 +49,30 @@ export const mockStore = configureStore({
   },
 });
 
+export const mockSettingsSlice = createSlice({
+  name: 'settingsAreVisible',
+  initialState: {
+    value: true
+  },
+  reducers: {
+    updateSettingsVisibility: (state, action) => {
+      state.value = action.payload;
+    },
+  },
+});
+
+export const mockStoreSettingsOpen = configureStore({
+  reducer: {
+    auth: mockAuthSlice.reducer,
+    crossword: mockCrosswordSlice.reducer,
+    settingsAreVisible: mockSettingsSlice.reducer,
+    cubeSpinsSlowly: cubeSpinReducer,
+    darkMode: darkModeSlice.reducer,
+    language: languageReducer,
+  },
+});
+
+
 const mockAuthSliceLoggedIn = createSlice({
   name: 'auth',
   initialState: {

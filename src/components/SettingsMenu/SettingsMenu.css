@@ -23,7 +23,8 @@
     transition: .4s ease-in-out;
 }
 
-.settings-closed {
+.settings-closed,
+.settings-closed__light-mode {
     margin-bottom: 0rem;
     transition: 1s ease-in-out;
     opacity: 0.25;
