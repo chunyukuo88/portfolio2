@@ -91,6 +91,27 @@ footer span {
   transition: 0.7s ease-in-out;
 }
 
+#site-info {
+  padding: 1.5rem;
+  max-width: 85%;
+  max-height: 100rem;
+  text-align: justify;
+  transition: 1.3s ease-in-out;
+  overflow: auto;
+}
+
+#site-info__blurry {
+  padding: 1.5rem;
+  max-width: 85%;
+  max-height: 100rem;
+  text-align: justify;
+  transition: 1.3s ease-in-out;
+  overflow: auto;
+  color: transparent;
+  text-shadow: 0 0 .25rem var(--primaryColor);
+  transition: 0.7s ease-in-out;
+}
+
 #tech-skills-abridged li:nth-child(2){
   color: green;
 }

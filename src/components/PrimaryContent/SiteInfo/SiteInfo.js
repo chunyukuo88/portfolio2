@@ -4,8 +4,12 @@ import './SiteInfo.css';
 export function SiteInfo(props) {
   const { skillClickHandler, language, menuIsOpen } = props;
 
+  const getId = () => menuIsOpen
+    ? 'site-info__blurry'
+    : 'site-info';
+
   return (
-    <article id='site-info' className={menuIsOpen ? 'blurry' : null} onClick={skillClickHandler}>
+    <article id={getId()} className={menuIsOpen ? 'blurry' : null} onClick={skillClickHandler}>
       <h3>{strings.abridgedVersionTitle[language]}</h3>
       <p>{strings.abridgedVersionBody[language]}</p>
       <h3>{strings.unabridgedVersionTitle[language]}</h3>

@@ -1,11 +1,4 @@
-#site-info {
-    padding: 1.5rem;
-    max-width: 85%;
-    max-height: 100rem;
-    text-align: justify;
-    transition: 1.3s ease-in-out;
-    overflow: auto;
-}
+
 
 @media (max-height: 1330px) {
     #site-info {
