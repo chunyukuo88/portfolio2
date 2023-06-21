@@ -1,4 +1,11 @@
+::-webkit-scrollbar {
+    width: 1px;
+    background-color: black;
+}
 
+::-webkit-scrollbar-thumb {
+    background-color: var(--primaryColor);
+}
 
 @media (max-height: 1330px) {
     #site-info {
