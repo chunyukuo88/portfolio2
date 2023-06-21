@@ -45,7 +45,7 @@ function App(){
   const primaryContentMap = {
     skills: <Skills { ...{primaryContentClickHandler, language, settingsAreVisible}}/>,
     aboutMe: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
-    siteInfo: <SiteInfo { ...{primaryContentClickHandler, language, settingsAreVisible}}/>,
+    siteInfo: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
     // funStuff: <div>Coming Soon</div>,
   };
 
