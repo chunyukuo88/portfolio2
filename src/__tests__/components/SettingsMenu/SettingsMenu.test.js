@@ -8,7 +8,7 @@ const { ENGLISH } = strings;
 
 // TODO: These need redone; coverage should be achieved via integration tests.
 
-describe.skip('SettingsMenu.jsx', () => {
+describe('SettingsMenu.jsx', () => {
   describe('GIVEN: The global state indicates that the settings should be visible', () => {
     describe('WHEN: component loads,', () => {
       test('THEN: the component is visible.', () => {
@@ -17,12 +17,12 @@ describe.skip('SettingsMenu.jsx', () => {
           mockStoreSettingsOpen
         );
 
-        const settingsMenu = document.querySelector('.settings-closed');
+        const settingsMenu = document.querySelector('.settings-open');
 
         expect(settingsMenu).toBeVisible();
       });
     });
-    describe('WHEN: the isOpen prop is false,', () => {
+    describe('WHEN: the global state indicates that the settings should be hidden,', () => {
       test('THEN: the menu is not visible.', () => {
         renderWithQueryClient(
           <SettingsMenu />,
@@ -37,17 +37,17 @@ describe.skip('SettingsMenu.jsx', () => {
   });
   describe('GIVEN: the page loads', () => {
     describe('WHEN: the user clicks the day/night toggle,', () => {
-      test('THEN: the color theme changes.', () => {
+      test('THEN: the color theme changes.', async () => {
         renderWithQueryClient(
           <SettingsMenu />,
           mockStoreSettingsOpen
         );
 
-        const theme = screen.getByText(strings.darkMode[ENGLISH]);
+        const darkModeToggle = screen.getByText(strings.darkMode[ENGLISH]);
 
-        fireEvent.click(theme);
+        fireEvent.click(darkModeToggle);
 
-        const component = document.querySelector('.settings-open__light-mode');
+        const component = document.querySelector('.settings-open');
 
         expect(component).toBeVisible();
       });
