@@ -2,9 +2,9 @@ import strings from 'src/common/strings';
 import './Skills.css';
 
 export function Skills(props) {
-  const { skillClickHandler, language, settingsAreVisible } = props;
+  const { skillClickHandler, language, menuIsOpen } = props;
 
-  const getId = () => settingsAreVisible
+  const getId = () => menuIsOpen
     ? 'tech-skills-abridged__blurry'
     : 'tech-skills-abridged';
 

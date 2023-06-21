@@ -4,6 +4,7 @@ import { useCommonGlobals } from './common/hooks';
 import { Divide as Hamburger } from 'hamburger-react'
 import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
+import { SiteInfo } from './components/PrimaryContent/SiteInfo/SiteInfo';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { Skills } from './components/PrimaryContent/Skills/Skills';
 import { AboutMe } from './components/PrimaryContent/AboutMe/AboutMe';
@@ -20,7 +21,6 @@ import { logEasterEgg } from './common/utils';
 import strings from './common/strings';
 import { routes } from './routes';
 import './App.css';
-import {SiteInfo} from "./components/PrimaryContent/SiteInfo/SiteInfo";
 
 function App(){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
@@ -30,7 +30,7 @@ function App(){
   const [ primaryContentKey, setPrimaryContentKey ] = useState('skills');
   const dispatch = useDispatch();
 
-  // logEasterEgg();
+  logEasterEgg();
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -43,7 +43,7 @@ function App(){
   };
 
   const primaryContentMap = {
-    skills: <Skills { ...{primaryContentClickHandler, language, settingsAreVisible}}/>,
+    skills: <Skills { ...{primaryContentClickHandler, language, menuIsOpen}}/>,
     aboutMe: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
     siteInfo: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
     // funStuff: <div>Coming Soon</div>,
