@@ -33,7 +33,7 @@ export function Sidebar({ isOpen, setPrimaryContentKey }){
       <ul>
         {
           menuItems.map((item) => (
-            <li key={item.title || 'toggler'}>
+            <li key={item.title}>
               <div className='sidebar__listItem'>
                 <CSSTransition
                   in={isOpen}
@@ -41,7 +41,7 @@ export function Sidebar({ isOpen, setPrimaryContentKey }){
                   classNames={'fade'}
                   unmountOnExit
                 >
-                  <div onClick={() => setPrimaryContentKey(item.key)}>{item.title || item.component}</div>
+                  <div onClick={() => setPrimaryContentKey(item.key)}>{item.title}</div>
                 </CSSTransition>
               </div>
             </li>
