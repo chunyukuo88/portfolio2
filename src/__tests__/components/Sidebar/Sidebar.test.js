@@ -24,7 +24,6 @@ describe('Sidebar.jsx', () => {
         menuItemLabel
         ${strings.aboutMe[ENGLISH]}
         ${strings.siteInfo[ENGLISH]}
-        ${strings.resume[ENGLISH]}
         ${strings.settings[ENGLISH]}
       `('THEN: the menu items are also visible', ({ menuItemLabel }) => {
         const menuItem = screen.getByText(menuItemLabel);
@@ -36,7 +35,6 @@ describe('Sidebar.jsx', () => {
           menuItemLabel                 |   key
           ${strings.aboutMe[ENGLISH]}   |   ${'aboutMe'}
           ${strings.siteInfo[ENGLISH]}  |   ${'siteInfo'}
-          ${strings.resume[ENGLISH]}    |   ${'resume'}
         `('THEN: the content beneath the sidebar is adjusted accordingly.', ({ menuItemLabel, key }) => {
           const settingsMenuOption = screen.getByText(menuItemLabel);
           let darkModeSetting = screen.queryByText(strings.darkMode[ENGLISH]);
@@ -46,6 +44,18 @@ describe('Sidebar.jsx', () => {
           fireEvent.click(settingsMenuOption);
 
           expect(setPrimaryContentKey).toBeCalledWith(key);
+        });
+      });
+      describe('WHEN: The user clicks on Resume', () => {
+        it('THEN: does not change the content', () => {
+          const resume = screen.getByText(strings.resume[ENGLISH]);
+          let darkModeSetting = screen.queryByText(strings.darkMode[ENGLISH]);
+
+          expect(darkModeSetting).toBeNull();
+
+          fireEvent.click(resume);
+
+          expect(setPrimaryContentKey).not.toBeCalled();
         });
       });
     });
