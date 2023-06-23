@@ -9,13 +9,11 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import { Skills } from './components/PrimaryContent/Skills/Skills';
 import { AboutMe } from './components/PrimaryContent/AboutMe/AboutMe';
 import { Footer } from './components/Footer/Footer';
+import { Resume } from './components/Resume/Resume';
 import { Cube } from './components/Cube/Cube';
 
 import { selectCurrentDarkTheme } from './features/darkMode/darkModeSlice';
-import {
-  selectSettingsMenuVisibility,
-  updateSettingsVisibility
-} from './features/settingsMenu/settingsMenuSlice';
+import { updateSettingsVisibility } from './features/settingsMenu/settingsMenuSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings from './common/strings';
@@ -23,7 +21,6 @@ import { routes } from './routes';
 import './App.css';
 
 function App(){
-  const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals(routes.blog);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
@@ -42,10 +39,12 @@ function App(){
     return dispatch(updateSettingsVisibility(false));
   };
 
+
   const primaryContentMap = {
     skills: <Skills { ...{primaryContentClickHandler, language, menuIsOpen}}/>,
     aboutMe: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
     siteInfo: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
+    resume: <Resume />
     // funStuff: <div>Coming Soon</div>,
   };
 
