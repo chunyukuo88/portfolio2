@@ -71,7 +71,7 @@ function App(){
   );
 
   return (
-    <>
+    <div id='app'>
       <header>woof</header>
       <main>
         <p>
@@ -87,7 +87,7 @@ function App(){
       <footer>
         hello
       </footer>
-    </>
+    </div>
   );
   // return (
   //   <main className={isDarkMode ? undefined : 'light-mode'}>
