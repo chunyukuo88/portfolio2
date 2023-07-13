@@ -9,6 +9,9 @@
   user-select: none;
 }
 
+html {
+  color-scheme: light dark;
+}
 body {
   margin: 0;
   padding: 0;
@@ -27,6 +30,7 @@ header {
 
 main {
   background-color: yellow;
+  color: black;
   overflow: scroll;
   flex-grow: 1;
   max-height: 80vh;
