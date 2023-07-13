@@ -14,30 +14,35 @@ body {
   padding: 0;
 }
 
-#app {
+.card {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  display: grid;
-  grid-template-rows: 15% 70% 15%;
 }
 
 header {
   background-color: red;
-  height: 15vh;
+  height: 10vh;
 }
 
 main {
   background-color: yellow;
   overflow: scroll;
-  height: 70vh;
+  flex-grow: 1;
+  max-height: 80vh;
 }
 
 footer {
   background-color: green;
-  height: 15vh;
+  height: 10vh;
 }
 
+
+
+
+
 header, main, footer {
-  padding: 1.5rem;
+  /*padding: 1.5rem;*/
 }
 
 
