@@ -22,20 +22,18 @@ body {
 
 header {
   background-color: red;
-  height: 15%;
+  height: 15vh;
 }
 
 main {
   background-color: yellow;
-  flex-grow: 1;
   overflow: scroll;
-  height: 80%;
+  height: 70vh;
 }
 
 footer {
   background-color: green;
-  flex-shrink: 0;
-  height: 20%;
+  height: 15vh;
 }
 
 header, main, footer {
@@ -77,13 +75,7 @@ header, main, footer {
 /*  grid-template-rows: 80% 10%;*/
 /*}*/
 
-/*footer {*/
-/*  border-top: var(--border);*/
-/*  height: 3em;*/
-/*  display: grid;*/
-/*  cursor: pointer;*/
-/*  grid-template-columns: repeat(4, 25%);*/
-/*}*/
+
 
 /*footer span {*/
 /*  cursor: pointer;*/
