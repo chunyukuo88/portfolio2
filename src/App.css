@@ -37,18 +37,22 @@ main {
 }
 
 footer {
-  background-color: green;
+  background-color: gray;
   height: 10vh;
 }
-
-
-
-
 
 header, main, footer {
   /*padding: 1.5rem;*/
 }
 
+@media (max-width: 400px) {
+  .card {
+    height: 90vh;
+  }
+  main {
+    max-height: 70vh;
+  }
+}
 
 
 /*.blurry {*/
