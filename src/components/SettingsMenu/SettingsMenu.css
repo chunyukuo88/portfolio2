@@ -17,7 +17,6 @@
 }
 
 .settings-open {
-    margin-right: 11rem;
     border-left: var(--border);
     border-bottom: var(--border);
     transition: .4s ease-in-out;
