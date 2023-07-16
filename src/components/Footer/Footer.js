@@ -6,9 +6,6 @@ import LinkedIn from 'src/common/icons/contact_LinkedIn.svg';
 export function Footer() {
   return (
     <footer>
-      <span>
-        <img className='footer-icons' src={Mail} alt='Mail icon'/>
-      </span>
     <span>
       <a href='https://github.com/chunyukuo88/' target='_blank' rel='noreferrer'>
         <img className='footer-icons' src={GitHub} alt='Github icon'/>
