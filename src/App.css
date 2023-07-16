@@ -65,7 +65,6 @@ section {
 #settings-menu-container {
   position: absolute;
   margin-top: 4rem;
-  margin-left: 20rem;
   width: 30rem;
   display: flex;
   flex-direction: row;
@@ -130,7 +129,6 @@ footer span {
     height: 50%;
   }
   #settings-menu-container {
-    margin-left: 10rem;
     width: 25rem;
   }
 }

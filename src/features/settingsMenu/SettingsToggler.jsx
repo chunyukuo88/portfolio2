@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentLanguage } from 'src/features/language/languageSlice';
 import { selectSettingsMenuVisibility } from './settingsMenuSlice';
 import { updateSettingsVisibility } from './settingsMenuSlice';
-
 import strings from 'src/common/strings';
 
 export function SettingsToggler() {
