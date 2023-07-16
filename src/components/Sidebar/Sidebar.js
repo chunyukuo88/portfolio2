@@ -15,7 +15,7 @@ export function Sidebar({ isOpen, setPrimaryContentKey }){
   const menuItems = [
     { title: strings.aboutMe[language], key: 'aboutMe' },
     { title: strings.siteInfo[language], key: 'siteInfo' },
-    { title: strings.resume[language], key: 'resume' },
+    // { title: strings.resume[language], key: 'resume' },
     // { title: strings.funStuff[language], key: 'funStuff' },
   ];
 
