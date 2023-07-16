@@ -22,7 +22,7 @@ body {
   padding: 0;
 }
 
-.card {
+main {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -50,7 +50,7 @@ header {
   align-items: center;
 }
 
-main {
+section {
   background-color: yellow;
   color: black;
   overflow: scroll;
@@ -76,10 +76,10 @@ footer span {
 }
 
 @media (max-width: 400px) {
-  .card {
+  main {
     height: 90vh;
   }
-  main {
+  section {
     max-height: 70vh;
   }
 }
