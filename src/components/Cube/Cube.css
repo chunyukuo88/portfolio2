@@ -34,7 +34,6 @@
     height: var(--cubeSideLength);
     transform-style: preserve-3d;
     z-index: -4;
-    border-left: var(--border);
 }
 
 .cube div span {
