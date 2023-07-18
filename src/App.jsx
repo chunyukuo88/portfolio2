@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useCommonGlobals } from './common/hooks';
-
 import { Divide as Hamburger } from 'hamburger-react'
 import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
@@ -49,6 +48,12 @@ function App(){
     // funStuff: <div>Coming Soon</div>,
   };
 
+  const ConditionalCube = () => (
+    <>
+      {primaryContentKey !== 'siteInfo' && <Cube />}
+    </>
+  );
+
   const Header = () => (
     <header>
       <div id='name-and-title' onClick={() => setPrimaryContentKey('skills')}>
@@ -72,23 +77,20 @@ function App(){
 
   return (
     <main className={isDarkMode ? undefined : 'light-mode'}>
-      <Header />
+      <Header/>
 
       <section>
         <Sidebar isOpen={menuIsOpen} setPrimaryContentKey={setPrimaryContentKey} />
-        <div id='primary-content-and-settings-container' >
-          <div id='primary-content' onClick={primaryContentClickHandler}>
-            {primaryContentMap[primaryContentKey]}
-          </div>
-        </div>
+         <div id='primary-content-and-settings-container' >
+           <div id='primary-content' onClick={primaryContentClickHandler}>
+             {primaryContentMap[primaryContentKey]}
+           </div>
+         </div>
       </section>
-
       <div id='settings-menu-container'>
         <SettingsMenu />
       </div>
-
-      <Cube />
-
+      <ConditionalCube />
       <Footer />
     </main>
   );

@@ -13,7 +13,7 @@ function Language() {
       case ENGLISH: return CHINESE;
       case CHINESE: return GERMAN;
       case GERMAN: return ENGLISH;
-    };
+    }
   };
 
   const clickHandler = () => {
@@ -26,6 +26,7 @@ function Language() {
       role='button'
       id='language-button'
       onClick={clickHandler}
+      alt={'globe, representing language button'}
       style={{ cursor: 'pointer', height: '1rem' }}
       src={LanguageIcon}
     />

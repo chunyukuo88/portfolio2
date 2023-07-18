@@ -15,7 +15,7 @@ export function Sidebar({ isOpen, setPrimaryContentKey }){
   const menuItems = [
     { title: strings.aboutMe[language], key: 'aboutMe' },
     { title: strings.siteInfo[language], key: 'siteInfo' },
-    { title: strings.resume[language], key: 'resume' },
+    // { title: strings.resume[language], key: 'resume' },
     // { title: strings.funStuff[language], key: 'funStuff' },
   ];
 
@@ -27,6 +27,21 @@ export function Sidebar({ isOpen, setPrimaryContentKey }){
     const base = classNameBasedOnWhetherOpen;
     return isDarkMode ? base : base + '__light-mode';
   };
+
+  const Settings = () => (
+    <li key={'SettingsToggler'}>
+      <div className='sidebar__listItem'>
+        <CSSTransition
+          in={isOpen}
+          timeout={200}
+          classNames={'fade'}
+          unmountOnExit
+        >
+          <SettingsToggler />
+        </CSSTransition>
+      </div>
+    </li>
+  );
 
   return (
     <div className={classNameBasedOnDarkMode()}>
@@ -47,18 +62,6 @@ export function Sidebar({ isOpen, setPrimaryContentKey }){
             </li>
           ))
         }
-        <li key={'SettingsToggler'}>
-          <div className='sidebar__listItem'>
-            <CSSTransition
-              in={isOpen}
-              timeout={200}
-              classNames={'fade'}
-              unmountOnExit
-            >
-              <SettingsToggler />
-            </CSSTransition>
-          </div>
-        </li>
       </ul>
     </div>
   );
