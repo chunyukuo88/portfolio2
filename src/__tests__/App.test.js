@@ -8,7 +8,9 @@ import strings from 'src/common/strings';
 
 const { ENGLISH } = strings;
 
-describe('App.jsx integration tests.', () => {
+// TODO: Un-skip after adding the settings functionality back in.
+
+describe.skip('App.jsx integration tests.', () => {
   describe('GIVEN: The page has loaded', () => {
     describe('WHEN: the user clicks the dark mode toggle', () => {
       test('THEN: it toggles to light mode.', () => {

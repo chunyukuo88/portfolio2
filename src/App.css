@@ -64,7 +64,7 @@ section {
 
 #settings-menu-container {
   position: absolute;
-  margin-top: 4rem;
+  margin-top: 5.75em;
   width: 30rem;
   display: flex;
   flex-direction: row;

@@ -5,7 +5,8 @@
     width: 33%;
     transition: .4s ease-in-out;
     border-right: 1px solid var(--primaryColor);
-    border-bottom: 1px solid var(--primaryColor);
+    /* TODO This border-bottom rule is the exact cause of the excess scrollage on the right of the app. */
+    /*border-bottom: 1px solid var(--primaryColor);*/
 }
 
 .settings-open__light-mode,
