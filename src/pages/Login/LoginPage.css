@@ -44,11 +44,23 @@ input:focus {
     color: var(--primaryColor);
     border: 1px solid var(--primaryColor);
     margin: 1rem;
-    width: 22.5vw;
+    width: 100%;
 }
 
-
 @media (max-width: 400px) {
+    #login-card {
+        height: 18rem;
+    }
+
+    .inputs-wrapper {
+        border: none;
+        width: 74%;
+    }
+
+    input {
+        width: 75%;
+    }
+
     #login-card {
         margin-top: 20%;
         height: 15rem;
