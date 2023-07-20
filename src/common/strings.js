@@ -35,11 +35,6 @@ const strings = {
     english: 'Hello',
     german: 'Über mich',
   },
-  siteInfo: {
-    chinese: '網站信息',
-    english: 'Site Info',
-    german: 'Seite',
-  },
   admin: {
     chinese: '内部管理',
     english: 'Admin',
@@ -102,7 +97,7 @@ const strings = {
   },
   login: {
     chinese: '登錄',
-    english: 'Log in',
+    english: 'Log In',
     german: 'Anmelden',
   },
   logout: {
@@ -175,10 +170,20 @@ const strings = {
     english: 'Settings',
     german: 'Aufstellen',
   },
+  siteInfo: {
+    chinese: '網站信息',
+    english: 'Site Info',
+    german: 'Seite',
+  },
   spin: {
     chinese: '旋轉',
     english: 'Spin',
     german: 'Dreh',
+  },
+  submit: {
+    chinese: '提交',
+    english: 'Submit',
+    german: 'Einreichen',
   },
   switch: {
     chinese: '切換',

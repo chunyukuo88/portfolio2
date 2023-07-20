@@ -78,33 +78,38 @@ export const LoginPage = ({ setPrimaryContentKey }) => {
   return (
     <div id='login-card-wrapper'>
       <div id='login-card'>
-        <h1 className='logged-out-section-heading'>{strings.login[language]}</h1>
-        <div className='username-input'>
-          <input
-            type='text'
-            label='username input'
-            data-testid='username-input'
-            id='username'
-            ref={userRef}
-            value={user}
-            onChange={handleUserInput}
-            placeholder={strings.username[language]}
-            autoComplete='off'
-            required
-          />
-        </div>
-        <div className='password-input'>
-          <input
-            type='password'
-            label='password input'
-            data-testid='password-input'
-            id='password'
-            onChange={handlePwdInput}
-            placeholder={strings.password[language]}
-            value={pwd}
-            required
-          />
-        </div>
+        <h1 className='logged-out-section-heading'>{`< ${strings.login[language]} >`}</h1>
+        <form className='logout-out-form' onSubmit={handleSubmit}>
+          <fieldset className='inputs-wrapper'>
+            <div className='username-input'>
+              <input
+                type='text'
+                label='username input'
+                data-testid='username-input'
+                id='username'
+                ref={userRef}
+                value={user}
+                onChange={handleUserInput}
+                placeholder={strings.username[language]}
+                autoComplete='off'
+                required
+              />
+            </div>
+            <div className='password-input'>
+              <input
+                type='password'
+                label='password input'
+                data-testid='password-input'
+                id='password'
+                onChange={handlePwdInput}
+                placeholder={strings.password[language]}
+                value={pwd}
+                required
+              />
+            </div>
+          </fieldset>
+          <button className='login-button' title='login button'>{strings.submit[language]}</button>
+        </form>
       </div>
     </div>
   );
