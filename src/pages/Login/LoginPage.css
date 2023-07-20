@@ -1,54 +1,79 @@
-.cube-wrapper {
-    margin-left: 65%;
+#login-card-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.logged-out-section,
-.inputs-wrapper {
+#login-card {
+    margin-top: 10%;
+    border: 1px solid var(--primaryColor);
+    height: 20rem;
+    width: 40vw;
+
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-.logged-out-section-heading {
-    font-size: 4rem;
-    text-transform: uppercase;
-    background: -webkit-linear-gradient(#00ec00, #233d21);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+@media (max-width: 400px) {
+    #login-card {
+        margin-top: 20%;
+        height: 15rem;
+        width: 50vw;
+    }
 }
 
-.logout-out-form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+/*.cube-wrapper {*/
+/*    margin-left: 65%;*/
+/*}*/
 
-.username-input {
-    display: inline;
-    text-align: left;
-}
+/*.logged-out-section,*/
+/*.inputs-wrapper {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*}*/
 
-#username,
-#password {
-    border: none;
-    border-radius: 0.25rem;
-    margin: 0.5rem;
-    height: 2rem;
-    width: 12rem;
-}
+/*.logged-out-section-heading {*/
+/*    font-size: 4rem;*/
+/*    text-transform: uppercase;*/
+/*    background: -webkit-linear-gradient(#00ec00, #233d21);*/
+/*    -webkit-background-clip: text;*/
+/*    -webkit-text-fill-color: transparent;*/
+/*}*/
 
-.login-button {
-    background: linear-gradient(#151515,#00ec00);
-    border: none;
-    border-radius: 0.25rem;
-    color: white;
-    cursor: pointer;
-    height: 6.5em;
-    margin: 0.25rem;
-    transition: 0.2s;
-}
+/*.logout-out-form {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
 
-.login-button:hover {
-    transform: scale(1.1);
-    transition: 0.2s;
-}
+/*.username-input {*/
+/*    display: inline;*/
+/*    text-align: left;*/
+/*}*/
+
+/*#username,*/
+/*#password {*/
+/*    border: none;*/
+/*    border-radius: 0.25rem;*/
+/*    margin: 0.5rem;*/
+/*    height: 2rem;*/
+/*    width: 12rem;*/
+/*}*/
+
+/*.login-button {*/
+/*    background: linear-gradient(#151515,#00ec00);*/
+/*    border: none;*/
+/*    border-radius: 0.25rem;*/
+/*    color: white;*/
+/*    cursor: pointer;*/
+/*    height: 6.5em;*/
+/*    margin: 0.25rem;*/
+/*    transition: 0.2s;*/
+/*}*/
+
+/*.login-button:hover {*/
+/*    transform: scale(1.1);*/
+/*    transition: 0.2s;*/
+/*}*/

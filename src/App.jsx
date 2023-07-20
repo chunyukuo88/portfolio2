@@ -20,6 +20,7 @@ import { logEasterEgg } from './common/utils';
 import strings from './common/strings';
 import { routes } from './routes';
 import './App.css';
+import {LoginPage} from "./pages/Login/LoginPage";
 
 function App(){
   const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
@@ -45,6 +46,7 @@ function App(){
     skills: <Skills { ...{primaryContentClickHandler, language, menuIsOpen}}/>,
     aboutMe: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
     siteInfo: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
+    login: <LoginPage />
     // funStuff: <div>Coming Soon</div>,
   };
 
