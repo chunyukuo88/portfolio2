@@ -209,6 +209,8 @@ const strings = {
 
 export default strings;
 export const contentKeys = {
+  ABOUT_ME: 'aboutMe',
+  ADMIN: 'admin',
   SKILLS: 'skills',
   SITE_INFO: 'siteInfo',
 };

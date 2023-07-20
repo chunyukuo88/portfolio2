@@ -13,7 +13,8 @@ import './LoginPage.css';
 import { ChangePassword } from './ChangePassword';
 import { LoggedOutContent } from './LoggedOutContent';
 
-export const LoginPage = ({ setPrimaryContentKey }) => {
+export const LoginPage = (props) => {
+  const { setPrimaryContentKey } = props;
   const [ language, username ] = useCommonGlobals(routes.login);
   const dispatch = useDispatch();
   const { changePassword, signIn, signOut } = useAuth();

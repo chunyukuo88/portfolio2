@@ -27,7 +27,7 @@ function App(){
   const [ primaryContentKey, setPrimaryContentKey ] = useState(contentKeys.SKILLS);
   const dispatch = useDispatch();
 
-  logEasterEgg();
+  // logEasterEgg();
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -40,10 +40,10 @@ function App(){
   };
 
   const primaryContentMap = {
-    skills: <Skills { ...{primaryContentClickHandler, language, menuIsOpen}}/>,
-    aboutMe: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
-    siteInfo: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
-    login: <LoginPage setPrimaryContentKey={setPrimaryContentKey} setMenuIsOpen={setMenuIsOpen}/>
+    [contentKeys.SKILLS]: <Skills { ...{primaryContentClickHandler, language, menuIsOpen}}/>,
+    [contentKeys.ABOUT_ME]: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
+    [contentKeys.SITE_INFO]: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
+    [contentKeys.ADMIN]: <LoginPage setPrimaryContentKey={setPrimaryContentKey}/>
     // funStuff: <div>Coming Soon</div>,
   };
 
@@ -79,7 +79,7 @@ function App(){
       <Header/>
 
       <section>
-        <Sidebar isOpen={menuIsOpen} setPrimaryContentKey={setPrimaryContentKey} />
+        <Sidebar isOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} setPrimaryContentKey={setPrimaryContentKey} />
          <div id='primary-content-and-settings-container' >
            <div id='primary-content' onClick={primaryContentClickHandler}>
              {primaryContentMap[primaryContentKey]}

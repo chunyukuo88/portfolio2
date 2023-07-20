@@ -35,8 +35,8 @@ input {
 }
 
 input:focus {
-    /*border: 1px dotted var(--primaryColor);*/
-    border-color: red;
+    border: 1px dotted var(--primaryColor);
+    outline: none;
 }
 
 .login-button {
