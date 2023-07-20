@@ -203,3 +203,7 @@ const strings = {
 };
 
 export default strings;
+export const contentKeys = {
+  SKILLS: 'skills',
+  SITE_INFO: 'siteInfo',
+};
