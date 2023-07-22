@@ -1,0 +1,15 @@
+::-webkit-scrollbar {
+    width: 1px;
+    background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primaryColor);
+}
+
+@media (max-height: 1330px) {
+    #bread-blog {
+        max-height: 55%;
+        overflow: auto;
+    }
+}
