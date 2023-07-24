@@ -7,9 +7,31 @@
     background-color: var(--primaryColor);
 }
 
+#bread-blog {
+    width: 50vw;
+    background-color: lightgreen;
+    margin: auto;
+}
+
+.blog-post {
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-image {
+    width: 30vw;
+    margin: 2rem;
+}
+
 @media (max-height: 1330px) {
     #bread-blog {
-        max-height: 55%;
+        width: 70vw;
         overflow: auto;
+    }
+    .blog-image {
+        width: 60vw;
     }
 }

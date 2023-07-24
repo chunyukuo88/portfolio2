@@ -1,19 +1,19 @@
-import {useIntersection} from 'react-use'; // TODO: check this out
-import './BreadBlog.css';
+import { useIntersection } from 'react-use'; // TODO: check this out
 import { useQuery } from '@tanstack/react-query';
-import strings, { queryKeys } from '../../common/strings';
-import { getBlogs } from '../../common/utils';
+import { useCommonGlobals } from '../../common/hooks';
 import { useSelector } from 'react-redux';
 import { selectCurrentToken } from '../../features/auth/authSlice';
-import { useCommonGlobals } from '../../common/hooks';
-import { routes } from '../../routes';
+
 import { Pencil } from '../../components/Pencil/Pencil';
 import { TrashCan } from '../../components/TrashCan/TrashCan';
 import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
-import { Link } from 'react-router-dom';
-import { LinkStyling } from '../../common/globalStyles';
 
-export function BreadBlog({ menuIsOpen }) {
+import { getBlogs } from '../../common/utils';
+import { routes } from '../../routes';
+import strings, { queryKeys } from '../../common/strings';
+import './BreadBlog.css';
+
+export function BreadBlog() {
   const token = useSelector(selectCurrentToken);
   const [ language ] = useCommonGlobals(routes.blog);
   const queryResult = useQuery({
@@ -93,11 +93,6 @@ export function BreadBlog({ menuIsOpen }) {
     ? <LoadingSpinner />
     : (
       <article role='main' id='bread-blog'>
-        <nav className='back-to-home'>
-          <Link style={LinkStyling} to={routes.index}>
-            {strings.backButton[language]}
-          </Link>
-        </nav>
         <section>
           {
             queryResult.isError

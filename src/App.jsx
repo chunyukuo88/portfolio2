@@ -46,7 +46,6 @@ function App(){
     [contentKeys.SITE_INFO]: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
     [contentKeys.ADMIN]: <LoginPage setPrimaryContentKey={setPrimaryContentKey}/>,
     [contentKeys.BLOG]: <BreadBlog language={language} menuIsOpen={menuIsOpen} />,
-    // funStuff: <div>Coming Soon</div>,
   };
 
   const ConditionalCube = () => (
