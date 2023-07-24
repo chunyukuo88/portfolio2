@@ -49,7 +49,7 @@ export function BreadBlog() {
   const Heading = ({ article }) => (
     <>
       {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
-      <h2 className='publication-date'>{asDateString(article)}</h2>
+      <h5 className='publication-date'>{asDateString(article)}</h5>
     </>
   );
 
