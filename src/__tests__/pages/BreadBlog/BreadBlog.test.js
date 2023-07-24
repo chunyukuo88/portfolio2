@@ -1,5 +1,5 @@
-import { BreadBlog } from "src/pages/BreadBlog/BreadBlog";
-import {render} from "@testing-library/react";
+import { BreadBlog } from 'src/pages/BreadBlog/BreadBlog';
+import { render } from '@testing-library/react';
 
 describe('BreadBlog.jsx', () => {
   describe('GIVEN: the user is not logged in', () => {

@@ -1,13 +1,110 @@
-import {useIntersection} from "react-use"; // TODO: check this out
+import {useIntersection} from 'react-use'; // TODO: check this out
 import './BreadBlog.css';
+import { useQuery } from '@tanstack/react-query';
+import strings, { queryKeys } from '../../common/strings';
+import { getBlogs } from '../../common/utils';
+import { useSelector } from 'react-redux';
+import { selectCurrentToken } from '../../features/auth/authSlice';
+import { useCommonGlobals } from '../../common/hooks';
+import { routes } from '../../routes';
+import { Pencil } from '../../components/Pencil/Pencil';
+import { TrashCan } from '../../components/TrashCan/TrashCan';
+import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
+import { Link } from 'react-router-dom';
+import { LinkStyling } from '../../common/globalStyles';
 
 export function BreadBlog({ menuIsOpen }) {
-  return (
-    <article id='bread-blog'>
-      <section>
-        <title></title>
-        <p className='blog-body'></p>
-      </section>
-    </article>
+  const token = useSelector(selectCurrentToken);
+  const [ language ] = useCommonGlobals(routes.blog);
+  const queryResult = useQuery({
+    queryKey: [queryKeys.BLOGS],
+    queryFn: getBlogs,
+  });
+
+  const ErrorMessage = () => <div id='error-fetching-blog-posts'>{strings.blogDownForMaintenance[language]}</div>;
+
+  if (queryResult.isError) return <ErrorMessage />;
+
+  const sortNewestToOldest = (blogData) => blogData?.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
+  const sorted = sortNewestToOldest(queryResult.data);
+
+  const EDITABLE = {
+    TITLE: 'title',
+    IMG_URL: 'imageUrl',
+    BODY: 'theme',
+  };
+
+  const TitleWithButtons = ({ article }) => (
+    <div className='blog-title-with-buttons'>
+      <Pencil token={token} article={article} aspect={EDITABLE.TITLE}/>
+      <div>{article.title}</div>
+      <TrashCan token={token} article={article} />
+    </div>
   );
+
+  const TitleWithoutButtons = ({ article }) => <div className='blog-title-without-buttons'>{article.title}</div>;
+
+  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
+
+  const Heading = ({ article }) => (
+    <>
+      {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
+      <h2 className='publication-date'>{asDateString(article)}</h2>
+    </>
+  );
+
+  const Image = ({ article }) => (
+    <>
+      <span className='img-pencil-adjuster'>
+        {token && <Pencil token={token} article={article} aspect={EDITABLE.IMG_URL}/>}
+      </span>
+      <img
+        className='blog-image'
+        src={article.imageUrl}
+        aria-label={`Image for blog titled ${article.title}`}
+      />
+    </>
+  );
+
+  const Body = ({ article }) => (
+    <div className='blog-body-container'>
+      <div className='blog-body'>
+        <span className='img-pencil-adjuster'>
+          {token ? <Pencil token={token} article={article} aspect={EDITABLE.BODY}/> : null}
+        </span>
+        <span>{article.theme}</span>
+      </div>
+    </div>
+  );
+
+  const BlogContent = () => (
+    <>
+      {sorted.map((article, key) => (
+        <article className='blog-post' key={key}>
+          <Heading article={article}/>
+          <Image article={article} key={key} />
+          <Body article={article} />
+        </article>
+      ))}
+    </>
+  );
+
+  return (queryResult.isLoading)
+    ? <LoadingSpinner />
+    : (
+      <article role='main' id='bread-blog'>
+        <nav className='back-to-home'>
+          <Link style={LinkStyling} to={routes.index}>
+            {strings.backButton[language]}
+          </Link>
+        </nav>
+        <section>
+          {
+            queryResult.isError
+              ? <ErrorMessage />
+              : <BlogContent />
+          }
+        </section>
+      </article>
+    );
 }

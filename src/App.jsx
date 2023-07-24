@@ -1,22 +1,23 @@
-import {useState} from 'react';
-import {useCommonGlobals} from './common/hooks';
+import { useState } from 'react';
+import { useCommonGlobals } from './common/hooks';
 import {Divide as Hamburger} from 'hamburger-react'
 import Language from './features/language/Language';
-import {SettingsMenu} from './components/SettingsMenu/SettingsMenu';
-import {SiteInfo} from './components/PrimaryContent/SiteInfo/SiteInfo';
-import {LoginPage} from './pages/Login/LoginPage';
-import {Sidebar} from './components/Sidebar/Sidebar';
-import {Skills} from './components/PrimaryContent/Skills/Skills';
-import {AboutMe} from './components/PrimaryContent/AboutMe/AboutMe';
-import {Footer} from './components/Footer/Footer';
-import {Cube} from './components/Cube/Cube';
+import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
+import { SiteInfo } from './components/PrimaryContent/SiteInfo/SiteInfo';
+import { LoginPage } from './pages/Login/LoginPage';
+import { Sidebar } from './components/Sidebar/Sidebar';
+import { Skills } from './components/PrimaryContent/Skills/Skills';
+import { BreadBlog } from './pages/BreadBlog/BreadBlog';
+import { AboutMe } from './components/PrimaryContent/AboutMe/AboutMe';
+import { Footer } from './components/Footer/Footer';
+import { Cube } from './components/Cube/Cube';
 
-import {selectCurrentDarkTheme} from './features/darkMode/darkModeSlice';
-import {selectSettingsMenuVisibility, updateSettingsVisibility} from './features/settingsMenu/settingsMenuSlice';
-import {useDispatch, useSelector} from 'react-redux';
-import {logEasterEgg} from './common/utils';
-import strings, {contentKeys} from './common/strings';
-import {routes} from './routes';
+import { selectCurrentDarkTheme } from './features/darkMode/darkModeSlice';
+import { selectSettingsMenuVisibility, updateSettingsVisibility } from './features/settingsMenu/settingsMenuSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logEasterEgg } from './common/utils';
+import strings, { contentKeys } from './common/strings';
+import { routes } from './routes';
 import './App.css';
 
 function App(){
