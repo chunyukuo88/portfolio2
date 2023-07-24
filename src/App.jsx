@@ -43,7 +43,8 @@ function App(){
     [contentKeys.SKILLS]: <Skills { ...{primaryContentClickHandler, language, menuIsOpen}}/>,
     [contentKeys.ABOUT_ME]: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
     [contentKeys.SITE_INFO]: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
-    [contentKeys.ADMIN]: <LoginPage setPrimaryContentKey={setPrimaryContentKey}/>
+    [contentKeys.ADMIN]: <LoginPage setPrimaryContentKey={setPrimaryContentKey}/>,
+    [contentKeys.BLOG]: <BreadBlog language={language} menuIsOpen={menuIsOpen} />,
     // funStuff: <div>Coming Soon</div>,
   };
 

@@ -9,13 +9,14 @@ import { routes } from 'src/routes';
 import './Sidebar.css';
 
 export function Sidebar({ isOpen, setMenuIsOpen, setPrimaryContentKey }){
-  const [ language ] = useCommonGlobals(routes.index);
+  const [ language, username ] = useCommonGlobals(routes.index);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
 
   const menuItems = [
     { title: strings.aboutMe[language], key: contentKeys.ABOUT_ME },
     { title: strings.siteInfo[language], key: contentKeys.SITE_INFO },
     { title: strings.admin[language], key: contentKeys.ADMIN },
+    { title: strings.blog[language], key: contentKeys.BLOG},
     // { title: strings.resume[language], key: 'resume' },
     // { title: strings.funStuff[language], key: 'funStuff' },
   ];
@@ -61,7 +62,7 @@ export function Sidebar({ isOpen, setMenuIsOpen, setPrimaryContentKey }){
                 <CSSTransition
                   in={isOpen}
                   timeout={200}
-                  classNames={'fade'}
+                  classNames='fade'
                   unmountOnExit
                 >
                   <div onClick={() => clickHandler(item)}>

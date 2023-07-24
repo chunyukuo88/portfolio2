@@ -211,6 +211,7 @@ export default strings;
 export const contentKeys = {
   ABOUT_ME: 'aboutMe',
   ADMIN: 'admin',
-  SKILLS: 'skills',
+  BLOG: 'blog',
   SITE_INFO: 'siteInfo',
+  SKILLS: 'skills',
 };
