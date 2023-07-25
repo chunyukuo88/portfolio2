@@ -22,11 +22,21 @@ export function BreadBlog() {
   });
 
   const ErrorMessage = () => <div id='error-fetching-blog-posts'>{strings.blogDownForMaintenance[language]}</div>;
-
   if (queryResult.isError) return <ErrorMessage />;
 
-  const sortNewestToOldest = (blogData) => blogData?.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
-  const sorted = sortNewestToOldest(queryResult.data);
+  const sortNewestToOldest = (body) => body.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
+  // const sorted = queryResult.body ? sortNewestToOldest(queryResult.body) : null;
+
+  let sorted = [];
+  if (queryResult.isSuccess) {
+    try {
+      const unsorted = JSON.parse(queryResult.data.body);
+      sorted = sortNewestToOldest(unsorted);
+    } catch (error) {
+      console.error('Error parsing blog post data:', error);
+    }
+  }
+
 
   const EDITABLE = {
     TITLE: 'title',
@@ -44,7 +54,7 @@ export function BreadBlog() {
 
   const TitleWithoutButtons = ({ article }) => <div className='blog-title-without-buttons'>{article.title}</div>;
 
-  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
+  const asDateString = (article) => new Date(article.created_at).toISOString().slice(0,10);
 
   const Heading = ({ article }) => (
     <>
@@ -72,14 +82,14 @@ export function BreadBlog() {
         <span className='img-pencil-adjuster'>
           {token ? <Pencil token={token} article={article} aspect={EDITABLE.BODY}/> : null}
         </span>
-        <span>{article.theme}</span>
+        <span>{article.body}</span>
       </div>
     </div>
   );
 
   const BlogContent = () => (
     <>
-      {sorted.map((article, key) => (
+      {sorted && sorted.map((article, key) => (
         <article className='blog-post' key={key}>
           <Heading article={article}/>
           <Image article={article} key={key} />
