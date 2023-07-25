@@ -25,7 +25,6 @@ export function BreadBlog() {
   if (queryResult.isError) return <ErrorMessage />;
 
   const sortNewestToOldest = (body) => body.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
-  // const sorted = queryResult.body ? sortNewestToOldest(queryResult.body) : null;
 
   let sorted = [];
   if (queryResult.isSuccess) {
@@ -36,7 +35,6 @@ export function BreadBlog() {
       console.error('Error parsing blog post data:', error);
     }
   }
-
 
   const EDITABLE = {
     TITLE: 'title',
@@ -89,7 +87,7 @@ export function BreadBlog() {
 
   const BlogContent = () => (
     <>
-      {sorted && sorted.map((article, key) => (
+      {sorted.map((article, key) => (
         <article className='blog-post' key={key}>
           <Heading article={article}/>
           <Image article={article} key={key} />
