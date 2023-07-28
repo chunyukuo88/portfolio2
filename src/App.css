@@ -1,9 +1,9 @@
 :root {
+  --border: var(--primaryColor) solid 1px;
   --largePadding: 0.5rem;
   --smallPadding: 0.25rem;
   --primaryColor: #93a48c;
   --primaryColorLightMode: #2e6e15;
-  --border: var(--primaryColor) solid 1px;
   --longTransition: 5s;
   --toggleSwitchTransition: .4s;
   user-select: none;
@@ -73,7 +73,7 @@ section {
 
 footer {
   height: 10vh;
-  border-top: 1px solid var(--primaryColor);
+  border-top: var(--border);
   display: grid;
   cursor: pointer;
   grid-template-columns: repeat(3, 33.3333%);

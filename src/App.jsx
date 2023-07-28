@@ -28,7 +28,9 @@ function App(){
   const [ primaryContentKey, setPrimaryContentKey ] = useState(contentKeys.SKILLS);
   const dispatch = useDispatch();
 
-  logEasterEgg();
+  if (process.env.NODE_ENV === 'production') {
+    logEasterEgg();
+  }
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
