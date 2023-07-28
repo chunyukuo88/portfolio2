@@ -1,5 +1,5 @@
 .loading-spinner-container {
-    background-color: #1e75e9;
+    background-color: black;
     width: 10rem;
     height: 10rem;
     border-radius: 50%;
@@ -21,8 +21,8 @@
     width: 0;
     height: 0;
     box-sizing: border-box;
-    border: 2rem solid #fff;
-    border-color: #fff transparent #fff transparent;
+    border: 2rem solid var(--primaryColor);
+    border-color: var(--primaryColor) transparent var(--primaryColor) transparent;
     animation: lds-hourglass 1.2s infinite;
 }
 @keyframes lds-hourglass {
