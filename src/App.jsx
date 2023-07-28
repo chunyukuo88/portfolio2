@@ -21,14 +21,14 @@ import { routes } from './routes';
 import './App.css';
 
 function App(){
-  const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
+  // const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals(routes.blog);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ primaryContentKey, setPrimaryContentKey ] = useState(contentKeys.SKILLS);
   const dispatch = useDispatch();
 
-  // logEasterEgg();
+  logEasterEgg();
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -48,9 +48,14 @@ function App(){
     [contentKeys.BLOG]: <BreadBlog language={language} menuIsOpen={menuIsOpen} />,
   };
 
+  const cubeShouldBeVisible = (
+    primaryContentKey !== contentKeys.SITE_INFO
+    && primaryContentKey !== contentKeys.BLOG
+  );
+
   const ConditionalCube = () => (
     <>
-      {primaryContentKey !== contentKeys.SITE_INFO && <Cube />}
+      {cubeShouldBeVisible ? <Cube /> : null}
     </>
   );
 

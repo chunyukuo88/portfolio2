@@ -17,7 +17,6 @@ const payload = { hitType: 'pageview', page: routes.blog };
 jest.spyOn(console, 'log').mockImplementation(jest.fn());
 jest.spyOn(console, 'error').mockImplementation(jest.fn());
 
-// msw boilerplate
 beforeAll(() => server.listen());
 afterEach(() => {
   server.resetHandlers();
