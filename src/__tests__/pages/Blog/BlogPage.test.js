@@ -4,12 +4,12 @@ import { server } from 'src/__msw__/server';
 import { mockStore, mockStoreLoggedIn } from 'src/testUtils';
 import { screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { QueryClient } from '@tanstack/react-query';
 import { rest } from 'msw';
 
-import { BlogPage } from 'src/pages/Blog/BlogPage';
+// import { BlogPage } from 'src/pages/Blog/BlogPage';
 import { routes } from 'src/routes';
 import ReactGA from 'react-ga4';
-import { QueryClient } from '@tanstack/react-query';
 
 const spy = jest.spyOn(ReactGA, 'send');
 const payload = { hitType: 'pageview', page: routes.blog };
@@ -17,7 +17,6 @@ const payload = { hitType: 'pageview', page: routes.blog };
 jest.spyOn(console, 'log').mockImplementation(jest.fn());
 jest.spyOn(console, 'error').mockImplementation(jest.fn());
 
-// msw boilerplate
 beforeAll(() => server.listen());
 afterEach(() => {
   server.resetHandlers();
@@ -25,7 +24,8 @@ afterEach(() => {
 });
 afterAll(() => server.close());
 
-describe('BlogPage.jsx', () => {
+// TODO: This component is no longer used but I am keeping these tests for reference.
+describe.skip('BlogPage.jsx', () => {
   describe('GIVEN: The user is not logged in (as administrator), ', () => {
     beforeEach(() => {
       renderWithQueryClient(<BlogPage />, mockStore);

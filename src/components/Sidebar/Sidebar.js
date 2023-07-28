@@ -4,17 +4,19 @@ import { CSSTransition } from 'react-transition-group';
 import { useCommonGlobals } from 'src/common/hooks';
 import { useSelector } from 'react-redux';
 
-import strings from 'src/common/strings';
+import strings, { contentKeys } from 'src/common/strings';
 import { routes } from 'src/routes';
 import './Sidebar.css';
 
-export function Sidebar({ isOpen, setPrimaryContentKey }){
-  const [ language ] = useCommonGlobals(routes.index);
+export function Sidebar({ isOpen, setMenuIsOpen, setPrimaryContentKey }){
+  const [ language, username ] = useCommonGlobals(routes.index);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
 
   const menuItems = [
-    { title: strings.aboutMe[language], key: 'aboutMe' },
-    { title: strings.siteInfo[language], key: 'siteInfo' },
+    { title: strings.aboutMe[language], key: contentKeys.ABOUT_ME },
+    { title: strings.siteInfo[language], key: contentKeys.SITE_INFO },
+    { title: strings.admin[language], key: contentKeys.ADMIN },
+    { title: strings.blog[language], key: contentKeys.BLOG},
     // { title: strings.resume[language], key: 'resume' },
     // { title: strings.funStuff[language], key: 'funStuff' },
   ];
@@ -43,6 +45,13 @@ export function Sidebar({ isOpen, setPrimaryContentKey }){
     </li>
   );
 
+  const clickHandler = (item) => {
+    setPrimaryContentKey(item.key);
+    if (item.key === contentKeys.ADMIN) {
+      return setMenuIsOpen(false);
+    }
+  };
+
   return (
     <div className={classNameBasedOnDarkMode()}>
       <ul>
@@ -53,10 +62,12 @@ export function Sidebar({ isOpen, setPrimaryContentKey }){
                 <CSSTransition
                   in={isOpen}
                   timeout={200}
-                  classNames={'fade'}
+                  classNames='fade'
                   unmountOnExit
                 >
-                  <div onClick={() => setPrimaryContentKey(item.key)}>{item.title}</div>
+                  <div onClick={() => clickHandler(item)}>
+                    {item.title}
+                  </div>
                 </CSSTransition>
               </div>
             </li>

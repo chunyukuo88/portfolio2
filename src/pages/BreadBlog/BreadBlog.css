@@ -1,0 +1,49 @@
+::-webkit-scrollbar {
+    width: 1px;
+    background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primaryColor);
+}
+
+#bread-blog {
+    width: 60%;
+    margin: auto;
+}
+
+.blog-post {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-title-without-buttons {
+    margin-top: 1rem;
+    font-size: 2rem;
+}
+
+.publication-date {
+    margin: 0.5rem;
+}
+
+.blog-image {
+    width: 60vw;
+}
+
+.blog-body-container {
+    margin: 0.5rem;
+    width: 60vw;
+    text-align: justify;
+}
+
+@media (max-width: 400px) {
+    #bread-blog {
+        width: 70vw;
+        overflow: auto;
+    }
+    .blog-image {
+        width: 60vw;
+    }
+}

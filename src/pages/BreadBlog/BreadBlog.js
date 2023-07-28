@@ -1,22 +1,19 @@
-import { useCommonGlobals } from 'src/common/hooks';
+import { useIntersection } from 'react-use'; // TODO: check this out
 import { useQuery } from '@tanstack/react-query';
+import { useCommonGlobals } from '../../common/hooks';
 import { useSelector } from 'react-redux';
+import { selectCurrentToken } from '../../features/auth/authSlice';
 
-import { Link } from 'react-router-dom';
-import { LinkStyling } from 'src/common/globalStyles';
-import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
+import { Pencil } from '../../components/Pencil/Pencil';
+import { TrashCan } from '../../components/TrashCan/TrashCan';
+import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
 
-import { getBlogs } from 'src/common/utils';
-import { selectCurrentToken } from 'src/features/auth/authSlice';
-import strings, { queryKeys } from 'src/common/strings';
-import { routes } from 'src/routes';
+import { getBlogs } from '../../common/utils';
+import { routes } from '../../routes';
+import strings, { queryKeys } from '../../common/strings';
+import './BreadBlog.css';
 
-import { TrashCan } from 'src/components/TrashCan/TrashCan';
-import { Pencil } from 'src/components/Pencil/Pencil';
-import './TrashcanAndPencil.css';
-import './BlogPage.css';
-
-export function BlogPage(){
+export function BreadBlog() {
   const token = useSelector(selectCurrentToken);
   const [ language ] = useCommonGlobals(routes.blog);
   const queryResult = useQuery({
@@ -25,11 +22,19 @@ export function BlogPage(){
   });
 
   const ErrorMessage = () => <div id='error-fetching-blog-posts'>{strings.blogDownForMaintenance[language]}</div>;
-
   if (queryResult.isError) return <ErrorMessage />;
 
-  const sortNewestToOldest = (blogData) => blogData?.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
-  const sorted = sortNewestToOldest(queryResult.data);
+  const sortNewestToOldest = (body) => body.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
+
+  let sorted = [];
+  if (queryResult.isSuccess) {
+    try {
+      const unsorted = JSON.parse(queryResult.data.body);
+      sorted = sortNewestToOldest(unsorted);
+    } catch (error) {
+      console.error('Error parsing blog post data:', error);
+    }
+  }
 
   const EDITABLE = {
     TITLE: 'title',
@@ -47,12 +52,12 @@ export function BlogPage(){
 
   const TitleWithoutButtons = ({ article }) => <div className='blog-title-without-buttons'>{article.title}</div>;
 
-  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
+  const asDateString = (article) => new Date(article.created_at).toISOString().slice(0,10);
 
   const Heading = ({ article }) => (
     <>
       {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
-      <h2 className='publication-date'>{asDateString(article)}</h2>
+      <h5 className='publication-date'>{asDateString(article)}</h5>
     </>
   );
 
@@ -75,7 +80,7 @@ export function BlogPage(){
         <span className='img-pencil-adjuster'>
           {token ? <Pencil token={token} article={article} aspect={EDITABLE.BODY}/> : null}
         </span>
-        <span>{article.theme}</span>
+        <span>{article.body}</span>
       </div>
     </div>
   );
@@ -95,19 +100,14 @@ export function BlogPage(){
   return (queryResult.isLoading)
     ? <LoadingSpinner />
     : (
-    <main role='main' className='blog-page-content'>
-      <nav className='back-to-home'>
-        <Link style={LinkStyling} to={routes.index}>
-          {strings.backButton[language]}
-        </Link>
-      </nav>
-      <section>
-        {
-          queryResult.isError
-            ? <ErrorMessage />
-            : <BlogContent />
-        }
-      </section>
-    </main>
-  );
+      <article role='main' id='bread-blog'>
+        <section>
+          {
+            queryResult.isError
+              ? <ErrorMessage />
+              : <BlogContent />
+          }
+        </section>
+      </article>
+    );
 }
