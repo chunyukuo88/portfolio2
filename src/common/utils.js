@@ -1,6 +1,7 @@
 import { easterEgg } from './strings';
 
 export const logger = console.log;
+export const errorLogger = console.error;
 
 export function logEasterEgg() {
   logger(`%c${easterEgg}`, 'color: yellow; background: black');
@@ -10,50 +11,49 @@ export function logEasterEgg() {
 export async function getCrosswords(){
   const response = await fetch(process.env.REACT_APP_GET_ALL_CROSSWORDS);
   if (!response.ok) {
-    throw new Error('An error occurred while fetching the crossword puzzles.');
+    throw new errorLogger('An error occurred while fetching the crossword puzzles.');
   }
   const data = await response.json();
   return data;
 }
 
 export async function getBlogs(){
-  const response = await fetch(process.env.REACT_APP_GET_BLOG_ENTRIES);
-  if (!response.ok) {
-    throw new Error('An error occurred while fetching the posts.');
+  const firstPageId = 1;
+  const url = `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/${firstPageId}`
+  const responseString = await fetch(url);
+  if (!responseString.ok) {
+    throw new errorLogger('An error occurred while fetching the posts.');
   }
-  const data = await response.json();
+  const data = await responseString.json();
   return data;
 }
 
 export async function updateBlogPost(entityId, options){
-  const { log, error } = console;
   try {
     const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
     const response = await fetch(url, options);
-    return log('The result of the attempt to update this blog post is as follows: ', response);
+    return logger('The result of the attempt to update this blog post is as follows: ', response);
   } catch (e) {
-    error('Verily, the update hath failed. I doth pray thou art well versed in its mending hence: ', e);
+    errorLogger('Verily, the update hath failed. I doth pray thou art well versed in its mending hence: ', e);
   }
 }
 
 export async function postData(url, data){
-  const { log, error } = console;
   try {
     const response = await fetch(url, data);
-    log(response);
+    logger(response);
   } catch (e) {
-    error('Forsooth, the POST entreaty failed, it did! Hence dour tidings:', e);
+    errorLogger('Forsooth, the POST entreaty failed, it did! Hence dour tidings:', e);
   }
 }
 
 export async function deleteBlog(entityId, options) {
-  const { log, error } = console;
   const url = `${process.env.REACT_APP_DELETE_BLOG_ENTRY}/${entityId}`;
   try {
     const response = await fetch(url, options);
-    log(response);
+    logger(response);
   } catch (e) {
-    error('Forsooth, the DELETE entreaty failed, the barmy codger! Hence dour tidings:', e);
+    errorLogger('Forsooth, the DELETE entreaty failed, the barmy codger! Hence dour tidings:', e);
   }
 }
 

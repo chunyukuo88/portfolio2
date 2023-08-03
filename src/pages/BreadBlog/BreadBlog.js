@@ -24,13 +24,14 @@ export function BreadBlog() {
   const ErrorMessage = () => <div id='error-fetching-blog-posts'>{strings.blogDownForMaintenance[language]}</div>;
   if (queryResult.isError) return <ErrorMessage />;
 
-  const sortNewestToOldest = (body) => body.sort((a, b) => a.creationTimeStamp > b.creationTimeStamp ? -1 : 1);
+  const sortNewestToOldest = (body) => body.sort((a, b) => new Date(a.creationTimeStamp) > new Date(b.creationTimeStamp) ? -1 : 1);
 
   let sorted = [];
   if (queryResult.isSuccess) {
     try {
-      const unsorted = JSON.parse(queryResult.data.body);
-      sorted = sortNewestToOldest(unsorted);
+      const pageAsArray = JSON.parse(queryResult.data.body)[0];
+      const arrayOfArticles = pageAsArray.results;
+      sorted = sortNewestToOldest(arrayOfArticles);
     } catch (error) {
       console.error('Error parsing blog post data:', error);
     }
@@ -52,7 +53,7 @@ export function BreadBlog() {
 
   const TitleWithoutButtons = ({ article }) => <div className='blog-title-without-buttons'>{article.title}</div>;
 
-  const asDateString = (article) => new Date(article.created_at).toISOString().slice(0,10);
+  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
 
   const Heading = ({ article }) => (
     <>
