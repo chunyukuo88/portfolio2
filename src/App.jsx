@@ -19,6 +19,7 @@ import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
 import { routes } from './routes';
 import './App.css';
+import {InfiniteArticles} from "./pages/BreadBlog/InfiniteArticles";
 
 function App(){
   const isDarkMode = useSelector(selectCurrentDarkTheme);
@@ -46,7 +47,8 @@ function App(){
     [contentKeys.ABOUT_ME]: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
     [contentKeys.SITE_INFO]: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
     [contentKeys.ADMIN]: <LoginPage setPrimaryContentKey={setPrimaryContentKey}/>,
-    [contentKeys.BLOG]: <BreadBlog language={language} menuIsOpen={menuIsOpen} />,
+    // [contentKeys.BLOG]: <BreadBlog language={language} menuIsOpen={menuIsOpen} />,
+    [contentKeys.BLOG]: <InfiniteArticles />,
   };
 
   const cubeShouldBeVisible = (

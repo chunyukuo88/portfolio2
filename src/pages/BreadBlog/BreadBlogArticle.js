@@ -2,7 +2,7 @@ export function BreadBlogArticle({ article }) {
 
   const TitleWithoutButtons = () => <div className='blog-title-without-buttons'>{article.title}</div>;
 
-  const asDateString = () => new Date(article.created_at).toISOString().slice(0,10);
+  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
 
   const Heading = () => (
     <>
