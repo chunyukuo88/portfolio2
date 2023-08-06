@@ -12,6 +12,7 @@ import { getBlogs } from '../../common/utils';
 import { routes } from '../../routes';
 import strings, { queryKeys } from '../../common/strings';
 import './BreadBlog.css';
+import {InfiniteArticles} from "./InfiniteArticles";
 
 export function BreadBlog() {
   const token = useSelector(selectCurrentToken);
@@ -106,7 +107,7 @@ export function BreadBlog() {
           {
             queryResult.isError
               ? <ErrorMessage />
-              : <BlogContent />
+              : <InfiniteArticles />
           }
         </section>
       </article>

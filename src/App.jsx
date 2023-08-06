@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useCommonGlobals } from './common/hooks';
-import {Divide as Hamburger} from 'hamburger-react'
+import { Divide as Hamburger } from 'hamburger-react'
 import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { SiteInfo } from './components/PrimaryContent/SiteInfo/SiteInfo';
@@ -13,7 +13,7 @@ import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
 import { selectCurrentDarkTheme } from './features/darkMode/darkModeSlice';
-import { selectSettingsMenuVisibility, updateSettingsVisibility } from './features/settingsMenu/settingsMenuSlice';
+import { updateSettingsVisibility } from './features/settingsMenu/settingsMenuSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
@@ -21,7 +21,6 @@ import { routes } from './routes';
 import './App.css';
 
 function App(){
-  // const settingsAreVisible = useSelector(selectSettingsMenuVisibility);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals(routes.blog);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
