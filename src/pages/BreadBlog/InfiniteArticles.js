@@ -2,7 +2,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { BreadBlogArticle } from './BreadBlogArticle';
 
-const initialUrl = process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE
+const initialUrl = `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/1`
 const fetchUrl = async (url) => {
   const response = await fetch(url);
   return response.json();
@@ -10,7 +10,7 @@ const fetchUrl = async (url) => {
 
 export function InfiniteArticles(){
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    'blog-articles',
+    ['blog-articles'],
     ({ pageParam = initialUrl }) => fetchUrl(pageParam),
     {
       getNextPageParam: (lastPage) => lastPage.next || undefined,
@@ -20,7 +20,9 @@ export function InfiniteArticles(){
   const Content = () => (
     <>
       {data.pages.map(pageData => {
-        pageData.result.map(article => <BreadBlogArticle article={article} />)
+        return pageData.result.map(article => {
+          return <BreadBlogArticle article={article} />
+        })
       })}
     </>
   );
