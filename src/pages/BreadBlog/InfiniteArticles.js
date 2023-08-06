@@ -1,11 +1,12 @@
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { BreadBlogArticle } from './BreadBlogArticle';
-import strings from "../../common/strings";
-import {useCommonGlobals} from "../../common/hooks";
-import {routes} from "../../routes";
+import strings from 'src/common/strings';
+import {useCommonGlobals} from 'src/common/hooks';
+import { routes } from 'src/routes';
+import {LoadingSpinner} from 'src/components/LoadingSpinner/LoadingSpinner';
 
-const initialUrl = `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/1`
+const initialUrl = `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/2`
 const fetchUrl = async (url) => {
   const response = await fetch(url);
   return response.json();
@@ -29,11 +30,7 @@ export function InfiniteArticles(){
     }
   );
 
-  if (isLoading) return (
-    <>
-      Loading... Loading... Loading... Loading... Loading... Loading... Loading... Loading...
-    </>
-  );
+  if (isLoading) return <LoadingSpinner />;
 
   const ErrorMessage = () => <div id='error-fetching-blog-posts'>{strings.blogDownForMaintenance[language]}</div>;
   if (isError) {
@@ -41,19 +38,9 @@ export function InfiniteArticles(){
     return <ErrorMessage />;
   }
 
-  const sortNewestToOldest = (body) => body.sort((a, b) => new Date(a.creationTimeStamp) > new Date(b.creationTimeStamp) ? -1 : 1);
-
-  const Content = (sorted) => (
-    <>
-      {sorted.pages.map(pageData => {
-        console.log('pageData: ');
-        console.dir(pageData);
-        return pageData.results.map(article => {
-          return <BreadBlogArticle article={article} />
-        })
-      })}
-    </>
-  );
+  const sortNewestToOldest = (body) => body.sort((a, b) => {
+    return new Date(a.creationTimeStamp) > new Date(b.creationTimeStamp) ? -1 : 1;
+  });
 
   if (isSuccess) {
     try {
@@ -69,12 +56,7 @@ export function InfiniteArticles(){
         </InfiniteScroll>
       );
     } catch (error) {
-      console.error('Error parsing blog post data:', error);
-      return (
-        <>
-          {error.toString()}
-        </>
-      )
+      return <ErrorMessage />;
     }
   }
 }
