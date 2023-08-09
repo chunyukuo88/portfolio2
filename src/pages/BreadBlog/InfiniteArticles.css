@@ -1,8 +1,17 @@
 #error-fetching-blog-posts {
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
 #blogs-unavailable {
     margin-top: 20%;
+}
+
+#infinite-scroll-articles-wrapper {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

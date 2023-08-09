@@ -1,8 +1,12 @@
+import './BreadBlogArticle.css';
+
 export function BreadBlogArticle({ article }) {
 
-  const TitleWithoutButtons = () => <div className='blog-title-without-buttons'>{article.title}</div>;
+  const TitleWithoutButtons = () => <p>{article.title}</p>;
 
-  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
+  const asDateString = (article) => new Date(article.creationTimeStamp)
+    .toISOString()
+    .slice(0,10);
 
   const Heading = () => (
     <>

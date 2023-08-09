@@ -4,10 +4,8 @@ import { useCommonGlobals } from 'src/common/hooks';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
 import InfiniteScroll from 'react-infinite-scroller';
-import './InfiniteArticles.css';
-
 import strings from 'src/common/strings';
-import { routes } from 'src/routes';
+import './InfiniteArticles.css';
 
 const initialUrl = process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
 const fetchUrl = async (url) => {
@@ -15,8 +13,8 @@ const fetchUrl = async (url) => {
   return response.json();
 };
 
-export function InfiniteArticles(){
-  const [ language ] = useCommonGlobals(routes.blog);
+export function InfiniteArticles() {
+  const [ language ] = useCommonGlobals();
   const {
     data,
     fetchNextPage,
@@ -24,7 +22,6 @@ export function InfiniteArticles(){
     isSuccess,
     isLoading,
     isError,
-    error
   } = useInfiniteQuery(
     ['blog-articles'],
     ({ pageParam = initialUrl }) => fetchUrl(pageParam),
@@ -44,7 +41,6 @@ export function InfiniteArticles(){
   );
 
   if (isError) {
-    console.info('the error, sir: ', error.toString());
     return <ErrorMessage />;
   }
 
@@ -54,16 +50,18 @@ export function InfiniteArticles(){
 
   if (isSuccess) {
     try {
-      const pageAsArray = JSON.parse(data.pages[0].body)[0].results;
+      const pageAsArray = JSON.parse(data.pages[0].body).results;
       const sorted = sortNewestToOldest(pageAsArray);
 
       return (
+        <div id='infinite-scroll-articles-wrapper'>
         <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
-          {sorted.map(article => {
-            console.dir(article);
-            return <BreadBlogArticle article={article} />
-          })}
+            {sorted.map(article => {
+              console.dir(article);
+              return <BreadBlogArticle article={article} />
+            })}
         </InfiniteScroll>
+        </div>
       );
     } catch (error) {
       return <ErrorMessage />;
