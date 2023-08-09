@@ -4,6 +4,7 @@ import { useCommonGlobals } from 'src/common/hooks';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
 import InfiniteScroll from 'react-infinite-scroller';
+import './InfiniteArticles.css';
 
 import strings from 'src/common/strings';
 import { routes } from 'src/routes';
@@ -36,7 +37,9 @@ export function InfiniteArticles(){
 
   const ErrorMessage = () => (
     <div id='error-fetching-blog-posts'>
-      {strings.blogDownForMaintenance[language]}
+      <p id='blogs-unavailable'>
+        {strings.blogDownForMaintenance[language]}
+      </p>
     </div>
   );
 

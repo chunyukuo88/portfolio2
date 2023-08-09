@@ -1,0 +1,8 @@
+#error-fetching-blog-posts {
+    display: flex;
+    justify-content: center;
+}
+
+#blogs-unavailable {
+    margin-top: 20%;
+}
