@@ -1,12 +1,14 @@
-import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { BreadBlogArticle } from './BreadBlogArticle';
-import strings from 'src/common/strings';
-import {useCommonGlobals} from 'src/common/hooks';
-import { routes } from 'src/routes';
-import {LoadingSpinner} from 'src/components/LoadingSpinner/LoadingSpinner';
+import { useCommonGlobals } from 'src/common/hooks';
 
-const initialUrl = `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/2`
+import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
+import { BreadBlogArticle } from './BreadBlogArticle';
+import InfiniteScroll from 'react-infinite-scroller';
+
+import strings from 'src/common/strings';
+import { routes } from 'src/routes';
+
+const initialUrl = process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
 const fetchUrl = async (url) => {
   const response = await fetch(url);
   return response.json();
@@ -32,7 +34,12 @@ export function InfiniteArticles(){
 
   if (isLoading) return <LoadingSpinner />;
 
-  const ErrorMessage = () => <div id='error-fetching-blog-posts'>{strings.blogDownForMaintenance[language]}</div>;
+  const ErrorMessage = () => (
+    <div id='error-fetching-blog-posts'>
+      {strings.blogDownForMaintenance[language]}
+    </div>
+  );
+
   if (isError) {
     console.info('the error, sir: ', error.toString());
     return <ErrorMessage />;
