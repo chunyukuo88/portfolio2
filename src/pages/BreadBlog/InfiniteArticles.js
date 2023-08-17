@@ -14,6 +14,7 @@ export function InfiniteArticles() {
   const [ language ] = useCommonGlobals();
 
   const fetchUrl = async ({pageParam = null}) => {
+    console.log('pageParam', pageParam); // TODO: This stays `null` at all times. It is not receiving the new pageParam value.
     const url = pageParam ? `${initialUrl}${pageParam}` : initialUrl
     const response = await fetch(url);
     return response.json();
@@ -35,7 +36,6 @@ export function InfiniteArticles() {
     getNextPageParam: (lastPage) => {
       const page = JSON.parse(lastPage.body);
       const previousPageParam = page.previous || undefined;
-      console.log(previousPageParam);
       return previousPageParam;
     },
   });
