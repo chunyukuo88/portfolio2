@@ -26,7 +26,7 @@ export function InfiniteArticles() {
     ['blog-articles'],
     ({ pageParam = initialUrl }) => fetchUrl(pageParam),
     {
-      getNextPageParam: (lastPage) => lastPage.next || undefined,
+      getPreviousPageParam: (lastPage) => lastPage.previous || undefined,
     }
   );
 
