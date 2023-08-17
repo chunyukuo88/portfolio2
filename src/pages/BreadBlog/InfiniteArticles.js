@@ -32,10 +32,10 @@ export function InfiniteArticles() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  const ErrorMessage = () => (
+  const ErrorMessage = (message) => (
     <div id='error-fetching-blog-posts'>
       <p id='blogs-unavailable'>
-        {strings.blogDownForMaintenance[language]}
+        {message || strings.blogDownForMaintenance[language]}
       </p>
     </div>
   );
@@ -50,21 +50,21 @@ export function InfiniteArticles() {
 
   if (isSuccess) {
     try {
-      const pageAsArray = JSON.parse(data.pages[0].body).results;
-      const sorted = sortNewestToOldest(pageAsArray);
-
       return (
         <div id='infinite-scroll-articles-wrapper'>
           <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
-            {sorted.map(article => {
-              console.dir(article);
-              return <BreadBlogArticle article={article} />
-            })}
+            {data.pages.map((pageData) => {
+                return JSON.parse(pageData.body).results.map(article => {
+                  console.dir(article);
+                  return <BreadBlogArticle article={article} />
+                })
+              }
+            )}
           </InfiniteScroll>
         </div>
       );
     } catch (error) {
-      return <ErrorMessage />;
+      return <ErrorMessage message={'Blogs fetched successfully but there was an error processing them.'}/>;
     }
   }
 }
