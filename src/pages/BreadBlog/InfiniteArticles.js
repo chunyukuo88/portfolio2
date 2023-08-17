@@ -8,27 +8,37 @@ import strings from 'src/common/strings';
 import './InfiniteArticles.css';
 
 const initialUrl = process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
-const fetchUrl = async (url) => {
-  const response = await fetch(url);
-  return response.json();
-};
+
 
 export function InfiniteArticles() {
   const [ language ] = useCommonGlobals();
+
+  const fetchUrl = async ({pageParam = null}) => {
+    const url = pageParam ? `${initialUrl}${pageParam}` : initialUrl
+    const response = await fetch(url);
+    return response.json();
+  };
+
   const {
     data,
     fetchNextPage,
     hasNextPage,
     isSuccess,
     isLoading,
+    isFetching,
     isError,
-  } = useInfiniteQuery(
-    ['blog-articles'],
-    ({ pageParam = initialUrl }) => fetchUrl(pageParam),
-    {
-      getNextPageParam: (lastPage) => lastPage.previous || undefined,
-    }
-  );
+  } = useInfiniteQuery({
+    queryKey: ['blog-articles'],
+    queryFn: ({pageParam = initialUrl}) => {
+      return fetchUrl(pageParam);
+    },
+    getNextPageParam: (lastPage) => {
+      const page = JSON.parse(lastPage.body);
+      const previousPageParam = page.previous || undefined;
+      console.log(previousPageParam);
+      return previousPageParam;
+    },
+  });
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -44,19 +54,15 @@ export function InfiniteArticles() {
     return <ErrorMessage />;
   }
 
-  const sortNewestToOldest = (body) => body.sort((a, b) => {
-    return new Date(a.creationTimeStamp) > new Date(b.creationTimeStamp) ? -1 : 1;
-  });
-
   if (isSuccess) {
     try {
       return (
         <div id='infinite-scroll-articles-wrapper'>
+          {isFetching ? <LoadingSpinner /> : null}
           <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
             {data.pages.map((pageData) => {
                 return JSON.parse(pageData.body).results.map(article => {
-                  console.dir(article);
-                  return <BreadBlogArticle article={article} />
+                  return <BreadBlogArticle article={article} key={article.creationTimeStamp} />
                 })
               }
             )}
