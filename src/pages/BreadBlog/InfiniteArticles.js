@@ -26,7 +26,7 @@ export function InfiniteArticles() {
     ['blog-articles'],
     ({ pageParam = initialUrl }) => fetchUrl(pageParam),
     {
-      getPreviousPageParam: (lastPage) => lastPage.previous || undefined,
+      getNextPageParam: (lastPage) => lastPage.previous || undefined,
     }
   );
 
@@ -55,12 +55,12 @@ export function InfiniteArticles() {
 
       return (
         <div id='infinite-scroll-articles-wrapper'>
-        <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
+          <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
             {sorted.map(article => {
               console.dir(article);
               return <BreadBlogArticle article={article} />
             })}
-        </InfiniteScroll>
+          </InfiniteScroll>
         </div>
       );
     } catch (error) {
