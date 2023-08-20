@@ -21,11 +21,11 @@ export function InfiniteArticles() {
   const queryClient = useQueryClient();
   const ref = useRef(null);
 
-  const {data, fetchNextPage, isFetchingNextPage, isSuccess} = useInfiniteQuery(
+  const {data, fetchNextPage, isFetchingNextPage, isLoading, isSuccess} = useInfiniteQuery(
     ['blog-articles'],
-    async ({pageParam = 1}) => await fetchUrl(pageParam),
+    async ({pageParam = 2}) => await fetchUrl(pageParam),
     {
-      getNextPageParam: (_, pages) => pages.length + 1
+      getNextPageParam: (_, pages) => pages.length - 1
     }
   );
 
@@ -36,10 +36,10 @@ export function InfiniteArticles() {
     if (ref.current) {
       observer.observe(ref.current)
     }
-  }, [ref]);
+  }, []);
 
-  if (data) {
-    console.log(data);
+  if (isLoading || isFetchingNextPage) {
+    return <LoadingSpinner />;
   }
 
   if (isSuccess) {
@@ -47,11 +47,11 @@ export function InfiniteArticles() {
       <QueryClientProvider client={queryClient}>
         <div id='infinite-scroll-articles-wrapper'>
           {data.pages.map((pageData) => {
-              return JSON.parse(pageData.body).results.map(article => {
-                return <BreadBlogArticle article={article} key={article.creationTimeStamp} />
-              })
-            }
-          )}
+            console.dir(JSON.parse(pageData.body));
+            return JSON.parse(pageData.body)[0].results.map(article => {
+              return <BreadBlogArticle article={article} key={article.creationTimeStamp} />
+            })
+          })}
         </div>
         <span ref={ref}></span>
       </QueryClientProvider>
