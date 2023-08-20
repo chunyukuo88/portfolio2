@@ -4,14 +4,14 @@ export function BreadBlogArticle({ article }) {
 
   const TitleWithoutButtons = () => <p>{article.title}</p>;
 
-  const asDateString = (article) => new Date(article.creationTimeStamp)
+  const asDateString = new Date(article.creationTimeStamp)
     .toISOString()
     .slice(0,10);
 
   const Heading = () => (
     <>
       <TitleWithoutButtons article={article} />
-      <h5 className='publication-date'>{asDateString(article)}</h5>
+      <h5 className='publication-date'>{asDateString}</h5>
     </>
   );
 
