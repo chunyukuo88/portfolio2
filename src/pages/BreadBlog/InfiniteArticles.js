@@ -1,30 +1,21 @@
-import {QueryClientProvider, useInfiniteQuery, useQueryClient} from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
-import InfiniteScroll from 'react-infinite-scroller';
-import strings from 'src/common/strings';
-
-
-import { useState, useEffect } from 'react';
-import { useCommonGlobals } from 'src/common/hooks';
 import './InfiniteArticles.css';
 
 const initialUrl = process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
 
 export function InfiniteArticles() {
-  const [ language ] = useCommonGlobals();
   const [ posts, setPosts ] = useState([]);
   const [ page, setPage ] = useState(null);
 
   const handleScroll = () => {
-    console.log('handleScroll()');
     if (
       window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
-      && posts.length > 0
+      // && posts.length > 0
     ) {
       console.log('sth');
-      // setPage(previousPage => previousPage + 1);
-      setPage(page + 1);
+      setPage(previousPage => previousPage + 1);
     }
   };
 
@@ -40,17 +31,17 @@ export function InfiniteArticles() {
   }, [page]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('wheel', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleScroll);
     };
-  }, [posts]);
+  }, []);
 
-  return posts.length ? (
+  return posts.length > 0 ? (
     <>
       <div id='infinite-scroll-articles-wrapper'>
-        {posts.map((article) => {
-          return <BreadBlogArticle article={article} key={article.creationTimeStamp} />
+        {posts.map((article, key) => {
+          return <BreadBlogArticle article={article} key={key} />
         })}
       </div>
     </>

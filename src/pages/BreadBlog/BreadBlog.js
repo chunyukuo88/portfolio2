@@ -13,6 +13,7 @@ import { routes } from '../../routes';
 import strings, { queryKeys } from '../../common/strings';
 import './BreadBlog.css';
 import {InfiniteArticles} from "./InfiniteArticles";
+import {useEffect} from "react";
 
 export function BreadBlog() {
   const token = useSelector(selectCurrentToken);
@@ -38,77 +39,12 @@ export function BreadBlog() {
     }
   }
 
-  const EDITABLE = {
-    TITLE: 'title',
-    IMG_URL: 'imageUrl',
-    BODY: 'theme',
-  };
-
-  const TitleWithButtons = ({ article }) => (
-    <div className='blog-title-with-buttons'>
-      <Pencil token={token} article={article} aspect={EDITABLE.TITLE}/>
-      <div>{article.title}</div>
-      <TrashCan token={token} article={article} />
-    </div>
-  );
-
-  const TitleWithoutButtons = ({ article }) => <div className='blog-title-without-buttons'>{article.title}</div>;
-
-  const asDateString = (article) => new Date(article.creationTimeStamp).toISOString().slice(0,10);
-
-  const Heading = ({ article }) => (
-    <>
-      {token ? <TitleWithButtons article={article} /> : <TitleWithoutButtons article={article} />}
-      <h5 className='publication-date'>{asDateString(article)}</h5>
-    </>
-  );
-
-  const Image = ({ article }) => (
-    <>
-      <span className='img-pencil-adjuster'>
-        {token && <Pencil token={token} article={article} aspect={EDITABLE.IMG_URL}/>}
-      </span>
-      <img
-        className='blog-image'
-        src={article.imageUrl}
-        aria-label={`Image for blog titled ${article.title}`}
-      />
-    </>
-  );
-
-  const Body = ({ article }) => (
-    <div className='blog-body-container'>
-      <div className='blog-body'>
-        <span className='img-pencil-adjuster'>
-          {token ? <Pencil token={token} article={article} aspect={EDITABLE.BODY}/> : null}
-        </span>
-        <span>{article.body}</span>
-      </div>
-    </div>
-  );
-
-  const BlogContent = () => (
-    <>
-      {sorted.map((article, key) => (
-        <article className='blog-post' key={key}>
-          <Heading article={article}/>
-          <Image article={article} key={key} />
-          <Body article={article} />
-        </article>
-      ))}
-    </>
-  );
-
   return (queryResult.isLoading)
     ? <LoadingSpinner />
     : (
       <article role='main' id='bread-blog'>
         <section>
-          {
-            queryResult.isError
-              ? <ErrorMessage />
-              : <InfiniteArticles />
-          }
+          <InfiniteArticles />
         </section>
       </article>
     );
