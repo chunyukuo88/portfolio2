@@ -1,4 +1,5 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useRef, useEffect } from 'react';
+import {QueryClientProvider, useInfiniteQuery, useQueryClient} from '@tanstack/react-query';
 import { useCommonGlobals } from 'src/common/hooks';
 
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
@@ -9,68 +10,51 @@ import './InfiniteArticles.css';
 
 const initialUrl = process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
 
+const fetchUrl = async ({ pageParam = null }) => {
+  const url = pageParam ? `${initialUrl}${pageParam}` : initialUrl
+  const response = await fetch(url);
+  return response.json();
+};
 
 export function InfiniteArticles() {
   const [ language ] = useCommonGlobals();
+  const queryClient = useQueryClient();
+  const ref = useRef(null);
 
-  const fetchUrl = async ({pageParam = null}) => {
-    console.log('pageParam', pageParam); // TODO: This stays `null` at all times. It is not receiving the new pageParam value.
-    const url = pageParam ? `${initialUrl}${pageParam}` : initialUrl
-    const response = await fetch(url);
-    return response.json();
-  };
-
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isSuccess,
-    isLoading,
-    isFetching,
-    isError,
-  } = useInfiniteQuery({
-    queryKey: ['blog-articles'],
-    queryFn: ({pageParam = initialUrl}) => {
-      return fetchUrl(pageParam);
-    },
-    getNextPageParam: (lastPage) => {
-      const page = JSON.parse(lastPage.body);
-      const previousPageParam = page.previous || undefined;
-      return previousPageParam;
-    },
-  });
-
-  if (isLoading) return <LoadingSpinner />;
-
-  const ErrorMessage = (message) => (
-    <div id='error-fetching-blog-posts'>
-      <p id='blogs-unavailable'>
-        {message || strings.blogDownForMaintenance[language]}
-      </p>
-    </div>
+  const {data, fetchNextPage, isFetchingNextPage, isSuccess} = useInfiniteQuery(
+    ['blog-articles'],
+    async ({pageParam = 1}) => await fetchUrl(pageParam),
+    {
+      getNextPageParam: (_, pages) => pages.length + 1
+    }
   );
 
-  if (isError) {
-    return <ErrorMessage />;
+  useEffect(()=> {
+    const observer = new IntersectionObserver(
+      (entries) => {entries.forEach(entry => fetchNextPage())
+    });
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+  }, [ref]);
+
+  if (data) {
+    console.log(data);
   }
 
   if (isSuccess) {
-    try {
-      return (
+    return (
+      <QueryClientProvider client={queryClient}>
         <div id='infinite-scroll-articles-wrapper'>
-          {isFetching ? <LoadingSpinner /> : null}
-          <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
-            {data.pages.map((pageData) => {
-                return JSON.parse(pageData.body).results.map(article => {
-                  return <BreadBlogArticle article={article} key={article.creationTimeStamp} />
-                })
-              }
-            )}
-          </InfiniteScroll>
+          {data.pages.map((pageData) => {
+              return JSON.parse(pageData.body).results.map(article => {
+                return <BreadBlogArticle article={article} key={article.creationTimeStamp} />
+              })
+            }
+          )}
         </div>
-      );
-    } catch (error) {
-      return <ErrorMessage message={'Blogs fetched successfully but there was an error processing them.'}/>;
-    }
+        <span ref={ref}></span>
+      </QueryClientProvider>
+    );
   }
 }
