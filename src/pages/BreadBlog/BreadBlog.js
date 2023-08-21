@@ -1,11 +1,8 @@
-import { useIntersection } from 'react-use'; // TODO: check this out
 import { useQuery } from '@tanstack/react-query';
 import { useCommonGlobals } from '../../common/hooks';
 import { useSelector } from 'react-redux';
 import { selectCurrentToken } from '../../features/auth/authSlice';
 
-import { Pencil } from '../../components/Pencil/Pencil';
-import { TrashCan } from '../../components/TrashCan/TrashCan';
 import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
 
 import { getBlogs } from '../../common/utils';
@@ -13,7 +10,6 @@ import { routes } from '../../routes';
 import strings, { queryKeys } from '../../common/strings';
 import './BreadBlog.css';
 import {InfiniteArticles} from "./InfiniteArticles";
-import {useEffect} from "react";
 
 export function BreadBlog() {
   const token = useSelector(selectCurrentToken);

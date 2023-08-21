@@ -9,23 +9,28 @@ export function InfiniteArticles() {
   const [ posts, setPosts ] = useState([]);
   const [ page, setPage ] = useState(null);
 
+
   const handleScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
-      // && posts.length > 0
-    ) {
-      console.log('sth');
-      setPage(previousPage => previousPage + 1);
+    console.log(`
+      window.innerHeight: ${window.innerHeight}
+      window.scrollY: ${window.scrollY}
+      document.body.offsetHeight: ${document.body.offsetHeight}
+    `);
+    const userIsNearBottomOfPage = (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100);
+    if (userIsNearBottomOfPage) {
+      setPage(1);
     }
   };
 
   useEffect(() => {
-    const pageNumber = page || 1;
+    const pageNumber = page || 2;
     fetch(`${initialUrl}${pageNumber}`).then(
       async response => {
         const newPosts = await response.json()
         const parsedNewPosts = JSON.parse(newPosts.body)[0].results;
-        setPosts([...posts, ...parsedNewPosts]);
+        if (parsedNewPosts) {
+          setPosts([...posts, ...parsedNewPosts]);
+        }
       }
     );
   }, [page]);
