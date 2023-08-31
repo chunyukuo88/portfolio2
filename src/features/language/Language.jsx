@@ -7,12 +7,13 @@ import strings from 'src/common/strings.js';
 function Language() {
   const language = useSelector((state) => state.language.value);
   const dispatch = useDispatch();
-  const { CHINESE, ENGLISH, GERMAN } = strings;
+  const { CHINESE, ENGLISH, GERMAN, JAPANESE } = strings;
   const languageToggler = (currentLanguage) => {
     switch (currentLanguage) {
       case ENGLISH: return CHINESE;
       case CHINESE: return GERMAN;
-      case GERMAN: return ENGLISH;
+      case GERMAN: return JAPANESE;
+      case JAPANESE: return ENGLISH;
     }
   };
 
