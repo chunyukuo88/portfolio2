@@ -3,37 +3,35 @@ import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
 import './InfiniteArticles.css';
 
-const initialUrl = process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
-
 export function InfiniteArticles() {
   const [ posts, setPosts ] = useState([]);
-  const [ page, setPage ] = useState(null);
-
+  const [ page, setPage ] = useState('');
   const lastArticleRef = useRef(null);
 
   const handleScroll = () => {
     if (lastArticleRef?.current?.body) {
       const lastArticle = document.getElementById(`${lastArticleRef.current.body}`);
       const topOfLastArticle = lastArticle?.getBoundingClientRect().top;
-      if (topOfLastArticle < 100) {
-        const decrementedPage = lastArticleRef.current.page - 1;
-        if (decrementedPage > 0) {
-          setPage(decrementedPage);
-        }
+      const decrementedPage = lastArticleRef.current.page - 1;
+      if (topOfLastArticle < 100 && decrementedPage > 0) {
+        setPage(decrementedPage);
       }
     }
   };
 
   useEffect(() => {
     const pageNumber = page || 4;
-    setPage(pageNumber);
-    fetch(`${initialUrl}${pageNumber}`).then(
+    console.log('1 pageNumber: ', pageNumber);
+    fetch(`${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}${pageNumber}`).then(
       async response => {
         const newPosts = await response.json();
         const parsedNewPosts = JSON.parse(newPosts.body)[0].results;
+        console.log('2 posts:')
+        console.dir(parsedNewPosts);
         if (parsedNewPosts) {
           setPosts([...posts, ...parsedNewPosts]);
           lastArticleRef.current = parsedNewPosts[parsedNewPosts.length - 1];
+          console.log('3: ', lastArticleRef.current);
         }
       }
     );
