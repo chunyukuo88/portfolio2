@@ -19,22 +19,23 @@ export function InfiniteArticles() {
     }
   };
 
+  const getInfiniteBlogsUrl = (page) => page
+    ? `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}${page}`
+    : process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
+
+  const getParsedNewPosts = (page, newPosts) => page
+    ? JSON.parse(newPosts.body)[0].results
+    : JSON.parse(newPosts.body).results;
+
   useEffect(() => {
-    const url = page
-      ? `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}${page}`
-      : process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
+    const url = getInfiniteBlogsUrl(page)
     fetch(url).then(
       async response => {
         const newPosts = await response.json();
-        const parsedNewPosts = page
-          ? JSON.parse(newPosts.body)[0].results
-          : JSON.parse(newPosts.body).results;
-        console.log('2 posts:')
-        console.dir(parsedNewPosts);
+        const parsedNewPosts = getParsedNewPosts(page, newPosts);
         if (parsedNewPosts) {
           setPosts([...posts, ...parsedNewPosts]);
           lastArticleRef.current = parsedNewPosts[parsedNewPosts.length - 1];
-          console.log('3: ', lastArticleRef.current);
         }
       }
     );
@@ -48,16 +49,14 @@ export function InfiniteArticles() {
   }, []);
 
   return posts.length > 0 ? (
-    <>
-      <div id='infinite-scroll-articles-wrapper'>
-        {posts.map((article, key) => {
-          return (
-            <div id={`${article.body}`} key={key}>
-              <BreadBlogArticle article={article} />
-            </div>
-          );
-        })}
-      </div>
-    </>
+    <div id='infinite-scroll-articles-wrapper'>
+      {posts.map((article, key) => {
+        return (
+          <div id={`${article.body}`} key={key}>
+            <BreadBlogArticle article={article} />
+          </div>
+        );
+      })}
+    </div>
   ) : <LoadingSpinner />;
 }
