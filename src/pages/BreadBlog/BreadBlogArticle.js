@@ -16,14 +16,12 @@ export function BreadBlogArticle({ article }) {
   );
 
   const Image = () => (
-    <>
-      <img
-        loading='lazy'
-        className='blog-image'
-        src={article.imageUrl}
-        aria-label={`Image for blog titled ${article.title}`}
-      />
-    </>
+    <img
+      loading='lazy'
+      className='blog-image'
+      src={article.imageUrl}
+      aria-label={`Image for blog titled ${article.title}`}
+    />
   );
 
   const Body = () => (
