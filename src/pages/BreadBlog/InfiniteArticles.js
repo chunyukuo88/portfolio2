@@ -5,7 +5,7 @@ import './InfiniteArticles.css';
 
 export function InfiniteArticles() {
   const [ posts, setPosts ] = useState([]);
-  const [ page, setPage ] = useState(undefined);
+  const [ page, setPage ] = useState(null);
   const lastArticleRef = useRef(null);
 
   const handleScroll = () => {
