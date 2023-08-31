@@ -5,7 +5,7 @@ import './InfiniteArticles.css';
 
 export function InfiniteArticles() {
   const [ posts, setPosts ] = useState([]);
-  const [ page, setPage ] = useState('');
+  const [ page, setPage ] = useState(undefined);
   const lastArticleRef = useRef(null);
 
   const handleScroll = () => {
@@ -20,12 +20,15 @@ export function InfiniteArticles() {
   };
 
   useEffect(() => {
-    const pageNumber = page || 4;
-    console.log('1 pageNumber: ', pageNumber);
-    fetch(`${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}${pageNumber}`).then(
+    const url = page
+      ? `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}${page}`
+      : process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
+    fetch(url).then(
       async response => {
         const newPosts = await response.json();
-        const parsedNewPosts = JSON.parse(newPosts.body)[0].results;
+        const parsedNewPosts = page
+          ? JSON.parse(newPosts.body)[0].results
+          : JSON.parse(newPosts.body).results;
         console.log('2 posts:')
         console.dir(parsedNewPosts);
         if (parsedNewPosts) {
