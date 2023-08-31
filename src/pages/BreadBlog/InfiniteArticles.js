@@ -1,4 +1,4 @@
-import {useState, useEffect, useLayoutEffect, useRef} from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
 import './InfiniteArticles.css';
@@ -11,23 +11,22 @@ export function InfiniteArticles() {
 
   const lastArticleRef = useRef(null);
 
-  const handleScroll = (event) => {
+  const handleScroll = () => {
     if (lastArticleRef?.current?.body) {
-      console.log(lastArticleRef.current.body);
       const lastArticle = document.getElementById(`${lastArticleRef.current.body}`);
-      const topOflastArticle = lastArticle.getBoundingClientRect().top;
-      if (topOflastArticle < 0 && Math.abs(topOflastArticle) >= window.innerHeight) {
-        console.log('moist!');
-        setPage(1);
+      const topOfLastArticle = lastArticle?.getBoundingClientRect().top;
+      if (topOfLastArticle < 100) {
+        const decrementedPage = lastArticleRef.current.page - 1;
+        if (decrementedPage > 0) {
+          setPage(decrementedPage);
+        }
       }
-
     }
   };
 
-
   useEffect(() => {
-    console.log('useEffect() - page: ', page);
-    const pageNumber = page || 2;
+    const pageNumber = page || 4;
+    setPage(pageNumber);
     fetch(`${initialUrl}${pageNumber}`).then(
       async response => {
         const newPosts = await response.json();
@@ -52,10 +51,10 @@ export function InfiniteArticles() {
       <div id='infinite-scroll-articles-wrapper'>
         {posts.map((article, key) => {
           return (
-            <div id={`${article.body}`}>
-              <BreadBlogArticle article={article} key={key} />
+            <div id={`${article.body}`} key={key}>
+              <BreadBlogArticle article={article} />
             </div>
-          )
+          );
         })}
       </div>
     </>
