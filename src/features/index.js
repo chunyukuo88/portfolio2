@@ -1,6 +1,6 @@
 export { selectCurrentUser, selectCurrentToken } from './auth/authSlice';
-export { updateLanguage } from './language/languageSlice';
-export { toggleToSpinQuickly, toggleToSpinSlowly } from './cubeSpin/cubeSpinSlice';
-export { setDarkMode, setLightMode } from './darkMode/darkModeSlice';
-export { updateGrid, declareVictory, resetGrid, resetVictoryState } from './crossword/crosswordSlice';
-export { updateSettingsVisibility } from './settingsMenu/settingsMenuSlice';
+export { selectCurrentLanguage, updateLanguage } from './language/languageSlice';
+export { selectCubeSpinSpeed, toggleToSpinQuickly, toggleToSpinSlowly } from './cubeSpin/cubeSpinSlice';
+export { selectCurrentDarkTheme, setDarkMode, setLightMode, darkModeSlice } from './darkMode/darkModeSlice';
+export { selectUserHasWon, selectCurrentGrid, updateGrid, declareVictory, resetGrid, resetVictoryState } from './crossword/crosswordSlice';
+export { selectSettingsMenuVisibility, updateSettingsVisibility } from './settingsMenu/settingsMenuSlice';
