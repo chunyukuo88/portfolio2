@@ -3,7 +3,7 @@ import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
 import './InfiniteArticles.css';
 
-export function InfiniteArticles() {
+export function InfiniteArticles({ menuIsOpen }) {
   const [ posts, setPosts ] = useState([]);
   const [ page, setPage ] = useState(null);
   const lastArticleRef = useRef(null);

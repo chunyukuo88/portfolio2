@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useCommonGlobals } from 'src/common/hooks';
 import { useAuth } from 'src/features/auth/useAuth';
 
@@ -10,14 +10,11 @@ import strings, { contentKeys } from 'src/common/strings.js';
 import { routes } from 'src/routes';
 import './LoginPage.css';
 
-import { ChangePassword } from './ChangePassword';
-import { LoggedOutContent } from './LoggedOutContent';
-
 export const LoginPage = (props) => {
   const { setPrimaryContentKey } = props;
-  const [ language, username ] = useCommonGlobals(routes.login);
+  const [ language ] = useCommonGlobals(routes.login);
   const dispatch = useDispatch();
-  const { changePassword, signIn, signOut } = useAuth();
+  const { signIn } = useAuth();
   const userRef = useRef();
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
@@ -114,26 +111,4 @@ export const LoginPage = (props) => {
       </div>
     </div>
   );
-
-  // return (
-  //   <main
-  //     id='login-page'
-  //     style={{ color: 'white'}}
-  //     title={strings.login[language]}
-  //   >
-  //     {username ? <LoggedInContent /> : <LoggedOutContent signIn={signIn} />}
-  //     <p className='back-to-home'>
-  //       <Link
-  //         style={LinkStyling}
-  //         to={routes.index}
-  //         aria-label={strings.backButton[language]}
-  //       >
-  //         {strings.backButton[language]}
-  //       </Link>
-  //     </p>
-  //     <section className='cube-wrapper'>
-  //       <Cube />
-  //     </section>
-  //   </main>
-  // );
 };

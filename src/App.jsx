@@ -45,8 +45,7 @@ function App(){
     [contentKeys.ABOUT_ME]: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
     [contentKeys.SITE_INFO]: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
     [contentKeys.ADMIN]: <LoginPage setPrimaryContentKey={setPrimaryContentKey}/>,
-    // [contentKeys.BLOG]: <BreadBlog language={language} menuIsOpen={menuIsOpen} />,
-    [contentKeys.BLOG]: <InfiniteArticles />,
+    [contentKeys.BLOG]: <InfiniteArticles menuIsOpen={menuIsOpen}/>,
   };
 
   const cubeShouldBeVisible = (
