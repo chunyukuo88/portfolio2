@@ -9,7 +9,7 @@ import { routes } from 'src/routes';
 import './Sidebar.css';
 
 export function Sidebar({ isOpen, setMenuIsOpen, setPrimaryContentKey }){
-  const [ language, username ] = useCommonGlobals(routes.index);
+  const [ language ] = useCommonGlobals(routes.index);
   const isDarkMode = useSelector(selectCurrentDarkTheme);
 
   const menuItems = [
@@ -30,20 +30,20 @@ export function Sidebar({ isOpen, setMenuIsOpen, setPrimaryContentKey }){
     return isDarkMode ? base : base + '__light-mode';
   };
 
-  const Settings = () => (
-    <li key={'SettingsToggler'}>
-      <div className='sidebar__listItem'>
-        <CSSTransition
-          in={isOpen}
-          timeout={200}
-          classNames={'fade'}
-          unmountOnExit
-        >
-          <SettingsToggler />
-        </CSSTransition>
-      </div>
-    </li>
-  );
+  // const Settings = () => (
+  //   <li key={'SettingsToggler'}>
+  //     <div className='sidebar__listItem'>
+  //       <CSSTransition
+  //         in={isOpen}
+  //         timeout={200}
+  //         classNames={'fade'}
+  //         unmountOnExit
+  //       >
+  //         <SettingsToggler />
+  //       </CSSTransition>
+  //     </div>
+  //   </li>
+  // );
 
   const clickHandler = (item) => {
     setPrimaryContentKey(item.key);

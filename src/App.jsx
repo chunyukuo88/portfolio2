@@ -7,8 +7,8 @@ import { SiteInfo } from './components/PrimaryContent/SiteInfo/SiteInfo';
 import { LoginPage } from './pages/Login/LoginPage';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { Skills } from './components/PrimaryContent/Skills/Skills';
-import { BreadBlog } from './pages/BreadBlog/BreadBlog';
 import { AboutMe } from './components/PrimaryContent/AboutMe/AboutMe';
+import { InfiniteArticles } from './pages/BreadBlog/InfiniteArticles';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
@@ -16,12 +16,11 @@ import { selectCurrentDarkTheme, updateSettingsVisibility } from './features';
 import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
-import { routes } from './routes';
 import './App.css';
 
 function App(){
   const isDarkMode = useSelector(selectCurrentDarkTheme);
-  const [ language ] = useCommonGlobals(routes.blog);
+  const [ language ] = useCommonGlobals();
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ primaryContentKey, setPrimaryContentKey ] = useState(contentKeys.SKILLS);
   const dispatch = useDispatch();
@@ -45,7 +44,7 @@ function App(){
     [contentKeys.ABOUT_ME]: <AboutMe language={language} menuIsOpen={menuIsOpen}/>,
     [contentKeys.SITE_INFO]: <SiteInfo language={language} menuIsOpen={menuIsOpen} />,
     [contentKeys.ADMIN]: <LoginPage setPrimaryContentKey={setPrimaryContentKey}/>,
-    [contentKeys.BLOG]: <BreadBlog language={language} menuIsOpen={menuIsOpen} />,
+    [contentKeys.BLOG]: <InfiniteArticles />,
   };
 
   const cubeShouldBeVisible = (
