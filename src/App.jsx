@@ -12,8 +12,7 @@ import { AboutMe } from './components/PrimaryContent/AboutMe/AboutMe';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
-import { selectCurrentDarkTheme } from './features/darkMode/darkModeSlice';
-import { updateSettingsVisibility } from './features';
+import { selectCurrentDarkTheme, updateSettingsVisibility } from './features';
 import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';

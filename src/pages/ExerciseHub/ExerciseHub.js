@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useCommonGlobals } from 'src/common/hooks';
-import { selectCurrentToken } from 'src/features/auth/authSlice';
+import { selectCurrentToken } from 'src/features';
 import { useSelector } from 'react-redux';
 
 import strings from 'src/common/strings';

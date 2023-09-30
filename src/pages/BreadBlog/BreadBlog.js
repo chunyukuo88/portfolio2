@@ -1,8 +1,7 @@
-import { useIntersection } from 'react-use'; // TODO: check this out
 import { useQuery } from '@tanstack/react-query';
 import { useCommonGlobals } from '../../common/hooks';
 import { useSelector } from 'react-redux';
-import { selectCurrentToken } from '../../features/auth/authSlice';
+import { selectCurrentToken } from '../../features';
 
 import { Pencil } from '../../components/Pencil/Pencil';
 import { TrashCan } from '../../components/TrashCan/TrashCan';
