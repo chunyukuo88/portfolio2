@@ -1,3 +1,9 @@
+/**
+ *
+ * Deprecated -- Kept in October 2023 for reference purposes.
+ *
+ * */
+
 import { useQuery } from '@tanstack/react-query';
 import { useCommonGlobals } from '../../common/hooks';
 
