@@ -1,7 +1,11 @@
+/**
+ *
+ * Deprecated -- Kept in October 2023 for reference purposes.
+ *
+ * */
+
 import { useQuery } from '@tanstack/react-query';
 import { useCommonGlobals } from '../../common/hooks';
-import { useSelector } from 'react-redux';
-import { selectCurrentToken } from '../../features/auth/authSlice';
 
 import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
 
@@ -12,7 +16,6 @@ import './BreadBlog.css';
 import {InfiniteArticles} from "./InfiniteArticles";
 
 export function BreadBlog() {
-  const token = useSelector(selectCurrentToken);
   const [ language ] = useCommonGlobals(routes.blog);
   const queryResult = useQuery({
     queryKey: [queryKeys.BLOGS],
