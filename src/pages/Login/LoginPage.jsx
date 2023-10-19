@@ -9,6 +9,7 @@ import { setCredentials } from 'src/features/auth/authSlice.js';
 import strings, { contentKeys } from 'src/common/strings.js';
 import { routes } from 'src/routes';
 import './LoginPage.css';
+import {Auth} from "aws-amplify";
 
 export const LoginPage = (props) => {
   const { setPrimaryContentKey } = props;
@@ -16,7 +17,7 @@ export const LoginPage = (props) => {
   const dispatch = useDispatch();
   const { signIn } = useAuth();
   const userRef = useRef();
-  const [user, setUser] = useState('');
+  const [userName, setUserName] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
@@ -26,7 +27,7 @@ export const LoginPage = (props) => {
 
   useEffect(() => {
     setErrMsg('');
-  }, [user, pwd]);
+  }, [userName, pwd]);
 
   const handleError = (error) => {
     if (!error?.originalStatus) setErrMsg('No server response');
@@ -37,7 +38,7 @@ export const LoginPage = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { username, signInUserSession } = await signIn(user, pwd);
+      const { username, signInUserSession } = await signIn(userName, pwd);
       const payload = {
         username,
         token: signInUserSession.accessToken.jwtToken,
@@ -50,28 +51,41 @@ export const LoginPage = (props) => {
     }
   };
 
-  const handleUserInput = (event) => setUser(event.target.value);
+  const handleUserInput = (event) => setUserName(event.target.value);
   const handlePwdInput = (event) => setPwd(event.target.value);
 
-  // const logoutHandler = async () => {
-  //   signOut().then(() => {
-  //     const logOutPayload = {
-  //       user: null,
-  //       token: null,
-  //     };
-  //     dispatch(setCredentials(logOutPayload));
-  //     setPrimaryContentKey();
-  //   });
-  // };
-  // const LoggedInContent = () => (
-  //   <>
-  //     <h1>You are logged in.</h1>
-  //     <ChangePassword changePassword={changePassword} />
-  //     <button onClick={logoutHandler} aria-label='Logout'>
-  //       Logout
-  //     </button>
-  //   </>
-  // );
+  const handler = async () => {
+    const payload = {
+      title: 'Test 12',
+      imageUrl:
+        'https://czzbyiyicvjcorsepbfp.supabase.co/storage/v1/object/public/alexgochenour.xyz-blog-photos/z_Berry%20Bread-min.JPG',
+      body: 'Page 4, article 12',
+      likes: 5,
+      views: 50,
+    };
+
+    try {
+      const session = await Auth.currentSession();
+      const token = session.getIdToken().getJwtToken();
+
+      await fetch(process.env.REACT_APP_UPDATE_BLOG, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(payload),
+      }).then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to update resource');
+        }
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   return (
     <div id='login-card-wrapper'>
@@ -86,7 +100,7 @@ export const LoginPage = (props) => {
                 data-testid='username-input'
                 id='username'
                 ref={userRef}
-                value={user}
+                value={userName}
                 onChange={handleUserInput}
                 placeholder={strings.username[language]}
                 autoComplete='off'
@@ -107,6 +121,7 @@ export const LoginPage = (props) => {
             </div>
           </fieldset>
           <button className='login-button' title='login button'>{strings.submit[language]}</button>
+          <button onClick={handler}>Update</button>
         </form>
       </div>
     </div>
