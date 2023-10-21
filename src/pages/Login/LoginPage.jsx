@@ -9,7 +9,6 @@ import { setCredentials } from 'src/features/auth/authSlice.js';
 import strings, { contentKeys } from 'src/common/strings.js';
 import { routes } from 'src/routes';
 import './LoginPage.css';
-import {Auth} from "aws-amplify";
 
 export const LoginPage = (props) => {
   const { setPrimaryContentKey } = props;
