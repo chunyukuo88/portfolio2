@@ -5,6 +5,8 @@ import './BreadBlogArticle.css';
 
 
 export function BreadBlogArticle({ article }) {
+  console.log('hmm: ', process.env.REACT_APP_UPDATE_BLOG_ENTRY);
+
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
   const TitleWithoutButtons = () => <p>{article.title}</p>;
