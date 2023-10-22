@@ -52,7 +52,7 @@ export function InfiniteArticles({ menuIsOpen }) {
     <div id='infinite-scroll-articles-wrapper'>
       {posts.map((article, key) => {
         return (
-          <div id={`${article.articleId}`} key={key}>
+          <div id={`${article.articleId}`} className='individual-article' key={key}>
             <BreadBlogArticle article={article} />
           </div>
         );

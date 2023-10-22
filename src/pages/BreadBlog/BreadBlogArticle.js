@@ -39,9 +39,7 @@ export function BreadBlogArticle({ article }) {
   const Body = () => (
     <div className='blog-body-container'>
       {isAuthorized ? <Pencil article={article} token={token} aspect={editable[2]}/> : null}
-      <div className='blog-body'>
-        <span>{article.body}</span>
-      </div>
+      <span>{article.body}</span>
     </div>
   );
 
