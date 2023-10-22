@@ -5,8 +5,6 @@ import { useMutation } from '@tanstack/react-query';
 
 export function Pencil(props) {
   const { article, token, aspect } = props;
-  // console.log('article: ');
-  // console.dir(article);
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const inputRef = useRef(null);
 
