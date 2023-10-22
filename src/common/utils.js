@@ -30,7 +30,7 @@ export async function getBlogs(){
 
 export async function updateBlogPost(entityId, options){
   try {
-    const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
+    const url = `${process.env.REACT_APP_UPDATE_BLOG}${entityId}`;
     const response = await fetch(url, options);
     return logger('The result of the attempt to update this blog post is as follows: ', response);
   } catch (e) {

@@ -8,15 +8,13 @@ export function Pencil(props) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const inputRef = useRef(null);
 
-  const mutation = useMutation((requestData) => updateBlogPost(article.entityId, requestData));
+  const mutation = useMutation((requestData) => updateBlogPost(article.page, requestData));
 
   // TODO: Validation
 
   const updateHandler = async () => {
-    const data = {
-      [aspect]: inputRef.current.value,
-    };
-    const requestData = createHttpRequest('PUT', token, data);
+    article[aspect] = inputRef.current.value;
+    const requestData = createHttpRequest('PUT', token, article);
     mutation.mutate(requestData);
   };
 

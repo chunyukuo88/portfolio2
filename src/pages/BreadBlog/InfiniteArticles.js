@@ -9,8 +9,8 @@ export function InfiniteArticles({ menuIsOpen }) {
   const lastArticleRef = useRef(null);
 
   const handleScroll = () => {
-    if (lastArticleRef?.current?.body) {
-      const lastArticle = document.getElementById(`${lastArticleRef.current.body}`);
+    if (lastArticleRef?.current?.articleId) {
+      const lastArticle = document.getElementById(`${lastArticleRef.current.articleId}`);
       const topOfLastArticle = lastArticle?.getBoundingClientRect().top;
       const decrementedPage = lastArticleRef.current.page - 1;
       if (topOfLastArticle < 100 && decrementedPage > 0) {
@@ -52,7 +52,7 @@ export function InfiniteArticles({ menuIsOpen }) {
     <div id='infinite-scroll-articles-wrapper'>
       {posts.map((article, key) => {
         return (
-          <div id={`${article.body}`} key={key}>
+          <div id={`${article.articleId}`} className='individual-article' key={key}>
             <BreadBlogArticle article={article} />
           </div>
         );

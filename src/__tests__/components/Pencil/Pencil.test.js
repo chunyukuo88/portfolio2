@@ -3,7 +3,7 @@ import { renderWithQueryClient } from 'src/__msw__/testUtils';
 import { mockStoreLoggedIn } from 'src/testUtils';
 
 import { Pencil } from 'src/components/Pencil/Pencil';
-import { updateBlogPost } from 'src/common/utils';
+import {createHttpRequest, updateBlogPost} from 'src/common/utils';
 
 jest.mock('src/common/utils', () => {
   const originalModule = jest.requireActual('src/common/utils');
@@ -17,24 +17,26 @@ jest.spyOn(console, 'log').mockImplementation(jest.fn());
 
 describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', () => {
   const article = {
-    entityId: 123,
-    title: 'some title',
+    title: 'Berry Bread!',
+    articleId: 12,
+    page: 4,
+    imageUrl: 'https://czzbyiyicvjcorsepbfp.supabase.co/storage/v1/object/public/alexgochenour.xyz-blog-photos/z_Berry%20Bread-min.JPG',
+    body: 'Yay bread.',
+    likes: 5,
+    views: 50,
+    creationTimeStamp: 'Thu Aug 03 2023 17:56:20 GMT-0400 (Eastern Daylight Time)'
   };
+
   const aspect = 'title';
   const entityId = '123';
   describe('WHEN: the user clicks the pencil then confirms the updated aspect,', () => {
     test('THEN: the change is sent to the back end.', async() => {
       const newTitle = 'a new title!';
-      const expectedUpdate = { title: newTitle };
-      const requestContainingExpectedUpdate = {
-        body: "{\"title\":\"a new title!\"}",
-        headers: {
-          Authorization: 'Bearer undefined',
-          'Content-Type': 'application/json',
-        },
-        method: 'PUT',
-      };
-      const { debug } = renderWithQueryClient(
+      const updated = JSON.parse(JSON.stringify(article));
+      updated.title = newTitle;
+      const requestContainingExpectedUpdate = createHttpRequest('PUT', undefined, updated);
+
+      renderWithQueryClient(
         <Pencil
           aspect={aspect}
           entityId={entityId}
@@ -46,14 +48,14 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
       fireEvent.click(pencil);
 
       const textBox = screen.queryByRole('textbox');
-      fireEvent.change(textBox, { target: { value: expectedUpdate.title } });
+      fireEvent.change(textBox, { target: { value: updated.title } });
 
       const confirmationButton = screen.queryByText('Confirm');
       fireEvent.click(confirmationButton);
 
       await waitFor(() => {
         expect(updateBlogPost).toBeCalledTimes(1);
-        expect(updateBlogPost).toBeCalledWith(article.entityId, requestContainingExpectedUpdate);
+        expect(updateBlogPost).toBeCalledWith(article.page, requestContainingExpectedUpdate);
       });
     });
   });

@@ -1,6 +1,7 @@
 import { Auth } from 'aws-amplify';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from './authSlice';
+import { errorLogger, logger } from '../../common/utils';
 
 export function useAuth(){
   const user = useSelector(selectCurrentUser);
@@ -13,8 +14,8 @@ export function useAuth(){
 
   const changePassword = async (username, oldPassword, newPassword) => {
     Auth.changePassword(user, oldPassword, newPassword)
-      .then(data => console.log(data))
-      .catch(e => console.error(e));
+      .then(data => logger(data))
+      .catch(e => errorLogger(e));
   };
 
   const signOut = async () => {
