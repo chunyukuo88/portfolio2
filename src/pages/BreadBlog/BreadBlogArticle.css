@@ -5,3 +5,25 @@ img {
 h5, p {
     text-align: center;
 }
+
+.bread-blog-article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-body-container {
+    margin: 0.5rem;
+    width: 31.25rem;
+    text-align: justify;
+}
+
+.title-without-buttons {
+    font-size: 2rem;
+    margin: 0.5rem;
+}
+
+.publication-date {
+    margin: 0 0 0.5rem 0;
+}
