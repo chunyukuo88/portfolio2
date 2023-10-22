@@ -170,7 +170,7 @@ describe('utils', () => {
       body: JSON.stringify({ title: 'This is an updated title!' }),
     };
     describe('WHEN: updateBlogPost() is invoked with valid data,', () => {
-      const url = `${process.env.REACT_APP_UPDATE_BLOG_ENTRY}/${entityId}`;
+      const url = `${process.env.REACT_APP_UPDATE_BLOG}${entityId}`;
       it('THEN: updates the aspect of the blog.', async () => {
         const mockResponse = { status: 200 };
         const mockFetch = jest.fn().mockReturnValue(mockResponse);
