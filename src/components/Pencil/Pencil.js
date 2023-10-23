@@ -58,7 +58,7 @@ export function Pencil(props) {
       {modalIsVisible ? <Modal /> : null}
       {mutation.isLoading ? <LoadingSpinner /> : null}
       {!modalIsVisible
-        ? <div className='pencil' onClick={pencilClickHandler}><PencilSvg /></div>
+        ? <div onClick={pencilClickHandler}><PencilSvg /></div>
         : null}
     </>
   );

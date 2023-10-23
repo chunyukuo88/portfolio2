@@ -28,7 +28,7 @@ export function BreadBlogArticle({ article }) {
     .slice(0,10);
 
   const isAuthorized = user && token;
-  const editable = ['title', 'image', 'body'];
+  const editable = ['title', 'image url', 'body'];
 
   const Heading = () => (
     <>
