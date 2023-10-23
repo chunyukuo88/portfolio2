@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import { createHttpRequest, updateBlogPost } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
-import {primaryColor} from "../../common/strings";
+import { primaryColor } from "../../common/strings";
 
 export function Pencil(props) {
   const { article, token, aspect } = props;
@@ -50,7 +50,7 @@ export function Pencil(props) {
     </svg>
   );
 
-  const pencilClickHandler = () => () => setModalIsVisible(true);
+  const pencilClickHandler = () => setModalIsVisible(true);
 
   return (
     <>
