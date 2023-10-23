@@ -19,9 +19,20 @@ h5, p {
     text-align: justify;
 }
 
-.title-without-buttons {
+.blog-article-title {
     font-size: 2rem;
     margin: 0.5rem;
+    width: 100%;
+}
+
+.title-with-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.title-with-buttons > div {
+    border: 1px solid var(--primaryColor);
 }
 
 .publication-date {

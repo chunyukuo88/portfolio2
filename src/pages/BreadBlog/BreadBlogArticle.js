@@ -7,8 +7,18 @@ import './BreadBlogArticle.css';
 export function BreadBlogArticle({ article }) {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
+
+  const TitleWithButtons = () => (
+    <div className='title-with-buttons'>
+      <div>
+        <Pencil article={article} token={token} aspect={editable[0]}/>
+      </div>
+      <p>{article.title}</p>
+    </div>
+  );
+
   const TitleWithoutButtons = () => (
-    <p className='title-without-buttons'>
+    <p>
       {article.title}
     </p>
   );
@@ -22,8 +32,12 @@ export function BreadBlogArticle({ article }) {
 
   const Heading = () => (
     <>
-      {isAuthorized ? <Pencil article={article} token={token} aspect={editable[0]}/> : null}
-      <TitleWithoutButtons article={article} />
+      <div className='blog-article-title'>
+        {isAuthorized
+          ? <TitleWithButtons />
+          : <TitleWithoutButtons />
+        }
+      </div>
       <h5 className='publication-date'>{asDateString}</h5>
     </>
   );
