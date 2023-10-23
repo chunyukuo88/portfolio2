@@ -4,6 +4,8 @@ export const queryKeys = {
   CROSSWORD: 'crosswords_get',
 };
 
+export const primaryColor = '#93a48c';
+
 export const easterEgg = `                                                                                    
                                                                                     
                                                                                     

@@ -38,11 +38,17 @@ input:focus {
 .login-button {
     background-color: black;
     color: var(--primaryColor);
+    cursor: pointer;
     border-top: var(--border);
     border-bottom: var(--border);
     margin: 1rem auto;
     height: 2rem;
     width: 50vw;
+}
+
+.login-button:hover {
+    background-color: var(--primaryColor);
+    color: black;
 }
 
 .logged-out-section-heading {

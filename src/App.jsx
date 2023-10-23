@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useCommonGlobals } from './common/hooks';
 import { Divide as Hamburger } from 'hamburger-react'
-import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { SiteInfo } from './components/PrimaryContent/SiteInfo/SiteInfo';
 import { LoginPage } from './pages/Login/LoginPage';
@@ -17,18 +16,45 @@ import { updateSettingsVisibility } from './features/settingsMenu/settingsMenuSl
 import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
+import { updateLanguage } from './features/language/languageSlice';
+import LanguageIconInverted from './common/icons/language_inverted.svg';
+import LanguageIcon from './common/icons/language.svg';
 import './App.css';
+
+const languageGlobeStyle = {
+  cursor: 'pointer',
+  height: '1rem',
+  margin: 0
+};
 
 function App(){
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals();
+  const dispatch = useDispatch();
+
+  const [globeIsInverted, setGlobeIsInverted] = useState(false);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ primaryContentKey, setPrimaryContentKey ] = useState(contentKeys.SKILLS);
-  const dispatch = useDispatch();
 
   if (process.env.NODE_ENV === 'production') {
     logEasterEgg();
   }
+
+  const { CHINESE, ENGLISH, GERMAN, JAPANESE } = strings;
+
+  const languageToggler = (currentLanguage) => {
+    switch (currentLanguage) {
+      case ENGLISH: return CHINESE;
+      case CHINESE: return GERMAN;
+      case GERMAN: return JAPANESE;
+      case JAPANESE: return ENGLISH;
+    }
+  };
+
+  const globeClickHandler = () => {
+    const newLang = languageToggler(language);
+    return dispatch(updateLanguage(newLang));
+  };
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -59,14 +85,38 @@ function App(){
     </>
   );
 
+  const headerClickHandler = () => setPrimaryContentKey(contentKeys.SKILLS)
+
+  const NormalGlobe = () => (
+    <img
+      alt={'globe, representing language button'}
+      style={languageGlobeStyle}
+      src={LanguageIcon}
+    />
+  );
+
+  const InvertedGlobe = () => (
+    <img
+      alt={'globe, representing language button'}
+      style={languageGlobeStyle}
+      src={LanguageIconInverted}
+    />
+  );
+
   const Header = () => (
     <header>
-      <div id='name-and-title' onClick={() => setPrimaryContentKey(contentKeys.SKILLS)}>
+      <div id='name-and-title' onClick={headerClickHandler}>
         <div>{strings.myName[language]}</div>
         <div>{strings.myTitle[language]}</div>
       </div>
-      <div id='language-button-container'>
-        <Language />
+      <div
+        id='language-button-container'
+        onClick={globeClickHandler}
+        onMouseEnter={() => setGlobeIsInverted(true)}
+        onMouseLeave={() => setGlobeIsInverted(false)}
+        role='button'
+      >
+        {!globeIsInverted ? <NormalGlobe /> : <InvertedGlobe />}
       </div>
       <div onClick={menuButtonHandler} id='main-menu-button-container'>
         <Hamburger
