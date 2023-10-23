@@ -87,6 +87,22 @@ function App(){
 
   const headerClickHandler = () => setPrimaryContentKey(contentKeys.SKILLS)
 
+  const NormalGlobe = () => (
+    <img
+      alt={'globe, representing language button'}
+      style={languageGlobeStyle}
+      src={LanguageIcon}
+    />
+  );
+
+  const InvertedGlobe = () => (
+    <img
+      alt={'globe, representing language button'}
+      style={languageGlobeStyle}
+      src={LanguageIconInverted}
+    />
+  );
+
   const Header = () => (
     <header>
       <div id='name-and-title' onClick={headerClickHandler}>
@@ -100,11 +116,7 @@ function App(){
         onMouseLeave={() => setGlobeIsInverted(false)}
         role='button'
       >
-        <img
-          alt={'globe, representing language button'}
-          style={languageGlobeStyle}
-          src={globeIsInverted ? LanguageIconInverted : LanguageIcon}
-        />
+        {!globeIsInverted ? <NormalGlobe /> : <InvertedGlobe />}
       </div>
       <div onClick={menuButtonHandler} id='main-menu-button-container'>
         <Hamburger
