@@ -43,15 +43,17 @@ export function BreadBlogArticle({ article }) {
   );
 
   const Image = () => (
-    <>
-      {isAuthorized ? <Pencil article={article} token={token} aspect={editable[1]}/> : null}
+    <div className='blog-article-image'>
+      <div>
+        {isAuthorized ? <Pencil article={article} token={token} aspect={editable[1]}/> : null}
+      </div>
       <img
         loading='lazy'
         className='blog-image'
         src={article.imageUrl}
         aria-label={`Image for blog titled ${article.title}`}
       />
-    </>
+    </div>
   );
 
   const Body = () => (

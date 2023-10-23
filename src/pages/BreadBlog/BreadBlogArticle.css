@@ -27,14 +27,16 @@ h5, p {
 
 .title-with-buttons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-}
-
-.title-with-buttons > div {
-    border: 1px solid var(--primaryColor);
 }
 
 .publication-date {
     margin: 0 0 0.5rem 0;
+}
+
+.blog-article-image > div {
+    position: relative;
+    top: 2.70rem;
+    /*width: 3rem;*/
 }
