@@ -17,9 +17,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
 import { updateLanguage } from './features/language/languageSlice';
+import LanguageIconInverted from './common/icons/language_inverted.svg';
+import LanguageIcon from './common/icons/language.svg';
 import './App.css';
-import LanguageIconInverted from "./common/icons/language_inverted.svg";
-import LanguageIcon from "./common/icons/language.svg";
 
 const languageGlobeStyle = {
   cursor: 'pointer',
@@ -93,13 +93,15 @@ function App(){
         <div>{strings.myName[language]}</div>
         <div>{strings.myTitle[language]}</div>
       </div>
-      <div onClick={globeClickHandler} id='language-button-container' role='button'>
+      <div
+        id='language-button-container'
+        onClick={globeClickHandler}
+        onMouseEnter={() => setGlobeIsInverted(true)}
+        onMouseLeave={() => setGlobeIsInverted(false)}
+        role='button'
+      >
         <img
-          role='button'
-          id='language-button'
           alt={'globe, representing language button'}
-          onMouseEnter={() => setGlobeIsInverted(true)}
-          onMouseLeave={() => setGlobeIsInverted(false)}
           style={languageGlobeStyle}
           src={globeIsInverted ? LanguageIconInverted : LanguageIcon}
         />
