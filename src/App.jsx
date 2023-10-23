@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useCommonGlobals } from './common/hooks';
 import { Divide as Hamburger } from 'hamburger-react'
-import Language from './features/language/Language';
 import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
 import { SiteInfo } from './components/PrimaryContent/SiteInfo/SiteInfo';
 import { LoginPage } from './pages/Login/LoginPage';
@@ -19,13 +18,23 @@ import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
 import { updateLanguage } from './features/language/languageSlice';
 import './App.css';
+import LanguageIconInverted from "./common/icons/language_inverted.svg";
+import LanguageIcon from "./common/icons/language.svg";
+
+const languageGlobeStyle = {
+  cursor: 'pointer',
+  height: '1rem',
+  margin: 0
+};
 
 function App(){
   const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals();
+  const dispatch = useDispatch();
+
+  const [globeIsInverted, setGlobeIsInverted] = useState(false);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ primaryContentKey, setPrimaryContentKey ] = useState(contentKeys.SKILLS);
-  const dispatch = useDispatch();
 
   if (process.env.NODE_ENV === 'production') {
     logEasterEgg();
@@ -85,7 +94,15 @@ function App(){
         <div>{strings.myTitle[language]}</div>
       </div>
       <div onClick={globeClickHandler} id='language-button-container' role='button'>
-        <Language />
+        <img
+          role='button'
+          id='language-button'
+          alt={'globe, representing language button'}
+          onMouseEnter={() => setGlobeIsInverted(true)}
+          onMouseLeave={() => setGlobeIsInverted(false)}
+          style={languageGlobeStyle}
+          src={globeIsInverted ? LanguageIconInverted : LanguageIcon}
+        />
       </div>
       <div onClick={menuButtonHandler} id='main-menu-button-container'>
         <Hamburger
