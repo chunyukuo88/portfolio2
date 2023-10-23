@@ -17,6 +17,7 @@ import { updateSettingsVisibility } from './features/settingsMenu/settingsMenuSl
 import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
+import { updateLanguage } from './features/language/languageSlice';
 import './App.css';
 
 function App(){
@@ -29,6 +30,22 @@ function App(){
   if (process.env.NODE_ENV === 'production') {
     logEasterEgg();
   }
+
+  const { CHINESE, ENGLISH, GERMAN, JAPANESE } = strings;
+
+  const languageToggler = (currentLanguage) => {
+    switch (currentLanguage) {
+      case ENGLISH: return CHINESE;
+      case CHINESE: return GERMAN;
+      case GERMAN: return JAPANESE;
+      case JAPANESE: return ENGLISH;
+    }
+  };
+
+  const globeClickHandler = () => {
+    const newLang = languageToggler(language);
+    return dispatch(updateLanguage(newLang));
+  };
 
   const menuButtonHandler = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -59,13 +76,15 @@ function App(){
     </>
   );
 
+  const headerClickHandler = () => setPrimaryContentKey(contentKeys.SKILLS)
+
   const Header = () => (
     <header>
-      <div id='name-and-title' onClick={() => setPrimaryContentKey(contentKeys.SKILLS)}>
+      <div id='name-and-title' onClick={headerClickHandler}>
         <div>{strings.myName[language]}</div>
         <div>{strings.myTitle[language]}</div>
       </div>
-      <div id='language-button-container'>
+      <div onClick={globeClickHandler} id='language-button-container' role='button'>
         <Language />
       </div>
       <div onClick={menuButtonHandler} id='main-menu-button-container'>

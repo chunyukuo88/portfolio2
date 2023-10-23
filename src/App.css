@@ -47,6 +47,14 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
+  cursor: pointer;
+}
+
+#language-button-container:hover,
+#main-menu-button-container:hover {
+  background-color: var(--primaryColor);
+  color: black;
 }
 
 section {
