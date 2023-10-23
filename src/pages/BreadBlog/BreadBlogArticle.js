@@ -7,7 +7,11 @@ import './BreadBlogArticle.css';
 export function BreadBlogArticle({ article }) {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
-  const TitleWithoutButtons = () => <p>{article.title}</p>;
+  const TitleWithoutButtons = () => (
+    <p className='title-without-buttons'>
+      {article.title}
+    </p>
+  );
 
   const asDateString = new Date(article.creationTimeStamp)
     .toISOString()
@@ -44,10 +48,10 @@ export function BreadBlogArticle({ article }) {
   );
 
   return (
-    <>
+    <div className='bread-blog-article'>
       <Heading />
       <Image />
       <Body />
-    </>
+    </div>
   );
 }

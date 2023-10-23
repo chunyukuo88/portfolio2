@@ -12,7 +12,6 @@ import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
 import { getBlogs } from '../../common/utils';
 import { routes } from '../../routes';
 import strings, { queryKeys } from '../../common/strings';
-import './BreadBlog.css';
 import {InfiniteArticles} from "./InfiniteArticles";
 
 export function BreadBlog() {
