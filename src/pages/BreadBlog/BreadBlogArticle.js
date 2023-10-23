@@ -7,8 +7,18 @@ import './BreadBlogArticle.css';
 export function BreadBlogArticle({ article }) {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
+
+  const TitleWithButtons = () => (
+    <div className='title-with-buttons'>
+      <div>
+        <Pencil article={article} token={token} aspect={editable[0]}/>
+      </div>
+      <p>{article.title}</p>
+    </div>
+  );
+
   const TitleWithoutButtons = () => (
-    <p className='title-without-buttons'>
+    <p>
       {article.title}
     </p>
   );
@@ -18,26 +28,32 @@ export function BreadBlogArticle({ article }) {
     .slice(0,10);
 
   const isAuthorized = user && token;
-  const editable = ['title', 'image', 'body'];
+  const editable = ['title', 'image url', 'body'];
 
   const Heading = () => (
     <>
-      {isAuthorized ? <Pencil article={article} token={token} aspect={editable[0]}/> : null}
-      <TitleWithoutButtons article={article} />
+      <div className='blog-article-title'>
+        {isAuthorized
+          ? <TitleWithButtons />
+          : <TitleWithoutButtons />
+        }
+      </div>
       <h5 className='publication-date'>{asDateString}</h5>
     </>
   );
 
   const Image = () => (
-    <>
-      {isAuthorized ? <Pencil article={article} token={token} aspect={editable[1]}/> : null}
+    <div className='blog-article-image'>
+      <div>
+        {isAuthorized ? <Pencil article={article} token={token} aspect={editable[1]}/> : null}
+      </div>
       <img
         loading='lazy'
         className='blog-image'
         src={article.imageUrl}
         aria-label={`Image for blog titled ${article.title}`}
       />
-    </>
+    </div>
   );
 
   const Body = () => (

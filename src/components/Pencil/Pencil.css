@@ -1,0 +1,41 @@
+.update-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--primaryColor);
+    background-color: black;
+    margin: 0 1rem;
+}
+
+.update-modal > p {
+    font-size: 1rem;
+}
+
+textarea {
+    background-color: var(--primaryColor);
+    width: 11rem;
+}
+
+.update-modal > div {
+    width: 180px;
+    display: flex;
+}
+
+.update-modal > div > span {
+    border: var(--border);
+    font-size: 1rem;
+    width: 7rem;
+    text-align: center;
+    cursor: pointer;
+    margin: 0.5rem 0;
+}
+
+.update-modal > div > span:hover {
+    background-color: var(--primaryColor);
+    color: black;
+}
+
+svg {
+    background-color: black;
+    cursor: pointer;
+}

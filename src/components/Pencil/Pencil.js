@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
-import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
+import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { createHttpRequest, updateBlogPost } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
-import { primaryColor } from "../../common/strings";
+import { primaryColor } from 'src/common/strings';
+import './Pencil.css';
 
 export function Pencil(props) {
   const { article, token, aspect } = props;
@@ -32,11 +33,11 @@ export function Pencil(props) {
 
   const Modal = () => (
     <div className='update-modal'>
-      <p className='update-modal-header'>Update the {aspect}</p>
+      <p>Update the {aspect}</p>
       <textarea style={style} ref={inputRef} type='text' defaultValue={article[aspect]}/>
-      <div className='update-buttons-container'>
-        <button onClick={confirmationHandler}>Confirm</button>
-        <button onClick={cancellationHandler}>Nvrmnd</button>
+      <div>
+        <span onClick={confirmationHandler} role='button'>Confirm</span>
+        <span onClick={cancellationHandler} role='button'>Nvrmnd</span>
       </div>
     </div>
   );
@@ -57,7 +58,7 @@ export function Pencil(props) {
       {modalIsVisible ? <Modal /> : null}
       {mutation.isLoading ? <LoadingSpinner /> : null}
       {!modalIsVisible
-        ? <div className='pencil' onClick={pencilClickHandler}><PencilSvg /></div>
+        ? <div onClick={pencilClickHandler}><PencilSvg /></div>
         : null}
     </>
   );
