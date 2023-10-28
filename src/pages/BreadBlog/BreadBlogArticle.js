@@ -23,9 +23,14 @@ export function BreadBlogArticle({ article }) {
     </p>
   );
 
-  const asDateString = new Date(article.creationTimeStamp)
-    .toISOString()
-    .slice(0,10);
+  const asDateString = () => {
+    return article.creationTimeStamp
+      ? new Date(article.creationTimeStamp)
+        .toISOString()
+        .slice(0,10)
+      : 'Forgot when I wrote this.'
+  }
+
 
   const isAuthorized = user && token;
   const editable = ['title', 'imageUrl', 'body'];
@@ -38,7 +43,7 @@ export function BreadBlogArticle({ article }) {
           : <TitleWithoutButtons />
         }
       </div>
-      <h5 className='publication-date'>{asDateString}</h5>
+      <h5 className='publication-date'>{asDateString()}</h5>
     </>
   );
 
