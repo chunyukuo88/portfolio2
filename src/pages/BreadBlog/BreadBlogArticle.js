@@ -1,12 +1,14 @@
-import { selectCurrentUser, selectCurrentToken } from 'src/features/auth/authSlice';
 import { useSelector } from 'react-redux';
 import { Pencil } from 'src/components/Pencil/Pencil';
 import './BreadBlogArticle.css';
-
+import strings from "../../common/strings";
+import { selectCurrentUser, selectCurrentToken } from 'src/features/auth/authSlice';
+import {selectCurrentLanguage} from "../../features/language/languageSlice";
 
 export function BreadBlogArticle({ article }) {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
+  const language = useSelector(selectCurrentLanguage);
 
   const TitleWithButtons = () => (
     <div className='title-with-buttons'>
@@ -17,18 +19,14 @@ export function BreadBlogArticle({ article }) {
     </div>
   );
 
-  const TitleWithoutButtons = () => (
-    <p>
-      {article.title}
-    </p>
-  );
+  const TitleWithoutButtons = () => <p>{article.title}</p>;
 
   const asDateString = () => {
     return article.creationTimeStamp
       ? new Date(article.creationTimeStamp)
         .toISOString()
         .slice(0,10)
-      : 'Forgot when I wrote this.'
+      : strings.forgotWhenIWroteThis[language]
   }
 
 
