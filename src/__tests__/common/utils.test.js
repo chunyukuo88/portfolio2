@@ -84,7 +84,7 @@ describe('utils', () => {
               json: () => Promise.resolve({ puzzles: ['entry1', 'entry2'] }), // Mock the response data
             })
           );
-          const expectedURL = `${process.env.REACT_APP_APIG_ID}${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/1`;
+          const expectedURL = `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/1`;
 
           const result = await getBlogs();
 
@@ -150,7 +150,7 @@ describe('utils', () => {
       body: JSON.stringify({ title: 'This is an updated title!' }),
     };
     describe('WHEN: updateBlogPost() is invoked with valid data,', () => {
-      const url = `${process.env.REACT_APP_APIG_ID}${process.env.REACT_APP_UPDATE_BLOG}${entityId}`;
+      const url = `${process.env.REACT_APP_UPDATE_BLOG}${entityId}`;
       it('THEN: updates the aspect of the blog.', async () => {
         const mockResponse = { status: 200 };
         const mockFetch = jest.fn().mockReturnValue(mockResponse);

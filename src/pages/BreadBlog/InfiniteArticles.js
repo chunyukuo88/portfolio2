@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
 import './InfiniteArticles.css';
+import { environments } from 'src/common/strings';
 
-export function InfiniteArticles({ menuIsOpen }) {
+export function InfiniteArticles() {
   const [ posts, setPosts ] = useState([]);
   const [ page, setPage ] = useState(null);
   const lastArticleRef = useRef(null);
@@ -19,9 +20,13 @@ export function InfiniteArticles({ menuIsOpen }) {
     }
   };
 
-  const getInfiniteBlogsUrl = (page) => page
-    ? `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}${page}`
+  const endpoint = (process.env.NODE_ENV === environments.PROD)
+    ? process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE_PROD
     : process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
+
+  const getInfiniteBlogsUrl = (page) => page
+    ? `${endpoint}${page}`
+    : endpoint;
 
   const getParsedNewPosts = (page, newPosts) => page
     ? JSON.parse(newPosts.body)[0].results
