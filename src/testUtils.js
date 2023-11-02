@@ -1,8 +1,8 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import languageReducer from './features/language/languageSlice';
-import { settingsMenuSlice } from './features/settingsMenu/settingsMenuSlice';
-import { darkModeSlice } from './features/darkMode/darkModeSlice';
-import cubeSpinReducer from './features/cubeSpin/cubeSpinSlice';
+import languageReducer from './globalState/language/languageSlice';
+import { settingsMenuSlice } from './globalState/settingsMenu/settingsMenuSlice';
+import { darkModeSlice } from './globalState/darkMode/darkModeSlice';
+import cubeSpinReducer from './globalState/cubeSpin/cubeSpinSlice';
 
 const mockAuthSlice = createSlice({
   name: 'auth',

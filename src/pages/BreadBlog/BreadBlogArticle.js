@@ -1,9 +1,12 @@
 import { useSelector } from 'react-redux';
 import { Pencil } from 'src/components/Pencil/Pencil';
 import './BreadBlogArticle.css';
-import strings from "../../common/strings";
-import { selectCurrentUser, selectCurrentToken } from 'src/features/auth/authSlice';
-import {selectCurrentLanguage} from "../../features/language/languageSlice";
+import strings from 'src/common/strings';
+import { 
+  selectCurrentUser, 
+  selectCurrentToken,
+  selectCurrentLanguage,
+} from 'src/globalState';
 
 export function BreadBlogArticle({ article }) {
   const user = useSelector(selectCurrentUser);

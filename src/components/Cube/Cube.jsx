@@ -1,4 +1,4 @@
-import { selectCubeSpinSpeed } from '../../features/cubeSpin/cubeSpinSlice';
+import { selectCubeSpinSpeed } from '../../globalState/cubeSpin/cubeSpinSlice';
 import { useSelector } from 'react-redux';
 import './Cube.css';
 

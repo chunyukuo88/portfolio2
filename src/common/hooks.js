@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import ReactGA from 'react-ga4';
-import { selectCurrentLanguage } from 'src/features/language/languageSlice';
-import { selectCurrentUser } from 'src/features/auth/authSlice';
+import { selectCurrentLanguage } from 'src/globalState/language/languageSlice';
+import { selectCurrentUser } from 'src/globalState/auth/authSlice';
 
 export function useCommonGlobals(page){
   useEffect(() => {

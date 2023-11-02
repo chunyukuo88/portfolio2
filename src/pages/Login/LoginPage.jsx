@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useCommonGlobals } from 'src/common/hooks';
-import { useAuth } from 'src/features/auth/useAuth';
+import { useAuth } from 'src/globalState/auth/useAuth';
 
-import { updateLanguage } from 'src/features/language/languageSlice';
-import { setCredentials } from 'src/features/auth/authSlice.js';
+import { updateLanguage } from 'src/globalState/language/languageSlice';
+import { setCredentials } from 'src/globalState/auth/authSlice.js';
 
 import strings, { contentKeys } from 'src/common/strings.js';
 import { routes } from 'src/routes';

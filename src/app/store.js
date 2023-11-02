@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from 'src/features/auth/authSlice';
-import languageReducer from 'src/features/language/languageSlice';
-import settingsReducer from 'src/features/settingsMenu/settingsMenuSlice';
-import darkModeReducer from 'src/features/darkMode/darkModeSlice';
-import cubeSpinReducer from 'src/features/cubeSpin/cubeSpinSlice';
+import authReducer from 'src/globalState/auth/authSlice';
+import languageReducer from 'src/globalState/language/languageSlice';
+import settingsReducer from 'src/globalState/settingsMenu/settingsMenuSlice';
+import darkModeReducer from 'src/globalState/darkMode/darkModeSlice';
+import cubeSpinReducer from 'src/globalState/cubeSpin/cubeSpinSlice';
 
 export const store = configureStore({
   reducer: {

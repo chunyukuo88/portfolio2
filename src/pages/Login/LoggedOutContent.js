@@ -2,10 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { selectCurrentLanguage, updateLanguage } from 'src/features/language/languageSlice';
-import { setCredentials } from 'src/features/auth/authSlice';
 import strings from 'src/common/strings';
 import { routes } from 'src/routes';
+import {
+  selectCurrentLanguage,
+  updateLanguage,
+  setCredentials,
+} from 'src/globalState';
 
 export const LoggedOutContent = ({ signIn }) => {
   const language = useSelector(selectCurrentLanguage);

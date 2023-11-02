@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { mockStoreLoggedIn } from 'src/testUtils';
-import { RequireAuth } from 'src/features/auth/RequireAuth';
+import { RequireAuth } from 'src/globalState/auth/RequireAuth';
 import Root from 'src/Root';
 
 describe('GIVEN: The user is logged in', () => {

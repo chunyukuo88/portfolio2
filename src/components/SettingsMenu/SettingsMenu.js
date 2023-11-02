@@ -1,9 +1,15 @@
-import { selectSettingsMenuVisibility } from 'src/features/settingsMenu/settingsMenuSlice';
-import { selectCurrentDarkTheme, setDarkMode, setLightMode } from 'src/features/darkMode/darkModeSlice';
-import { selectCubeSpinSpeed, toggleToSpinQuickly, toggleToSpinSlowly } from 'src/features/cubeSpin/cubeSpinSlice';
-import { selectCurrentLanguage } from 'src/features/language/languageSlice';
 import { CSSTransition } from 'react-transition-group';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectSettingsMenuVisibility,
+  selectCurrentDarkTheme,
+  selectCurrentLanguage,
+  selectCubeSpinSpeed,
+  toggleToSpinQuickly,
+  toggleToSpinSlowly,
+  setLightMode,
+  setDarkMode,
+} from 'src/globalState';
 
 import strings from 'src/common/strings';
 import './SettingsMenu.css';
