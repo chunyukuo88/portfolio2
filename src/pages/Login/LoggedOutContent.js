@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { selectCurrentLanguage, updateLanguage } from 'src/features/language/languageSlice';
-import { setCredentials } from 'src/features/auth/authSlice';
+import { selectCurrentLanguage, updateLanguage } from 'src/globalState/language/languageSlice';
+import { setCredentials } from 'src/globalState/auth/authSlice';
 import strings from 'src/common/strings';
 import { routes } from 'src/routes';
 

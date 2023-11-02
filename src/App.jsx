@@ -11,12 +11,12 @@ import { InfiniteArticles } from './pages/BreadBlog/InfiniteArticles';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
-import { selectCurrentDarkTheme } from './features/darkMode/darkModeSlice';
-import { updateSettingsVisibility } from './features/settingsMenu/settingsMenuSlice';
+import { selectCurrentDarkTheme } from './globalState/darkMode/darkModeSlice';
+import { updateSettingsVisibility } from './globalState/settingsMenu/settingsMenuSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
-import { updateLanguage } from './features/language/languageSlice';
+import { updateLanguage } from './globalState/language/languageSlice';
 import LanguageIconInverted from './common/icons/language_inverted.svg';
 import LanguageIcon from './common/icons/language.svg';
 import './App.css';

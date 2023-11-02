@@ -26,7 +26,7 @@ export const strings = {
   paragraph1: {
     chinese: '',
     english: 'My motivation to create this site was two-fold: I wanted to apply the technologies I work with to make a site that expresses\n' +
-      'my own design preferences and functionality and towards features I have never been paid to produce; I also wanted to explore technologies I have never been paid to use, such as Supabase, Redux Toolkit, msw, and Redis. There are, of course, a few baubles like Dark Mode and the spinning\n' +
+      'my own design preferences and functionality and towards globalState I have never been paid to produce; I also wanted to explore technologies I have never been paid to use, such as Supabase, Redux Toolkit, msw, and Redis. There are, of course, a few baubles like Dark Mode and the spinning\n' +
       'cube that found themselves creeping into the project along the way. (The cube was made with vanilla CSS and Redux, and it was a blast to assemble.)',
     german: '',
   },
@@ -41,7 +41,7 @@ export const strings = {
     chinese: '',
     english: 'Hence the present iteration, which dispenses with the React Spring, bright colors, and (excess) flashy animations and is ' +
       'informed a Udemy course as well as many, many Design Course videos.\n' +
-      'The front-end code is publicly available, but the back end is private, as I use it to experiment a lot with security features beyond\n' +
+      'The front-end code is publicly available, but the back end is private, as I use it to experiment a lot with security globalState beyond\n' +
       'the standard protected routes configuration that the Serverless Framework offers. Because of this, I cannot make it publicly available,\n' +
       'although I would be happy to provide a guided tour on a case-by-case basis. It consists of a suite of Lambda functions written in Node\n' +
       'that interact with Redis Cloud (Redis as a primary data source, not just a data cache) and Supabase, as well as AWS Cognito for auth.',
