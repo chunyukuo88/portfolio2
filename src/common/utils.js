@@ -12,7 +12,9 @@ export function logEasterEgg() {
 
 export async function getBlogs(){
   const firstPageId = 1;
-  const url = `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/${firstPageId}`
+  const url = (process.env.NODE_ENV === PROD)
+    ? `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE_PROD}/${firstPageId}`
+    : `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/${firstPageId}`;
   const responseString = await fetch(url);
   if (!responseString.ok) {
     throw new errorLogger('An error occurred while fetching the posts.');
