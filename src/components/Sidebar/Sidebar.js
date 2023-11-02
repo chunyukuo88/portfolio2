@@ -1,5 +1,4 @@
-import { selectCurrentDarkTheme } from 'src/globalState/darkMode/darkModeSlice';
-import { SettingsToggler } from 'src/globalState/settingsMenu/SettingsToggler';
+import { selectCurrentDarkTheme } from 'src/globalState';
 import { CSSTransition } from 'react-transition-group';
 import { useCommonGlobals } from 'src/common/hooks';
 import { useSelector } from 'react-redux';
