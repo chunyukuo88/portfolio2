@@ -1,4 +1,6 @@
-import { easterEgg } from './strings';
+import { easterEgg, environments } from './strings';
+
+const { PROD, DEV } = environments;
 
 export const logger = console.log;
 export const errorLogger = console.error;
@@ -7,15 +9,6 @@ export function logEasterEgg() {
   logger(`%c${easterEgg}`, 'color: yellow; background: black');
   logger('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 };
-
-export async function getCrosswords(){
-  const response = await fetch(process.env.REACT_APP_GET_ALL_CROSSWORDS);
-  if (!response.ok) {
-    throw new errorLogger('An error occurred while fetching the crossword puzzles.');
-  }
-  const data = await response.json();
-  return data;
-}
 
 export async function getBlogs(){
   const firstPageId = 1;

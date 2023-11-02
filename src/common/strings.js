@@ -1,3 +1,8 @@
+export const environments = {
+  PROD: 'production',
+  DEV: 'development',
+};
+
 export const queryKeys = {
   BLOGS: 'blogs',
   BLOG_DELETION: 'blog_deletion',
