@@ -44,10 +44,10 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
         />, mockStoreLoggedIn
       );
 
-      const pencil = screen.queryByText('✏️');
+      const pencil = document.querySelector('div');
       fireEvent.click(pencil);
 
-      const textBox = screen.queryByRole('textbox');
+      const textBox = screen.queryByRole('textarea');
       fireEvent.change(textBox, { target: { value: updated.title } });
 
       const confirmationButton = screen.queryByText('Confirm');
@@ -72,10 +72,10 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
       let textBox = document.querySelector('textarea');
       expect(textBox).toBeNull();
 
-      const pencil = screen.queryByText('✏️');
+      const pencil = document.querySelector('div');
       fireEvent.click(pencil);
 
-      textBox = screen.queryByRole('textbox');
+      textBox = screen.queryByRole('textarea');
       expect(textBox).toBeVisible();
 
       const cancellationButton = screen.queryByText('Nvrmnd');

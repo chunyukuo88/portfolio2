@@ -2,7 +2,6 @@ import {
   createHttpRequest,
   deleteBlog,
   getBlogs,
-  getCrosswords,
   postData,
   updateBlogPost,
 } from 'src/common/utils';
@@ -52,25 +51,6 @@ describe('utils', () => {
         const result = createHttpRequest(httpMethod, token, data);
 
         expect(result).toEqual(expectedResult);
-      });
-    });
-  });
-  describe('getCrosswords()', () => {
-    describe('GIVEN: there are no problems with the server,', () => {
-      describe('WHEN: getCrosswords() is invoked,', () => {
-        it('THEN: The function returns data for all crossword puzzles.', async () => {
-          global.fetch = jest.fn(() =>
-            Promise.resolve({
-              ok: true,
-              json: () => Promise.resolve({ puzzles: ['puzzle1', 'puzzle2'] }), // Mock the response data
-            })
-          );
-
-          const result = await getCrosswords();
-
-          expect(global.fetch).toHaveBeenCalledWith(process.env.REACT_APP_GET_ALL_CROSSWORDS);
-          expect(result).toEqual({ puzzles: ['puzzle1', 'puzzle2'] });
-        });
       });
     });
   });

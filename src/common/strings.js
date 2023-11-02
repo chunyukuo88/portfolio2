@@ -1,3 +1,8 @@
+export const environments = {
+  PROD: 'production',
+  DEV: 'development',
+};
+
 export const queryKeys = {
   BLOGS: 'blogs',
   BLOG_DELETION: 'blog_deletion',
@@ -92,6 +97,12 @@ const strings = {
     english: 'Calisthenics',
     german: 'Kallisthenie',
     japanese: '筋トレ',
+  },
+  forgotWhenIWroteThis: {
+    chinese: '幾天前寫的。',
+    english: 'Written a few days ago.',
+    german: 'Ich habe vergessen, wann ich das geschrieben habe.',
+    japanese: '書いた時期を忘れました。',
   },
   funStuff: {
     chinese: '趣事',

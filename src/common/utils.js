@@ -1,4 +1,6 @@
-import { easterEgg } from './strings';
+import { easterEgg, environments } from './strings';
+
+const { PROD, DEV } = environments;
 
 export const logger = console.log;
 export const errorLogger = console.error;
@@ -8,18 +10,11 @@ export function logEasterEgg() {
   logger('%cgithub.com/chunyukuo88/portfolio2', 'color: yellow; font-size: 2em; background: black;');
 };
 
-export async function getCrosswords(){
-  const response = await fetch(process.env.REACT_APP_GET_ALL_CROSSWORDS);
-  if (!response.ok) {
-    throw new errorLogger('An error occurred while fetching the crossword puzzles.');
-  }
-  const data = await response.json();
-  return data;
-}
-
 export async function getBlogs(){
   const firstPageId = 1;
-  const url = `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/${firstPageId}`
+  const url = (process.env.NODE_ENV === PROD)
+    ? `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE_PROD}/${firstPageId}`
+    : `${process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE}/${firstPageId}`;
   const responseString = await fetch(url);
   if (!responseString.ok) {
     throw new errorLogger('An error occurred while fetching the posts.');
@@ -30,7 +25,9 @@ export async function getBlogs(){
 
 export async function updateBlogPost(entityId, options){
   try {
-    const url = `${process.env.REACT_APP_UPDATE_BLOG}${entityId}`;
+    const url = (process.env.NODE_ENV === PROD)
+      ? `${process.env.REACT_APP_UPDATE_BLOG_PROD}${entityId}`
+      : `${process.env.REACT_APP_UPDATE_BLOG}${entityId}`;
     const response = await fetch(url, options);
     return logger('The result of the attempt to update this blog post is as follows: ', response);
   } catch (e) {
@@ -48,7 +45,9 @@ export async function postData(url, data){
 }
 
 export async function deleteBlog(entityId, options) {
-  const url = `${process.env.REACT_APP_DELETE_BLOG_ENTRY}/${entityId}`;
+  const url = (process.env.NODE_ENV === PROD)
+    ? `${process.env.REACT_APP_DELETE_BLOG_ENTRY_PROD}/${entityId}`
+    : `${process.env.REACT_APP_DELETE_BLOG_ENTRY}/${entityId}`;
   try {
     const response = await fetch(url, options);
     logger(response);
