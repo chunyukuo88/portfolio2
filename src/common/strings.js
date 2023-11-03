@@ -59,7 +59,7 @@ const strings = {
   blog: {
     chinese: '麵包博客',
     english: 'Bread Blog',
-    german: 'Brot-Ausstellung',
+    german: 'Das Brot',
     japanese: 'パンブログ',
   },
   blogDownForMaintenance: {

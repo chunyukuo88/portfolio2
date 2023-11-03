@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
-import './InfiniteArticles.css';
 import { environments } from 'src/common/strings';
+import './InfiniteArticles.css';
 
 export function InfiniteArticles() {
   const [ posts, setPosts ] = useState([]);

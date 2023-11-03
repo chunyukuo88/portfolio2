@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import Root from './Root';
-import { store } from './app/store';
+import { store } from './globalState/store';
 import { Auth } from 'aws-amplify';
 
 Auth.configure({
