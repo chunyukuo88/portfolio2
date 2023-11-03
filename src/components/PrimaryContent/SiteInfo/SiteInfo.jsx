@@ -5,7 +5,7 @@ export function SiteInfo(props) {
   const { language, menuIsOpen } = props;
 
   return (
-    <article id='site-info' className={menuIsOpen ? 'blurry' : null}>
+    <article className={menuIsOpen ? 'blurry' : null}>
       <h3>{strings.abridgedVersionTitle[language]}</h3>
       <p>{strings.abridgedVersionBody[language]}</p>
       <h3>{strings.unabridgedVersionTitle[language]}</h3>

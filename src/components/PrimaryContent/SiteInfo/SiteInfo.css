@@ -7,9 +7,24 @@
     background-color: var(--primaryColor);
 }
 
-@media (max-height: 1330px) {
-    #site-info {
-        max-height: 55%;
-        overflow: auto;
+article {
+    max-width: 36rem;
+    margin: auto;
+    font-size: 1.5rem;
+}
+
+article > h3 {
+    text-align: center;
+}
+article > p {
+    text-align: justify;
+    font-size: 0.8rem;
+    text-justify: newspaper;
+}
+
+@media (max-width: 400px) {
+    article {
+        font-size: 1rem;
+        max-width: 22rem;
     }
 }
