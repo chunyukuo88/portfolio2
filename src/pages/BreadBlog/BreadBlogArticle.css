@@ -38,5 +38,16 @@ h5, p {
 .blog-article-image > div {
     position: relative;
     top: 2.70rem;
-    /*width: 3rem;*/
+}
+
+@media (max-width: 400px) {
+    img {
+        max-width: 20rem;
+    }
+
+    .blog-body-container {
+        margin: 0.5rem;
+        width: 20rem;
+        text-align: justify;
+    }
 }
