@@ -28,3 +28,10 @@ article > p {
         max-width: 22rem;
     }
 }
+
+@media (max-width: 500px) {
+    article {
+        font-size: 1rem;
+        max-width: 22rem;
+    }
+}

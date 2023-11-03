@@ -51,3 +51,14 @@ h5, p {
         text-align: justify;
     }
 }
+@media (max-width: 500px) {
+    img {
+        max-width: 20rem;
+    }
+
+    .blog-body-container {
+        margin: 0.5rem;
+        width: 20rem;
+        text-align: justify;
+    }
+}
