@@ -19,3 +19,9 @@
 .individual-article {
     width: 40rem;
 }
+
+@media (max-width: 400px) {
+    .individual-article {
+        width: 20rem;
+    }
+}
