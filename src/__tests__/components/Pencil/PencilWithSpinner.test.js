@@ -18,7 +18,7 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
         />, mockStoreLoggedIn
       );
 
-      const pencil = screen.queryByText('✏️');
+      const pencil = document.querySelector('.pencil-svg');
       fireEvent.click(pencil);
 
       const textBox = screen.queryByRole('textbox');
