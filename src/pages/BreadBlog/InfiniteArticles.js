@@ -3,6 +3,7 @@ import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
 import { environments } from 'src/common/strings';
 import './InfiniteArticles.css';
+import {NewBlogPost} from "./NewBlogPost";
 
 export function InfiniteArticles() {
   const [ posts, setPosts ] = useState([]);
@@ -55,6 +56,7 @@ export function InfiniteArticles() {
 
   return posts.length > 0 ? (
     <div id='infinite-scroll-articles-wrapper'>
+      <NewBlogPost />
       {posts.map((article, key) => {
         return (
           <div id={`${article.articleId}`} className='individual-article' key={key}>

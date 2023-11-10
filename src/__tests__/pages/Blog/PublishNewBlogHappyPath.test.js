@@ -18,6 +18,38 @@ afterEach(() => {
 
 
 describe('GIVEN: There are no problems with the server,', () => {
+  describe('WHEN: they click the plus button', () => {
+    it.only('THEN: the editable sections appear.', async () => {
+      let title, body, imageUrl;
+
+      render(
+        <Root store={mockStoreLoggedIn}>
+          <NewBlogPost/>
+        </Root>
+      );
+      title = screen.getByTestId('blog-panel-title');
+      body = screen.getByTestId('blog-panel-body');
+      imageUrl = screen.getByTestId('blog-panel-img');
+
+      expect(title).not.toBeVisible();
+      expect(body).not.toBeVisible();
+      expect(imageUrl).not.toBeVisible();
+
+      const plusSignButton = document.querySelector('#plus-sign-button');
+
+      await waitFor(() => {
+        fireEvent.click(plusSignButton);
+
+        title = screen.getByTestId('blog-panel-title');
+        body = screen.getByTestId('blog-panel-body');
+        imageUrl = screen.getByTestId('blog-panel-img');
+
+        expect(title).toBeVisible();
+        expect(body).toBeVisible();
+        expect(imageUrl).toBeVisible();
+      });
+    });
+  });
   describe('WHEN: they submit the filled out form', () => {
     let title, body, imageUrl;
 

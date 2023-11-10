@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import {useRef, useState} from 'react';
 import { createHttpRequest, postData } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
 
@@ -6,6 +6,7 @@ export function NewBlogPost({ token }) {
   const titleRef = useRef(null);
   const bodyRef = useRef(null);
   const imageUrlRef = useRef(null);
+  const [plusBtnVisible, setPlusBtnVisible] = useState(true);
 
   const clearAllInputs = () => {
     titleRef.current.value = '';
@@ -43,10 +44,14 @@ export function NewBlogPost({ token }) {
 
   const errorMsgClickHandler = () => mutation.reset();
 
-  return (
+  const showInputs = () => setPlusBtnVisible(false);
+
+  const Inputs = () => (
     <section className='content-card'>
       {mutation.isError
-        ? <h1 data-testid='failed-to-publish-blog' onClick={errorMsgClickHandler}>Failed to publish blog post: {mutation.error}</h1>
+        ? <h1 data-testid='failed-to-publish-blog' onClick={errorMsgClickHandler}>
+          Failed to publish blog post: {mutation.error}
+        </h1>
         : null
       }
       {mutation.isSuccess
@@ -91,13 +96,27 @@ export function NewBlogPost({ token }) {
         </label>
         <div className='button-wrapper'>
           <button
-              className='publish-panel-button'
-              data-testid='blog-submission-btn'
+            className='publish-panel-button'
+            data-testid='blog-submission-btn'
           >
             Publish
           </button>
         </div>
       </form>
     </section>
+  );
+
+  return (
+    <>
+      {
+        plusBtnVisible
+          ? <div
+              id='plus-sign-button'
+              onClick={showInputs}
+              role='button'
+            >+</div>
+          : <Inputs />
+      }
+    </>
   );
 }
