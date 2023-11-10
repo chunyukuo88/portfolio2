@@ -41,10 +41,18 @@ export function NewBlogPost({ token }) {
     clearAllInputs();
   }
 
+  const errorMsgClickHandler = () => mutation.reset();
+
   return (
     <section className='content-card'>
-      {mutation.isError ? <h1 data-testid='failed-to-publish-blog' onClick={() => mutation.reset()}>Failed to publish blog post: {mutation.error}</h1> : null}
-      {mutation.isSuccess ? <h1>The blog post has been published successfully.</h1> : null}
+      {mutation.isError
+        ? <h1 data-testid='failed-to-publish-blog' onClick={errorMsgClickHandler}>Failed to publish blog post: {mutation.error}</h1>
+        : null
+      }
+      {mutation.isSuccess
+        ? <h1>The blog post has been published successfully.</h1>
+        : null
+      }
       <h1 className='publish-panel-title'>Write a Blog Post</h1>
       <form
         className='content-form'
@@ -57,7 +65,7 @@ export function NewBlogPost({ token }) {
             className='publish-panel-input'
             data-testid='blog-panel-title'
             ref={titleRef}
-            placeholder='With other companies in mind'
+            placeholder='Make it pithy.'
           />
         </label>
         <label className='publish-panel-label'>
