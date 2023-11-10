@@ -106,17 +106,11 @@ export function NewBlogPost({ token }) {
     </section>
   );
 
-  return (
-    <>
-      {
-        plusBtnVisible
-          ? <div
-              id='plus-sign-button'
-              onClick={showInputs}
-              role='button'
-            >+</div>
-          : <Inputs />
-      }
-    </>
+  const PlusButton = () => (
+    <div onClick={showInputs} role='button'>
+      +
+    </div>
   );
+
+  return <>{plusBtnVisible ? <PlusButton/> : <Inputs/>}</>;
 }

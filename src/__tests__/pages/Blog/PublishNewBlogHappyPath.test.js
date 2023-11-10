@@ -27,15 +27,15 @@ describe('GIVEN: There are no problems with the server,', () => {
           <NewBlogPost/>
         </Root>
       );
-      title = screen.getByTestId('blog-panel-title');
-      body = screen.getByTestId('blog-panel-body');
-      imageUrl = screen.getByTestId('blog-panel-img');
+      title = screen.queryByTestId('blog-panel-title');
+      body = screen.queryByTestId('blog-panel-body');
+      imageUrl = screen.queryByTestId('blog-panel-img');
 
-      expect(title).not.toBeVisible();
-      expect(body).not.toBeVisible();
-      expect(imageUrl).not.toBeVisible();
+      expect(title).toBeNull();
+      expect(body).toBeNull();
+      expect(imageUrl).toBeNull();
 
-      const plusSignButton = document.querySelector('#plus-sign-button');
+      const plusSignButton = screen.getByText('+');
 
       await waitFor(() => {
         fireEvent.click(plusSignButton);
