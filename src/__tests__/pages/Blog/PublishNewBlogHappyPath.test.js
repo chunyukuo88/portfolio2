@@ -19,7 +19,7 @@ afterEach(() => {
 
 describe('GIVEN: There are no problems with the server,', () => {
   describe('WHEN: they click the plus button', () => {
-    it.only('THEN: the editable sections appear.', async () => {
+    it('THEN: the editable sections appear.', () => {
       let title, body, imageUrl;
 
       render(
@@ -37,17 +37,15 @@ describe('GIVEN: There are no problems with the server,', () => {
 
       const plusSignButton = screen.getByText('+');
 
-      await waitFor(() => {
-        fireEvent.click(plusSignButton);
+      fireEvent.click(plusSignButton);
 
-        title = screen.getByTestId('blog-panel-title');
-        body = screen.getByTestId('blog-panel-body');
-        imageUrl = screen.getByTestId('blog-panel-img');
+      title = screen.getByTestId('blog-panel-title');
+      body = screen.getByTestId('blog-panel-body');
+      imageUrl = screen.getByTestId('blog-panel-img');
 
-        expect(title).toBeVisible();
-        expect(body).toBeVisible();
-        expect(imageUrl).toBeVisible();
-      });
+      expect(title).toBeVisible();
+      expect(body).toBeVisible();
+      expect(imageUrl).toBeVisible();
     });
   });
   describe('WHEN: they submit the filled out form', () => {
@@ -59,6 +57,9 @@ describe('GIVEN: There are no problems with the server,', () => {
           <NewBlogPost/>
         </Root>
       );
+
+      const plusSignButton = screen.getByText('+');
+      fireEvent.click(plusSignButton);
 
       title = screen.getByTestId('blog-panel-title');
       body = screen.getByTestId('blog-panel-body');

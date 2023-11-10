@@ -1,6 +1,7 @@
-import {useRef, useState} from 'react';
+import { useRef, useState } from 'react';
 import { createHttpRequest, postData } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
+import './NewBlogPost.css';
 
 export function NewBlogPost({ token }) {
   const titleRef = useRef(null);
@@ -107,9 +108,9 @@ export function NewBlogPost({ token }) {
   );
 
   const PlusButton = () => (
-    <div onClick={showInputs} role='button'>
+    <h2 role='button' onClick={showInputs}>
       +
-    </div>
+    </h2>
   );
 
   return <>{plusBtnVisible ? <PlusButton/> : <Inputs/>}</>;
