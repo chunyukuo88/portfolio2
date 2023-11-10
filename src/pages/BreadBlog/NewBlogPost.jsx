@@ -15,7 +15,7 @@ export function NewBlogPost({ token }) {
 
   const mutation = useMutation({
     mutationFn: async (blogData) => {
-      return await postData(process.env.REACT_APP_POST_BLOG_ENTRY, blogData);
+      return await postData(process.env.REACT_APP_CREATE_BLOG, blogData);
     }
   });
 

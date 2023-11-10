@@ -1,4 +1,4 @@
-import { PublishContentPage } from 'src/pages/PublishContent/PublishContentPage';
+import { NewBlogPost } from 'src/pages/BreadBlog/NewBlogPost';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { mockStoreLoggedIn } from 'src/testUtils';
 import Root from 'src/Root';
@@ -17,14 +17,14 @@ afterEach(() => {
 });
 
 
-describe('AND: There are no problems with the server,', () => {
+describe('GIVEN: There are no problems with the server,', () => {
   describe('WHEN: they submit the filled out form', () => {
     let title, body, imageUrl;
 
     beforeEach(() => {
       render(
         <Root store={mockStoreLoggedIn}>
-          <PublishContentPage/>
+          <NewBlogPost/>
         </Root>
       );
 
