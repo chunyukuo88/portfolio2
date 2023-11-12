@@ -36,15 +36,15 @@ describe('NewBlogPost.jsx', () => {
         const plusSignButton = screen.getByText('+');
         fireEvent.click(plusSignButton);
 
-        title = screen.getByTestId('blog-panel-title');
-        body = screen.getByTestId('blog-panel-body');
-        imageUrl = screen.getByTestId('blog-panel-img');
+        title = document.querySelectorAll('.publish-panel-input')[0];
+        body = document.querySelectorAll('.publish-panel-input')[1];
+        imageUrl = document.querySelectorAll('.publish-panel-input')[2];
 
         fireEvent.change(title, { target: { value: 'some title' } });
         fireEvent.change(body, { target: { value: 'some body' } });
         fireEvent.change(imageUrl, { target: { value: 'some imageUrl' } });
 
-        const submissionButton = screen.getByTestId('blog-submission-btn');
+        const submissionButton = screen.getByText('Publish');
 
         fireEvent.click(submissionButton);
       });
