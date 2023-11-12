@@ -3,11 +3,15 @@ import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
 import { environments } from 'src/common/strings';
 import './InfiniteArticles.css';
-import {NewBlogPost} from "./NewBlogPost";
+import { NewBlogPost } from './NewBlogPost';
+import { useSelector } from 'react-redux';
+import { selectCurrentToken, selectCurrentUser } from '../../globalState';
 
 export function InfiniteArticles() {
   const [ posts, setPosts ] = useState([]);
   const [ page, setPage ] = useState(null);
+  const user = useSelector(selectCurrentUser);
+  const token = useSelector(selectCurrentToken);
   const lastArticleRef = useRef(null);
 
   const handleScroll = () => {
@@ -54,9 +58,11 @@ export function InfiniteArticles() {
     };
   }, []);
 
+  const isAuthorized = user && token;
+
   return posts.length > 0 ? (
     <div id='infinite-scroll-articles-wrapper'>
-      <NewBlogPost/>
+      {isAuthorized ? <NewBlogPost/> : null}
       {posts.map((article, key) => {
         return (
           <div id={`${article.articleId}`} className='individual-article' key={key}>
