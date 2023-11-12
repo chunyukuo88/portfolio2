@@ -56,7 +56,7 @@ export function InfiniteArticles() {
 
   return posts.length > 0 ? (
     <div id='infinite-scroll-articles-wrapper'>
-      <NewBlogPost />
+      <NewBlogPost/>
       {posts.map((article, key) => {
         return (
           <div id={`${article.articleId}`} className='individual-article' key={key}>

@@ -33,6 +33,9 @@ describe('NewBlogPost.jsx', () => {
           </Root>
         );
 
+        const plusSignButton = screen.getByText('+');
+        fireEvent.click(plusSignButton);
+
         title = screen.getByTestId('blog-panel-title');
         body = screen.getByTestId('blog-panel-body');
         imageUrl = screen.getByTestId('blog-panel-img');
@@ -52,7 +55,7 @@ describe('NewBlogPost.jsx', () => {
       it('THEN: the error is logged to the console.', async () => {
         expect(errorSpy).toBeCalledWith(error);
       });
-      it.skip('THEN: An error message is displayed in the publication panel.', async () =>{
+      it.skip('THEN: An error message is displayed in the publication panel.', async () => {
         mockFn = () => undefined;
         await waitFor(() => {
           const errorMessage = screen.queryByTestId('failed-to-publish-blog');

@@ -2,8 +2,11 @@ import { useRef, useState } from 'react';
 import { createHttpRequest, postData } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
 import './NewBlogPost.css';
+import { useSelector } from 'react-redux';
+import { selectCurrentToken } from 'src/globalState';
 
-export function NewBlogPost({ token }) {
+export function NewBlogPost() {
+  const token = useSelector(selectCurrentToken);
   const titleRef = useRef(null);
   const bodyRef = useRef(null);
   const imageUrlRef = useRef(null);
@@ -21,16 +24,18 @@ export function NewBlogPost({ token }) {
     }
   });
 
-  const createDataObject = () => ({
-    title: titleRef.current.value,
-    creationTimeStamp: Date.now(),
-    theme: bodyRef.current.value,
-    imageUrl: imageUrlRef.current.value,
-    likes: 0,
-    views: 0,
-  });
+  const createDataObject = () => {
+    if (bodyRef) {
+      console.dir();
+    }
+    return {
+      title: titleRef.current.value,
+      body: bodyRef.current.value,
+      imageUrl: imageUrlRef.current.value,
+    };
+  };
 
-  const missingInfo = () => (!titleRef.current.value || !bodyRef.current.value)
+  const missingInfo = () => (!titleRef?.current?.value || !bodyRef?.current?.value);
 
   const submissionHandler = async (event) => {
     event.preventDefault();
@@ -51,8 +56,8 @@ export function NewBlogPost({ token }) {
     <section className='content-card'>
       {mutation.isError
         ? <h1 data-testid='failed-to-publish-blog' onClick={errorMsgClickHandler}>
-          Failed to publish blog post: {mutation.error}
-        </h1>
+            Failed to publish blog post: {mutation.error}
+          </h1>
         : null
       }
       {mutation.isSuccess
