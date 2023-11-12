@@ -44,12 +44,12 @@ export function Pencil(props) {
 
   const PencilSvg = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="35">
-      <line x1="5" y1="5" x2="26" y2="25" stroke={primaryColor} stroke-width="1" />
-      <line x1="5" y1="5" x2="0" y2="10" stroke={primaryColor} stroke-width="1" />
-      <line x1="0" y1="10" x2="20" y2="30" stroke={primaryColor} stroke-width="1" />
-      <line x1="25" y1="25" x2="20" y2="30" stroke={primaryColor} stroke-width="1" />
-      <line x1="26" y1="24.5" x2="25" y2="30" stroke={primaryColor} stroke-width="1" />
-      <line x1="20" y1="30" x2="25" y2="30" stroke={primaryColor} stroke-width="1" />
+      <line x1="5" y1="5" x2="26" y2="25" stroke={primaryColor} strokeWidth="1" />
+      <line x1="5" y1="5" x2="0" y2="10" stroke={primaryColor} strokeWidth="1" />
+      <line x1="0" y1="10" x2="20" y2="30" stroke={primaryColor} strokeWidth="1" />
+      <line x1="25" y1="25" x2="20" y2="30" stroke={primaryColor} strokeWidth="1" />
+      <line x1="26" y1="24.5" x2="25" y2="30" stroke={primaryColor} strokeWidth="1" />
+      <line x1="20" y1="30" x2="25" y2="30" stroke={primaryColor} strokeWidth="1" />
     </svg>
   );
 

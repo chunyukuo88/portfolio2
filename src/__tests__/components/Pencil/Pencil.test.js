@@ -18,13 +18,8 @@ jest.spyOn(console, 'log').mockImplementation(jest.fn());
 describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', () => {
   const article = {
     title: 'Berry Bread!',
-    articleId: 12,
-    page: 4,
     imageUrl: 'https://czzbyiyicvjcorsepbfp.supabase.co/storage/v1/object/public/alexgochenour.xyz-blog-photos/z_Berry%20Bread-min.JPG',
     body: 'Yay bread.',
-    likes: 5,
-    views: 50,
-    creationTimeStamp: 'Thu Aug 03 2023 17:56:20 GMT-0400 (Eastern Daylight Time)'
   };
 
   const aspect = 'title';
@@ -44,10 +39,10 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
         />, mockStoreLoggedIn
       );
 
-      const pencil = document.querySelector('div');
+      const pencil = document.querySelector('svg');
       fireEvent.click(pencil);
 
-      const textBox = screen.queryByRole('textarea');
+      const textBox = document.querySelector('textarea');
       fireEvent.change(textBox, { target: { value: updated.title } });
 
       const confirmationButton = screen.queryByText('Confirm');
@@ -72,10 +67,10 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
       let textBox = document.querySelector('textarea');
       expect(textBox).toBeNull();
 
-      const pencil = document.querySelector('div');
+      const pencil = document.querySelector('svg');
       fireEvent.click(pencil);
 
-      textBox = screen.queryByRole('textarea');
+      textBox = document.querySelector('textarea');
       expect(textBox).toBeVisible();
 
       const cancellationButton = screen.queryByText('Nvrmnd');
