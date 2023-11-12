@@ -1,11 +1,17 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { createHttpRequest, postData } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
+import './NewBlogPost.css';
+import { useSelector } from 'react-redux';
+import { selectCurrentToken } from 'src/globalState';
+import { environments } from 'src/common/strings';
 
-export function NewBlogPost({ token }) {
+export function NewBlogPost() {
+  const token = useSelector(selectCurrentToken);
   const titleRef = useRef(null);
   const bodyRef = useRef(null);
   const imageUrlRef = useRef(null);
+  const [plusBtnVisible, setPlusBtnVisible] = useState(true);
 
   const clearAllInputs = () => {
     titleRef.current.value = '';
@@ -13,22 +19,28 @@ export function NewBlogPost({ token }) {
     imageUrlRef.current.value = '';
   };
 
+  const url = (process.env.NODE_ENV === environments.PROD)
+    ? process.env.REACT_APP_CREATE_BLOG_PROD
+    : process.env.REACT_APP_CREATE_BLOG;
+  
   const mutation = useMutation({
     mutationFn: async (blogData) => {
-      return await postData(process.env.REACT_APP_POST_BLOG_ENTRY, blogData);
+      return await postData(url, blogData);
     }
   });
 
-  const createDataObject = () => ({
-    title: titleRef.current.value,
-    creationTimeStamp: Date.now(),
-    theme: bodyRef.current.value,
-    imageUrl: imageUrlRef.current.value,
-    likes: 0,
-    views: 0,
-  });
+  const createDataObject = () => {
+    if (bodyRef) {
+      console.dir();
+    }
+    return {
+      title: titleRef.current.value,
+      body: bodyRef.current.value,
+      imageUrl: imageUrlRef.current.value,
+    };
+  };
 
-  const missingInfo = () => (!titleRef.current.value || !bodyRef.current.value)
+  const missingInfo = () => (!titleRef?.current?.value || !bodyRef?.current?.value);
 
   const submissionHandler = async (event) => {
     event.preventDefault();
@@ -41,10 +53,22 @@ export function NewBlogPost({ token }) {
     clearAllInputs();
   }
 
-  return (
+  const errorMsgClickHandler = () => mutation.reset();
+
+  const showInputs = () => setPlusBtnVisible(false);
+
+  const Inputs = () => (
     <section className='content-card'>
-      {mutation.isError ? <h1 data-testid='failed-to-publish-blog' onClick={() => mutation.reset()}>Failed to publish blog post: {mutation.error}</h1> : null}
-      {mutation.isSuccess ? <h1>The blog post has been published successfully.</h1> : null}
+      {mutation.isError
+        ? <h1 data-testid='failed-to-publish-blog' onClick={errorMsgClickHandler}>
+            Failed to publish blog post: {mutation.error}
+          </h1>
+        : null
+      }
+      {mutation.isSuccess
+        ? <h1>The blog post has been published successfully.</h1>
+        : null
+      }
       <h1 className='publish-panel-title'>Write a Blog Post</h1>
       <form
         className='content-form'
@@ -57,7 +81,7 @@ export function NewBlogPost({ token }) {
             className='publish-panel-input'
             data-testid='blog-panel-title'
             ref={titleRef}
-            placeholder='With other companies in mind'
+            placeholder='Make it pithy.'
           />
         </label>
         <label className='publish-panel-label'>
@@ -83,8 +107,8 @@ export function NewBlogPost({ token }) {
         </label>
         <div className='button-wrapper'>
           <button
-              className='publish-panel-button'
-              data-testid='blog-submission-btn'
+            className='publish-panel-button'
+            data-testid='blog-submission-btn'
           >
             Publish
           </button>
@@ -92,4 +116,8 @@ export function NewBlogPost({ token }) {
       </form>
     </section>
   );
+
+  const PlusButton = () => <h2 role='button' onClick={showInputs}>+</h2>;
+
+  return <>{plusBtnVisible ? <PlusButton/> : <Inputs/>}</>;
 }

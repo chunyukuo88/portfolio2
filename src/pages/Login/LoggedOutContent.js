@@ -43,7 +43,7 @@ export const LoggedOutContent = ({ signIn }) => {
       }
       dispatch(setCredentials(payload));
       dispatch(updateLanguage(strings.CHINESE));
-      navigate(routes.index);
+      navigate(routes.blog);
     } catch (e) {
       handleError(e)
     }

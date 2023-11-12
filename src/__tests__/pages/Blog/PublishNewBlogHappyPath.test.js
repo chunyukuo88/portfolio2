@@ -1,4 +1,4 @@
-import { PublishContentPage } from 'src/pages/PublishContent/PublishContentPage';
+import { NewBlogPost } from 'src/pages/BreadBlog/NewBlogPost';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { mockStoreLoggedIn } from 'src/testUtils';
 import Root from 'src/Root';
@@ -17,16 +17,49 @@ afterEach(() => {
 });
 
 
-describe('AND: There are no problems with the server,', () => {
+describe('GIVEN: There are no problems with the server,', () => {
+  describe('WHEN: they click the plus button', () => {
+    it('THEN: the editable sections appear.', () => {
+      let title, body, imageUrl;
+
+      render(
+        <Root store={mockStoreLoggedIn}>
+          <NewBlogPost/>
+        </Root>
+      );
+      title = screen.queryByTestId('blog-panel-title');
+      body = screen.queryByTestId('blog-panel-body');
+      imageUrl = screen.queryByTestId('blog-panel-img');
+
+      expect(title).toBeNull();
+      expect(body).toBeNull();
+      expect(imageUrl).toBeNull();
+
+      const plusSignButton = screen.getByText('+');
+
+      fireEvent.click(plusSignButton);
+
+      title = screen.getByTestId('blog-panel-title');
+      body = screen.getByTestId('blog-panel-body');
+      imageUrl = screen.getByTestId('blog-panel-img');
+
+      expect(title).toBeVisible();
+      expect(body).toBeVisible();
+      expect(imageUrl).toBeVisible();
+    });
+  });
   describe('WHEN: they submit the filled out form', () => {
     let title, body, imageUrl;
 
     beforeEach(() => {
       render(
         <Root store={mockStoreLoggedIn}>
-          <PublishContentPage/>
+          <NewBlogPost/>
         </Root>
       );
+
+      const plusSignButton = screen.getByText('+');
+      fireEvent.click(plusSignButton);
 
       title = screen.getByTestId('blog-panel-title');
       body = screen.getByTestId('blog-panel-body');
