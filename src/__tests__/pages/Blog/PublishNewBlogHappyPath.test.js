@@ -39,9 +39,9 @@ describe('GIVEN: There are no problems with the server,', () => {
 
       fireEvent.click(plusSignButton);
 
-      title = screen.getByTestId('blog-panel-title');
-      body = screen.getByTestId('blog-panel-body');
-      imageUrl = screen.getByTestId('blog-panel-img');
+      title = document.querySelectorAll('.publish-panel-input')[0];
+      body = document.querySelectorAll('.publish-panel-input')[1];
+      imageUrl = document.querySelectorAll('.publish-panel-input')[2];
 
       expect(title).toBeVisible();
       expect(body).toBeVisible();
@@ -61,15 +61,15 @@ describe('GIVEN: There are no problems with the server,', () => {
       const plusSignButton = screen.getByText('+');
       fireEvent.click(plusSignButton);
 
-      title = screen.getByTestId('blog-panel-title');
-      body = screen.getByTestId('blog-panel-body');
-      imageUrl = screen.getByTestId('blog-panel-img');
+      title = document.querySelectorAll('.publish-panel-input')[0];
+      body = document.querySelectorAll('.publish-panel-input')[1];
+      imageUrl = document.querySelectorAll('.publish-panel-input')[2];
 
       fireEvent.change(title, { target: { value: 'some title' } });
       fireEvent.change(body, { target: { value: 'some body' } });
       fireEvent.change(imageUrl, { target: { value: 'some imageUrl' } });
 
-      const submissionButton = screen.getByTestId('blog-submission-btn');
+      const submissionButton = document.querySelector('#publish-panel-button');
 
       fireEvent.click(submissionButton);
     });
@@ -84,9 +84,9 @@ describe('GIVEN: There are no problems with the server,', () => {
       });
     });
     it('THEN: the inputs are cleared.', () => {
-      title = screen.getByTestId('blog-panel-title');
-      body = screen.getByTestId('blog-panel-body');
-      imageUrl = screen.getByTestId('blog-panel-img');
+      title = document.querySelectorAll('.publish-panel-input')[0];
+      body = document.querySelectorAll('.publish-panel-input')[1];
+      imageUrl = document.querySelectorAll('.publish-panel-input')[2];
 
       expect(title).toHaveTextContent('');
     });

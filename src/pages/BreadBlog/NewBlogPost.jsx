@@ -30,9 +30,6 @@ export function NewBlogPost() {
   });
 
   const createDataObject = () => {
-    if (bodyRef) {
-      console.dir();
-    }
     return {
       title: titleRef.current.value,
       body: bodyRef.current.value,
