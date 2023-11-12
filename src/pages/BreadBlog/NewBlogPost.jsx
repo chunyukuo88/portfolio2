@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import './NewBlogPost.css';
 import { useSelector } from 'react-redux';
 import { selectCurrentToken } from 'src/globalState';
+import { environments } from 'src/common/strings';
 
 export function NewBlogPost() {
   const token = useSelector(selectCurrentToken);
@@ -18,9 +19,13 @@ export function NewBlogPost() {
     imageUrlRef.current.value = '';
   };
 
+  const url = (process.env.NODE_ENV === environments.PROD)
+    ? process.env.REACT_APP_CREATE_BLOG_PROD
+    : process.env.REACT_APP_CREATE_BLOG;
+  
   const mutation = useMutation({
     mutationFn: async (blogData) => {
-      return await postData(process.env.REACT_APP_CREATE_BLOG, blogData);
+      return await postData(url, blogData);
     }
   });
 
