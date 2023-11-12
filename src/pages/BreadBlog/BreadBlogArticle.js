@@ -30,7 +30,7 @@ export function BreadBlogArticle({ article }) {
         .toISOString()
         .slice(0,10)
       : strings.forgotWhenIWroteThis[language]
-  }
+  };
 
 
   const isAuthorized = user && token;

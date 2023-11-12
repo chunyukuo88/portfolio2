@@ -1,6 +1,6 @@
 import { easterEgg, environments } from './strings';
 
-const { PROD, DEV } = environments;
+const { PROD } = environments;
 
 export const logger = console.log;
 export const errorLogger = console.error;
