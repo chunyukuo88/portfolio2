@@ -34,7 +34,7 @@ export function Pencil(props) {
   const Modal = () => (
     <div className='update-modal'>
       <p>Update the {aspect}</p>
-      <textarea style={style} ref={inputRef} type='text' defaultValue={article[aspect]}/>
+      <textarea style={style} ref={inputRef} defaultValue={article[aspect]}/>
       <div>
         <span onClick={confirmationHandler} role='button'>Confirm</span>
         <span onClick={cancellationHandler} role='button'>Nvrmnd</span>

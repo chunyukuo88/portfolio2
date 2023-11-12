@@ -8,7 +8,7 @@ jest.spyOn(console, 'log').mockImplementation(jest.fn());
 
 describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', () => {
   describe('WHEN: the user clicks the pencil then confirms the updated aspect,', () => {
-    test('THEN: the loading spinner appears.', async() => {
+    test('THEN: the loading spinner appears.', async () => {
       const expectedUpdate = { title: 'a new title!' };
       renderWithQueryClient(
         <Pencil
@@ -18,10 +18,10 @@ describe('GIVEN: an entityId and a blog post aspect (title, body, or imgUrl),', 
         />, mockStoreLoggedIn
       );
 
-      const pencil = document.querySelector('.pencil-svg');
+      const pencil = document.querySelector('svg');
       fireEvent.click(pencil);
 
-      const textBox = screen.queryByRole('textbox');
+      const textBox = document.querySelector('textarea');
       fireEvent.change(textBox, { target: { value: expectedUpdate.title } });
 
       const confirmationButton = screen.queryByText('Confirm');
