@@ -107,11 +107,7 @@ export function NewBlogPost({ token }) {
     </section>
   );
 
-  const PlusButton = () => (
-    <h2 role='button' onClick={showInputs}>
-      +
-    </h2>
-  );
+  const PlusButton = () => <h2 role='button' onClick={showInputs}>+</h2>;
 
   return <>{plusBtnVisible ? <PlusButton/> : <Inputs/>}</>;
 }

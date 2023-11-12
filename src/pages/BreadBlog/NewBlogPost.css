@@ -13,3 +13,11 @@ h2:hover {
     background-color: var(--primaryColor);
     color: black;
 }
+
+.content-card {
+    width: 500px;
+}
+
+.publish-panel-title {
+    text-align: center;
+}
