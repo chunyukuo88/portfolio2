@@ -1,5 +1,13 @@
-h2, .content-card, .publish-panel-input, #blog-body-input, #publish-panel-button {
+.content-card {
     width: 500px;
+}
+
+h2, .publish-panel-input, #blog-body-input {
+    width: 490px;
+}
+
+#publish-panel-button {
+    width: 499px;
 }
 
 .publish-panel-input, #blog-body-input, #publish-panel-button {
