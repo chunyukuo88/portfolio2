@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
 import { createHttpRequest, postData } from 'src/common/utils';
 import { useMutation } from '@tanstack/react-query';
-import './NewBlogPost.css';
 import { useSelector } from 'react-redux';
 import { selectCurrentToken } from 'src/globalState';
 import { environments } from 'src/common/strings';
+import './NewBlogPost.css';
 
 export function NewBlogPost() {
   const token = useSelector(selectCurrentToken);
@@ -79,7 +79,6 @@ export function NewBlogPost() {
           <input
             type='text'
             className='publish-panel-input'
-            data-testid='blog-panel-title'
             ref={titleRef}
             placeholder='Make it pithy.'
           />
@@ -90,7 +89,6 @@ export function NewBlogPost() {
             type='text'
             id='blog-body-input'
             className='publish-panel-input'
-            data-testid='blog-panel-body'
             ref={bodyRef}
             placeholder='Max 512 MB'
           />
@@ -100,18 +98,12 @@ export function NewBlogPost() {
           <input
             type='text'
             className='publish-panel-input'
-            data-testid='blog-panel-img'
             ref={imageUrlRef}
             placeholder='Not required'
           />
         </label>
         <div className='button-wrapper'>
-          <button
-            className='publish-panel-button'
-            data-testid='blog-submission-btn'
-          >
-            Publish
-          </button>
+          <button id='publish-panel-button'>Publish</button>
         </div>
       </form>
     </section>

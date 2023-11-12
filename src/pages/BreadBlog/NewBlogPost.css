@@ -1,12 +1,19 @@
+h2, .content-card, .publish-panel-input, #blog-body-input, #publish-panel-button {
+    width: 500px;
+}
+
+.publish-panel-input, #blog-body-input, #publish-panel-button {
+    margin-top: 1rem;
+}
+
 h2 {
+    align-items: center;
     border: var(--border);
+    cursor: pointer;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
     height: 3rem;
-    width: 500px;
-    cursor: pointer;
+    justify-content: center;
 }
 
 h2:hover {
@@ -14,10 +21,40 @@ h2:hover {
     color: black;
 }
 
-.content-card {
-    width: 500px;
-}
-
 .publish-panel-title {
     text-align: center;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+}
+
+.publish-panel-input {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#blog-body-input {
+    background-color: black;
+    color: var(--primaryColor);
+    height: 10rem;
+    outline: none;
+}
+
+.content-card {
+    background-color: black;
+}
+
+#publish-panel-button {
+    background-color: var(--primaryColor);
+    color: black;
+    cursor: pointer;
+    height: 3rem;
+}
+
+#publish-panel-button:hover {
+    background-color: black;
+    color: var(--primaryColor);
+    transition: 0.2s;
 }
