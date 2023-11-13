@@ -67,6 +67,10 @@ export function NewBlogPost() {
         : null
       }
       <h1 className='publish-panel-title'>Write a Blog Post</h1>
+      <details>
+        <summary>Note</summary>
+        The date of publication is added on the back end and cannot be changed from the UI.
+      </details>
       <form
         className='content-form'
         onSubmit={submissionHandler}

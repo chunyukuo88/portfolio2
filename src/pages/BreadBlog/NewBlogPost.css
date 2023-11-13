@@ -68,3 +68,8 @@ label {
     color: var(--primaryColor);
     transition: 0.2s;
 }
+
+details {
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+}
