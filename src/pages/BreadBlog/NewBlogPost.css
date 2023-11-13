@@ -1,13 +1,14 @@
 .content-card {
-    width: 500px;
+    width: 31.25rem;
+    overflow: hidden;
 }
 
 h2, .publish-panel-input, #blog-body-input {
-    width: 490px;
+    width: 30.625rem;
 }
 
 #publish-panel-button {
-    width: 499px;
+    width: 31.24rem;
 }
 
 .publish-panel-input, #blog-body-input, #publish-panel-button {
