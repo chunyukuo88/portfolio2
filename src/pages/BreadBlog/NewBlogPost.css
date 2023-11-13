@@ -1,5 +1,14 @@
-h2, .content-card, .publish-panel-input, #blog-body-input, #publish-panel-button {
-    width: 500px;
+.content-card {
+    width: 31.25rem;
+    overflow: hidden;
+}
+
+h2, .publish-panel-input, #blog-body-input {
+    width: 30.625rem;
+}
+
+#publish-panel-button {
+    width: 31.24rem;
 }
 
 .publish-panel-input, #blog-body-input, #publish-panel-button {
@@ -31,6 +40,7 @@ label {
 }
 
 .publish-panel-input {
+    text-align: start;
     margin-left: 0;
     margin-right: 0;
 }
@@ -57,4 +67,22 @@ label {
     background-color: black;
     color: var(--primaryColor);
     transition: 0.2s;
+}
+
+details {
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+    border: var(--border);
+    border-radius: 4px;
+    padding: 0.5em 0.5em 0;
+}
+
+summary {
+    font-weight: bold;
+    margin: -0.5em -0.5em 0;
+    padding: 0.5em;
+}
+
+details[open] {
+    padding: 0.5em;
 }
