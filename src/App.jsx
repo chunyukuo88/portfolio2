@@ -50,6 +50,7 @@ function App(){
       case CHINESE: return GERMAN;
       case GERMAN: return JAPANESE;
       case JAPANESE: return ENGLISH;
+      default: return ENGLISH;
     }
   };
 
