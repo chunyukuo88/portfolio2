@@ -25,8 +25,7 @@ export const strings = {
   },
   paragraph1: {
     chinese: '',
-    english: 'My motivation to create this site was two-fold: I wanted to apply the technologies I work with to make a site that expresses\n' +
-      'my own design preferences and functionality and towards globalState I have never been paid to produce; I also wanted to explore technologies I have never been paid to use, such as Supabase, Redux Toolkit, msw, and Redis. There are, of course, a few baubles like Dark Mode and the spinning\n' +
+    english: 'My motivation to create this site was two-fold: I wanted to apply technologies that I work with to make a site with features that I have never been paid to produce; I also wanted to explore technologies I have never been paid to use, such as Supabase, Redux Toolkit, msw, and Redis. There are, of course, a few baubles like the spinning\n' +
       'cube that found themselves creeping into the project along the way. (The cube was made with vanilla CSS and Redux, and it was a blast to assemble.)',
     german: '',
   },

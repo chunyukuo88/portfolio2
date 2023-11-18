@@ -11,12 +11,14 @@ import { InfiniteArticles } from './pages/BreadBlog/InfiniteArticles';
 import { Footer } from './components/Footer/Footer';
 import { Cube } from './components/Cube/Cube';
 
-import { selectCurrentDarkTheme } from './globalState/darkMode/darkModeSlice';
-import { updateSettingsVisibility } from './globalState/settingsMenu/settingsMenuSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
-import { updateLanguage } from './globalState/language/languageSlice';
+import {
+  selectCurrentDarkTheme,
+  updateSettingsVisibility,
+  updateLanguage
+} from './globalState';
 import LanguageIconInverted from './common/icons/language_inverted.svg';
 import LanguageIcon from './common/icons/language.svg';
 import './App.css';
@@ -51,6 +53,10 @@ function App(){
     }
   };
 
+  const languageSpecificFonts = (language === JAPANESE)
+    ? { fontFamily: "'Shippori Mincho B1', serif"}
+    : null;
+
   const globeClickHandler = () => {
     const newLang = languageToggler(language);
     return dispatch(updateLanguage(newLang));
@@ -79,11 +85,7 @@ function App(){
     && primaryContentKey !== contentKeys.BLOG
   );
 
-  const ConditionalCube = () => (
-    <>
-      {cubeShouldBeVisible ? <Cube /> : null}
-    </>
-  );
+  const ConditionalCube = () => <>{cubeShouldBeVisible ? <Cube /> : null}</>;
 
   const headerClickHandler = () => setPrimaryContentKey(contentKeys.SKILLS)
 
@@ -131,7 +133,7 @@ function App(){
   );
 
   return (
-    <main className={isDarkMode ? undefined : 'light-mode'}>
+    <main className={isDarkMode ? undefined : 'light-mode'} style={languageSpecificFonts}>
       <Header/>
 
       <section>
