@@ -53,9 +53,12 @@ function App(){
     }
   };
 
-  const languageSpecificFonts = (language === JAPANESE)
-    ? { fontFamily: "'Shippori Mincho B1', serif"}
-    : null;
+  const languageSpecificFonts = () => {
+    if (language === JAPANESE) return { fontFamily: "'Shippori Mincho B1', serif"};
+    if (language === CHINESE) return { fontFamily: "'Noto Serif HK', serif"};
+    return { fontFamily: "'Source Code Pro', monospace"};
+  }
+
 
   const globeClickHandler = () => {
     const newLang = languageToggler(language);
@@ -133,7 +136,7 @@ function App(){
   );
 
   return (
-    <main className={isDarkMode ? undefined : 'light-mode'} style={languageSpecificFonts}>
+    <main className={isDarkMode ? undefined : 'light-mode'} style={languageSpecificFonts()}>
       <Header/>
 
       <section>

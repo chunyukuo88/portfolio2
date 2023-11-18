@@ -44,6 +44,18 @@ const strings = {
     german: 'Über mich',
     japanese: '自己紹介',
   },
+  aboutMeSpiel: {
+    chinese: '我喜歡可持續發展的實踐和測試驅動的代碼。我發現配對能夠快速傳播知識，並產生更短的反饋循環、更高質量和可讀性的代碼，以及更簡短的代碼審查，最好是在成對或小組中進行。所有這些都節省了 $$$，並促使我與同事之間更加自然的互動。像這樣的敏捷實踐促使我追求 Scrum 認證。我專攻前端開發，但我還構建了為 Kapitus、MadHive、Offor Health 和 NetJets 提供堅固、經過充分測試的微服務的部署管道。作為一名前語言學家，我重視可讀性、清晰度和有效的溝通。',
+    english: 'I love sustainable development practices and test-driven code. I find that\n' +
+      '        pairing spreads knowledge quickly and results in shorter feedback loops, code of higher quality and readability,\n' +
+      '        and shorter code reviews, which are also best done in pairs or mobs. All of this saves $$$ and makes for more\n' +
+      '        natural interactions with my peers. Agile practices like these led me to pursue Scrum certification.\n' +
+      '        I specialize in front-end development, but I have also crafted deployment pipelines and robust, well-tested\n' +
+      '        microservices for Kapitus, MadHive, Offor Health, and NetJets. As a former linguist, I value readability,\n' +
+      '        clarity, and effective communication.',
+    german: 'Ich liebe nachhaltige Entwicklungspraktiken und testgetriebenen Code. Ich habe festgestellt, dass Pair Programming Wissen schnell verbreitet und zu kürzeren Feedback-Schleifen, Code von höherer Qualität und Lesbarkeit sowie kürzeren Code-Reviews führt, die am besten in Paaren oder Gruppen durchgeführt werden. All dies spart Geld und fördert natürlichere Interaktionen mit meinen Kollegen. Agile Praktiken wie diese haben mich dazu veranlasst, die Scrum-Zertifizierung zu verfolgen. Ich bin auf die Frontend-Entwicklung spezialisiert, habe aber auch Deployment-Pipelines und robuste, gut getestete Mikroservices für Kapitus, MadHive, Offor Health und NetJets entwickelt. Als ehemaliger Linguist lege ich Wert auf Lesbarkeit, Klarheit und effektive Kommunikation.',
+    japanese: '持続可能な開発プラクティスとテスト駆動のコードが好きです。ペアプログラミングが知識を迅速に広め、より短いフィードバックループ、高品質で読みやすいコード、短いコードレビューをもたらすことに気付きました。これらはペアやモブで行うのが最良であり、同僚との自然な相互作用をもたらします。これらのアジャイルな実践が私をScrum認定を追求することに導きました。私はフロントエンド開発に特化していますが、Kapitus、MadHive、Offor Health、NetJets向けにも展開パイプラインや堅牢で十分にテストされたマイクロサービスを構築しました。元言語学者として、私は可読性、明瞭さ、そして効果的なコミュニケーションを重視しています。',
+  },
   admin: {
     chinese: '内部管理',
     english: 'Admin',
