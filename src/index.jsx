@@ -1,6 +1,5 @@
 import { StrictMode } from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import * as ReactDOM from "react-dom/client";
 import Root from './Root';
 import { store } from './globalState/store';
 import { Auth } from 'aws-amplify';
@@ -11,10 +10,9 @@ Auth.configure({
   userPoolWebClientId: `${process.env.REACT_APP_CLIENT_ID}`,
 });
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Root store={store}>
-      <App />
-    </Root>
+    <Root store={store} />
   </StrictMode>,
 );
