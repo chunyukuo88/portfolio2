@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentToken, selectCurrentUser } from 'src/globalState';
 
-import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
 import { BreadBlogArticle } from './BreadBlogArticle';
 import { NewBlogPost } from './NewBlogPost';
+import { LoadingSpinner } from 'src/components';
 
 import { environments } from 'src/common/strings';
 import './InfiniteArticles.css';

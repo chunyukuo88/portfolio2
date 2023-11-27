@@ -1,15 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useCommonGlobals } from 'src/common/hooks';
+import { updateLanguage, setCredentials } from 'src/globalState';
 import { useAuth } from 'src/globalState/auth/useAuth';
-
-import { updateLanguage } from 'src/globalState/language/languageSlice';
-import { setCredentials } from 'src/globalState/auth/authSlice.js';
-
 import strings, { contentKeys } from 'src/common/strings.js';
 import { routes } from 'src/routes';
 import './LoginPage.css';
-import {Auth} from "aws-amplify";
 
 export const LoginPage = (props) => {
   const { setPrimaryContentKey } = props;
