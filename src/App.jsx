@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { useCommonGlobals } from './common/hooks';
 import { Divide as Hamburger } from 'hamburger-react'
-import { SettingsMenu } from './components/SettingsMenu/SettingsMenu';
-import { SiteInfo } from './components/PrimaryContent/SiteInfo/SiteInfo';
-import { LoginPage } from './pages/Login/LoginPage';
-import { Sidebar } from './components/Sidebar/Sidebar';
-import { Skills } from './components/PrimaryContent/Skills/Skills';
-import { AboutMe } from './components/PrimaryContent/AboutMe/AboutMe';
 import { InfiniteArticles } from './pages/BreadBlog/InfiniteArticles';
-import { Footer } from './components/Footer/Footer';
-import { Cube } from './components/Cube/Cube';
+import { LoginPage } from './pages/Login/LoginPage';
+
+import {
+  SettingsMenu,
+  SiteInfo,
+  Sidebar,
+  Skills,
+  AboutMe,
+  Footer,
+  Cube,
+} from './components';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { logEasterEgg } from './common/utils';
@@ -50,6 +53,7 @@ function App(){
       case CHINESE: return GERMAN;
       case GERMAN: return JAPANESE;
       case JAPANESE: return ENGLISH;
+      default: return ENGLISH;
     }
   };
 

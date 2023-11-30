@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { LoadingSpinner } from 'src/components/LoadingSpinner/LoadingSpinner';
+import { useSelector } from 'react-redux';
+import { selectCurrentToken, selectCurrentUser } from 'src/globalState';
+
 import { BreadBlogArticle } from './BreadBlogArticle';
+import { NewBlogPost } from './NewBlogPost';
+import { LoadingSpinner } from 'src/components';
+
 import { environments } from 'src/common/strings';
 import './InfiniteArticles.css';
-import { NewBlogPost } from './NewBlogPost';
-import { useSelector } from 'react-redux';
-import { selectCurrentToken, selectCurrentUser } from '../../globalState';
 
 export function InfiniteArticles() {
   const [ posts, setPosts ] = useState([]);
@@ -29,17 +31,14 @@ export function InfiniteArticles() {
     ? process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE_PROD
     : process.env.REACT_APP_GET_BLOG_ENTRIES_INFINITE;
 
-  const getInfiniteBlogsUrl = (page) => page
-    ? `${endpoint}${page}`
-    : endpoint;
+  const infiniteBlogsUrl = page ? `${endpoint}${page}` : endpoint;
 
   const getParsedNewPosts = (page, newPosts) => page
     ? JSON.parse(newPosts.body)[0].results
     : JSON.parse(newPosts.body).results;
 
   useEffect(() => {
-    const url = getInfiniteBlogsUrl(page)
-    fetch(url).then(
+    fetch(infiniteBlogsUrl).then(
       async response => {
         const newPosts = await response.json();
         const parsedNewPosts = getParsedNewPosts(page, newPosts);
@@ -53,8 +52,10 @@ export function InfiniteArticles() {
 
   useEffect(() => {
     window.addEventListener('wheel', handleScroll);
+    window.addEventListener('touchmove', handleScroll);
     return () => {
       window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
     };
   }, []);
 

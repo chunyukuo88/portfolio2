@@ -13,7 +13,8 @@
   "jest": {
     "coveragePathIgnorePatterns": [
       "./src/index.jsx",
-      "./src/testUtils.js"
+      "./src/testUtils.js",
+      "./src/__msw__"
     ]
   },
   "eslintConfig": {
