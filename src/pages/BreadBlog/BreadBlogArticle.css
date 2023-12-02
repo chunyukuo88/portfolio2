@@ -6,6 +6,13 @@ h5, p {
     text-align: center;
 }
 
+.spinner-frame-for-blog-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .bread-blog-article {
     display: flex;
     flex-direction: column;

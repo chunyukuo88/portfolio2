@@ -7,10 +7,10 @@ import {
 } from 'src/globalState';
 
 import { Pencil } from 'src/components/Pencil/Pencil';
+import { LoadingSpinner } from 'src/components';
 
 import strings from 'src/common/strings';
 import './BreadBlogArticle.css';
-import {LoadingSpinner} from "../../components";
 
 export function BreadBlogArticle({ article }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -55,9 +55,15 @@ export function BreadBlogArticle({ article }) {
 
   const disableLoadingSpinner = () => setIsLoading(false);
 
+  const Spinner = () => (
+    <div className='spinner-frame-for-blog-page'>
+      {isLoading ? <LoadingSpinner /> : null}
+    </div>
+  );
+
   const Image = () => (
     <div className='blog-article-image'>
-      {isLoading ? < LoadingSpinner /> : null}
+      <Spinner />
       <div>
         {isAuthorized ? <Pencil article={article} token={token} aspect={editable[1]}/> : null}
       </div>
