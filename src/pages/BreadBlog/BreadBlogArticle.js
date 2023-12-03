@@ -1,14 +1,20 @@
 import { useSelector } from 'react-redux';
-import { Pencil } from 'src/components/Pencil/Pencil';
+import { useState } from 'react';
 import {
   selectCurrentUser,
   selectCurrentToken,
   selectCurrentLanguage,
 } from 'src/globalState';
+
+import { Pencil } from 'src/components/Pencil/Pencil';
+import { LoadingSpinner } from 'src/components';
+
 import strings from 'src/common/strings';
 import './BreadBlogArticle.css';
 
 export function BreadBlogArticle({ article }) {
+  const [isLoading, setIsLoading] = useState(true);
+
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
   const language = useSelector(selectCurrentLanguage);
@@ -32,7 +38,6 @@ export function BreadBlogArticle({ article }) {
       : strings.forgotWhenIWroteThis[language]
   };
 
-
   const isAuthorized = user && token;
   const editable = ['title', 'imageUrl', 'body'];
 
@@ -48,8 +53,17 @@ export function BreadBlogArticle({ article }) {
     </>
   );
 
+  const disableLoadingSpinner = () => setIsLoading(false);
+
+  const Spinner = () => (
+    <div className='spinner-frame-for-blog-page'>
+      {isLoading ? <LoadingSpinner /> : null}
+    </div>
+  );
+
   const Image = () => (
     <div className='blog-article-image'>
+      <Spinner />
       <div>
         {isAuthorized ? <Pencil article={article} token={token} aspect={editable[1]}/> : null}
       </div>
@@ -57,7 +71,9 @@ export function BreadBlogArticle({ article }) {
         loading='lazy'
         className='blog-image'
         src={article.imageUrl}
+        alt={`Image for blog titled ${article.title}`}
         aria-label={`Image for blog titled ${article.title}`}
+        onLoad={disableLoadingSpinner}
       />
     </div>
   );
