@@ -1,4 +1,4 @@
-import {configureStore, createSlice} from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import authReducer from 'src/globalState/auth/authSlice';
 import settingsReducer from 'src/globalState/settingsMenu/settingsMenuSlice';
 import darkModeReducer from 'src/globalState/darkMode/darkModeSlice';
@@ -24,5 +24,29 @@ export const storeWithGermanDefault = configureStore({
     darkMode: darkModeReducer,
     cubeSpinsSlowly: cubeSpinReducer,
   },
-  devTools: true, // TODO Change this for production
+});
+
+const authSliceLoggedIn = createSlice({
+  name: 'auth',
+  initialState: {
+    user: 'some user',
+    token: 'some token',
+  },
+  reducers: {
+    setCredentials: (state, action) => {
+      const { username, token } = action.payload;
+      state.user = username;
+      state.token = token;
+    },
+  },
+});
+
+export const storeWithUserLoggedIn = configureStore({
+  reducer: {
+    auth: authSliceLoggedIn.reducer,
+    language: languageSliceWithGermanDefault.reducer,
+    settingsAreVisible: settingsReducer,
+    darkMode: darkModeReducer,
+    cubeSpinsSlowly: cubeSpinReducer,
+  },
 });

@@ -13,5 +13,5 @@ export const store = configureStore({
     darkMode: darkModeReducer,
     cubeSpinsSlowly: cubeSpinReducer,
   },
-  devTools: true, // TODO Change this for production
+  devTools: true,
 });

@@ -6,8 +6,6 @@ import strings from 'src/common/strings';
 
 const { ENGLISH } = strings;
 
-// TODO: These need redone; coverage should be achieved via integration tests.
-
 describe('SettingsMenu.jsx', () => {
   describe('GIVEN: The global state indicates that the settings should be visible', () => {
     describe('WHEN: component loads,', () => {
