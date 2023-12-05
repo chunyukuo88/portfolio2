@@ -12,8 +12,6 @@ export function Pencil(props) {
 
   const mutation = useMutation((requestData) => updateBlogPost(article.page, requestData));
 
-  // TODO: Validation
-
   const updateHandler = async () => {
     article[aspect] = inputRef.current.value;
     const requestData = createHttpRequest('PUT', token, article);

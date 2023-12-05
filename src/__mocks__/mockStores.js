@@ -43,7 +43,7 @@ const authSliceLoggedIn = createSlice({
 
 export const storeWithUserLoggedIn = configureStore({
   reducer: {
-    auth: authSliceLoggedIn.reducer, // TODO: 啥東西
+    auth: authSliceLoggedIn.reducer,
     language: languageSliceWithGermanDefault.reducer,
     settingsAreVisible: settingsReducer,
     darkMode: darkModeReducer,
