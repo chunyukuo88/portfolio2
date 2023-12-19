@@ -14,6 +14,16 @@
     transition: 0.7s ease-in-out;
 }
 
-#tech-skills-abridged li:nth-child(2){
+#tech-skills-abridged {
+    color: #262626;
+}
+
+.dynamic-emergence {
+    color: var(--primaryColor);
+    transition: 5s;
+}
+
+.highlighted-skill {
     color: green;
+    transition: 5s;
 }
