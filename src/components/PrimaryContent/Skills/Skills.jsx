@@ -13,14 +13,14 @@ export function Skills(props) {
       <li>The Serverless Framework</li>
       <li>{strings.techSkillsTDD[language]}</li>
       <li>Lambdas with Node.js</li>
+      <li>Testing Library</li>
       <li>Web Components</li>
       <li>Docker Compose</li>
-      <li>Testing Library</li>
       <li>React Query</li>
       <li>Redis Cloud</li>
+      <li>SvelteKit</li>
       <li>Supabase</li>
       <li>GraphQL</li>
-      <li>SvelteKit</li>
       <li>Scrum</li>
       <li>React</li>
       <li>msw</li>
