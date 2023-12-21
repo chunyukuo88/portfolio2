@@ -11,7 +11,7 @@ export function Skills(props) {
   return (
     <ul id={getId()} onClick={skillClickHandler}>
       <li>The Serverless Framework</li>
-      <li>{strings.techSkillsTDD[language]}</li>
+      <li id='tdd'>{strings.techSkillsTDD[language]}</li>
       <li>Lambdas with Node.js</li>
       <li>Testing Library</li>
       <li>Web Components</li>
