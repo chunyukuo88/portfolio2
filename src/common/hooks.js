@@ -30,11 +30,6 @@ export function useMousePosition() {
   return mousePosition;
 }
 
-
-
-
-
-
 const useDocumentHeight = () => {
   const getHeight = useCallback(
     () =>
