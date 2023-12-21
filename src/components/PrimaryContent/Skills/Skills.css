@@ -4,10 +4,6 @@
     width: 100%;
 }
 
-#tech-skills-abridged {
-    transition: 0.7s ease-in-out;
-}
-
 #tech-skills-abridged__blurry {
     color: transparent;
     text-shadow: 0 0 .25rem var(--primaryColor);
@@ -15,17 +11,8 @@
 }
 
 #tech-skills-abridged {
+    transition: 0.7s ease-in-out;
     color: #262626;
-}
-
-.dynamic-emergence {
-    color: var(--primaryColor);
-    transition: 5s;
-}
-
-.highlighted-skill {
-    color: green;
-    transition: 5s;
 }
 
 ul > li {
