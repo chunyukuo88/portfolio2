@@ -8,13 +8,27 @@ const { ENGLISH } = strings;
 
 const setPrimaryContentKey = jest.fn();
 
-// TODO: Un-skip after adding the settings functionality back in.
-
-describe.skip('Sidebar.jsx', () => {
+describe('Sidebar.jsx', () => {
   describe('GIVEN: props to specify whether the Sidebar is open,', () => {
     describe('WHEN: the isOpen prop is true,', () => {
+      const mockSetMenuIsOpen = jest.fn();
       beforeEach(() => {
-        renderWithQueryClient(<Sidebar isOpen={true} setPrimaryContentKey={setPrimaryContentKey} />, mockStore);
+        renderWithQueryClient(
+          <Sidebar
+            isOpen={true}
+            setPrimaryContentKey={setPrimaryContentKey}
+            setMenuIsOpen={mockSetMenuIsOpen}
+          />, mockStore
+        );
+      });
+      describe('AND: When the user clicks on the Admin option', () => {
+        test('THEN: The setPrimaryContentKey callback is invoked to close the sidebar.', () => {
+          const admin = screen.getByText('Admin');
+
+          fireEvent.click(admin);
+
+          expect(mockSetMenuIsOpen).toBeCalledTimes(1);
+        });
       });
       test('THEN: the bar has the appropriate CSS class to make it pop out.', () => {
         const visibleSidebar = document.querySelector('.sidebar-open');
@@ -26,19 +40,16 @@ describe.skip('Sidebar.jsx', () => {
         menuItemLabel
         ${strings.aboutMe[ENGLISH]}
         ${strings.siteInfo[ENGLISH]}
-        ${strings.resume[ENGLISH]}
-        ${strings.settings[ENGLISH]}
       `('THEN: the menu items are also visible', ({ menuItemLabel }) => {
         const menuItem = screen.getByText(menuItemLabel);
 
         expect(menuItem).toBeVisible();
       });
-      describe('WHEN: The user clicks the a menu item', () => {
+      describe('WHEN: The user clicks a menu item', () => {
         test.each`
           menuItemLabel                 |   key
           ${strings.aboutMe[ENGLISH]}   |   ${'aboutMe'}
           ${strings.siteInfo[ENGLISH]}  |   ${'siteInfo'}
-          ${strings.resume[ENGLISH]}    |   ${'resume'}
         `('THEN: the content beneath the sidebar is adjusted accordingly.', ({ menuItemLabel, key }) => {
           const settingsMenuOption = screen.getByText(menuItemLabel);
           let darkModeSetting = screen.queryByText(strings.darkMode[ENGLISH]);
@@ -65,7 +76,6 @@ describe.skip('Sidebar.jsx', () => {
         menuItemLabel
         ${strings.aboutMe[ENGLISH]}
         ${strings.siteInfo[ENGLISH]}
-        ${strings.resume[ENGLISH]}
       `('THEN: the menu items are NOT visible', ({ menuItemLabel }) => {
         const menuItem = screen.queryByText(menuItemLabel);
 
