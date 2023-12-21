@@ -36,8 +36,10 @@ ul > li:nth-child(1) {
     animation: fadeIn 2s ease-in-out 0.2s forwards;
 }
 
+/* TDD */
 ul > li:nth-child(2) {
-    animation: fadeIn 2s ease-in-out 0.4s forwards;
+    animation: fadeIn 2s ease-in-out 0.4s forwards,
+    highlightSkill 2s ease-in-out 3s forwards;
 }
 
 ul > li:nth-child(3) {
@@ -101,3 +103,11 @@ ul > li:nth-child(15) {
     }
 }
 
+@keyframes highlightSkill {
+    from {
+        color: var(--primaryColor);
+    }
+    to {
+        color: green;
+    }
+}
