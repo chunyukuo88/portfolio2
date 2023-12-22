@@ -36,6 +36,7 @@
     height: 1.5rem;
     cursor: pointer;
     border-bottom: var(--border);
+    color: var(--primaryColor);
 }
 
 .sidebar__listItem span {
