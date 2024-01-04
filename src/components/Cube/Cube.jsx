@@ -1,14 +1,10 @@
-import { selectCubeSpinSpeed } from '../../globalState/cubeSpin/cubeSpinSlice';
-import { useSelector } from 'react-redux';
 import './Cube.css';
 
 export function Cube() {
-  const shouldSpinSlowly = useSelector(selectCubeSpinSpeed);
-
-  const rotationSpeed = shouldSpinSlowly ? 4 : 1;
+  const secondsForSingleRotation = 4;
 
   const style = {
-    animation: `animate ${rotationSpeed}s linear infinite`,
+    animation: `animate ${secondsForSingleRotation}s linear infinite`,
   };
 
   return (

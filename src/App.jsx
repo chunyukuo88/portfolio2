@@ -5,7 +5,6 @@ import { InfiniteArticles } from './pages/BreadBlog/InfiniteArticles';
 import { LoginPage } from './pages/Login/LoginPage';
 
 import {
-  SettingsMenu,
   SiteInfo,
   Sidebar,
   Skills,
@@ -14,11 +13,10 @@ import {
   Cube,
 } from './components';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logEasterEgg } from './common/utils';
 import strings, { contentKeys } from './common/strings';
 import {
-  selectCurrentDarkTheme,
   updateSettingsVisibility,
   updateLanguage
 } from './globalState';
@@ -33,7 +31,6 @@ const languageGlobeStyle = {
 };
 
 function App(){
-  const isDarkMode = useSelector(selectCurrentDarkTheme);
   const [ language ] = useCommonGlobals();
   const dispatch = useDispatch();
 
@@ -140,7 +137,7 @@ function App(){
   );
 
   return (
-    <main className={isDarkMode ? undefined : 'light-mode'} style={languageSpecificFonts()}>
+    <main style={languageSpecificFonts()}>
       <Header/>
 
       <section>
@@ -151,9 +148,6 @@ function App(){
            </div>
          </div>
       </section>
-      <div id='settings-menu-container'>
-        <SettingsMenu />
-      </div>
       <ConditionalCube />
       <Footer />
     </main>

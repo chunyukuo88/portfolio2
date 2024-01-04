@@ -5,5 +5,4 @@ export { Pencil } from './Pencil/Pencil';
 export { AboutMe } from './PrimaryContent/AboutMe/AboutMe';
 export { SiteInfo } from './PrimaryContent/SiteInfo/SiteInfo';
 export { Skills } from './PrimaryContent/Skills/Skills';
-export { SettingsMenu } from './SettingsMenu/SettingsMenu';
 export { Sidebar } from './Sidebar/Sidebar';

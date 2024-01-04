@@ -1,8 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import authReducer from 'src/globalState/auth/authSlice';
 import settingsReducer from 'src/globalState/settingsMenu/settingsMenuSlice';
-import darkModeReducer from 'src/globalState/darkMode/darkModeSlice';
-import cubeSpinReducer from 'src/globalState/cubeSpin/cubeSpinSlice';
 
 const languageSliceWithGermanDefault = createSlice({
   name: 'language',
@@ -21,8 +19,6 @@ export const storeWithGermanDefault = configureStore({
     auth: authReducer,
     language: languageSliceWithGermanDefault.reducer,
     settingsAreVisible: settingsReducer,
-    darkMode: darkModeReducer,
-    cubeSpinsSlowly: cubeSpinReducer,
   },
 });
 
@@ -46,7 +42,5 @@ export const storeWithUserLoggedIn = configureStore({
     auth: authSliceLoggedIn.reducer,
     language: languageSliceWithGermanDefault.reducer,
     settingsAreVisible: settingsReducer,
-    darkMode: darkModeReducer,
-    cubeSpinsSlowly: cubeSpinReducer,
   },
 });
