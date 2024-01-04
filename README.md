@@ -18,3 +18,11 @@ I figured it might fun to learn some new technologies, so I decided on Supabase 
 - Click "Wi-Fi Settings..."
 - Find the current connected Wi-Fi network and click "Details..."
 - The value next to "IP address" is what you want. Type that into the mobile browser, then add :3000
+
+## Reference: 
+
+- New GitHub access token? No problem! Here's the incantation to run if not prompted by git:
+
+```
+git remote set-url origin https://USERNAME:TOKEN@github.com/USERNAME/REPO.git
+```
