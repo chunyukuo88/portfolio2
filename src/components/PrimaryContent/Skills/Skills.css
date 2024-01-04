@@ -80,6 +80,14 @@ ul > li:nth-child(15) {
     animation: fadeIn 2s ease-in-out 2.6s forwards;
 }
 
+ul > li:nth-child(16) {
+    animation: fadeIn 2s ease-in-out 2.8s forwards;
+}
+
+ul > li:nth-child(17) {
+    animation: fadeIn 2s ease-in-out 3s forwards;
+}
+
 @keyframes fadeIn {
     from {
         color: black;

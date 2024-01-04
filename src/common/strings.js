@@ -250,7 +250,7 @@ const strings = {
   },
   techSkillsTDD: {
     chinese: '測試驅動開發',
-    english: 'Test-driven Development',
+    english: 'test-driven development',
     german: 'Testgetriebene Entwicklung',
     japanese: 'テスト駆動開発',
   },
@@ -259,12 +259,6 @@ const strings = {
     english: 'Username',
     german: 'Benutzername',
     japanese: 'ユーザー名',
-  },
-  workouts: {
-    chinese: '鍛鍊',
-    english: 'Workouts',
-    german: 'Workouts',
-    japanese: 'ワークアウト',
   },
 };
 

@@ -10,21 +10,23 @@ export function Skills(props) {
 
   return (
     <ul id={getId()} onClick={skillClickHandler}>
-      <li>The Serverless Framework</li>
+      <li>the serverless framework</li>
       <li id='tdd'>{strings.techSkillsTDD[language]}</li>
-      <li>Lambdas with Node.js</li>
-      <li>Testing Library</li>
-      <li>Web Components</li>
-      <li>Docker Compose</li>
-      <li>React Query</li>
-      <li>Redis Cloud</li>
-      <li>SvelteKit</li>
-      <li>Supabase</li>
-      <li>GraphQL</li>
-      <li>Scrum</li>
-      <li>React</li>
+      <li>testing library</li>
+      <li>web components</li>
+      <li>docker compose</li>
+      <li>react query</li>
+      <li>redis cloud</li>
+      <li>sveltekit</li>
+      <li>supabase</li>
+      <li>graphql</li>
+      <li>scrum</li>
+      <li>react</li>
+      <li>node</li>
       <li>msw</li>
       <li>css</li>
+      <li>go</li>
+      <li>λ</li>
     </ul>
   );
 }
