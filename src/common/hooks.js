@@ -1,13 +1,9 @@
 import {useCallback, useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
-import ReactGA from 'react-ga4';
 import { selectCurrentLanguage } from 'src/globalState/language/languageSlice';
 import { selectCurrentUser } from 'src/globalState/auth/authSlice';
 
 export function useCommonGlobals(page){
-  useEffect(() => {
-    ReactGA.send({ hitType: 'pageview', page });
-  }, []);
   const language = useSelector(selectCurrentLanguage);
   const username = useSelector(selectCurrentUser);
   return [language, username];

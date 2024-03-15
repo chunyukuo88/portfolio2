@@ -8,7 +8,6 @@ I figured it might fun to learn some new technologies, so I decided on Supabase 
 - Redux Toolkit
 - Tanstack Query
 - AWS Cognito
-- `react-spring`
 - Jest
 - And a lot of timeless CSS!
 
