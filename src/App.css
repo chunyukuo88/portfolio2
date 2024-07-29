@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --border: var(--primaryColor) solid 1px;
   --largePadding: 0.5rem;
